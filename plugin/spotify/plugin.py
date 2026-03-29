@@ -106,14 +106,26 @@ def _fetch_album_art(pb: Optional[dict]) -> tuple[Optional[str], Optional[str]]:
         return None, f"download failed: {exc}"
 
 
-def _build_track_label(pb: Optional[dict]) -> str:
-    """Return the current track title from playback data."""
-    if not pb or not isinstance(pb, dict):
+def _build_track_label(pb: Optional[dict], mode: str = "song") -> str:
+    """Build a display label from playback data based on *mode*.
+
+    Modes: ``"song"``, ``"artist"``, ``"song_artist"``, ``"none"``.
+    """
+    if mode == "none" or not pb or not isinstance(pb, dict):
         return ""
     item = pb.get("item")
     if not isinstance(item, dict):
         return ""
-    return item.get("name", "") or ""
+    song = item.get("name", "") or ""
+    artists_list = item.get("artists")
+    artist = ""
+    if isinstance(artists_list, list) and artists_list:
+        artist = artists_list[0].get("name", "") or ""
+    if mode == "artist":
+        return artist
+    if mode == "song_artist" and song and artist:
+        return f"{song} - {artist}"
+    return song
 
 
 def _get_client(config: Dict[str, Any]) -> SpotifyClient:
@@ -158,6 +170,24 @@ def _evict_client(config: Dict[str, Any]) -> None:
 
 # ── Plugin functions ──────────────────────────────────────────────────────────
 
+def poll_volume_display(config: Dict[str, Any]) -> Dict[str, Any]:
+    """Return the current volume as a label when 'Show Volume %' is enabled.
+
+    Called by the generic display poller in start.py.
+    """
+    if not config.get("show_volume_label"):
+        return {}
+    try:
+        client = _get_client(config)
+        pb = _get_playback_cached(client)
+        vol = (pb.get("device") or {}).get("volume_percent") if pb else None
+        if vol is None:
+            return {}
+        return {"display_update": {"text": f"{vol}%"}}
+    except Exception:
+        return {}
+
+
 def poll_display(config: Dict[str, Any]) -> Dict[str, Any]:
     """Fetch current playback state and return album art / track label if changed.
 
@@ -177,9 +207,10 @@ def poll_display(config: Dict[str, Any]) -> Dict[str, Any]:
         if art_path and _last_art_url != prev_url:
             display_update["image"] = art_path
 
-        track_label = _build_track_label(pb)
+        mode = str(config.get("display_mode") or "none")
+        track_label = _build_track_label(pb, mode)
         if track_label != _last_track_label:
-            display_update["scroll_text"] = track_label or ""
+            display_update["text"] = track_label or ""
             display_update["scroll_speed"] = 4
             _last_track_label = track_label
 
@@ -226,10 +257,11 @@ def play_pause(config: Dict[str, Any]) -> Dict[str, Any]:
     elif art_err:
         result["art_error"] = art_err
 
-    track_label = _build_track_label(art_pb)
+    mode = str(config.get("display_mode") or "none")
+    track_label = _build_track_label(art_pb, mode)
     if track_label:
         disp = result.setdefault("display_update", {})
-        disp["scroll_text"] = track_label
+        disp["text"] = track_label
         disp["scroll_speed"] = 4
 
     return result
@@ -294,7 +326,10 @@ def volume_up(config: Dict[str, Any]) -> Dict[str, Any]:
         new_vol = min(100, current + step)
         client.set_volume(new_vol)
         _invalidate_pb_cache()
-        return {"success": True, "action": "volume_up", "volume": new_vol}
+        result: Dict[str, Any] = {"success": True, "action": "volume_up", "volume": new_vol}
+        if config.get("show_volume_label"):
+            result["display_update"] = {"text": f"{new_vol}%"}
+        return result
     except SpotifyError as e:
         _evict_client(config)
         return {"success": False, "error": str(e)}
@@ -320,7 +355,10 @@ def volume_down(config: Dict[str, Any]) -> Dict[str, Any]:
         new_vol = max(0, current - step)
         client.set_volume(new_vol)
         _invalidate_pb_cache()
-        return {"success": True, "action": "volume_down", "volume": new_vol}
+        result: Dict[str, Any] = {"success": True, "action": "volume_down", "volume": new_vol}
+        if config.get("show_volume_label"):
+            result["display_update"] = {"text": f"{new_vol}%"}
+        return result
     except SpotifyError as e:
         _evict_client(config)
         return {"success": False, "error": str(e)}

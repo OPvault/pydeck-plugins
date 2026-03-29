@@ -29,19 +29,25 @@
       "description": "Toggle Spotify play/pause",
       "default_display": {
         "color": "#1DB954",
-        "text": ""
+        "text": "",
+        "image": "plugins/plugin/spotify/img/_now_playing.jpg"
       },
       "poll": {
         "function": "poll_display",
-        "interval_ms": 1000
+        "interval_ms": 3000
       },
       "ui": [
         {
-          "type": "input",
-          "id": "label",
-          "label": "Button Label",
-          "placeholder": "Play/Pause",
-          "default": ""
+          "type": "radio",
+          "id": "display_mode",
+          "label": "Display Text",
+          "default": "song",
+          "options": [
+            {"value": "none",        "label": "None"},
+            {"value": "song",        "label": "Song"},
+            {"value": "song_artist", "label": "Song - Artist"},
+            {"value": "artist",      "label": "Artist"}
+          ]
         }
       ]
     },
@@ -50,50 +56,34 @@
       "description": "Skip to the next Spotify track",
       "default_display": {
         "color": "#1DB954",
-        "text": "Next"
+        "text": "",
+        "image": "plugins/plugin/spotify/img/Next.png"
       },
-      "ui": [
-        {
-          "type": "input",
-          "id": "label",
-          "label": "Button Label",
-          "placeholder": "Next",
-          "default": ""
-        }
-      ]
+      "ui": []
     },
     "prev_track": {
       "label": "Previous Track",
       "description": "Go back to the previous Spotify track",
       "default_display": {
         "color": "#1DB954",
-        "text": "Prev"
+        "text": "",
+        "image": "plugins/plugin/spotify/img/Previous.png"
       },
-      "ui": [
-        {
-          "type": "input",
-          "id": "label",
-          "label": "Button Label",
-          "placeholder": "Prev",
-          "default": ""
-        }
-      ]
+      "ui": []
     },
     "volume_up": {
       "label": "Volume Up",
       "description": "Increase Spotify volume",
       "default_display": {
         "color": "#1DB954",
-        "text": "Vol +"
+        "text": "",
+        "image": "plugins/plugin/spotify/img/VolumeUp.png"
+      },
+      "poll": {
+        "function": "poll_volume_display",
+        "interval_ms": 1000
       },
       "ui": [
-        {
-          "type": "input",
-          "id": "label",
-          "label": "Button Label",
-          "placeholder": "Vol +",
-          "default": ""
-        },
         {
           "type": "number",
           "id": "volume_step",
@@ -101,6 +91,12 @@
           "min": 1,
           "max": 100,
           "default": 10
+        },
+        {
+          "type": "checkbox",
+          "id": "show_volume_label",
+          "label": "Show Volume %",
+          "default": false
         }
       ]
     },
@@ -109,16 +105,14 @@
       "description": "Decrease Spotify volume",
       "default_display": {
         "color": "#1DB954",
-        "text": "Vol -"
+        "text": "",
+        "image": "plugins/plugin/spotify/img/VolumeDown.png"
+      },
+      "poll": {
+        "function": "poll_volume_display",
+        "interval_ms": 1000
       },
       "ui": [
-        {
-          "type": "input",
-          "id": "label",
-          "label": "Button Label",
-          "placeholder": "Vol -",
-          "default": ""
-        },
         {
           "type": "number",
           "id": "volume_step",
@@ -126,6 +120,12 @@
           "min": 1,
           "max": 100,
           "default": 10
+        },
+        {
+          "type": "checkbox",
+          "id": "show_volume_label",
+          "label": "Show Volume %",
+          "default": false
         }
       ]
     },
@@ -134,34 +134,20 @@
       "description": "Toggle Spotify shuffle mode on/off",
       "default_display": {
         "color": "#1DB954",
-        "text": "Shfl"
+        "text": "",
+        "image": "plugins/plugin/spotify/img/Shuffle.png"
       },
-      "ui": [
-        {
-          "type": "input",
-          "id": "label",
-          "label": "Button Label",
-          "placeholder": "Shuffle",
-          "default": ""
-        }
-      ]
+      "ui": []
     },
     "cycle_repeat": {
       "label": "Repeat",
       "description": "Cycle repeat mode: off → context → track → off",
       "default_display": {
         "color": "#1DB954",
-        "text": "Rpt"
+        "text": "",
+        "image": "plugins/plugin/spotify/img/Repeat.png"
       },
-      "ui": [
-        {
-          "type": "input",
-          "id": "label",
-          "label": "Button Label",
-          "placeholder": "Repeat",
-          "default": ""
-        }
-      ]
+      "ui": []
     }
   }
 }
