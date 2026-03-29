@@ -1,5 +1,5 @@
 {
-  "name": "discord",
+  "name": "Discord",
   "version": "1.0.0",
   "description": "Control Discord voice state (mute/deafen) via RPC",
   "author": "PyDeck Team",
@@ -33,15 +33,7 @@
         "default": {"image": "plugins/plugin/discord/img/mute_0.png"},
         "active":  {"image": "plugins/plugin/discord/img/mute_1.png"}
       },
-      "ui": [
-        {
-          "type": "input",
-          "id": "label",
-          "label": "Button Label",
-          "placeholder": "Mute",
-          "default": ""
-        }
-      ]
+      "ui": []
     },
     "toggle_deafen": {
       "label": "Discord Deafen",
@@ -55,15 +47,7 @@
         "default": {"image": "plugins/plugin/discord/img/deafen_0.png"},
         "active":  {"image": "plugins/plugin/discord/img/deafen_1.png"}
       },
-      "ui": [
-        {
-          "type": "input",
-          "id": "label",
-          "label": "Button Label",
-          "placeholder": "Deafen",
-          "default": ""
-        }
-      ]
+      "ui": []
     }
   }
 }
