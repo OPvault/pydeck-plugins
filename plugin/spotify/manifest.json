@@ -1,0 +1,167 @@
+{
+  "name": "spotify",
+  "version": "1.0.0",
+  "description": "Control Spotify playback via the Web API",
+  "author": "PyDeck Team",
+  "oauth": {
+    "authorize_url": "https://accounts.spotify.com/authorize",
+    "token_url": "https://accounts.spotify.com/api/token",
+    "scopes": "user-read-playback-state user-modify-playback-state user-read-currently-playing",
+    "auth_method": "basic"
+  },
+  "credentials": [
+    {"id": "client_id",     "label": "Client ID",     "type": "text"},
+    {"id": "client_secret", "label": "Client Secret", "type": "password"}
+  ],
+  "permissions": {
+    "urllib.request": ["urlopen", "Request"],
+    "urllib.parse": ["urlencode"],
+    "urllib.error": ["HTTPError"],
+    "base64": ["b64encode"],
+    "hashlib": ["sha256"],
+    "json": ["dumps", "loads"],
+    "threading": ["Lock"],
+    "pathlib": ["Path"]
+  },
+  "functions": {
+    "play_pause": {
+      "label": "Play / Pause",
+      "description": "Toggle Spotify play/pause",
+      "default_display": {
+        "color": "#1DB954",
+        "text": ""
+      },
+      "poll": {
+        "function": "poll_display",
+        "interval_ms": 1000
+      },
+      "ui": [
+        {
+          "type": "input",
+          "id": "label",
+          "label": "Button Label",
+          "placeholder": "Play/Pause",
+          "default": ""
+        }
+      ]
+    },
+    "next_track": {
+      "label": "Next Track",
+      "description": "Skip to the next Spotify track",
+      "default_display": {
+        "color": "#1DB954",
+        "text": "Next"
+      },
+      "ui": [
+        {
+          "type": "input",
+          "id": "label",
+          "label": "Button Label",
+          "placeholder": "Next",
+          "default": ""
+        }
+      ]
+    },
+    "prev_track": {
+      "label": "Previous Track",
+      "description": "Go back to the previous Spotify track",
+      "default_display": {
+        "color": "#1DB954",
+        "text": "Prev"
+      },
+      "ui": [
+        {
+          "type": "input",
+          "id": "label",
+          "label": "Button Label",
+          "placeholder": "Prev",
+          "default": ""
+        }
+      ]
+    },
+    "volume_up": {
+      "label": "Volume Up",
+      "description": "Increase Spotify volume",
+      "default_display": {
+        "color": "#1DB954",
+        "text": "Vol +"
+      },
+      "ui": [
+        {
+          "type": "input",
+          "id": "label",
+          "label": "Button Label",
+          "placeholder": "Vol +",
+          "default": ""
+        },
+        {
+          "type": "number",
+          "id": "volume_step",
+          "label": "Volume Step (%)",
+          "min": 1,
+          "max": 100,
+          "default": 10
+        }
+      ]
+    },
+    "volume_down": {
+      "label": "Volume Down",
+      "description": "Decrease Spotify volume",
+      "default_display": {
+        "color": "#1DB954",
+        "text": "Vol -"
+      },
+      "ui": [
+        {
+          "type": "input",
+          "id": "label",
+          "label": "Button Label",
+          "placeholder": "Vol -",
+          "default": ""
+        },
+        {
+          "type": "number",
+          "id": "volume_step",
+          "label": "Volume Step (%)",
+          "min": 1,
+          "max": 100,
+          "default": 10
+        }
+      ]
+    },
+    "toggle_shuffle": {
+      "label": "Shuffle",
+      "description": "Toggle Spotify shuffle mode on/off",
+      "default_display": {
+        "color": "#1DB954",
+        "text": "Shfl"
+      },
+      "ui": [
+        {
+          "type": "input",
+          "id": "label",
+          "label": "Button Label",
+          "placeholder": "Shuffle",
+          "default": ""
+        }
+      ]
+    },
+    "cycle_repeat": {
+      "label": "Repeat",
+      "description": "Cycle repeat mode: off → context → track → off",
+      "default_display": {
+        "color": "#1DB954",
+        "text": "Rpt"
+      },
+      "ui": [
+        {
+          "type": "input",
+          "id": "label",
+          "label": "Button Label",
+          "placeholder": "Repeat",
+          "default": ""
+        }
+      ]
+    }
+  }
+}
