@@ -1,0 +1,380 @@
+"""Spotify plugin for PyDeck.
+
+Controls Spotify playback via the Web API (OAuth2 Authorization Code flow).
+
+First-time setup:
+1. Create a Spotify app at https://developer.spotify.com/dashboard
+2. Add http://localhost:8686/oauth/spotify/callback as a Redirect URI in the app settings
+3. Enter your Client ID and Client Secret in the Credentials Manager (key icon)
+4. Click 'Authorize' in the Credentials Manager to complete OAuth
+5. Spotify will redirect back automatically
+"""
+
+from __future__ import annotations
+
+import hashlib
+import sys
+import time
+import urllib.request
+from pathlib import Path
+from typing import Any, Dict, Optional
+
+_PLUGIN_DIR = Path(__file__).parent
+if str(_PLUGIN_DIR) not in sys.path:
+    sys.path.insert(0, str(_PLUGIN_DIR))
+
+from spotify_client import SpotifyClient, SpotifyError  # noqa: E402
+
+# Module-level client cache keyed by (client_id, client_secret).
+# Persists across button presses within one process — no repeated OAuth overhead.
+_client_cache: dict[tuple[str, str], SpotifyClient] = {}
+
+# Short-lived playback state cache — avoids a GET /me/player on every button
+# press (the legacy v1 code used a shared background-polled state for the same
+# reason). Cache entries expire after _PB_TTL seconds.
+_pb_cache: Optional[dict] = None
+_pb_cache_ts: float = 0.0
+_PB_TTL = 3.0  # seconds
+
+_ART_IMG_DIR = _PLUGIN_DIR / "img"
+_ART_FILE = _ART_IMG_DIR / "_now_playing.jpg"
+_ART_REL_PATH = "plugins/plugin/spotify/img/_now_playing.jpg"
+_last_art_url: Optional[str] = None
+_last_track_label: Optional[str] = None
+
+
+def _get_playback_cached(client: SpotifyClient) -> Optional[dict]:
+    """Return playback state, reusing a recent cached result if available."""
+    global _pb_cache, _pb_cache_ts
+    now = time.monotonic()
+    if _pb_cache is not None and (now - _pb_cache_ts) < _PB_TTL:
+        return _pb_cache
+    pb = client.get_playback()
+    _pb_cache = pb
+    _pb_cache_ts = now
+    return pb
+
+
+def _invalidate_pb_cache() -> None:
+    global _pb_cache, _pb_cache_ts
+    _pb_cache = None
+    _pb_cache_ts = 0.0
+
+
+def _pick_art_url(images: list) -> str:
+    """Select the smallest album art image >= 80px tall."""
+    if not images:
+        return ""
+    suitable = [i for i in images if (i.get("height") or 0) >= 80]
+    if suitable:
+        suitable.sort(key=lambda i: i.get("height", 0))
+        return suitable[0]["url"]
+    return images[0]["url"]
+
+
+def _fetch_album_art(pb: Optional[dict]) -> tuple[Optional[str], Optional[str]]:
+    """Extract album art from playback state, download it, and return
+    ``(relative_path, error)``."""
+    global _last_art_url
+    if not pb or not isinstance(pb, dict):
+        return None, "no playback data"
+    item = pb.get("item")
+    if not isinstance(item, dict):
+        return None, f"no item in playback (keys: {list(pb.keys())})"
+    album = item.get("album")
+    if not isinstance(album, dict):
+        return None, "no album in item"
+    images = album.get("images")
+    if not images:
+        return None, "no images in album"
+    art_url = _pick_art_url(images)
+    if not art_url:
+        return None, "could not pick art URL"
+    if art_url == _last_art_url and _ART_FILE.exists():
+        return _ART_REL_PATH, None
+    try:
+        req = urllib.request.Request(art_url, headers={"User-Agent": "PyDeck/1.0"})
+        with urllib.request.urlopen(req, timeout=5) as resp:
+            data = resp.read()
+        if len(data) < 100:
+            return None, f"downloaded data too small ({len(data)} bytes)"
+        _ART_IMG_DIR.mkdir(parents=True, exist_ok=True)
+        _ART_FILE.write_bytes(data)
+        _last_art_url = art_url
+        return _ART_REL_PATH, None
+    except Exception as exc:
+        return None, f"download failed: {exc}"
+
+
+def _build_track_label(pb: Optional[dict]) -> str:
+    """Return the current track title from playback data."""
+    if not pb or not isinstance(pb, dict):
+        return ""
+    item = pb.get("item")
+    if not isinstance(item, dict):
+        return ""
+    return item.get("name", "") or ""
+
+
+def _get_client(config: Dict[str, Any]) -> SpotifyClient:
+    """Return a cached SpotifyClient, creating one if needed.
+
+    Raises:
+        SpotifyError: If credentials are missing.
+    """
+    cid = str(config.get("client_id") or "").strip()
+    csec = str(config.get("client_secret") or "").strip()
+    if not cid or not csec:
+        raise SpotifyError(
+            "client_id and client_secret are required — "
+            "configure them in the Credentials Manager (key icon in header)"
+        )
+    key = (cid, csec)
+    client = _client_cache.get(key)
+    if client is None:
+        client = SpotifyClient(
+            cid, csec,
+            access_token=str(config.get("access_token") or "").strip(),
+            refresh_token=str(config.get("refresh_token") or "").strip(),
+        )
+        _client_cache[key] = client
+    else:
+        # Pick up tokens written to credentials.json externally (e.g. after OAuth callback)
+        if not client.access_token and config.get("access_token"):
+            client.access_token = str(config["access_token"]).strip()
+        if not client.refresh_token and config.get("refresh_token"):
+            client.refresh_token = str(config["refresh_token"]).strip()
+    return client
+
+
+def _evict_client(config: Dict[str, Any]) -> None:
+    """Remove a stale cache entry so the next press creates a fresh client."""
+    key = (
+        str(config.get("client_id") or "").strip(),
+        str(config.get("client_secret") or "").strip(),
+    )
+    _client_cache.pop(key, None)
+
+
+# ── Plugin functions ──────────────────────────────────────────────────────────
+
+def poll_display(config: Dict[str, Any]) -> Dict[str, Any]:
+    """Fetch current playback state and return album art / track label if changed.
+
+    Called by the generic display poller in start.py.
+    Only returns ``display_update`` when something actually changed,
+    so the poller doesn't needlessly write to disk or emit events.
+    """
+    global _last_track_label
+    try:
+        client = _get_client(config)
+        pb = client.get_playback()
+        prev_url = _last_art_url
+        art_path, _ = _fetch_album_art(pb)
+
+        display_update: Dict[str, Any] = {}
+
+        if art_path and _last_art_url != prev_url:
+            display_update["image"] = art_path
+
+        track_label = _build_track_label(pb)
+        if track_label != _last_track_label:
+            display_update["scroll_text"] = track_label or ""
+            display_update["scroll_speed"] = 4
+            _last_track_label = track_label
+
+        if display_update:
+            return {"display_update": display_update}
+        return {}
+    except Exception:
+        return {}
+
+
+def play_pause(config: Dict[str, Any]) -> Dict[str, Any]:
+    """Toggle Spotify play/pause.
+
+    Args:
+        config: Dict with Spotify credentials.
+
+    Returns:
+        Dict with success flag, action taken, and album art display_update.
+    """
+    try:
+        client = _get_client(config)
+    except (SpotifyError, Exception) as e:
+        return {"success": False, "error": str(e)}
+
+    pb = _get_playback_cached(client)
+    result: Dict[str, Any] = {"success": True}
+
+    try:
+        if pb and pb.get("is_playing"):
+            client.pause()
+            _invalidate_pb_cache()
+            result.update(action="pause", is_playing=False)
+        else:
+            client.play()
+            _invalidate_pb_cache()
+            result.update(action="play", is_playing=True)
+    except (SpotifyError, Exception) as e:
+        result.update(success=False, error=str(e))
+
+    art_pb = pb if (pb and pb.get("item")) else client.get_playback()
+    art_path, art_err = _fetch_album_art(art_pb)
+    if art_path:
+        result["display_update"] = {"image": art_path}
+    elif art_err:
+        result["art_error"] = art_err
+
+    track_label = _build_track_label(art_pb)
+    if track_label:
+        disp = result.setdefault("display_update", {})
+        disp["scroll_text"] = track_label
+        disp["scroll_speed"] = 4
+
+    return result
+
+
+def next_track(config: Dict[str, Any]) -> Dict[str, Any]:
+    """Skip to the next Spotify track.
+
+    Args:
+        config: Dict with Spotify credentials.
+
+    Returns:
+        Dict with success flag.
+    """
+    try:
+        client = _get_client(config)
+        client.next_track()
+        return {"success": True, "action": "next"}
+    except SpotifyError as e:
+        _evict_client(config)
+        return {"success": False, "error": str(e)}
+    except Exception as e:
+        _evict_client(config)
+        return {"success": False, "error": f"Unexpected error: {e}"}
+
+
+def prev_track(config: Dict[str, Any]) -> Dict[str, Any]:
+    """Go back to the previous Spotify track.
+
+    Args:
+        config: Dict with Spotify credentials.
+
+    Returns:
+        Dict with success flag.
+    """
+    try:
+        client = _get_client(config)
+        client.prev_track()
+        return {"success": True, "action": "prev"}
+    except SpotifyError as e:
+        _evict_client(config)
+        return {"success": False, "error": str(e)}
+    except Exception as e:
+        _evict_client(config)
+        return {"success": False, "error": f"Unexpected error: {e}"}
+
+
+def volume_up(config: Dict[str, Any]) -> Dict[str, Any]:
+    """Increase Spotify volume by a configurable step.
+
+    Args:
+        config: Dict with Spotify credentials and optional volume_step (default 10).
+
+    Returns:
+        Dict with success flag and new volume level.
+    """
+    try:
+        client = _get_client(config)
+        step = max(1, min(100, int(config.get("volume_step") or 10)))
+        pb = _get_playback_cached(client)
+        current = (pb.get("device") or {}).get("volume_percent", 50) if pb else 50
+        new_vol = min(100, current + step)
+        client.set_volume(new_vol)
+        _invalidate_pb_cache()
+        return {"success": True, "action": "volume_up", "volume": new_vol}
+    except SpotifyError as e:
+        _evict_client(config)
+        return {"success": False, "error": str(e)}
+    except Exception as e:
+        _evict_client(config)
+        return {"success": False, "error": f"Unexpected error: {e}"}
+
+
+def volume_down(config: Dict[str, Any]) -> Dict[str, Any]:
+    """Decrease Spotify volume by a configurable step.
+
+    Args:
+        config: Dict with Spotify credentials and optional volume_step (default 10).
+
+    Returns:
+        Dict with success flag and new volume level.
+    """
+    try:
+        client = _get_client(config)
+        step = max(1, min(100, int(config.get("volume_step") or 10)))
+        pb = _get_playback_cached(client)
+        current = (pb.get("device") or {}).get("volume_percent", 50) if pb else 50
+        new_vol = max(0, current - step)
+        client.set_volume(new_vol)
+        _invalidate_pb_cache()
+        return {"success": True, "action": "volume_down", "volume": new_vol}
+    except SpotifyError as e:
+        _evict_client(config)
+        return {"success": False, "error": str(e)}
+    except Exception as e:
+        _evict_client(config)
+        return {"success": False, "error": f"Unexpected error: {e}"}
+
+
+def toggle_shuffle(config: Dict[str, Any]) -> Dict[str, Any]:
+    """Toggle Spotify shuffle mode on/off.
+
+    Args:
+        config: Dict with Spotify credentials.
+
+    Returns:
+        Dict with success flag and new shuffle state.
+    """
+    try:
+        client = _get_client(config)
+        pb = _get_playback_cached(client)
+        current_shuffle = pb.get("shuffle_state", False) if pb else False
+        client.set_shuffle(not current_shuffle)
+        _invalidate_pb_cache()
+        return {"success": True, "action": "shuffle", "shuffle": not current_shuffle}
+    except SpotifyError as e:
+        _evict_client(config)
+        return {"success": False, "error": str(e)}
+    except Exception as e:
+        _evict_client(config)
+        return {"success": False, "error": f"Unexpected error: {e}"}
+
+
+def cycle_repeat(config: Dict[str, Any]) -> Dict[str, Any]:
+    """Cycle Spotify repeat mode: off → context → track → off.
+
+    Args:
+        config: Dict with Spotify credentials.
+
+    Returns:
+        Dict with success flag and new repeat state.
+    """
+    try:
+        client = _get_client(config)
+        pb = _get_playback_cached(client)
+        current = pb.get("repeat_state", "off") if pb else "off"
+        next_state = {"off": "context", "context": "track", "track": "off"}.get(
+            current, "off"
+        )
+        client.set_repeat(next_state)
+        _invalidate_pb_cache()
+        return {"success": True, "action": "repeat", "repeat": next_state}
+    except SpotifyError as e:
+        _evict_client(config)
+        return {"success": False, "error": str(e)}
+    except Exception as e:
+        _evict_client(config)
+        return {"success": False, "error": f"Unexpected error: {e}"}

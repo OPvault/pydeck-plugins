@@ -1,0 +1,20 @@
+{
+  "name": "Spotify",
+  "description": "Control Spotify playback (play/pause, next/prev, volume, shuffle, repeat) via the Web API",
+  "features": [
+    "Toggle play/pause",
+    "Next/previous track",
+    "Volume up/down with configurable step",
+    "Shuffle toggle",
+    "Repeat cycle (off → context → track)",
+    "OAuth2 Authorization Code flow with automatic token refresh"
+  ],
+  "options": {
+    "client_id": "",
+    "client_secret": ""
+  },
+  "metadata": {
+    "category": "media",
+    "tags": ["spotify", "music", "playback", "media", "oauth"]
+  }
+}
