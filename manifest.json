@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "label": "Official · Canary",
-  "generated_at": "2026-04-03T16:34:15Z",
+  "label": "Official · Stable",
+  "generated_at": "2026-04-03T18:19:43Z",
   "plugins": [
     {
       "name": "Browser",
