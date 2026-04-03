@@ -1,0 +1,69 @@
+{
+  "name": "Folder",
+  "version": "1.0.0",
+  "description": "Navigate virtual folder pages on the Stream Deck",
+  "functions": {
+    "enter_folder": {
+      "label": "Enter Folder",
+      "description": "Switch deck buttons to a folder by folder id",
+      "sidebar_icon": "plugins/plugin/folder/img/folder_enter.png",
+      "default_display": {
+        "color": "#000000",
+        "text": "",
+        "image": "plugins/plugin/folder/img/folder_enter.png"
+      },
+      "ui": [
+        {
+          "type": "input",
+          "id": "folder_id",
+          "label": "Folder ID",
+          "placeholder": "gaming",
+          "default": ""
+        },
+        {
+          "type": "input",
+          "id": "label",
+          "label": "Button Label",
+          "placeholder": "Gaming",
+          "default": ""
+        }
+      ]
+    },
+    "return_folder": {
+      "label": "Return Folder",
+      "description": "Return to parent folder or root",
+      "sidebar_icon": "plugins/plugin/folder/img/folder_return.png",
+      "default_display": {
+        "color": "#000000",
+        "text": "",
+        "image": "plugins/plugin/folder/img/folder_return.png"
+      },
+      "ui": [
+        {
+          "type": "select",
+          "id": "return_mode",
+          "label": "Return Mode",
+          "options": [
+            {
+              "label": "Parent Folder",
+              "value": "parent"
+            },
+            {
+              "label": "Root Folder",
+              "value": "root"
+            }
+          ],
+          "default": "parent"
+        },
+        {
+          "type": "input",
+          "id": "label",
+          "label": "Button Label",
+          "placeholder": "Back",
+          "default": ""
+        }
+      ]
+    }
+  },
+  "author": "PyDeck Team"
+}
