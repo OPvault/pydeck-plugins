@@ -1,0 +1,16 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" width="80" height="80">
+	<defs>
+		<image  width="80" height="80" id="img1" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAABQAQMAAAC032DuAAAAAXNSR0IB2cksfwAAAANQTFRFXgD/7FrR7QAAABRJREFUeJxjZIADxlHmKHOUSVsmAI6oAFEnCie3AAAAAElFTkSuQmCC"/>
+	</defs>
+	<style>
+		.s0 { fill: #ffffff } 
+		.s1 { fill: #5e00ff } 
+	</style>
+	<g id="Media Controls">
+		<use id="Layer 3" href="#img1" x="0" y="0"/>
+		<path id="Shape 2" fill-rule="evenodd" class="s0" d="m24 9h31c8.28 0 15 6.72 15 15v31c0 8.28-6.72 15-15 15h-31c-8.28 0-15-6.72-15-15v-31c0-8.28 6.72-15 15-15z"/>
+		<path id="Shape 1 copy 7" fill-rule="evenodd" class="s1" d="m44 26h4v27.44h-4z"/>
+		<path id="Shape 1 copy 8" fill-rule="evenodd" class="s1" d="m53 26h4v27.44h-4z"/>
+		<path id="Layer 1 copy 5" class="s1" d="m22 26v27.44l18-13.72z"/>
+	</g>
+</svg>
