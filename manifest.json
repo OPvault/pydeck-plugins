@@ -74,7 +74,7 @@
         "1.0"
       ],
       "versions": [
-        {Folder
+        {
           "version": "1.0.0",
           "path": "plugins/home-assistant/1.0.0",
           "min_pydeck_version": null,
