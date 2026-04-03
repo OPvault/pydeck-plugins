@@ -149,14 +149,14 @@
       "summary": "Send HTTP requests with a configurable method and payload",
       "author": "PyDeck Team",
       "latest": "1.0.0",
-      "icon_path": "plugins/web requests/icon.svg",
+      "icon_path": "plugins/web-requests/icon.svg",
       "compatible_pydeck_versions": [
         "1.0"
       ],
       "versions": [
         {
           "version": "1.0.0",
-          "path": "plugins/web requests/1.0.0",
+          "path": "plugins/web-requests/1.0.0",
           "min_pydeck_version": null,
           "max_pydeck_version": null
         }
