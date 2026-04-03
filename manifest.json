@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "label": "Official · Canary",
-  "generated_at": "2026-04-03T12:50:40Z",
+  "generated_at": "2026-04-03T16:20:55Z",
   "plugins": [
     {
       "name": "Browser",
@@ -50,7 +50,7 @@
       "summary": "Control Discord voice state (mute/deafen) via RPC",
       "author": "PyDeck Team",
       "latest": "1.0.0",
-      "icon_path": "plugins/discord/icon.png",
+      "icon_path": "plugins/discord/icon.svg",
       "compatible_pydeck_versions": [
         "1.0"
       ],
@@ -115,7 +115,7 @@
       "category": "utilities",
       "summary": "Control Spotify playback via the Web API",
       "author": "PyDeck Team",
-      "latest": "1.0.0",
+      "latest": "1.0.1",
       "icon_path": "plugins/spotify/icon.svg",
       "compatible_pydeck_versions": [
         "1.0"
@@ -124,6 +124,12 @@
         {
           "version": "1.0.0",
           "path": "plugins/spotify/1.0.0",
+          "min_pydeck_version": null,
+          "max_pydeck_version": null
+        },
+        {
+          "version": "1.0.1",
+          "path": "plugins/spotify/1.0.1",
           "min_pydeck_version": null,
           "max_pydeck_version": null
         }
