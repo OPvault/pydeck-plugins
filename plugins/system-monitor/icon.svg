@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Chip body -->
+  <rect x="22" y="22" width="56" height="56" rx="5" fill="#0f172a" stroke="#4f9cf9" stroke-width="3"/>
+  <!-- Inner die -->
+  <rect x="34" y="34" width="32" height="32" rx="3" fill="#1e3a5f" stroke="#4f9cf9" stroke-width="1.5"/>
+  <!-- Grid lines on die -->
+  <line x1="42" y1="34" x2="42" y2="66" stroke="#4f9cf9" stroke-width="0.8" opacity="0.5"/>
+  <line x1="50" y1="34" x2="50" y2="66" stroke="#4f9cf9" stroke-width="0.8" opacity="0.5"/>
+  <line x1="58" y1="34" x2="58" y2="66" stroke="#4f9cf9" stroke-width="0.8" opacity="0.5"/>
+  <line x1="34" y1="42" x2="66" y2="42" stroke="#4f9cf9" stroke-width="0.8" opacity="0.5"/>
+  <line x1="34" y1="50" x2="66" y2="50" stroke="#4f9cf9" stroke-width="0.8" opacity="0.5"/>
+  <line x1="34" y1="58" x2="66" y2="58" stroke="#4f9cf9" stroke-width="0.8" opacity="0.5"/>
+  <!-- Pins left -->
+  <line x1="22" y1="35" x2="8"  y2="35" stroke="#4f9cf9" stroke-width="3" stroke-linecap="round"/>
+  <line x1="22" y1="45" x2="8"  y2="45" stroke="#4f9cf9" stroke-width="3" stroke-linecap="round"/>
+  <line x1="22" y1="55" x2="8"  y2="55" stroke="#4f9cf9" stroke-width="3" stroke-linecap="round"/>
+  <line x1="22" y1="65" x2="8"  y2="65" stroke="#4f9cf9" stroke-width="3" stroke-linecap="round"/>
+  <!-- Pins right -->
+  <line x1="78" y1="35" x2="92" y2="35" stroke="#4f9cf9" stroke-width="3" stroke-linecap="round"/>
+  <line x1="78" y1="45" x2="92" y2="45" stroke="#4f9cf9" stroke-width="3" stroke-linecap="round"/>
+  <line x1="78" y1="55" x2="92" y2="55" stroke="#4f9cf9" stroke-width="3" stroke-linecap="round"/>
+  <line x1="78" y1="65" x2="92" y2="65" stroke="#4f9cf9" stroke-width="3" stroke-linecap="round"/>
+  <!-- Pins top -->
+  <line x1="35" y1="22" x2="35" y2="8"  stroke="#4f9cf9" stroke-width="3" stroke-linecap="round"/>
+  <line x1="50" y1="22" x2="50" y2="8"  stroke="#4f9cf9" stroke-width="3" stroke-linecap="round"/>
+  <line x1="65" y1="22" x2="65" y2="8"  stroke="#4f9cf9" stroke-width="3" stroke-linecap="round"/>
+  <!-- Pins bottom -->
+  <line x1="35" y1="78" x2="35" y2="92" stroke="#4f9cf9" stroke-width="3" stroke-linecap="round"/>
+  <line x1="50" y1="78" x2="50" y2="92" stroke="#4f9cf9" stroke-width="3" stroke-linecap="round"/>
+  <line x1="65" y1="78" x2="65" y2="92" stroke="#4f9cf9" stroke-width="3" stroke-linecap="round"/>
+  <!-- Activity dot -->
+  <circle cx="50" cy="50" r="5" fill="#22c55e"/>
+</svg>
