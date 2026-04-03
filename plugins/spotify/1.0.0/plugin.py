@@ -5,8 +5,8 @@ Controls Spotify playback via the Web API (OAuth2 Authorization Code flow).
 First-time setup:
 1. Create a Spotify app at https://developer.spotify.com/dashboard
 2. Add http://localhost:8686/oauth/spotify/callback as a Redirect URI in the app settings
-3. Enter your Client ID and Client Secret in the Credentials Manager (key icon)
-4. Click 'Authorize' in the Credentials Manager to complete OAuth
+3. Enter your Client ID and Client Secret under Settings → API (open Settings from the deck header)
+4. Click Authorize there to complete OAuth
 5. Spotify will redirect back automatically
 """
 
@@ -40,7 +40,9 @@ _ART_IMG_DIR = _PLUGIN_DIR / "img"
 _ART_FILE = _ART_IMG_DIR / "_now_playing.jpg"
 _ART_REL_PATH = "plugins/plugin/spotify/img/_now_playing.jpg"
 _last_art_url: Optional[str] = None
-_last_track_label: Optional[str] = None
+# Last album-art URL + track label applied per deck slot (poller passes
+# _device_id / _button_id). Globals would make only the first deck update.
+_last_spotify_face: dict[tuple[str, int], tuple[Optional[str], Optional[str]]] = {}
 
 
 def _get_playback_cached(client: SpotifyClient) -> Optional[dict]:
@@ -106,6 +108,23 @@ def _fetch_album_art(pb: Optional[dict]) -> tuple[Optional[str], Optional[str]]:
         return None, f"download failed: {exc}"
 
 
+def _playback_art_url(pb: Optional[dict]) -> Optional[str]:
+    """Album art URL from playback, or None if unavailable."""
+    if not pb or not isinstance(pb, dict):
+        return None
+    item = pb.get("item")
+    if not isinstance(item, dict):
+        return None
+    album = item.get("album")
+    if not isinstance(album, dict):
+        return None
+    images = album.get("images")
+    if not images:
+        return None
+    url = _pick_art_url(images)
+    return url if url else None
+
+
 def _build_track_label(pb: Optional[dict], mode: str = "song") -> str:
     """Build a display label from playback data based on *mode*.
 
@@ -139,7 +158,7 @@ def _get_client(config: Dict[str, Any]) -> SpotifyClient:
     if not cid or not csec:
         raise SpotifyError(
             "client_id and client_secret are required — "
-            "configure them in the Credentials Manager (key icon in header)"
+            "configure them under Settings → API"
         )
     key = (cid, csec)
     client = _client_cache.get(key)
@@ -195,26 +214,38 @@ def poll_display(config: Dict[str, Any]) -> Dict[str, Any]:
     Only returns ``display_update`` when something actually changed,
     so the poller doesn't needlessly write to disk or emit events.
     """
-    global _last_track_label
+    did = str(config.get("_device_id") or "")
+    bid = config.get("_button_id")
+    if not isinstance(bid, int):
+        bid = 0
+    key = (did, bid)
+    prev_art_sent, prev_label_sent = _last_spotify_face.get(key, (None, None))
+
     try:
         client = _get_client(config)
         pb = client.get_playback()
-        prev_url = _last_art_url
         art_path, _ = _fetch_album_art(pb)
+        art_url = _playback_art_url(pb)
 
         display_update: Dict[str, Any] = {}
 
-        if art_path and _last_art_url != prev_url:
+        if art_path and art_url != prev_art_sent:
             display_update["image"] = art_path
 
         mode = str(config.get("display_mode") or "none")
         track_label = _build_track_label(pb, mode)
-        if track_label != _last_track_label:
+        if track_label != prev_label_sent:
             display_update["text"] = track_label or ""
             display_update["scroll_speed"] = 4
-            _last_track_label = track_label
 
         if display_update:
+            new_art = prev_art_sent
+            new_lbl = prev_label_sent
+            if "image" in display_update:
+                new_art = art_url
+            if "text" in display_update:
+                new_lbl = track_label
+            _last_spotify_face[key] = (new_art, new_lbl)
             return {"display_update": display_update}
         return {}
     except Exception:
@@ -358,6 +389,41 @@ def volume_down(config: Dict[str, Any]) -> Dict[str, Any]:
         result: Dict[str, Any] = {"success": True, "action": "volume_down", "volume": new_vol}
         if config.get("show_volume_label"):
             result["display_update"] = {"text": f"{new_vol}%"}
+        return result
+    except SpotifyError as e:
+        _evict_client(config)
+        return {"success": False, "error": str(e)}
+    except Exception as e:
+        _evict_client(config)
+        return {"success": False, "error": f"Unexpected error: {e}"}
+
+
+def set_volume(config: Dict[str, Any]) -> Dict[str, Any]:
+    """Set Spotify playback volume to a fixed level (0–100%).
+
+    Config:
+        volume_percent: target level (required).
+        show_volume_label: when true, poller / press can show ``NN%`` on the button.
+    """
+    try:
+        client = _get_client(config)
+        raw = config.get("volume_percent")
+        if raw is None or raw == "":
+            return {"success": False, "error": "Configure Volume (%) for this button"}
+        try:
+            target = int(raw)
+        except (TypeError, ValueError):
+            return {"success": False, "error": "Volume (%) must be a whole number"}
+        target = max(0, min(100, target))
+        client.set_volume(target)
+        _invalidate_pb_cache()
+        result: Dict[str, Any] = {
+            "success": True,
+            "action": "set_volume",
+            "volume": target,
+        }
+        if config.get("show_volume_label"):
+            result["display_update"] = {"text": f"{target}%"}
         return result
     except SpotifyError as e:
         _evict_client(config)

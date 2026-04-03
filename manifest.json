@@ -1,0 +1,166 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-04-03T00:30:20Z",
+  "plugins": [
+    {
+      "name": "Browser",
+      "slug": "browser",
+      "category": "utilities",
+      "summary": "Open URLs in the default browser",
+      "author": "PyDeck Team",
+      "latest": "1.0.0",
+      "icon_path": "plugin-repo/plugins/browser/icon.png",
+      "compatible_pydeck_versions": [
+        "1.0"
+      ],
+      "versions": [
+        {
+          "version": "1.0.0",
+          "path": "plugin-repo/plugins/browser/1.0.0",
+          "min_pydeck_version": null,
+          "max_pydeck_version": null
+        }
+      ]
+    },
+    {
+      "name": "Clock",
+      "slug": "clock",
+      "category": "utilities",
+      "summary": "Display a live digital clock on a button",
+      "author": "PyDeck Team",
+      "latest": "1.0.0",
+      "icon_path": "plugin-repo/plugins/clock/icon.png",
+      "compatible_pydeck_versions": [
+        "1.0"
+      ],
+      "versions": [
+        {
+          "version": "1.0.0",
+          "path": "plugin-repo/plugins/clock/1.0.0",
+          "min_pydeck_version": null,
+          "max_pydeck_version": null
+        }
+      ]
+    },
+    {
+      "name": "Discord",
+      "slug": "discord",
+      "category": "communication",
+      "summary": "Control Discord voice state (mute/deafen) via RPC",
+      "author": "PyDeck Team",
+      "latest": "1.0.0",
+      "icon_path": "plugin-repo/plugins/discord/icon.png",
+      "compatible_pydeck_versions": [
+        "1.0"
+      ],
+      "versions": [
+        {
+          "version": "1.0.0",
+          "path": "plugin-repo/plugins/discord/1.0.0",
+          "min_pydeck_version": null,
+          "max_pydeck_version": null
+        }
+      ]
+    },
+    {
+      "name": "Folder",
+      "slug": "folder",
+      "category": "utilities",
+      "summary": "Navigate virtual folder pages on the Stream Deck",
+      "author": "PyDeck Team",
+      "latest": "1.0.0",
+      "icon_path": "plugin-repo/plugins/folder/icon.png",
+      "compatible_pydeck_versions": [
+        "1.0"
+      ],
+      "versions": [
+        {
+          "version": "1.0.0",
+          "path": "plugin-repo/plugins/folder/1.0.0",
+          "min_pydeck_version": null,
+          "max_pydeck_version": null
+        }
+      ]
+    },
+    {
+      "name": "Home Assistant",
+      "slug": "home-assistant",
+      "category": "home-automation",
+      "summary": "Control and monitor Home Assistant entities",
+      "author": "PyDeck Team",
+      "latest": "1.0.0",
+      "icon_path": "plugin-repo/plugins/home-assistant/icon.png",
+      "compatible_pydeck_versions": [
+        "1.0"
+      ],
+      "versions": [
+        {
+          "version": "1.0.0",
+          "path": "plugin-repo/plugins/home-assistant/1.0.0",
+          "min_pydeck_version": null,
+          "max_pydeck_version": null
+        }
+      ]
+    },
+    {
+      "name": "Media Control",
+      "slug": "media-control",
+      "category": "media",
+      "summary": "Control media playback on Linux",
+      "author": "PyDeck Team",
+      "latest": "1.0.0",
+      "icon_path": "plugin-repo/plugins/media_control/icon.png",
+      "compatible_pydeck_versions": [
+        "1.0"
+      ],
+      "versions": [
+        {
+          "version": "1.0.0",
+          "path": "plugin-repo/plugins/media_control/1.0.0",
+          "min_pydeck_version": null,
+          "max_pydeck_version": null
+        }
+      ]
+    },
+    {
+      "name": "Spotify",
+      "slug": "spotify",
+      "category": "media",
+      "summary": "Control Spotify playback via the Web API",
+      "author": "PyDeck Team",
+      "latest": "1.0.0",
+      "icon_path": "plugin-repo/plugins/spotify/icon.png",
+      "compatible_pydeck_versions": [
+        "1.0"
+      ],
+      "versions": [
+        {
+          "version": "1.0.0",
+          "path": "plugin-repo/plugins/spotify/1.0.0",
+          "min_pydeck_version": null,
+          "max_pydeck_version": null
+        }
+      ]
+    },
+    {
+      "name": "Web Requests",
+      "slug": "web-requests",
+      "category": "utilities",
+      "summary": "Send HTTP requests with a configurable method and payload",
+      "author": "PyDeck Team",
+      "latest": "1.0.0",
+      "icon_path": "plugin-repo/plugins/web requests/icon.png",
+      "compatible_pydeck_versions": [
+        "1.0"
+      ],
+      "versions": [
+        {
+          "version": "1.0.0",
+          "path": "plugin-repo/plugins/web requests/1.0.0",
+          "min_pydeck_version": null,
+          "max_pydeck_version": null
+        }
+      ]
+    }
+  ]
+}

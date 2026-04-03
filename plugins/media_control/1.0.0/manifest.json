@@ -1,0 +1,118 @@
+{
+  "name": "Media Control",
+  "version": "1.0.0",
+  "description": "Control media playback on Linux (play/pause, next, previous, volume)",
+  "author": "PyDeck Team",
+  "permissions": {
+    "shutil": [
+      "which"
+    ],
+    "subprocess": [
+      "run"
+    ]
+  },
+  "functions": {
+    "play": {
+      "label": "Play",
+      "description": "Start playback",
+      "sidebar_icon": "plugins/plugin/media_control/img/Play.png",
+      "default_display": {
+        "color": "#2a2a2e",
+        "text": "",
+        "image": "plugins/plugin/media_control/img/Play.png"
+      },
+      "ui": []
+    },
+    "pause": {
+      "label": "Pause",
+      "description": "Pause playback",
+      "sidebar_icon": "plugins/plugin/media_control/img/Pause.png",
+      "default_display": {
+        "color": "#2a2a2e",
+        "text": "",
+        "image": "plugins/plugin/media_control/img/Pause.png"
+      },
+      "ui": []
+    },
+    "play_pause": {
+      "label": "Play/Pause",
+      "description": "Toggle playback",
+      "sidebar_icon": "plugins/plugin/media_control/img/PlayPause.png",
+      "default_display": {
+        "color": "#2a2a2e",
+        "text": "",
+        "image": "plugins/plugin/media_control/img/PlayPause.png"
+      },
+      "ui": []
+    },
+    "next_track": {
+      "label": "Next Track",
+      "description": "Skip to the next track",
+      "sidebar_icon": "plugins/plugin/media_control/img/Next.png",
+      "default_display": {
+        "color": "#2a2a2e",
+        "text": "",
+        "image": "plugins/plugin/media_control/img/Next.png"
+      },
+      "ui": []
+    },
+    "previous_track": {
+      "label": "Previous Track",
+      "description": "Go to the previous track",
+      "sidebar_icon": "plugins/plugin/media_control/img/Previous.png",
+      "default_display": {
+        "color": "#2a2a2e",
+        "text": "",
+        "image": "plugins/plugin/media_control/img/Previous.png"
+      },
+      "ui": []
+    },
+    "volume_up": {
+      "label": "Volume Up",
+      "description": "Increase volume",
+      "sidebar_icon": "plugins/plugin/media_control/img/VolumeUp.png",
+      "default_display": {
+        "color": "#2a2a2e",
+        "text": "",
+        "image": "plugins/plugin/media_control/img/VolumeUp.png"
+      },
+      "ui": [
+        {
+          "type": "number",
+          "id": "step_percent",
+          "label": "Volume Step (%)",
+          "default": 5
+        }
+      ]
+    },
+    "volume_down": {
+      "label": "Volume Down",
+      "description": "Decrease volume",
+      "sidebar_icon": "plugins/plugin/media_control/img/VolumeDown.png",
+      "default_display": {
+        "color": "#2a2a2e",
+        "text": "",
+        "image": "plugins/plugin/media_control/img/VolumeDown.png"
+      },
+      "ui": [
+        {
+          "type": "number",
+          "id": "step_percent",
+          "label": "Volume Step (%)",
+          "default": 5
+        }
+      ]
+    },
+    "mute_toggle": {
+      "label": "Toggle Mute",
+      "description": "Toggle mute on default sink",
+      "sidebar_icon": "plugins/plugin/media_control/img/Mute.png",
+      "default_display": {
+        "color": "#2a2a2e",
+        "text": "",
+        "image": "plugins/plugin/media_control/img/Mute.png"
+      },
+      "ui": []
+    }
+  }
+}

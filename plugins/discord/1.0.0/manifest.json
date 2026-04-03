@@ -24,6 +24,7 @@
     "toggle_mute": {
       "label": "Discord Mute",
       "description": "Toggle Discord microphone mute",
+      "sidebar_icon": "plugins/plugin/discord/img/mute_0.png",
       "default_display": {
         "image": "plugins/plugin/discord/img/mute_0.png",
         "color": "#000000",
@@ -38,6 +39,7 @@
     "toggle_deafen": {
       "label": "Discord Deafen",
       "description": "Toggle Discord deafen (mic + audio)",
+      "sidebar_icon": "plugins/plugin/discord/img/deafen_0.png",
       "default_display": {
         "image": "plugins/plugin/discord/img/deafen_0.png",
         "color": "#000000",

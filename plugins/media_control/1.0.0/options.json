@@ -1,0 +1,8 @@
+{
+  "name": "Media Control Plugin",
+  "description": "Linux media transport and volume control using playerctl/pactl/amixer",
+  "metadata": {
+    "category": "media",
+    "tags": ["media", "music", "playback", "volume"]
+  }
+}
