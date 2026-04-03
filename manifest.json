@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "label": "Official · Canary",
-  "generated_at": "2026-04-03T18:21:02Z",
+  "generated_at": "2026-04-03T19:01:50Z",
   "plugins": [
     {
       "name": "Browser",
@@ -104,6 +104,26 @@
         {
           "version": "1.0.0",
           "path": "plugins/media-control/1.0.0",
+          "min_pydeck_version": null,
+          "max_pydeck_version": null
+        }
+      ]
+    },
+    {
+      "name": "MET",
+      "slug": "MET",
+      "category": "weather",
+      "summary": "Show current weather from met.no for a chosen location",
+      "author": "PyDeck Team",
+      "latest": "1.0.0",
+      "icon_path": "plugins/MET/icon.png",
+      "compatible_pydeck_versions": [
+        "1.0"
+      ],
+      "versions": [
+        {
+          "version": "1.0.0",
+          "path": "plugins/MET/1.0.0",
           "min_pydeck_version": null,
           "max_pydeck_version": null
         }
