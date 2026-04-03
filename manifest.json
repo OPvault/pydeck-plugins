@@ -63,26 +63,6 @@
       ]
     },
     {
-      "name": "Folder",
-      "slug": "folder",
-      "category": "utilities",
-      "summary": "Navigate virtual folder pages on the Stream Deck",
-      "author": "PyDeck Team",
-      "latest": "1.0.0",
-      "icon_path": "plugins/folder/icon.svg",
-      "compatible_pydeck_versions": [
-        "1.0"
-      ],
-      "versions": [
-        {
-          "version": "1.0.0",
-          "path": "plugins/folder/1.0.0",
-          "min_pydeck_version": null,
-          "max_pydeck_version": null
-        }
-      ]
-    },
-    {
       "name": "Home Assistant",
       "slug": "home-assistant",
       "category": "home-automation",
@@ -94,7 +74,7 @@
         "1.0"
       ],
       "versions": [
-        {
+        {Folder
           "version": "1.0.0",
           "path": "plugins/home-assistant/1.0.0",
           "min_pydeck_version": null,
