@@ -1,0 +1,30 @@
+{
+  "name": "Browser",
+  "version": "1.0.0",
+  "description": "Open URLs in the default browser",
+  "permissions": {
+    "webbrowser": [
+      "open"
+    ]
+  },
+  "functions": {
+    "open_youtube": {
+      "label": "Open YouTube",
+      "description": "Launch youtube.com in your default browser",
+      "ui": []
+    },
+    "open_url": {
+      "label": "Open URL",
+      "description": "Launch a custom URL in your default browser",
+      "ui": [
+        {
+          "type": "input",
+          "id": "url",
+          "label": "URL",
+          "default": "https://youtube.com"
+        }
+      ]
+    }
+  },
+  "author": "PyDeck Team"
+}

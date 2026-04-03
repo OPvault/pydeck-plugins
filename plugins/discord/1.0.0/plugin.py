@@ -6,7 +6,7 @@ Requires a Discord application with the rpc, rpc.voice.read, and rpc.voice.write
 First-time setup:
 1. Create a Discord application at https://discord.com/developers/applications
 2. Add http://localhost as a redirect URI
-3. Enter the client_id and client_secret in the Credentials Manager (key icon)
+3. Enter the client_id and client_secret under Settings → API
 4. On first press, Discord will show an authorization prompt — approve it
 """
 
@@ -44,7 +44,7 @@ def _get_rpc(client_id: Any, client_secret: Any) -> DiscordRPC:
     if not cid or not csec:
         raise DiscordRPCError(
             "client_id and client_secret are required — "
-            "configure them in the Credentials Manager (key icon in header)"
+            "configure them under Settings → API"
         )
 
     key = (cid, csec)
@@ -70,7 +70,7 @@ def toggle_mute(config: Dict[str, Any]) -> Dict[str, Any]:
     """Toggle Discord microphone mute.
 
     Args:
-        config: Dict with client_id, client_secret (from Credentials Manager)
+        config: Dict with client_id, client_secret (from Settings → API)
                 and optional label/color.
 
     Returns:
@@ -101,7 +101,7 @@ def toggle_deafen(config: Dict[str, Any]) -> Dict[str, Any]:
     """Toggle Discord deafen (mic + audio).
 
     Args:
-        config: Dict with client_id, client_secret (from Credentials Manager)
+        config: Dict with client_id, client_secret (from Settings → API)
                 and optional label/color.
 
     Returns:
@@ -116,8 +116,12 @@ def toggle_deafen(config: Dict[str, Any]) -> Dict[str, Any]:
             "muted": state["mute"],
             "deafened": state["deaf"],
             "state": "active" if state["deaf"] else "default",
+            # Discord mutes you when deafening; RPC sometimes reports mute
+            # before/after inconsistently — treat deafen as implying muted UI.
             "related_states": {
-                "toggle_mute": "active" if state["mute"] else "default",
+                "toggle_mute": (
+                    "active" if (state["mute"] or state["deaf"]) else "default"
+                ),
             },
         }
     except DiscordRPCError as e:

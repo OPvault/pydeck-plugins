@@ -16,10 +16,13 @@ import time
 import uuid
 import urllib.request
 import urllib.parse
+from pathlib import Path
 
-DISCORD_TOKEN_FILE = os.path.join(
-    os.path.expanduser("~"), ".config", "pydeck", "discord_token.json"
-)
+# OAuth tokens live with other plugin credentials (same file as Spotify, HA, etc.).
+_CREDS_PATH = Path.home() / ".config" / "pydeck" / "core" / "credentials.json"
+_PLUGIN_KEY = "discord"
+# Older PyDeck builds used this file; migrated on first load.
+_LEGACY_TOKEN_FILE = Path.home() / ".config" / "pydeck" / "discord_token.json"
 
 _SCOPES = ["rpc", "rpc.voice.read", "rpc.voice.write"]
 _TOKEN_URL = "https://discord.com/api/oauth2/token"
@@ -116,25 +119,69 @@ class DiscordRPC:
     # ── Token persistence ──────────────────────────────────────────────────
 
     def _load_tokens(self):
+        if self._load_tokens_from_credentials():
+            return
+        self._migrate_legacy_token_file()
+
+    def _load_tokens_from_credentials(self) -> bool:
         try:
-            with open(DISCORD_TOKEN_FILE) as f:
-                data = json.load(f)
-            if data.get("client_id") == self.client_id:
-                self._access_token = data.get("access_token")
-                self._refresh_token = data.get("refresh_token")
-                self._token_expiry = data.get("expiry", 0)
+            if not _CREDS_PATH.is_file():
+                return False
+            with _CREDS_PATH.open("r", encoding="utf-8") as f:
+                raw = json.load(f)
+            data = raw.get(_PLUGIN_KEY, {})
+            if not isinstance(data, dict) or data.get("client_id") != self.client_id:
+                return False
+            self._access_token = data.get("access_token")
+            self._refresh_token = data.get("refresh_token")
+            self._token_expiry = float(
+                data.get("token_expiry", data.get("expiry", 0)) or 0
+            )
+            return bool(self._access_token or self._refresh_token)
         except Exception:
+            return False
+
+    def _migrate_legacy_token_file(self) -> None:
+        if not _LEGACY_TOKEN_FILE.is_file():
+            return
+        try:
+            with _LEGACY_TOKEN_FILE.open("r", encoding="utf-8") as f:
+                data = json.load(f)
+            if data.get("client_id") != self.client_id:
+                return
+            self._access_token = data.get("access_token")
+            self._refresh_token = data.get("refresh_token")
+            self._token_expiry = float(data.get("expiry", data.get("token_expiry", 0)) or 0)
+            self._save_tokens()
+        except Exception:
+            return
+        try:
+            _LEGACY_TOKEN_FILE.unlink()
+        except OSError:
             pass
 
     def _save_tokens(self):
-        os.makedirs(os.path.dirname(DISCORD_TOKEN_FILE), exist_ok=True)
-        with open(DISCORD_TOKEN_FILE, "w") as f:
-            json.dump({
-                "client_id": self.client_id,
-                "access_token": self._access_token,
-                "refresh_token": self._refresh_token,
-                "expiry": self._token_expiry,
-            }, f)
+        try:
+            raw: dict = {}
+            if _CREDS_PATH.is_file():
+                with _CREDS_PATH.open("r", encoding="utf-8") as f:
+                    raw = json.load(f)
+            if not isinstance(raw, dict):
+                raw = {}
+            creds = raw.setdefault(_PLUGIN_KEY, {})
+            if not isinstance(creds, dict):
+                creds = {}
+                raw[_PLUGIN_KEY] = creds
+            creds["access_token"] = self._access_token
+            creds["refresh_token"] = self._refresh_token
+            creds["token_expiry"] = self._token_expiry
+            creds.pop("expiry", None)
+            _CREDS_PATH.parent.mkdir(parents=True, exist_ok=True)
+            with _CREDS_PATH.open("w", encoding="utf-8") as f:
+                json.dump(raw, f, indent=2)
+                f.write("\n")
+        except Exception:
+            pass
 
     def clear_tokens(self):
         self._access_token = None
@@ -142,7 +189,23 @@ class DiscordRPC:
         self._token_expiry = 0
         self._disconnect()
         try:
-            os.remove(DISCORD_TOKEN_FILE)
+            if _CREDS_PATH.is_file():
+                with _CREDS_PATH.open("r", encoding="utf-8") as f:
+                    raw = json.load(f)
+                if isinstance(raw, dict):
+                    creds = raw.get(_PLUGIN_KEY, {})
+                    if isinstance(creds, dict):
+                        for k in ("access_token", "refresh_token", "token_expiry", "expiry"):
+                            creds.pop(k, None)
+                        raw[_PLUGIN_KEY] = creds
+                    with _CREDS_PATH.open("w", encoding="utf-8") as f:
+                        json.dump(raw, f, indent=2)
+                        f.write("\n")
+        except Exception:
+            pass
+        try:
+            if _LEGACY_TOKEN_FILE.is_file():
+                _LEGACY_TOKEN_FILE.unlink()
         except OSError:
             pass
 
