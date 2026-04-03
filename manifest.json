@@ -49,7 +49,7 @@
       "summary": "Control Discord voice state (mute/deafen) via RPC",
       "author": "PyDeck Team",
       "latest": "1.0.0",
-      "icon_path": "plugins/discord/icon.svg",
+      "icon_path": "plugins/discord/icon.png",
       "compatible_pydeck_versions": [
         "1.0"
       ],
@@ -69,7 +69,7 @@
       "summary": "Control and monitor Home Assistant entities",
       "author": "PyDeck Team",
       "latest": "1.0.1",
-      "icon_path": "plugins/home-assistant/icon.svg",
+      "icon_path": "plugins/home-assistant/icon.png",
       "compatible_pydeck_versions": [
         "1.0"
       ],

@@ -43,4 +43,4 @@ pydeck-plugins/
 2. Add an entry to the root `manifest.json` with the correct `slug`, `latest`, and `versions[].path`.
 3. Commit and push both changes together.
 
-See [docs/MARKETPLACE_REPO.md](docs/MARKETPLACE_REPO.md) for the full catalog format reference and [docs/PLUGIN_DEVELOPMENT.md](docs/PLUGIN_DEVELOPMENT.md) for the plugin manifest and `plugin.py` API.
+See the [pydeck-docs](https://github.com/opvault/pydeck-docs) repo for the full catalog format reference and plugin manifest and `plugin.py` API.
