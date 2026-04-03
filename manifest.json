@@ -9,7 +9,7 @@
       "summary": "Open URLs in the default browser",
       "author": "PyDeck Team",
       "latest": "1.0.0",
-      "icon_path": "plugins/browser/icon.png",
+      "icon_path": "plugins/browser/icon.svg",
       "compatible_pydeck_versions": [
         "1.0"
       ],
@@ -29,7 +29,7 @@
       "summary": "Display a live digital clock on a button",
       "author": "PyDeck Team",
       "latest": "1.0.0",
-      "icon_path": "plugins/clock/icon.png",
+      "icon_path": "plugins/clock/icon.svg",
       "compatible_pydeck_versions": [
         "1.0"
       ],
@@ -49,7 +49,7 @@
       "summary": "Control Discord voice state (mute/deafen) via RPC",
       "author": "PyDeck Team",
       "latest": "1.0.0",
-      "icon_path": "plugins/discord/icon.png",
+      "icon_path": "plugins/discord/icon.svg",
       "compatible_pydeck_versions": [
         "1.0"
       ],
@@ -69,7 +69,7 @@
       "summary": "Navigate virtual folder pages on the Stream Deck",
       "author": "PyDeck Team",
       "latest": "1.0.0",
-      "icon_path": "plugins/folder/icon.png",
+      "icon_path": "plugins/folder/icon.svg",
       "compatible_pydeck_versions": [
         "1.0"
       ],
@@ -89,7 +89,7 @@
       "summary": "Control and monitor Home Assistant entities",
       "author": "PyDeck Team",
       "latest": "1.0.0",
-      "icon_path": "plugins/home-assistant/icon.png",
+      "icon_path": "plugins/home-assistant/icon.svg",
       "compatible_pydeck_versions": [
         "1.0"
       ],
@@ -109,7 +109,7 @@
       "summary": "Control media playback on Linux",
       "author": "PyDeck Team",
       "latest": "1.0.0",
-      "icon_path": "plugins/media_control/icon.png",
+      "icon_path": "plugins/media_control/icon.svg",
       "compatible_pydeck_versions": [
         "1.0"
       ],
@@ -129,7 +129,7 @@
       "summary": "Control Spotify playback via the Web API",
       "author": "PyDeck Team",
       "latest": "1.0.0",
-      "icon_path": "plugins/spotify/icon.png",
+      "icon_path": "plugins/spotify/icon.svg",
       "compatible_pydeck_versions": [
         "1.0"
       ],
@@ -149,7 +149,7 @@
       "summary": "Send HTTP requests with a configurable method and payload",
       "author": "PyDeck Team",
       "latest": "1.0.0",
-      "icon_path": "plugins/web requests/icon.png",
+      "icon_path": "plugins/web requests/icon.svg",
       "compatible_pydeck_versions": [
         "1.0"
       ],
