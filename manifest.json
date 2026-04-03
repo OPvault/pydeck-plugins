@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "label": "Official · Canary",
-  "generated_at": "2026-04-03T22:57:38Z",
+  "generated_at": "2026-04-03T23:01:11Z",
   "plugins": [
     {
       "name": "Browser",
@@ -64,6 +64,26 @@
         {
           "version": "1.0.1",
           "path": "plugins/discord/1.0.1",
+          "min_pydeck_version": null,
+          "max_pydeck_version": null
+        }
+      ]
+    },
+    {
+      "name": "Folder",
+      "slug": "folder",
+      "category": "utilities",
+      "summary": "Navigate virtual folder pages on the Stream Deck",
+      "author": "PyDeck Team",
+      "latest": "1.0.0",
+      "icon_path": "plugins/folder/icon.png",
+      "compatible_pydeck_versions": [
+        "1.0"
+      ],
+      "versions": [
+        {
+          "version": "1.0.0",
+          "path": "plugins/folder/1.0.0",
           "min_pydeck_version": null,
           "max_pydeck_version": null
         }
