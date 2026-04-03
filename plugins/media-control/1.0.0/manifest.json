@@ -15,66 +15,66 @@
     "play": {
       "label": "Play",
       "description": "Start playback",
-      "sidebar_icon": "plugins/plugin/media_control/img/Play.png",
+      "sidebar_icon": "plugins/plugin/media-control/img/Play.png",
       "default_display": {
         "color": "#2a2a2e",
         "text": "",
-        "image": "plugins/plugin/media_control/img/Play.png"
+        "image": "plugins/plugin/media-control/img/Play.png"
       },
       "ui": []
     },
     "pause": {
       "label": "Pause",
       "description": "Pause playback",
-      "sidebar_icon": "plugins/plugin/media_control/img/Pause.png",
+      "sidebar_icon": "plugins/plugin/media-control/img/Pause.png",
       "default_display": {
         "color": "#2a2a2e",
         "text": "",
-        "image": "plugins/plugin/media_control/img/Pause.png"
+        "image": "plugins/plugin/media-control/img/Pause.png"
       },
       "ui": []
     },
     "play_pause": {
       "label": "Play/Pause",
       "description": "Toggle playback",
-      "sidebar_icon": "plugins/plugin/media_control/img/PlayPause.png",
+      "sidebar_icon": "plugins/plugin/media-control/img/PlayPause.png",
       "default_display": {
         "color": "#2a2a2e",
         "text": "",
-        "image": "plugins/plugin/media_control/img/PlayPause.png"
+        "image": "plugins/plugin/media-control/img/PlayPause.png"
       },
       "ui": []
     },
     "next_track": {
       "label": "Next Track",
       "description": "Skip to the next track",
-      "sidebar_icon": "plugins/plugin/media_control/img/Next.png",
+      "sidebar_icon": "plugins/plugin/media-control/img/Next.png",
       "default_display": {
         "color": "#2a2a2e",
         "text": "",
-        "image": "plugins/plugin/media_control/img/Next.png"
+        "image": "plugins/plugin/media-control/img/Next.png"
       },
       "ui": []
     },
     "previous_track": {
       "label": "Previous Track",
       "description": "Go to the previous track",
-      "sidebar_icon": "plugins/plugin/media_control/img/Previous.png",
+      "sidebar_icon": "plugins/plugin/media-control/img/Previous.png",
       "default_display": {
         "color": "#2a2a2e",
         "text": "",
-        "image": "plugins/plugin/media_control/img/Previous.png"
+        "image": "plugins/plugin/media-control/img/Previous.png"
       },
       "ui": []
     },
     "volume_up": {
       "label": "Volume Up",
       "description": "Increase volume",
-      "sidebar_icon": "plugins/plugin/media_control/img/VolumeUp.png",
+      "sidebar_icon": "plugins/plugin/media-control/img/VolumeUp.png",
       "default_display": {
         "color": "#2a2a2e",
         "text": "",
-        "image": "plugins/plugin/media_control/img/VolumeUp.png"
+        "image": "plugins/plugin/media-control/img/VolumeUp.png"
       },
       "ui": [
         {
@@ -88,11 +88,11 @@
     "volume_down": {
       "label": "Volume Down",
       "description": "Decrease volume",
-      "sidebar_icon": "plugins/plugin/media_control/img/VolumeDown.png",
+      "sidebar_icon": "plugins/plugin/media-control/img/VolumeDown.png",
       "default_display": {
         "color": "#2a2a2e",
         "text": "",
-        "image": "plugins/plugin/media_control/img/VolumeDown.png"
+        "image": "plugins/plugin/media-control/img/VolumeDown.png"
       },
       "ui": [
         {
@@ -106,11 +106,11 @@
     "mute_toggle": {
       "label": "Toggle Mute",
       "description": "Toggle mute on default sink",
-      "sidebar_icon": "plugins/plugin/media_control/img/Mute.png",
+      "sidebar_icon": "plugins/plugin/media-control/img/Mute.png",
       "default_display": {
         "color": "#2a2a2e",
         "text": "",
-        "image": "plugins/plugin/media_control/img/Mute.png"
+        "image": "plugins/plugin/media-control/img/Mute.png"
       },
       "ui": []
     }
