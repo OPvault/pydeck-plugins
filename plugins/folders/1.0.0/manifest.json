@@ -19,13 +19,6 @@
           "label": "Folder ID",
           "placeholder": "gaming",
           "default": ""
-        },
-        {
-          "type": "input",
-          "id": "label",
-          "label": "Button Label",
-          "placeholder": "Gaming",
-          "default": ""
         }
       ]
     },
@@ -54,13 +47,6 @@
             }
           ],
           "default": "parent"
-        },
-        {
-          "type": "input",
-          "id": "label",
-          "label": "Button Label",
-          "placeholder": "Back",
-          "default": ""
         }
       ]
     }
