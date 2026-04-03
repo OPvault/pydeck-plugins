@@ -1,6 +1,6 @@
 {
   "name": "MET",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Show current weather from met.no for a chosen location",
   "author": "PyDeck Team",
   "permissions": {
