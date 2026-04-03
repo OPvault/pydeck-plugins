@@ -6,11 +6,11 @@
     "enter_folder": {
       "label": "Enter Folder",
       "description": "Switch deck buttons to a folder by folder id",
-      "sidebar_icon": "plugins/plugin/folder/img/folder_enter.png",
+      "sidebar_icon": "plugins/plugin/folders/img/folder_enter.png",
       "default_display": {
         "color": "#000000",
         "text": "",
-        "image": "plugins/plugin/folder/img/folder_enter.png"
+        "image": "plugins/plugin/folders/img/folder_enter.png"
       },
       "ui": [
         {
@@ -32,11 +32,11 @@
     "return_folder": {
       "label": "Return Folder",
       "description": "Return to parent folder or root",
-      "sidebar_icon": "plugins/plugin/folder/img/folder_return.png",
+      "sidebar_icon": "plugins/plugin/folders/img/folder_return.png",
       "default_display": {
         "color": "#000000",
         "text": "",
-        "image": "plugins/plugin/folder/img/folder_return.png"
+        "image": "plugins/plugin/folders/img/folder_return.png"
       },
       "ui": [
         {
