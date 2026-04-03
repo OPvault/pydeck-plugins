@@ -53,7 +53,7 @@
     "play_pause": {
       "label": "Play / Pause",
       "description": "Toggle Spotify play/pause",
-      "sidebar_icon": "plugins/plugin/media_control/img/PlayPause.png",
+      "sidebar_icon": "plugins/plugin/spotify/img/PlayPause.png",
       "title_readonly": true,
       "default_display": {
         "color": "#1ed760",
@@ -99,33 +99,33 @@
     "next_track": {
       "label": "Next Track",
       "description": "Skip to the next Spotify track",
-      "sidebar_icon": "plugins/plugin/media_control/img/Next.png",
+      "sidebar_icon": "plugins/plugin/spotify/img/Next.png",
       "default_display": {
         "color": "#1ed760",
         "text": "",
-        "image": "plugins/plugin/media_control/img/Next.png"
+        "image": "plugins/plugin/spotify/img/Next.png"
       },
       "ui": []
     },
     "prev_track": {
       "label": "Previous Track",
       "description": "Go back to the previous Spotify track",
-      "sidebar_icon": "plugins/plugin/media_control/img/Previous.png",
+      "sidebar_icon": "plugins/plugin/spotify/img/Previous.png",
       "default_display": {
         "color": "#1ed760",
         "text": "",
-        "image": "plugins/plugin/media_control/img/Previous.png"
+        "image": "plugins/plugin/spotify/img/Previous.png"
       },
       "ui": []
     },
     "volume_up": {
       "label": "Volume Up",
       "description": "Increase Spotify volume",
-      "sidebar_icon": "plugins/plugin/media_control/img/VolumeUp.png",
+      "sidebar_icon": "plugins/plugin/spotify/img/VolumeUp.png",
       "default_display": {
         "color": "#1ed760",
         "text": "",
-        "image": "plugins/plugin/media_control/img/VolumeUp.png"
+        "image": "plugins/plugin/spotify/img/VolumeUp.png"
       },
       "poll": {
         "function": "poll_volume_display",
@@ -151,11 +151,11 @@
     "volume_down": {
       "label": "Volume Down",
       "description": "Decrease Spotify volume",
-      "sidebar_icon": "plugins/plugin/media_control/img/VolumeDown.png",
+      "sidebar_icon": "plugins/plugin/spotify/img/VolumeDown.png",
       "default_display": {
         "color": "#1ed760",
         "text": "",
-        "image": "plugins/plugin/media_control/img/VolumeDown.png"
+        "image": "plugins/plugin/spotify/img/VolumeDown.png"
       },
       "poll": {
         "function": "poll_volume_display",
@@ -211,22 +211,22 @@
     "toggle_shuffle": {
       "label": "Shuffle",
       "description": "Toggle Spotify shuffle mode on/off",
-      "sidebar_icon": "plugins/plugin/media_control/img/Shuffle.png",
+      "sidebar_icon": "plugins/plugin/spotify/img/Shuffle.png",
       "default_display": {
         "color": "#1ed760",
         "text": "",
-        "image": "plugins/plugin/media_control/img/Shuffle.png"
+        "image": "plugins/plugin/spotify/img/Shuffle.png"
       },
       "ui": []
     },
     "cycle_repeat": {
       "label": "Repeat",
       "description": "Cycle repeat mode: off \u2192 context \u2192 track \u2192 off",
-      "sidebar_icon": "plugins/plugin/media_control/img/Repeat.png",
+      "sidebar_icon": "plugins/plugin/spotify/img/Repeat.png",
       "default_display": {
         "color": "#1ed760",
         "text": "",
-        "image": "plugins/plugin/media_control/img/Repeat.png"
+        "image": "plugins/plugin/spotify/img/Repeat.png"
       },
       "ui": []
     }
