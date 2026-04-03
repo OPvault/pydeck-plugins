@@ -68,7 +68,7 @@
       "category": "home-automation",
       "summary": "Control and monitor Home Assistant entities",
       "author": "PyDeck Team",
-      "latest": "1.0.0",
+      "latest": "1.0.1",
       "icon_path": "plugins/home-assistant/icon.svg",
       "compatible_pydeck_versions": [
         "1.0"
@@ -77,6 +77,12 @@
         {
           "version": "1.0.0",
           "path": "plugins/home-assistant/1.0.0",
+          "min_pydeck_version": null,
+          "max_pydeck_version": null
+        },
+        {
+          "version": "1.0.1",
+          "path": "plugins/home-assistant/1.0.1",
           "min_pydeck_version": null,
           "max_pydeck_version": null
         }
