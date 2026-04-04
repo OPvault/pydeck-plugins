@@ -1,0 +1,17 @@
+{
+  "name": "Discord",
+  "description": "Control Discord voice state via RPC (mute/deafen)",
+  "features": [
+    "Toggle microphone mute",
+    "Toggle deafen (mic + audio)",
+    "Discord RPC integration via OAuth2"
+  ],
+  "options": {
+    "client_id": "",
+    "client_secret": ""
+  },
+  "metadata": {
+    "category": "communication",
+    "tags": ["discord", "voice", "mute", "deafen", "rpc"]
+  }
+}
