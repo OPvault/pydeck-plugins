@@ -1,0 +1,74 @@
+{
+  "name": "Keyboard",
+  "version": "1.0.0",
+  "description": "Simulate keyboard presses and text input via evdev/uinput. Works on both X11 and Wayland. Requires the user to be in the 'input' group: sudo usermod -aG input $USER",
+  "author": "PyDeck Team",
+  "permissions": {
+    "evdev": ["UInput", "ecodes"],
+    "time": ["sleep"]
+  },
+  "functions": {
+    "press_key": {
+      "label": "Press Key",
+      "description": "Press a key or key combination (e.g. ctrl+c, super+l, F5, volumeup)",
+      "default_display": {
+        "color": "#1e293b",
+        "text": "Key",
+        "text_position": "middle",
+        "scroll_enabled": false
+      },
+      "ui": [
+        {
+          "type": "hotkey_recorder",
+          "id": "hotkey",
+          "label": "Key / Shortcut",
+          "placeholder": "ctrl+c",
+          "default": ""
+        },
+        {
+          "type": "number",
+          "id": "repeat",
+          "label": "Repeat",
+          "default": 1,
+          "min": 1,
+          "max": 100
+        },
+        {
+          "type": "number",
+          "id": "delay_ms",
+          "label": "Delay between repeats (ms)",
+          "default": 50,
+          "min": 0,
+          "max": 5000
+        }
+      ]
+    },
+    "type_text": {
+      "label": "Type Text",
+      "description": "Type a string of text as keyboard input (US layout)",
+      "default_display": {
+        "color": "#1e293b",
+        "text": "Type",
+        "text_position": "middle",
+        "scroll_enabled": false
+      },
+      "ui": [
+        {
+          "type": "input",
+          "id": "text",
+          "label": "Text",
+          "placeholder": "Hello, World!",
+          "default": ""
+        },
+        {
+          "type": "number",
+          "id": "delay_ms",
+          "label": "Delay between characters (ms)",
+          "default": 30,
+          "min": 0,
+          "max": 1000
+        }
+      ]
+    }
+  }
+}

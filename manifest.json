@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "label": "Official · Canary",
-  "generated_at": "2026-04-04T17:24:35Z",
+  "generated_at": "2026-04-04T18:43:41Z",
   "plugins": [
     {
       "name": "Browser",
@@ -116,6 +116,26 @@
         {
           "version": "1.0.1",
           "path": "plugins/home-assistant/1.0.1",
+          "min_pydeck_version": null,
+          "max_pydeck_version": null
+        }
+      ]
+    },
+    {
+      "name": "Keyboard",
+      "slug": "keyboard",
+      "category": "utilities",
+      "summary": "Simulate keyboard presses and text input via evdev/uinput. Works on both X11 and Wayland. Requires the user to be in the 'input' group: sudo usermod -aG input $USER",
+      "author": "PyDeck Team",
+      "latest": "1.0.0",
+      "icon_path": "",
+      "compatible_pydeck_versions": [
+        "1.0"
+      ],
+      "versions": [
+        {
+          "version": "1.0.0",
+          "path": "plugins/keyboard/1.0.0",
           "min_pydeck_version": null,
           "max_pydeck_version": null
         }
