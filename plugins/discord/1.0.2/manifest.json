@@ -1,0 +1,69 @@
+{
+  "name": "Discord",
+  "version": "1.0.2",
+  "description": "Control Discord voice state (mute/deafen) via RPC",
+  "author": "PyDeck Team",
+  "oauth": {
+    "authorize_url": "https://discord.com/api/oauth2/authorize",
+    "token_url": "https://discord.com/api/oauth2/token",
+    "scopes": "rpc rpc.voice.read rpc.voice.write",
+    "auth_method": "post"
+  },
+  "credentials": [
+    {"id": "client_id",     "label": "Client ID",     "type": "text"},
+    {"id": "client_secret", "label": "Client Secret",  "type": "password"}
+  ],
+  "permissions": {
+    "socket": ["socket", "AF_UNIX", "SOCK_STREAM"],
+    "json": ["dumps", "loads"],
+    "os": ["path", "environ", "makedirs", "listdir", "remove"],
+    "struct": ["pack", "unpack"],
+    "time": ["time", "sleep"],
+    "threading": ["Thread", "Lock"],
+    "queue": ["Queue"],
+    "uuid": ["uuid4"],
+    "urllib.request": ["urlopen", "Request"],
+    "urllib.parse": ["urlencode"],
+    "pathlib": ["Path"]
+  },
+  "functions": {
+    "toggle_mute": {
+      "label": "Discord Mute",
+      "description": "Toggle Discord microphone mute",
+      "sidebar_icon": "plugins/plugin/discord/img/mute_0.png",
+      "default_display": {
+        "image": "plugins/plugin/discord/img/mute_0.png",
+        "color": "#000000",
+        "text": ""
+      },
+      "display_states": {
+        "default": {"image": "plugins/plugin/discord/img/mute_0.png"},
+        "active":  {"image": "plugins/plugin/discord/img/mute_1.png"}
+      },
+      "poll": {
+        "function": "poll_mute_state",
+        "interval_ms": 10000
+      },
+      "ui": []
+    },
+    "toggle_deafen": {
+      "label": "Discord Deafen",
+      "description": "Toggle Discord deafen (mic + audio)",
+      "sidebar_icon": "plugins/plugin/discord/img/deafen_0.png",
+      "default_display": {
+        "image": "plugins/plugin/discord/img/deafen_0.png",
+        "color": "#000000",
+        "text": ""
+      },
+      "display_states": {
+        "default": {"image": "plugins/plugin/discord/img/deafen_0.png"},
+        "active":  {"image": "plugins/plugin/discord/img/deafen_1.png"}
+      },
+      "poll": {
+        "function": "poll_deafen_state",
+        "interval_ms": 10000
+      },
+      "ui": []
+    }
+  }
+}
