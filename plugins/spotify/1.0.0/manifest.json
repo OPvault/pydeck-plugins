@@ -62,8 +62,7 @@
         "text_bold": true,
         "text_italic": false,
         "text_underline": false,
-        "text_position": "bottom",
-        "text_font": "DejaVu Sans"
+        "text_position": "bottom"
       },
       "poll": {
         "function": "poll_display",
