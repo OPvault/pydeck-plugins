@@ -1,0 +1,219 @@
+{
+  "name": "MET",
+  "version": "1.1.0",
+  "description": "Show current weather from met.no for a chosen location",
+  "author": "PyDeck Team",
+  "permissions": {
+    "json": ["loads"],
+    "urllib.request": ["Request", "urlopen"],
+    "urllib.parse": ["urlencode"],
+    "urllib.error": ["HTTPError", "URLError"],
+    "pathlib": ["Path"],
+    "re": ["match"]
+  },
+  "functions": {
+    "show_weather": {
+      "label": "Current Temperature",
+      "description": "Display the current temperature and optional weather condition",
+      "title_readonly": true,
+      "disableGallary": true,
+      "default_display": {
+        "color": "#3a6ea5",
+        "text": "Temp",
+        "text_font": "Adwaita Sans",
+        "text_position": "bottom",
+        "scroll_enabled": false
+      },
+      "poll": {
+        "function": "poll_weather",
+        "interval_ms": 1000
+      },
+      "ui": [
+        {
+          "type": "input",
+          "id": "location",
+          "label": "Location (city or lat,lon)",
+          "placeholder": "Oslo or 59.91,10.75",
+          "default": "Oslo",
+          "autosave": "off",
+          "help_text": "Find a location on yr and copy city name or coordinates:",
+          "help_label": "Open yr.no",
+          "help_url": "https://www.yr.no/en"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_condition",
+          "label": "Show Weather Condition",
+          "default": false
+        },
+        {
+          "type": "select",
+          "id": "temperature_unit",
+          "label": "Temperature Unit",
+          "default": "C",
+          "options": [
+            {
+              "label": "Celsius (C)",
+              "value": "C"
+            },
+            {
+              "label": "Fahrenheit (F)",
+              "value": "F"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "temperature_rounding",
+          "label": "Temperature Rounding",
+          "default": "none",
+          "options": [
+            {
+              "label": "No Rounding (1 decimal)",
+              "value": "none"
+            },
+            {
+              "label": "Round Down",
+              "value": "down"
+            },
+            {
+              "label": "Round Up",
+              "value": "up"
+            },
+            {
+              "label": "Round Nearest",
+              "value": "nearest"
+            }
+          ]
+        },
+        {
+          "type": "checkbox",
+          "id": "show_temperature_unit",
+          "label": "Show C/F Symbol",
+          "default": true
+        }
+      ]
+    },
+    "show_forecast": {
+      "label": "Multiple Forecasts",
+      "description": "Display 3 weather forecasts at configurable intervals",
+      "title_readonly": true,
+      "default_display": {
+        "color": "#3a6ea5",
+        "text": "Forecasts",
+        "text_font": "Adwaita Sans",
+        "text_position": "bottom",
+        "scroll_enabled": false
+      },
+      "poll": {
+        "function": "poll_forecast",
+        "interval_ms": 1000
+      },
+      "ui": [
+        {
+          "type": "input",
+          "id": "location",
+          "label": "Location (city or lat,lon)",
+          "placeholder": "Oslo or 59.91,10.75",
+          "default": "Oslo",
+          "autosave": "off",
+          "help_text": "Find a location on yr and copy city name or coordinates:",
+          "help_label": "Open yr",
+          "help_url": "https://www.yr.no/en"
+        },
+        {
+          "type": "select",
+          "id": "forecast_interval",
+          "label": "Forecast Interval",
+          "default": "1",
+          "options": [
+            {
+              "label": "1 Hour (next 3 hours)",
+              "value": "1"
+            },
+            {
+              "label": "3 Hours (next 9 hours)",
+              "value": "3"
+            },
+            {
+              "label": "6 Hours (next 18 hours)",
+              "value": "6"
+            },
+            {
+              "label": "12 Hours (next 36 hours)",
+              "value": "12"
+            },
+            {
+              "label": "24 Hours (next 3 days)",
+              "value": "24"
+            }
+          ]
+        },
+        {
+          "type": "checkbox",
+          "id": "exclude_current_forecast",
+          "label": "Skip current time (start at next interval)",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "show_day",
+          "label": "Show day of week (e.g., 'Fri 20' instead of '20')",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "show_condition",
+          "label": "Show Weather Condition (for first forecast)",
+          "default": false
+        },
+        {
+          "type": "select",
+          "id": "temperature_unit",
+          "label": "Temperature Unit",
+          "default": "C",
+          "options": [
+            {
+              "label": "Celsius (C)",
+              "value": "C"
+            },
+            {
+              "label": "Fahrenheit (F)",
+              "value": "F"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "temperature_rounding",
+          "label": "Temperature Rounding",
+          "default": "none",
+          "options": [
+            {
+              "label": "No Rounding (1 decimal)",
+              "value": "none"
+            },
+            {
+              "label": "Round Down",
+              "value": "down"
+            },
+            {
+              "label": "Round Up",
+              "value": "up"
+            },
+            {
+              "label": "Round Nearest",
+              "value": "nearest"
+            }
+          ]
+        },
+        {
+          "type": "checkbox",
+          "id": "show_temperature_unit",
+          "label": "Show C/F Symbol",
+          "default": true
+        }
+      ]
+    }
+  }
+}
