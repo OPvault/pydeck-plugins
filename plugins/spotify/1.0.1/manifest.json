@@ -62,7 +62,8 @@
         "text_bold": true,
         "text_italic": false,
         "text_underline": false,
-        "text_position": "bottom"
+        "text_position": "bottom",
+        "text_color": "#ffffff"
       },
       "poll": {
         "function": "poll_display",
