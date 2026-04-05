@@ -1,0 +1,47 @@
+/* Discord plugin theme */
+.action-tile[data-action-type="discord"]         .action-tile-icon { background: rgba(88,101,242,0.2);   color: #7289da; }
+.action-badge.badge-discord         { background: rgba(88,101,242,0.2);   color: #7289da; }
+.api-section-icon.discord-icon { background: rgba(88,101,242,0.2);  color: #7289da; }
+.log-tag-discord  { background: #1a1a36; color: #7289da; }
+
+/* Select-buttons field */
+.discord-action-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(72px, 1fr));
+    gap: 6px;
+}
+.discord-opt {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    padding: 10px 6px 8px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text-1);
+    font-size: 0.72rem;
+    font-weight: 600;
+    font-family: var(--font);
+    cursor: pointer;
+    line-height: 1.1;
+    text-align: center;
+    transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+.discord-opt:hover  { background: var(--surface-hover); border-color: rgba(255,255,255,0.14); color: var(--text-0); }
+.discord-opt.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+.discord-opt svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    pointer-events: none;
+}
+
+/* Auth status indicators */
+.discord-auth-row { display: flex; align-items: center; gap: 10px; margin-bottom: 4px; }
+.discord-auth-status { font-size: 0.78rem; font-weight: 600; }
+.discord-auth-status.auth-ok      { color: var(--success); }
+.discord-auth-status.auth-error   { color: var(--error); }
+.discord-auth-status.auth-waiting { color: var(--text-1); }
+.discord-auth-status.auth-none    { color: var(--text-2); }
