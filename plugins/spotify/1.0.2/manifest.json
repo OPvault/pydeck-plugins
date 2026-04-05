@@ -61,8 +61,7 @@
         "image": "plugins/storage/spotify/_now_playing.jpg",
         "text_bold": true,
         "text_italic": false,
-        "text_underline": false,
-        "text_font": "DejaVu Sans"
+        "text_underline": false
       },
       "poll": {
         "function": "poll_display",

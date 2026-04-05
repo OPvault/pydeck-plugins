@@ -19,7 +19,6 @@
       "default_display": {
         "color": "#3a6ea5",
         "text": "Weather",
-        "text_font": "Adwaita Sans",
         "text_position": "bottom",
         "scroll_enabled": false
       },
