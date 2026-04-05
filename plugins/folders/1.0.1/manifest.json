@@ -1,0 +1,79 @@
+{
+  "name": "Folders",
+  "version": "1.0.1",
+  "description": "Navigate virtual folder pages on the Stream Deck",
+  "functions": {
+    "enter_folder": {
+      "label": "Enter Folder",
+      "description": "Switch deck buttons to a folder by folder id",
+      "sidebar_icon": "plugins/plugin/folders/img/folder_enter.png",
+      "default_display": {
+        "color": "#000000",
+        "text": "",
+        "image": "plugins/plugin/folders/img/folder_enter.png"
+      },
+      "ui": [
+        {
+          "type": "input",
+          "id": "folder_id",
+          "label": "Folder ID",
+          "placeholder": "gaming",
+          "default": ""
+        }
+      ]
+    },
+    "return_folder": {
+      "label": "Return Folder",
+      "description": "Return to parent folder or root",
+      "sidebar_icon": "plugins/plugin/folders/img/folder_return.png",
+      "default_display": {
+        "color": "#000000",
+        "text": "",
+        "image": "plugins/plugin/folders/img/folder_return.png"
+      },
+      "ui": [
+        {
+          "type": "select",
+          "id": "return_mode",
+          "label": "Return Mode",
+          "options": [
+            {
+              "label": "Parent Folder",
+              "value": "parent"
+            },
+            {
+              "label": "Root Folder",
+              "value": "root"
+            }
+          ],
+          "default": "parent"
+        }
+      ]
+    },
+    "switch_profile": {
+      "label": "Switch Profile",
+      "description": "Switch to a specific profile",
+      "sidebar_icon": "plugins/plugin/folders/img/profile_switch.png",
+      "default_display": {
+        "color": "#000000",
+        "text": "",
+        "image": "plugins/plugin/folders/img/profile_switch.png"
+      },
+      "ui": [
+        {
+          "type": "api_select",
+          "id": "profile_name",
+          "label": "Profile",
+          "api": "profiles",
+          "search_placeholder": "Search profiles…",
+          "display": {
+            "label": "label",
+            "value": "value"
+          },
+          "default": ""
+        }
+      ]
+    }
+  },
+  "author": "PyDeck Team"
+}
