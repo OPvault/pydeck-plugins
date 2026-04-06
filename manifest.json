@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "label": "Official · Canary",
-  "generated_at": "2026-04-06T18:19:24Z",
+  "generated_at": "2026-04-06T18:37:21Z",
   "plugins": [
     {
       "name": "Clock",
@@ -97,7 +97,7 @@
       "category": "sports",
       "summary": "Countdown to the next Formula 1 race weekend with track icon",
       "author": "PyDeck Team",
-      "latest": "1.0.1",
+      "latest": "1.0.2",
       "icon_path": "plugins/f1/icon.svg",
       "compatible_pydeck_versions": [
         "1.0"
@@ -112,6 +112,12 @@
         {
           "version": "1.0.1",
           "path": "plugins/f1/1.0.1",
+          "min_pydeck_version": null,
+          "max_pydeck_version": null
+        },
+        {
+          "version": "1.0.2",
+          "path": "plugins/f1/1.0.2",
           "min_pydeck_version": null,
           "max_pydeck_version": null
         }
@@ -233,7 +239,7 @@
       "category": "weather",
       "summary": "Show current weather from met.no for a chosen location",
       "author": "PyDeck Team",
-      "latest": "1.1.0",
+      "latest": "1.1.1",
       "icon_path": "plugins/MET/icon.png",
       "compatible_pydeck_versions": [
         "1.0"
@@ -254,6 +260,12 @@
         {
           "version": "1.1.0",
           "path": "plugins/MET/1.1.0",
+          "min_pydeck_version": null,
+          "max_pydeck_version": null
+        },
+        {
+          "version": "1.1.1",
+          "path": "plugins/MET/1.1.1",
           "min_pydeck_version": null,
           "max_pydeck_version": null
         }
