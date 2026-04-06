@@ -70,6 +70,14 @@ REPO_ONLY_FILES: frozenset[str] = frozenset({
     "catalog.json",
     "icon.svg",
     "icon.png",
+    # License files live at the plugin root, not inside version folders.
+    # Pydeck downloads them alongside the versioned source, so they must be
+    # excluded from the diff/copy to avoid spurious version bumps.
+    "license.txt",
+    "lisence.txt",  # common typo variant
+    "LICENSE",
+    "LICENSE.txt",
+    "LICENSE.md",
 })
 
 # Directories / suffixes to ignore when copying or comparing source files.
@@ -173,12 +181,34 @@ def _read_version(manifest_path: Path) -> str:
 
 
 def _write_version(manifest_path: Path, new_version: str) -> None:
-    """Rewrite the 'version' field in a manifest.json file in-place."""
-    data = json.loads(manifest_path.read_text())
-    data["version"] = new_version
-    manifest_path.write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n")
+    """Update the 'version' field in a manifest.json file in-place.
+
+    Uses a targeted string replacement so the rest of the JSON formatting
+    is preserved exactly, preventing spurious diffs on the next sync run.
+    """
+    text = manifest_path.read_text()
+    data = json.loads(text)
+    old_version = str(data.get("version", ""))
+    updated = text.replace(
+        f'"version": "{old_version}"',
+        f'"version": "{new_version}"',
+        1,
+    )
+    if updated == text:
+        # Fallback: old_version not found as a string literal — full rewrite.
+        data["version"] = new_version
+        updated = json.dumps(data, indent=2, ensure_ascii=False) + "\n"
+    manifest_path.write_text(updated)
 
 # ── Comparison ─────────────────────────────────────────────────────────────────
+
+def _json_equal(a: Path, b: Path) -> bool:
+    """Return True if two JSON files are semantically identical."""
+    try:
+        return json.loads(a.read_text()) == json.loads(b.read_text())
+    except (json.JSONDecodeError, OSError):
+        return False
+
 
 def _files_changed(source_files: dict[str, Path], repo_version_dir: Path) -> bool:
     """Return True if any source file differs from the installed version."""
@@ -188,7 +218,10 @@ def _files_changed(source_files: dict[str, Path], repo_version_dir: Path) -> boo
         repo_path = repo_version_dir / rel
         if not repo_path.exists():
             return True
-        if not filecmp.cmp(str(src_path), str(repo_path), shallow=False):
+        if src_path.suffix == ".json":
+            if not _json_equal(src_path, repo_path):
+                return True
+        elif not filecmp.cmp(str(src_path), str(repo_path), shallow=False):
             return True
 
     # Also flag files that were removed from the source but still in the repo.
