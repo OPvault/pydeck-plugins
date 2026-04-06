@@ -1,3 +1,7 @@
 {
-  "category": "sports"
+  "category": "sports",
+  "licenses": [
+    { "name": "OpenF1", "file": "LICENSE-openf1" },
+    { "name": "Jolpica F1", "file": "LICENSE-jolpica" }
+  ]
 }

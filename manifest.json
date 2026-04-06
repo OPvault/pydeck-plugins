@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "label": "Official · Canary",
-  "generated_at": "2026-04-06T18:37:21Z",
+  "generated_at": "2026-04-06T19:38:20Z",
   "plugins": [
     {
       "name": "Clock",
@@ -120,6 +120,16 @@
           "path": "plugins/f1/1.0.2",
           "min_pydeck_version": null,
           "max_pydeck_version": null
+        }
+      ],
+      "licenses": [
+        {
+          "name": "OpenF1",
+          "file": "LICENSE-openf1"
+        },
+        {
+          "name": "Jolpica F1",
+          "file": "LICENSE-jolpica"
         }
       ]
     },
@@ -268,6 +278,12 @@
           "path": "plugins/MET/1.1.1",
           "min_pydeck_version": null,
           "max_pydeck_version": null
+        }
+      ],
+      "licenses": [
+        {
+          "name": "MET Norway",
+          "file": "lisence.txt"
         }
       ]
     },
