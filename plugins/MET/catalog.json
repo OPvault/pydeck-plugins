@@ -1,6 +1,7 @@
 {
   "category": "weather",
+  "compatible_pydeck_versions": ["1.0"],
   "licenses": [
-    { "name": "MET Norway", "file": "lisence.txt" }
+    { "name": "MET Norway", "file": "lisence.txt", "description": "Used to fetch current weather conditions and forecasts from met.no. Powers the temperature display, weather icon, and location-based updates." }
   ]
 }

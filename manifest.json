@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "label": "Official · Canary",
-  "generated_at": "2026-04-06T19:38:20Z",
+  "generated_at": "2026-04-06T19:50:52Z",
   "plugins": [
     {
       "name": "Clock",
@@ -97,7 +97,7 @@
       "category": "sports",
       "summary": "Countdown to the next Formula 1 race weekend with track icon",
       "author": "PyDeck Team",
-      "latest": "1.0.2",
+      "latest": "1.0.3",
       "icon_path": "plugins/f1/icon.svg",
       "compatible_pydeck_versions": [
         "1.0"
@@ -120,16 +120,24 @@
           "path": "plugins/f1/1.0.2",
           "min_pydeck_version": null,
           "max_pydeck_version": null
+        },
+        {
+          "version": "1.0.3",
+          "path": "plugins/f1/1.0.3",
+          "min_pydeck_version": null,
+          "max_pydeck_version": null
         }
       ],
       "licenses": [
         {
           "name": "OpenF1",
-          "file": "LICENSE-openf1"
+          "file": "LICENSE-openf1",
+          "description": "Used to fetch race data, and the current race weekend schedule. Powers the race countdown and track icon display."
         },
         {
           "name": "Jolpica F1",
-          "file": "LICENSE-jolpica"
+          "file": "LICENSE-jolpica",
+          "description": "Used to fetch historical driver and constructor championship standings and points. Powers the Driver Points and Constructor Points buttons."
         }
       ]
     },
@@ -249,7 +257,7 @@
       "category": "weather",
       "summary": "Show current weather from met.no for a chosen location",
       "author": "PyDeck Team",
-      "latest": "1.1.1",
+      "latest": "1.1.2",
       "icon_path": "plugins/MET/icon.png",
       "compatible_pydeck_versions": [
         "1.0"
@@ -278,12 +286,19 @@
           "path": "plugins/MET/1.1.1",
           "min_pydeck_version": null,
           "max_pydeck_version": null
+        },
+        {
+          "version": "1.1.2",
+          "path": "plugins/MET/1.1.2",
+          "min_pydeck_version": null,
+          "max_pydeck_version": null
         }
       ],
       "licenses": [
         {
           "name": "MET Norway",
-          "file": "lisence.txt"
+          "file": "lisence.txt",
+          "description": "Used to fetch current weather conditions and forecasts from met.no. Powers the temperature display, weather icon, and location-based updates."
         }
       ]
     },
