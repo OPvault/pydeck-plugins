@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "label": "Official · Canary",
-  "generated_at": "2026-04-06T16:48:36Z",
+  "generated_at": "2026-04-06T16:51:09Z",
   "plugins": [
     {
       "name": "Clock",
@@ -79,7 +79,7 @@
       "category": "sports",
       "summary": "Countdown to the next Formula 1 race weekend with track icon",
       "author": "PyDeck Team",
-      "latest": "1.0.0",
+      "latest": "1.0.1",
       "icon_path": "plugins/f1/icon.svg",
       "compatible_pydeck_versions": [
         "1.0"
@@ -88,6 +88,12 @@
         {
           "version": "1.0.0",
           "path": "plugins/f1/1.0.0",
+          "min_pydeck_version": null,
+          "max_pydeck_version": null
+        },
+        {
+          "version": "1.0.1",
+          "path": "plugins/f1/1.0.1",
           "min_pydeck_version": null,
           "max_pydeck_version": null
         }
