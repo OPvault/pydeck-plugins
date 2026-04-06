@@ -1,0 +1,19 @@
+{
+  "name": "Clock",
+  "description": "Display a live digital clock on any Stream Deck button, updating every second. Renders directly onto the button face — no title required.",
+  "features": [
+    "Clean style: sharp, minimal digits on a solid background",
+    "Sketchy style: hand-drawn look with a thick coloured border",
+    "Optional date display (abbreviated weekday + day + month)",
+    "Optional seconds display",
+    "12-hour or 24-hour format",
+    "Configurable time and date text colours",
+    "Updates every second via background polling",
+    "Lightweight — no credentials or network access required"
+  ],
+  "options": {},
+  "metadata": {
+    "category": "system",
+    "tags": ["clock", "time", "digital", "system", "utility"]
+  }
+}
