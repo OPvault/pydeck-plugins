@@ -9,6 +9,7 @@ Options
 -------
     --pydeck-source PATH   Override the saved/auto-detected source path
     --dry-run              Show what would happen; make no changes
+    --no-diff              Suppress the coloured per-file diff (shown by default)
     --no-generate          Skip running generate_manifest.py at the end
     --yes                  Skip confirmation prompts (non-interactive)
     --regen-conf           Re-prompt for the source path and save it again
@@ -47,6 +48,7 @@ root manifest.json stays current.
 from __future__ import annotations
 
 import argparse
+import difflib
 import filecmp
 import json
 import shutil
@@ -54,6 +56,15 @@ import subprocess
 import sys
 from pathlib import Path
 from typing import Optional
+
+# ── ANSI colours ───────────────────────────────────────────────────────────────
+
+_RESET  = "\033[0m"
+_RED    = "\033[31m"
+_GREEN  = "\033[32m"
+_CYAN   = "\033[36m"
+_BOLD   = "\033[1m"
+_DIM    = "\033[2m"
 
 # ── Repo layout ────────────────────────────────────────────────────────────────
 
@@ -238,6 +249,99 @@ def _files_changed(source_files: dict[str, Path], repo_version_dir: Path) -> boo
 
     return False
 
+# ── Diff display ───────────────────────────────────────────────────────────────
+
+def _is_binary(path: Path) -> bool:
+    """Heuristic: file is binary if it contains a null byte in the first 8 KB."""
+    try:
+        return b"\x00" in path.read_bytes()[:8192]
+    except OSError:
+        return False
+
+
+def _print_file_diff(rel: str, src: Path | None, repo: Path | None) -> None:
+    """Print a coloured unified diff for one file."""
+    label_a = f"a/{rel}"
+    label_b = f"b/{rel}"
+
+    if src is None:
+        line_count = len(repo.read_bytes().splitlines()) if repo else 0
+        print(f"{_BOLD}{_RED}deleted file: {rel}  ({line_count} lines){_RESET}")
+        return
+
+    if repo is None:
+        line_count = len(src.read_bytes().splitlines())
+        print(f"{_BOLD}{_GREEN}new file: {rel}  ({line_count} lines){_RESET}")
+        return
+
+    if _is_binary(src) or _is_binary(repo):
+        print(f"{_BOLD}binary file changed: {rel}{_RESET}")
+        return
+
+    src_lines  = src.read_text(errors="replace").splitlines(keepends=True)
+    repo_lines = repo.read_text(errors="replace").splitlines(keepends=True)
+    chunks = list(difflib.unified_diff(repo_lines, src_lines, fromfile=label_a, tofile=label_b))
+    if not chunks:
+        return
+    for line in chunks:
+        line = line.rstrip("\n")
+        if line.startswith("---") or line.startswith("+++"):
+            print(f"{_BOLD}{line}{_RESET}")
+        elif line.startswith("@@"):
+            print(f"{_CYAN}{line}{_RESET}")
+        elif line.startswith("+"):
+            print(f"{_GREEN}{line}{_RESET}")
+        elif line.startswith("-"):
+            print(f"{_RED}{line}{_RESET}")
+        else:
+            print(f"{_DIM}{line}{_RESET}")
+
+
+def _print_plugin_diff(
+    slug: str,
+    source_files: dict[str, Path],
+    repo_version_dir: Path,
+) -> None:
+    """Print a coloured diff between source and the latest repo version."""
+    print(f"\n{_BOLD}diff  {slug}  ({repo_version_dir.name} → new){_RESET}")
+
+    printed_any = False
+
+    # Changed / added files.
+    for rel, src_path in sorted(source_files.items()):
+        if Path(rel).name in REPO_ONLY_FILES:
+            continue
+        repo_path = repo_version_dir / rel
+        if not repo_path.exists():
+            _print_file_diff(rel, src_path, None)
+            printed_any = True
+        elif src_path.suffix == ".json":
+            if not _json_equal(src_path, repo_path):
+                _print_file_diff(rel, src_path, repo_path)
+                printed_any = True
+        elif not filecmp.cmp(str(src_path), str(repo_path), shallow=False):
+            _print_file_diff(rel, src_path, repo_path)
+            printed_any = True
+
+    # Deleted files (in repo but gone from source).
+    for repo_path in sorted(repo_version_dir.rglob("*")):
+        if not repo_path.is_file():
+            continue
+        if repo_path.name in REPO_ONLY_FILES:
+            continue
+        rel = str(repo_path.relative_to(repo_version_dir))
+        if any(part in EXCLUDE_DIRS for part in Path(rel).parts):
+            continue
+        if rel not in source_files:
+            _print_file_diff(rel, None, repo_path)
+            printed_any = True
+
+    if not printed_any:
+        print(f"  {_DIM}(no textual differences to display){_RESET}")
+
+    print()
+
+
 # ── Copy logic ─────────────────────────────────────────────────────────────────
 
 def _copy_plugin_to_repo(
@@ -322,7 +426,12 @@ def _resolve_source(
 
 # ── Per-plugin sync ────────────────────────────────────────────────────────────
 
-def _sync_plugin(slug: str, source_plugin_dir: Path, dry_run: bool) -> str:
+def _sync_plugin(
+    slug: str,
+    source_plugin_dir: Path,
+    dry_run: bool,
+    show_diff: bool = False,
+) -> str:
     """Sync one plugin. Returns a human-readable status line."""
     source_files = _source_files(source_plugin_dir)
     if not source_files:
@@ -344,6 +453,9 @@ def _sync_plugin(slug: str, source_plugin_dir: Path, dry_run: bool) -> str:
 
     if not _files_changed(source_files, latest_dir):
         return f"  SKIP    {slug}  (unchanged, latest={latest_dir.name})"
+
+    if show_diff:
+        _print_plugin_diff(slug, source_files, latest_dir)
 
     src_manifest = source_plugin_dir / "manifest.json"
     src_version  = _read_version(src_manifest) if src_manifest.exists() else latest_dir.name
@@ -369,7 +481,7 @@ def _sync_plugin(slug: str, source_plugin_dir: Path, dry_run: bool) -> str:
 
 # ── Main ───────────────────────────────────────────────────────────────────────
 
-def sync_all(source_root: Path, dry_run: bool) -> None:
+def sync_all(source_root: Path, dry_run: bool, show_diff: bool = False) -> None:
     slug_dirs = sorted(
         [d for d in source_root.iterdir() if d.is_dir() and not d.name.startswith(".")],
         key=lambda d: d.name.lower(),
@@ -380,7 +492,7 @@ def sync_all(source_root: Path, dry_run: bool) -> None:
 
     print(f"Scanning {len(slug_dirs)} source plugin(s)…\n")
     for slug_dir in slug_dirs:
-        print(_sync_plugin(slug_dir.name, slug_dir, dry_run))
+        print(_sync_plugin(slug_dir.name, slug_dir, dry_run, show_diff=show_diff))
 
 
 def main() -> None:
@@ -417,6 +529,11 @@ def main() -> None:
         action="store_true",
         help="Accept the auto-detected/saved path without prompting",
     )
+    parser.add_argument(
+        "--no-diff",
+        action="store_true",
+        help="Suppress the coloured per-file diff (shown by default)",
+    )
     args = parser.parse_args()
 
     source = _resolve_source(
@@ -432,7 +549,7 @@ def main() -> None:
     else:
         print()
 
-    sync_all(source, dry_run=args.dry_run)
+    sync_all(source, dry_run=args.dry_run, show_diff=not args.no_diff)
 
     if not args.no_generate:
         print("\nRunning generate_manifest.py…")

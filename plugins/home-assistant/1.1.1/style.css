@@ -1,0 +1,17 @@
+/* Home Assistant plugin theme */
+.action-tile[data-action-type="ha"] .action-tile-icon {
+    background: rgba(65, 168, 228, 0.18);
+    color: #41a8e4;
+}
+.action-badge.badge-ha {
+    background: rgba(65, 168, 228, 0.18);
+    color: #41a8e4;
+}
+.api-section-icon.ha-icon {
+    background: rgba(65, 168, 228, 0.18);
+    color: #41a8e4;
+}
+.log-tag-ha {
+    background: #0f2433;
+    color: #41a8e4;
+}
