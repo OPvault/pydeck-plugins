@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 72" width="72" height="72">
+  <rect width="72" height="72" rx="8" fill="#e10600"/>
+  <!-- Chequered flag stripe -->
+  <rect x="0" y="0" width="9" height="9" fill="#fff" opacity="0.15"/>
+  <rect x="18" y="0" width="9" height="9" fill="#fff" opacity="0.15"/>
+  <rect x="36" y="0" width="9" height="9" fill="#fff" opacity="0.15"/>
+  <rect x="54" y="0" width="9" height="9" fill="#fff" opacity="0.15"/>
+  <rect x="9" y="9" width="9" height="9" fill="#fff" opacity="0.15"/>
+  <rect x="27" y="9" width="9" height="9" fill="#fff" opacity="0.15"/>
+  <rect x="45" y="9" width="9" height="9" fill="#fff" opacity="0.15"/>
+  <rect x="63" y="9" width="9" height="9" fill="#fff" opacity="0.15"/>
+  <!-- F1 text -->
+  <text
+    x="36"
+    y="52"
+    font-family="Arial Black, Arial, sans-serif"
+    font-weight="900"
+    font-size="30"
+    fill="#ffffff"
+    text-anchor="middle"
+    letter-spacing="-1"
+  >F1</text>
+</svg>
