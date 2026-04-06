@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 72" width="72" height="72">
+  <g fill="none" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Terminal window -->
+    <rect x="8" y="12" width="56" height="48" rx="5" ry="5"/>
+    <!-- Title bar separator -->
+    <line x1="8" y1="26" x2="64" y2="26"/>
+    <!-- > prompt chevron -->
+    <polyline points="17,38 27,45 17,52"/>
+    <!-- _ cursor -->
+    <line x1="31" y1="52" x2="45" y2="52"/>
+  </g>
+</svg>
