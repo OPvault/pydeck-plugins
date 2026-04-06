@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "label": "Official · Canary",
-  "generated_at": "2026-04-06T18:14:40Z",
+  "generated_at": "2026-04-06T18:19:24Z",
   "plugins": [
     {
       "name": "Clock",
@@ -41,7 +41,7 @@
       "category": "communication",
       "summary": "Control Discord voice state (mute/deafen) via RPC",
       "author": "PyDeck Team",
-      "latest": "1.1.1",
+      "latest": "1.1.2",
       "icon_path": "plugins/discord/icon.svg",
       "compatible_pydeck_versions": [
         "1.0"
@@ -80,6 +80,12 @@
         {
           "version": "1.1.1",
           "path": "plugins/discord/1.1.1",
+          "min_pydeck_version": null,
+          "max_pydeck_version": null
+        },
+        {
+          "version": "1.1.2",
+          "path": "plugins/discord/1.1.2",
           "min_pydeck_version": null,
           "max_pydeck_version": null
         }
