@@ -178,7 +178,9 @@ def _build_plugin_entry(
         print(f"  WARNING: {slug} has no icon file", file=sys.stderr)
         icon = ""
 
-    return {
+    licenses = catalog.get("licenses") or prev_entry.get("licenses") or []
+
+    entry: Dict[str, Any] = {
         "name":                     name,
         "slug":                     slug,
         "category":                 category,
@@ -189,6 +191,9 @@ def _build_plugin_entry(
         "compatible_pydeck_versions": compat,
         "versions":                 versions,
     }
+    if licenses:
+        entry["licenses"] = licenses
+    return entry
 
 
 # ── Main ───────────────────────────────────────────────────────────────────────

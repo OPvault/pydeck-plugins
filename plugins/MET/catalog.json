@@ -1,4 +1,6 @@
 {
   "category": "weather",
-  "compatible_pydeck_versions": ["1.0"]
+  "licenses": [
+    { "name": "MET Norway", "file": "lisence.txt" }
+  ]
 }
