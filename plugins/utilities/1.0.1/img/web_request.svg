@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 72" width="72" height="72">
+  <g fill="none" stroke="white" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Request ? (outgoing, top) -->
+    <line x1="12" y1="26" x2="54" y2="26"/>
+    <polyline points="44,16 54,26 44,36"/>
+    <!-- Response ? (incoming, bottom) -->
+    <line x1="60" y1="46" x2="18" y2="46"/>
+    <polyline points="28,36 18,46 28,56"/>
+  </g>
+</svg>
