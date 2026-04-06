@@ -1,0 +1,96 @@
+{
+  "name": "Home Assistant",
+  "version": "1.0.1",
+  "description": "Control and monitor Home Assistant entities",
+  "author": "PyDeck Team",
+  "credentials": [
+    {"id": "url",   "label": "Home Assistant URL",        "type": "text"},
+    {"id": "token", "label": "Long-Lived Access Token",   "type": "password"}
+  ],
+  "permissions": {
+    "urllib.request": ["urlopen", "Request"],
+    "urllib.error": ["HTTPError"],
+    "urllib.parse": ["urlparse"],
+    "json": ["dumps", "loads"],
+    "hashlib": ["md5"],
+    "pathlib": ["Path"]
+  },
+  "functions": {
+    "toggle": {
+      "label": "HA Toggle",
+      "description": "Toggle a Home Assistant entity on/off",
+      "default_display": {
+        "color": "#1a3a6e",
+        "text": "HA"
+      },
+      "poll": {
+        "function": "poll_toggle",
+        "interval_ms": 3000
+      },
+      "ui": [
+        {
+          "type": "api_select",
+          "id": "domain_filter",
+          "label": "Domain",
+          "api": "domains",
+          "display": {
+            "label": "label",
+            "value": "value"
+          },
+          "default": ""
+        },
+        {
+          "type": "api_select",
+          "id": "entity_id",
+          "label": "Entity",
+          "api": "entities",
+          "filter_field": "domain_filter",
+          "filter_by": "domain",
+          "display": {
+            "label": "name",
+            "value": "entity_id"
+          },
+          "default": ""
+        }
+      ]
+    },
+    "display": {
+      "label": "HA Display",
+      "description": "Show a Home Assistant entity's current value (read-only)",
+      "default_display": {
+        "color": "#1a3a6e",
+        "text": "HA"
+      },
+      "poll": {
+        "function": "poll_display",
+        "interval_ms": 3000
+      },
+      "ui": [
+        {
+          "type": "api_select",
+          "id": "domain_filter",
+          "label": "Domain",
+          "api": "domains",
+          "display": {
+            "label": "label",
+            "value": "value"
+          },
+          "default": ""
+        },
+        {
+          "type": "api_select",
+          "id": "entity_id",
+          "label": "Entity",
+          "api": "entities",
+          "filter_field": "domain_filter",
+          "filter_by": "domain",
+          "display": {
+            "label": "name",
+            "value": "entity_id"
+          },
+          "default": ""
+        }
+      ]
+    }
+  }
+}
