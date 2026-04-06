@@ -1,0 +1,106 @@
+{
+  "name": "F1",
+  "version": "1.0.0",
+  "description": "Countdown to the next Formula 1 race weekend with track icon",
+  "author": "PyDeck Team",
+  "python_dependencies": ["Pillow"],
+  "permissions": {
+    "urllib.request": ["urlopen", "Request"],
+    "urllib.error": ["URLError"],
+    "json": ["loads"],
+    "datetime": ["datetime", "timezone", "timedelta"],
+    "pathlib": ["Path"],
+    "hashlib": ["md5"]
+  },
+  "functions": {
+    "next_race": {
+      "label": "F1 Next Race",
+      "description": "Countdown to the next Formula 1 race weekend with circuit track icon",
+      "disableGallery": true,
+      "disableGallary": true,
+      "default_display": {
+        "color": "#e10600",
+        "text": "",
+        "text_bold": true,
+        "text_color": "#ffffff",
+        "text_size": 10,
+        "scroll_enabled": false
+      },
+      "poll": {
+        "function": "poll_next_race",
+        "interval_ms": 60000
+      },
+      "ui": [
+        { "type": "checkbox", "id": "include_practice_1",       "label": "Practice 1",        "default": false },
+        { "type": "checkbox", "id": "include_practice_2",       "label": "Practice 2",        "default": false },
+        { "type": "checkbox", "id": "include_practice_3",       "label": "Practice 3",        "default": false },
+        { "type": "checkbox", "id": "include_sprint_qualifying", "label": "Sprint Qualifying",  "default": false },
+        { "type": "checkbox", "id": "include_sprint_race",       "label": "Sprint Race",        "default": false },
+        { "type": "checkbox", "id": "include_qualifying",        "label": "Qualifying",         "default": false },
+        { "type": "checkbox", "id": "include_race",              "label": "Race",               "default": true  }
+      ]
+    },
+    "driver_points": {
+      "label": "F1 Driver Points",
+      "description": "Show a driver's current championship position and points",
+      "disableGallery": true,
+      "disableGallary": true,
+      "default_display": {
+        "color": "#000000",
+        "text": "",
+        "text_bold": true,
+        "text_color": "#ffffff",
+        "text_size": 10,
+        "scroll_enabled": false
+      },
+      "poll": {
+        "function": "poll_driver_points",
+        "interval_ms": 3600000
+      },
+      "ui": [
+        {
+          "type": "api_select",
+          "id": "driver_id",
+          "label": "Driver",
+          "api": "drivers",
+          "display": {
+            "label": "label",
+            "value": "value"
+          },
+          "default": ""
+        }
+      ]
+    },
+    "constructor_points": {
+      "label": "F1 Constructor Points",
+      "description": "Show a constructor's current championship position and points",
+      "disableGallery": true,
+      "disableGallary": true,
+      "default_display": {
+        "color": "#e10600",
+        "text": "",
+        "text_bold": true,
+        "text_color": "#ffffff",
+        "text_size": 10,
+        "scroll_enabled": false
+      },
+      "poll": {
+        "function": "poll_constructor_points",
+        "interval_ms": 3600000
+      },
+      "ui": [
+        {
+          "type": "api_select",
+          "id": "constructor_id",
+          "label": "Team",
+          "api": "constructors",
+          "display": {
+            "label": "label",
+            "value": "value"
+          },
+          "default": ""
+        }
+      ]
+    }
+  }
+}
