@@ -19,18 +19,18 @@
           "version": "1.0.0",
           "path": "plugins/clock/1.0.0",
           "min_pydeck_version": null,
-          "max_pydeck_version": null
+          "max_pydeck_version": "0.8.1"
         },
         {
           "version": "1.0.1",
           "path": "plugins/clock/1.0.1",
           "min_pydeck_version": null,
-          "max_pydeck_version": null
+          "max_pydeck_version": "1.0.1"
         },
         {
           "version": "1.1.0",
           "path": "plugins/clock/1.1.0",
-          "min_pydeck_version": null,
+          "min_pydeck_version": "1.2.0",
           "max_pydeck_version": null
         }
       ]
