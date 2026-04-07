@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "label": "Official · Testing",
-  "generated_at": "2026-04-09T20:25:10Z",
+  "label": "Official · Canary",
+  "generated_at": "2026-04-07T19:08:45Z",
   "plugins": [
     {
       "name": "Clock",
@@ -212,7 +212,7 @@
       "summary": "Simulate keyboard presses and text input via evdev/uinput. Works on both X11 and Wayland. Requires the user to be in the 'input' group: sudo usermod -aG input $USER",
       "author": "PyDeck Team",
       "latest": "1.0.3",
-      "icon_path": "",
+      "icon_path": "plugins/keyboard/icon.svg",
       "compatible_pydeck_versions": [
         "1.0"
       ],
@@ -311,26 +311,6 @@
           "name": "MET Norway",
           "file": "lisence.txt",
           "description": "Used to fetch current weather conditions and forecasts from met.no. Powers the temperature display, weather icon, and location-based updates."
-        }
-      ]
-    },
-    {
-      "name": "Postinstall Test",
-      "slug": "test-postinstall",
-      "category": "utilities",
-      "summary": "A local test plugin that exercises the postinstall approval flow.",
-      "author": "PyDeck",
-      "latest": "1.0.1",
-      "icon_path": "",
-      "compatible_pydeck_versions": [
-        "1.0"
-      ],
-      "versions": [
-        {
-          "version": "1.0.1",
-          "path": "plugins/test-postinstall/1.0.1",
-          "min_pydeck_version": null,
-          "max_pydeck_version": null
         }
       ]
     },

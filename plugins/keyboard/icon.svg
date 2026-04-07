@@ -1,0 +1,14 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+	<defs>
+		<image  width="200" height="200" id="img1" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADIAQMAAACXljzdAAAAAXNSR0IB2cksfwAAAANQTFRFVgSQWyg5mAAAACdJREFUeJztyaEBAAAMAqD5/9PLBj+ASm6JMcYYY4wxxhhjjDHGlAcOMADJ5po/MQAAAABJRU5ErkJggg=="/>
+	</defs>
+	<style>
+		.s0 { fill: none;stroke: #ffffff;stroke-linecap: round;stroke-linejoin: round;stroke-width: 12 } 
+	</style>
+	<use id="Layer 1" href="#img1" x="0" y="0"/>
+	<g>
+		<path fill-rule="evenodd" class="s0" d="m52 20h96c17.67 0 32 14.33 32 32v96c0 17.67-14.33 32-32 32h-96c-17.67 0-32-14.33-32-32v-96c0-17.67 14.33-32 32-32z"/>
+		<path fill-rule="evenodd" class="s0" d="m64 40h72c8.84 0 16 7.16 16 16v76c0 8.84-7.16 16-16 16h-72c-8.84 0-16-7.16-16-16v-76c0-8.84 7.16-16 16-16z"/>
+		<path class="s0" d="m112 72l-28 22 28 22m-28-44v44"/>
+	</g>
+</svg>
