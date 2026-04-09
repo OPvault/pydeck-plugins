@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "label": "Official · Canary",
-  "generated_at": "2026-04-07T19:08:45Z",
+  "generated_at": "2026-04-09T16:13:00Z",
   "plugins": [
     {
       "name": "Clock",
@@ -15,18 +15,6 @@
         "1.0"
       ],
       "versions": [
-        {
-          "version": "1.0.0",
-          "path": "plugins/clock/1.0.0",
-          "min_pydeck_version": null,
-          "max_pydeck_version": null
-        },
-        {
-          "version": "1.0.1",
-          "path": "plugins/clock/1.0.1",
-          "min_pydeck_version": null,
-          "max_pydeck_version": null
-        },
         {
           "version": "1.1.0",
           "path": "plugins/clock/1.1.0",
@@ -47,30 +35,6 @@
         "1.0"
       ],
       "versions": [
-        {
-          "version": "1.0.0",
-          "path": "plugins/discord/1.0.0",
-          "min_pydeck_version": null,
-          "max_pydeck_version": null
-        },
-        {
-          "version": "1.0.1",
-          "path": "plugins/discord/1.0.1",
-          "min_pydeck_version": null,
-          "max_pydeck_version": null
-        },
-        {
-          "version": "1.0.2",
-          "path": "plugins/discord/1.0.2",
-          "min_pydeck_version": null,
-          "max_pydeck_version": null
-        },
-        {
-          "version": "1.0.3",
-          "path": "plugins/discord/1.0.3",
-          "min_pydeck_version": null,
-          "max_pydeck_version": null
-        },
         {
           "version": "1.1.0",
           "path": "plugins/discord/1.1.0",
@@ -103,24 +67,6 @@
         "1.0"
       ],
       "versions": [
-        {
-          "version": "1.0.0",
-          "path": "plugins/f1/1.0.0",
-          "min_pydeck_version": null,
-          "max_pydeck_version": null
-        },
-        {
-          "version": "1.0.1",
-          "path": "plugins/f1/1.0.1",
-          "min_pydeck_version": null,
-          "max_pydeck_version": null
-        },
-        {
-          "version": "1.0.2",
-          "path": "plugins/f1/1.0.2",
-          "min_pydeck_version": null,
-          "max_pydeck_version": null
-        },
         {
           "version": "1.0.3",
           "path": "plugins/f1/1.0.3",
@@ -180,18 +126,6 @@
       ],
       "versions": [
         {
-          "version": "1.0.0",
-          "path": "plugins/home-assistant/1.0.0",
-          "min_pydeck_version": null,
-          "max_pydeck_version": null
-        },
-        {
-          "version": "1.0.1",
-          "path": "plugins/home-assistant/1.0.1",
-          "min_pydeck_version": null,
-          "max_pydeck_version": null
-        },
-        {
           "version": "1.1.0",
           "path": "plugins/home-assistant/1.1.0",
           "min_pydeck_version": null,
@@ -217,18 +151,6 @@
         "1.0"
       ],
       "versions": [
-        {
-          "version": "1.0.0",
-          "path": "plugins/keyboard/1.0.0",
-          "min_pydeck_version": null,
-          "max_pydeck_version": null
-        },
-        {
-          "version": "1.0.1",
-          "path": "plugins/keyboard/1.0.1",
-          "min_pydeck_version": null,
-          "max_pydeck_version": null
-        },
         {
           "version": "1.0.2",
           "path": "plugins/keyboard/1.0.2",
@@ -276,18 +198,6 @@
       ],
       "versions": [
         {
-          "version": "1.0.0",
-          "path": "plugins/MET/1.0.0",
-          "min_pydeck_version": null,
-          "max_pydeck_version": null
-        },
-        {
-          "version": "1.0.1",
-          "path": "plugins/MET/1.0.1",
-          "min_pydeck_version": null,
-          "max_pydeck_version": null
-        },
-        {
           "version": "1.1.0",
           "path": "plugins/MET/1.1.0",
           "min_pydeck_version": null,
@@ -326,30 +236,6 @@
         "1.0"
       ],
       "versions": [
-        {
-          "version": "1.0.0",
-          "path": "plugins/spotify/1.0.0",
-          "min_pydeck_version": null,
-          "max_pydeck_version": null
-        },
-        {
-          "version": "1.0.1",
-          "path": "plugins/spotify/1.0.1",
-          "min_pydeck_version": null,
-          "max_pydeck_version": null
-        },
-        {
-          "version": "1.0.2",
-          "path": "plugins/spotify/1.0.2",
-          "min_pydeck_version": null,
-          "max_pydeck_version": null
-        },
-        {
-          "version": "1.0.3",
-          "path": "plugins/spotify/1.0.3",
-          "min_pydeck_version": null,
-          "max_pydeck_version": null
-        },
         {
           "version": "1.0.4",
           "path": "plugins/spotify/1.0.4",
