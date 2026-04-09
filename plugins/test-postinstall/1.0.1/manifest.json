@@ -7,7 +7,7 @@
   "entrypoint": "plugin.py",
   "python_dependencies": [],
   "post_install_script": "postinstall.sh",
-  "post_install_requires_sudo": false,
+  "post_install_requires_sudo": true,
   "post_install_delete_plugin_on_reject": true,
   "functions": {
     "write_test_info": {
