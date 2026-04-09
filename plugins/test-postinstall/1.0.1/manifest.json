@@ -1,6 +1,6 @@
 {
   "name": "Postinstall Test",
-  "version": "0.1.0",
+  "version": "1.0.1",
   "description": "A local test plugin that exercises the postinstall approval flow.",
   "author": "PyDeck",
   "slug": "test-postinstall",
