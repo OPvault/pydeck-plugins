@@ -1,7 +1,0 @@
-/* Spotify plugin theme */
-.action-tile[data-action-type="spotify"]         .action-tile-icon { background: rgba(29,185,84,0.18);   color: #1DB954; }
-.action-tile[data-action-type="spotify_display"] .action-tile-icon { background: rgba(29,185,84,0.12);   color: #1DB954; }
-.action-badge.badge-spotify         { background: rgba(29,185,84,0.18);   color: #1DB954; }
-.action-badge.badge-spotify_display { background: rgba(29,185,84,0.12);   color: #1DB954; }
-.api-section-icon.spotify-icon { background: rgba(29,185,84,0.18);  color: #1DB954; }
-.log-tag-spotify  { background: #122212; color: #1DB954; }

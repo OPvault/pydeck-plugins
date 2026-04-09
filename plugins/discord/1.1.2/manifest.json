@@ -34,7 +34,7 @@
       "sidebar_icon": "plugins/plugin/discord/img/mute_0.png",
       "default_display": {
         "image": "plugins/plugin/discord/img/mute_0.png",
-        "color": "#000000",
+        "color": "#5865f2",
         "text": ""
       },
       "display_states": {
@@ -56,7 +56,7 @@
       "sidebar_icon": "plugins/plugin/discord/img/deafen_0.png",
       "default_display": {
         "image": "plugins/plugin/discord/img/deafen_0.png",
-        "color": "#000000",
+        "color": "#5865f2",
         "text": ""
       },
       "display_states": {
