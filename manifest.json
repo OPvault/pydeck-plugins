@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "label": "Official · test",
-  "generated_at": "2026-04-09T17:02:11Z",
+  "label": "Official · Testing",
+  "generated_at": "2026-04-09T20:25:10Z",
   "plugins": [
     {
       "name": "Clock",
@@ -211,7 +211,7 @@
       "category": "utilities",
       "summary": "Simulate keyboard presses and text input via evdev/uinput. Works on both X11 and Wayland. Requires the user to be in the 'input' group: sudo usermod -aG input $USER",
       "author": "PyDeck Team",
-      "latest": "1.0.2",
+      "latest": "1.0.3",
       "icon_path": "",
       "compatible_pydeck_versions": [
         "1.0"
@@ -232,6 +232,12 @@
         {
           "version": "1.0.2",
           "path": "plugins/keyboard/1.0.2",
+          "min_pydeck_version": null,
+          "max_pydeck_version": null
+        },
+        {
+          "version": "1.0.3",
+          "path": "plugins/keyboard/1.0.3",
           "min_pydeck_version": null,
           "max_pydeck_version": null
         }
