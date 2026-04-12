@@ -8,11 +8,8 @@
     "evdev": ["UInput", "ecodes"],
     "time": ["sleep"]
   },
-<<<<<<< Updated upstream
-=======
   "post_install_script": "post_install.sh",
   "post_install_requires_sudo": true,
->>>>>>> Stashed changes
   "functions": {
     "press_key": {
       "label": "Press Key",
