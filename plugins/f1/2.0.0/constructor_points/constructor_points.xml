@@ -1,0 +1,8 @@
+<template name="constructor_points" title="F1 Constructor Points" description="Constructor championship standings" icon="img/f1.svg">
+  <box class="team-bg">
+    <spacer />
+    <text class="team-code">{team_code}</text>
+    <spacer />
+    <text class="team-info">{team_info}</text>
+  </box>
+</template>

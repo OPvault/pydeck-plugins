@@ -37,6 +37,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import shutil
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
@@ -50,6 +51,7 @@ ROOT_MANIFEST = REPO_ROOT / "manifest.json"
 
 SCHEMA_VERSION = 1
 DEFAULT_LABEL  = "Official · Canary"
+DEFAULT_PYDECK = "1.0.0"
 ICON_PRIORITY  = ("icon.svg", "icon.png")
 
 # ── Semver helpers ─────────────────────────────────────────────────────────────
@@ -63,11 +65,29 @@ def _semver_tuple(version: str) -> Tuple[int, ...]:
 
 
 def _is_version_dir(path: Path) -> bool:
-    """True if *path* is a directory whose name looks like a semver string."""
+    """True if *path* is a directory whose name looks like a semver string and contains files."""
     if not path.is_dir():
         return False
     parts = path.name.split(".")
-    return len(parts) >= 2 and all(p.isdigit() for p in parts)
+    if len(parts) < 2 or not all(p.isdigit() for p in parts):
+        return False
+    return any(p.is_file() for p in path.rglob("*"))
+
+
+def _purge_empty_version_dirs(plugins_dir: Path) -> None:
+    """Remove version directories that contain no actual files (ghost dirs)."""
+    for slug_dir in plugins_dir.iterdir():
+        if not slug_dir.is_dir():
+            continue
+        for child in slug_dir.iterdir():
+            if not child.is_dir():
+                continue
+            parts = child.name.split(".")
+            if len(parts) < 2 or not all(p.isdigit() for p in parts):
+                continue
+            if not any(p.is_file() for p in child.rglob("*")):
+                shutil.rmtree(child)
+                print(f"  PURGE   {child.relative_to(plugins_dir.parent)}  (empty version directory)")
 
 
 # ── Existing root manifest (for field fallbacks) ───────────────────────────────
@@ -145,8 +165,8 @@ def _build_plugin_entry(
         versions.append({
             "version":           vdir.name,
             "path":              f"plugins/{slug_dir.name}/{vdir.name}",
-            "min_pydeck_version": vmeta.get("min_pydeck_version", None),
-            "max_pydeck_version": vmeta.get("max_pydeck_version", None),
+            "min_pydeck_version": vmeta["min_pydeck_version"] if "min_pydeck_version" in vmeta else DEFAULT_PYDECK,
+            "max_pydeck_version": vmeta["max_pydeck_version"] if "max_pydeck_version" in vmeta else DEFAULT_PYDECK,
         })
         latest_meta = vmeta   # last (highest) version wins
 
@@ -199,6 +219,8 @@ def _build_plugin_entry(
 # ── Main ───────────────────────────────────────────────────────────────────────
 
 def generate(label: str, output: Path, dry_run: bool) -> None:
+    _purge_empty_version_dirs(PLUGINS_DIR)
+
     existing = _load_existing_root()
     plugins: List[Dict[str, Any]] = []
 

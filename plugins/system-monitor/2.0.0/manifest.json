@@ -1,0 +1,185 @@
+{
+  "name": "System Monitor",
+  "version": "2.0.0",
+  "description": "Monitor CPU, RAM, GPU, and disk usage — no extra Python packages required",
+  "author": "PyDeck Team",
+  "min_pydeck_version": "1.1.0",
+  "max_pydeck_version": null,
+  "permissions": {
+    "json": ["loads"],
+    "os": ["statvfs"],
+    "pathlib": ["Path"],
+    "re": ["search", "IGNORECASE"],
+    "shutil": ["which"],
+    "subprocess": ["run"]
+  },
+
+  "functions": {
+    "cpu_monitor": {
+      "label": "CPU",
+      "description": "Live CPU usage percentage and optional temperature",
+      "title_readonly": true,
+      "disableGallary": true,
+      "default_display": {
+        "color": "#0d1117",
+        "text": "CPU",
+        "text_position": "bottom",
+        "scroll_enabled": false
+      },
+      "poll": {
+        "function": "on_poll",
+        "interval_ms": 2000
+      },
+      "ui": [
+        {
+          "type": "select",
+          "id": "cpu_backend",
+          "label": "Data Source",
+          "default": "auto",
+          "options": [
+            { "label": "Auto-detect", "value": "auto" },
+            { "label": "/proc/stat (kernel, fastest)", "value": "procstat" },
+            { "label": "vmstat", "value": "vmstat" },
+            { "label": "mpstat", "value": "mpstat" },
+            { "label": "top", "value": "top" }
+          ]
+        },
+        {
+          "type": "group",
+          "id": "cpu_display_group",
+          "label": "Display",
+          "fields": [
+            { "type": "checkbox", "id": "show_temp", "label": "Temperature", "default": true },
+            { "type": "select", "id": "temp_unit", "label": "Temperature Unit", "default": "C",
+              "options": [
+                { "label": "Celsius (°C)", "value": "C" },
+                { "label": "Fahrenheit (°F)", "value": "F" }
+              ]
+            }
+          ]
+        }
+      ],
+      "pdk": true
+    },
+    "ram_monitor": {
+      "label": "RAM",
+      "description": "Live RAM usage percentage and optional used / total breakdown",
+      "title_readonly": true,
+      "disableGallary": true,
+      "default_display": {
+        "color": "#0d1117",
+        "text": "RAM",
+        "text_position": "bottom",
+        "scroll_enabled": false
+      },
+      "poll": {
+        "function": "on_poll",
+        "interval_ms": 2000
+      },
+      "ui": [
+        {
+          "type": "select",
+          "id": "ram_backend",
+          "label": "Data Source",
+          "default": "auto",
+          "options": [
+            { "label": "Auto-detect", "value": "auto" },
+            { "label": "/proc/meminfo (kernel, fastest)", "value": "procmeminfo" },
+            { "label": "free", "value": "free" },
+            { "label": "top", "value": "top" }
+          ]
+        },
+        {
+          "type": "checkbox",
+          "id": "show_used",
+          "label": "Show Used / Total",
+          "default": true
+        }
+      ],
+      "pdk": true
+    },
+    "gpu_monitor": {
+      "label": "GPU",
+      "description": "Live GPU temperature and utilisation via nvidia-smi, rocm-smi, or sysfs",
+      "title_readonly": true,
+      "disableGallary": true,
+      "default_display": {
+        "color": "#0d1117",
+        "text": "GPU",
+        "text_position": "bottom",
+        "scroll_enabled": false
+      },
+      "poll": {
+        "function": "on_poll",
+        "interval_ms": 3000
+      },
+      "ui": [
+        {
+          "type": "select",
+          "id": "gpu_backend",
+          "label": "Backend",
+          "default": "auto",
+          "options": [
+            { "label": "Auto-detect", "value": "auto" },
+            { "label": "NVIDIA (nvidia-smi)", "value": "nvidia" },
+            { "label": "AMD (rocm-smi)", "value": "amd" },
+            { "label": "sysfs (nouveau / AMD / Intel)", "value": "sysfs" }
+          ]
+        },
+        {
+          "type": "group",
+          "id": "gpu_display_group",
+          "label": "Display",
+          "fields": [
+            { "type": "checkbox", "id": "show_usage", "label": "Usage %", "default": true },
+            { "type": "select", "id": "temp_unit", "label": "Temperature Unit", "default": "C",
+              "options": [
+                { "label": "Celsius (°C)", "value": "C" },
+                { "label": "Fahrenheit (°F)", "value": "F" }
+              ]
+            }
+          ]
+        }
+      ],
+      "pdk": true
+    },
+    "disk_monitor": {
+      "label": "Disk",
+      "description": "Live disk usage for a chosen mount point",
+      "title_readonly": true,
+      "disableGallary": true,
+      "default_display": {
+        "color": "#0d1117",
+        "text": "Disk",
+        "text_position": "bottom",
+        "scroll_enabled": false
+      },
+      "poll": {
+        "function": "on_poll",
+        "interval_ms": 10000
+      },
+      "ui": [
+        {
+          "type": "select",
+          "id": "disk_backend",
+          "label": "Data Source",
+          "default": "auto",
+          "options": [
+            { "label": "Auto-detect", "value": "auto" },
+            { "label": "os.statvfs (kernel, fastest)", "value": "statvfs" },
+            { "label": "df", "value": "df" }
+          ]
+        },
+        {
+          "type": "input",
+          "id": "path",
+          "label": "Mount Point",
+          "default": "/",
+          "placeholder": "/"
+        }
+      ],
+      "pdk": true
+    }
+  },
+  "pdk": true
+}
