@@ -8,6 +8,8 @@ Usage
 Options
 -------
     --pydeck-source PATH   Override the saved/auto-detected source path
+    --plugin SLUG          Sync/list only the given plugin slug (repeatable)
+    --list-plugins         List source plugins and show NEW/CHANGED/UNCHANGED
     --dry-run              Show what would happen; make no changes
     --no-diff              Suppress the coloured per-file diff (shown by default)
     --no-generate          Skip running generate_manifest.py at the end
@@ -480,15 +482,83 @@ def _sync_plugin(
     )
 
 # ── Main ───────────────────────────────────────────────────────────────────────
+def _normalize_selected_plugins(raw_plugins: Optional[list[str]]) -> list[str]:
+    selected: list[str] = []
+    seen: set[str] = set()
+    for raw in raw_plugins or []:
+        for candidate in raw.split(","):
+            slug = candidate.strip()
+            if not slug or slug in seen:
+                continue
+            selected.append(slug)
+            seen.add(slug)
+    return selected
 
-def sync_all(source_root: Path, dry_run: bool, show_diff: bool = False) -> None:
-    slug_dirs = sorted(
+
+def _source_slug_dirs(source_root: Path) -> list[Path]:
+    return sorted(
         [d for d in source_root.iterdir() if d.is_dir() and not d.name.startswith(".")],
         key=lambda d: d.name.lower(),
     )
+
+
+def _select_slug_dirs(slug_dirs: list[Path], selected_plugins: Optional[list[str]]) -> list[Path]:
+    if not selected_plugins:
+        return slug_dirs
+    by_slug = {d.name: d for d in slug_dirs}
+    missing = [slug for slug in selected_plugins if slug not in by_slug]
+    if missing:
+        sys.exit(f"Error: selected plugin(s) not found in source: {', '.join(missing)}")
+    return [by_slug[slug] for slug in selected_plugins]
+
+
+def _plugin_status(source_plugin_dir: Path) -> tuple[str, str]:
+    slug = source_plugin_dir.name
+    source_files = _source_files(source_plugin_dir)
+    if not source_files:
+        return ("EMPTY", "no files in source")
+
+    slug_dir = PLUGINS_DIR / slug
+    latest_dir = _latest_version_dir(slug_dir) if slug_dir.exists() else None
+    if latest_dir is None:
+        return ("NEW", "not present in repo")
+    if _files_changed(source_files, latest_dir):
+        return ("CHANGED", f"differs from repo version {latest_dir.name}")
+    return ("UNCHANGED", f"matches repo version {latest_dir.name}")
+
+
+def list_plugins(source_root: Path, selected_plugins: Optional[list[str]] = None) -> None:
+    slug_dirs = _source_slug_dirs(source_root)
     if not slug_dirs:
         print("No plugin directories found in source.", file=sys.stderr)
         return
+    slug_dirs = _select_slug_dirs(slug_dirs, selected_plugins)
+
+    print(f"Listing {len(slug_dirs)} source plugin(s)…\n")
+    changed: list[str] = []
+    for slug_dir in slug_dirs:
+        status, detail = _plugin_status(slug_dir)
+        print(f"  {status:<10}{slug_dir.name}  ({detail})")
+        if status == "CHANGED":
+            changed.append(slug_dir.name)
+
+    if changed:
+        print(f"\nChanged plugin(s): {', '.join(changed)}")
+    else:
+        print("\nChanged plugin(s): none")
+
+
+def sync_all(
+    source_root: Path,
+    dry_run: bool,
+    show_diff: bool = False,
+    selected_plugins: Optional[list[str]] = None,
+) -> None:
+    slug_dirs = _source_slug_dirs(source_root)
+    if not slug_dirs:
+        print("No plugin directories found in source.", file=sys.stderr)
+        return
+    slug_dirs = _select_slug_dirs(slug_dirs, selected_plugins)
 
     print(f"Scanning {len(slug_dirs)} source plugin(s)…\n")
     for slug_dir in slug_dirs:
@@ -513,6 +583,17 @@ def main() -> None:
         "--regen-conf",
         action="store_true",
         help=f"Re-prompt for the source path and update {CONFIG_PATH}",
+    )
+    parser.add_argument(
+        "--plugin",
+        action="append",
+        metavar="SLUG",
+        help="Only sync/list the given plugin slug (repeat or pass comma-separated slugs)",
+    )
+    parser.add_argument(
+        "--list-plugins",
+        action="store_true",
+        help="List source plugins and show NEW/CHANGED/UNCHANGED status, then exit",
     )
     parser.add_argument(
         "--dry-run",
@@ -541,15 +622,26 @@ def main() -> None:
         regen_conf=args.regen_conf,
         yes=args.yes,
     )
+    selected_plugins = _normalize_selected_plugins(args.plugin)
 
     print(f"\nSource : {source}")
     print(f"Repo   : {REPO_ROOT}")
+    if selected_plugins:
+        print(f"Plugins: {', '.join(selected_plugins)}")
     if args.dry_run:
         print("Mode   : DRY RUN (no files will be written)\n")
     else:
         print()
+    if args.list_plugins:
+        list_plugins(source, selected_plugins=selected_plugins)
+        return
 
-    sync_all(source, dry_run=args.dry_run, show_diff=not args.no_diff)
+    sync_all(
+        source,
+        dry_run=args.dry_run,
+        show_diff=not args.no_diff,
+        selected_plugins=selected_plugins,
+    )
 
     if not args.no_generate:
         print("\nRunning generate_manifest.py…")

@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
   "label": "Official · Canary",
-  "generated_at": "2026-04-09T16:13:00Z",
+  "generated_at": "2026-04-12T15:05:53Z",
   "plugins": [
     {
       "name": "Clock",
       "slug": "clock",
       "category": "utilities",
-      "summary": "Display a live digital clock on a button with Clean or Sketchy style",
+      "summary": "Display a live digital clock on a button",
       "author": "PyDeck Team",
       "latest": "1.1.0",
       "icon_path": "plugins/clock/icon.svg",
@@ -29,7 +29,7 @@
       "category": "communication",
       "summary": "Control Discord voice state (mute/deafen) via RPC",
       "author": "PyDeck Team",
-      "latest": "1.1.2",
+      "latest": "1.1.3",
       "icon_path": "plugins/discord/icon.svg",
       "compatible_pydeck_versions": [
         "1.0"
@@ -50,6 +50,12 @@
         {
           "version": "1.1.2",
           "path": "plugins/discord/1.1.2",
+          "min_pydeck_version": null,
+          "max_pydeck_version": null
+        },
+        {
+          "version": "1.1.3",
+          "path": "plugins/discord/1.1.3",
           "min_pydeck_version": null,
           "max_pydeck_version": null
         }
@@ -93,7 +99,7 @@
       "category": "utilities",
       "summary": "Navigate virtual folder pages on the Stream Deck",
       "author": "PyDeck Team",
-      "latest": "1.0.1",
+      "latest": "1.0.2",
       "icon_path": "plugins/folders/icon.png",
       "compatible_pydeck_versions": [
         "1.0"
@@ -108,6 +114,12 @@
         {
           "version": "1.0.1",
           "path": "plugins/folders/1.0.1",
+          "min_pydeck_version": null,
+          "max_pydeck_version": null
+        },
+        {
+          "version": "1.0.2",
+          "path": "plugins/folders/1.0.2",
           "min_pydeck_version": null,
           "max_pydeck_version": null
         }
@@ -143,9 +155,9 @@
       "name": "Keyboard",
       "slug": "keyboard",
       "category": "utilities",
-      "summary": "Simulate keyboard presses and text input via evdev/uinput. Works on both X11 and Wayland. Requires the user to be in the 'input' group: sudo usermod -aG input $USER",
+      "summary": "Simulate keyboard presses and text input via xdotool on X11 when available, with evdev/uinput fallback for Wayland. Works on both X11 and Wayland. Requires the user to be in the 'input' group: sudo usermod -aG input $USER",
       "author": "PyDeck Team",
-      "latest": "1.0.3",
+      "latest": "1.0.4",
       "icon_path": "plugins/keyboard/icon.svg",
       "compatible_pydeck_versions": [
         "1.0"
@@ -158,8 +170,8 @@
           "max_pydeck_version": null
         },
         {
-          "version": "1.0.3",
-          "path": "plugins/keyboard/1.0.3",
+          "version": "1.0.4",
+          "path": "plugins/keyboard/1.0.4",
           "min_pydeck_version": null,
           "max_pydeck_version": null
         }
@@ -230,7 +242,7 @@
       "category": "media",
       "summary": "Control Spotify playback via the Web API",
       "author": "PyDeck Team",
-      "latest": "1.1.0",
+      "latest": "1.1.1",
       "icon_path": "plugins/spotify/icon.svg",
       "compatible_pydeck_versions": [
         "1.0"
@@ -245,6 +257,12 @@
         {
           "version": "1.1.0",
           "path": "plugins/spotify/1.1.0",
+          "min_pydeck_version": null,
+          "max_pydeck_version": null
+        },
+        {
+          "version": "1.1.1",
+          "path": "plugins/spotify/1.1.1",
           "min_pydeck_version": null,
           "max_pydeck_version": null
         }
