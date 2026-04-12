@@ -28,7 +28,7 @@
     "play_pause": {
       "label": "Play / Pause",
       "description": "Toggle Spotify play/pause with album art display",
-      "sidebar_icon": "plugins/plugin/spotify-pdk/img/PlayPause.png",
+      "sidebar_icon": "plugins/plugin/spotify/img/PlayPause.png",
       "disableGallery": true,
       "poll": { "function": "on_poll", "interval_ms": 1000 },
       "ui": [
@@ -48,21 +48,21 @@
     "next_track": {
       "label": "Next Track",
       "description": "Skip to the next Spotify track",
-      "sidebar_icon": "plugins/plugin/spotify-pdk/img/Next.png",
+      "sidebar_icon": "plugins/plugin/spotify/img/Next.png",
       "disableGallery": true,
       "pdk": true
     },
     "prev_track": {
       "label": "Previous Track",
       "description": "Go back to the previous Spotify track",
-      "sidebar_icon": "plugins/plugin/spotify-pdk/img/Previous.png",
+      "sidebar_icon": "plugins/plugin/spotify/img/Previous.png",
       "disableGallery": true,
       "pdk": true
     },
     "volume_up": {
       "label": "Volume Up",
       "description": "Increase Spotify volume",
-      "sidebar_icon": "plugins/plugin/spotify-pdk/img/VolumeUp.png",
+      "sidebar_icon": "plugins/plugin/spotify/img/VolumeUp.png",
       "disableGallery": true,
       "poll": { "function": "on_poll", "interval_ms": 3000 },
       "ui": [
@@ -74,7 +74,7 @@
     "volume_down": {
       "label": "Volume Down",
       "description": "Decrease Spotify volume",
-      "sidebar_icon": "plugins/plugin/spotify-pdk/img/VolumeDown.png",
+      "sidebar_icon": "plugins/plugin/spotify/img/VolumeDown.png",
       "disableGallery": true,
       "poll": { "function": "on_poll", "interval_ms": 3000 },
       "ui": [
@@ -86,7 +86,7 @@
     "set_volume": {
       "label": "Set Volume",
       "description": "Set Spotify playback volume to a specific level (0\u2013100%)",
-      "sidebar_icon": "plugins/plugin/spotify-pdk/img/Volume.png",
+      "sidebar_icon": "plugins/plugin/spotify/img/Volume.png",
       "disableGallery": true,
       "poll": { "function": "on_poll", "interval_ms": 3000 },
       "ui": [
@@ -98,7 +98,7 @@
     "toggle_shuffle": {
       "label": "Shuffle",
       "description": "Toggle Spotify shuffle mode on/off",
-      "sidebar_icon": "plugins/plugin/spotify-pdk/img/Shuffle.png",
+      "sidebar_icon": "plugins/plugin/spotify/img/Shuffle.png",
       "disableGallery": true,
       "poll": { "function": "on_poll", "interval_ms": 5000 },
       "pdk": true
@@ -106,7 +106,7 @@
     "cycle_repeat": {
       "label": "Repeat",
       "description": "Cycle repeat mode: off \u2192 context \u2192 track \u2192 off",
-      "sidebar_icon": "plugins/plugin/spotify-pdk/img/Repeat.png",
+      "sidebar_icon": "plugins/plugin/spotify/img/Repeat.png",
       "disableGallery": true,
       "poll": { "function": "on_poll", "interval_ms": 5000 },
       "pdk": true
