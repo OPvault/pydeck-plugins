@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "label": "Official · Canary",
-  "generated_at": "2026-04-12T18:25:14Z",
+  "generated_at": "2026-04-12T20:51:40Z",
   "plugins": [
     {
       "name": "Clock",
@@ -286,7 +286,7 @@
       "category": "media",
       "summary": "Control Spotify playback via the Web API",
       "author": "PyDeck Team",
-      "latest": "1.1.1",
+      "latest": "2.0.0",
       "icon_path": "plugins/spotify/icon.svg",
       "compatible_pydeck_versions": [
         "1.0"
@@ -309,6 +309,12 @@
           "path": "plugins/spotify/1.1.1",
           "min_pydeck_version": "1.0.0",
           "max_pydeck_version": "1.0.0"
+        },
+        {
+          "version": "2.0.0",
+          "path": "plugins/spotify/2.0.0",
+          "min_pydeck_version": "1.1.0",
+          "max_pydeck_version": null
         }
       ]
     },
