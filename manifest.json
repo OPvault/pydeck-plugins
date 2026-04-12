@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "label": "Official · Canary",
-  "generated_at": "2026-04-12T17:49:17Z",
+  "generated_at": "2026-04-12T17:54:59Z",
   "plugins": [
     {
       "name": "Clock",
@@ -361,11 +361,11 @@
     {
       "name": "Weather",
       "slug": "weather",
-      "category": "utilities",
+      "category": "weather",
       "summary": "Current weather and multi-hour forecasts powered by met.no",
       "author": "PyDeck Team",
       "latest": "2.0.0",
-      "icon_path": "",
+      "icon_path": "plugins/weather/icon.png",
       "compatible_pydeck_versions": [
         "1.0"
       ],
@@ -375,6 +375,13 @@
           "path": "plugins/weather/2.0.0",
           "min_pydeck_version": "1.1.0",
           "max_pydeck_version": null
+        }
+      ],
+      "licenses": [
+        {
+          "name": "MET Norway",
+          "file": "lisence.txt",
+          "description": "Used to fetch current weather conditions and forecasts from met.no. Powers the temperature display, weather icon, and location-based updates."
         }
       ]
     }
