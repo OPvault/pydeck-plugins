@@ -1,0 +1,18 @@
+{
+  "name": "Finnhub",
+  "description": "Display one market symbol price from Finnhub on your deck",
+  "features": [
+    "Single symbol quote (stock, crypto, oil)",
+    "Optional change line for 1h, 1d, or 1w",
+    "Freeform symbol entry with common aliases like BTC, ETH, oil, brent, and wti",
+    "Configurable decimal precision",
+    "Optional currency suffix"
+  ],
+  "options": {
+    "api_key": ""
+  },
+  "metadata": {
+    "category": "finance",
+    "tags": ["stocks", "crypto", "oil", "finnhub", "finance", "market", "quote"]
+  }
+}
