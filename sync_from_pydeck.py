@@ -171,9 +171,22 @@ def _source_files(plugin_dir: Path) -> dict[str, Path]:
     return result
 
 
+def _purge_empty_version_dirs(plugins_dir: Path) -> None:
+    """Remove version directories that contain no actual files (ghost dirs)."""
+    for slug_dir in plugins_dir.iterdir():
+        if not slug_dir.is_dir():
+            continue
+        for child in slug_dir.iterdir():
+            if not _is_version_dir(child):
+                continue
+            if not any(p.is_file() for p in child.rglob("*")):
+                shutil.rmtree(child)
+                print(f"  PURGE   {child.relative_to(plugins_dir.parent)}  (empty version directory)")
+
+
 def _is_version_dir_nonempty(path: Path) -> bool:
-    """Return True if path is a non-empty semver-named directory."""
-    return _is_version_dir(path) and any(path.rglob("*"))
+    """Return True if path is a semver-named directory containing at least one file."""
+    return _is_version_dir(path) and any(p.is_file() for p in path.rglob("*"))
 
 
 def _latest_version_dir(slug_dir: Path) -> Optional[Path]:
@@ -554,6 +567,8 @@ def sync_all(
     show_diff: bool = False,
     selected_plugins: Optional[list[str]] = None,
 ) -> None:
+    _purge_empty_version_dirs(PLUGINS_DIR)
+
     slug_dirs = _source_slug_dirs(source_root)
     if not slug_dirs:
         print("No plugin directories found in source.", file=sys.stderr)

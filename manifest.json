@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "label": "Official · Canary",
-  "generated_at": "2026-04-12T16:59:08Z",
+  "generated_at": "2026-04-12T17:49:17Z",
   "plugins": [
     {
       "name": "Clock",
@@ -9,7 +9,7 @@
       "category": "utilities",
       "summary": "Display a live digital clock on a button",
       "author": "PyDeck Team",
-      "latest": "1.1.0",
+      "latest": "2.0.0",
       "icon_path": "plugins/clock/icon.svg",
       "compatible_pydeck_versions": [
         "1.0"
@@ -18,7 +18,13 @@
         {
           "version": "1.1.0",
           "path": "plugins/clock/1.1.0",
-          "min_pydeck_version": null,
+          "min_pydeck_version": "1.0.0",
+          "max_pydeck_version": "1.0.0"
+        },
+        {
+          "version": "2.0.0",
+          "path": "plugins/clock/2.0.0",
+          "min_pydeck_version": "1.1.0",
           "max_pydeck_version": null
         }
       ]
@@ -38,26 +44,26 @@
         {
           "version": "1.1.0",
           "path": "plugins/discord/1.1.0",
-          "min_pydeck_version": null,
-          "max_pydeck_version": null
+          "min_pydeck_version": "1.0.0",
+          "max_pydeck_version": "1.0.0"
         },
         {
           "version": "1.1.1",
           "path": "plugins/discord/1.1.1",
-          "min_pydeck_version": null,
-          "max_pydeck_version": null
+          "min_pydeck_version": "1.0.0",
+          "max_pydeck_version": "1.0.0"
         },
         {
           "version": "1.1.2",
           "path": "plugins/discord/1.1.2",
-          "min_pydeck_version": null,
-          "max_pydeck_version": null
+          "min_pydeck_version": "1.0.0",
+          "max_pydeck_version": "1.0.0"
         },
         {
           "version": "1.1.3",
           "path": "plugins/discord/1.1.3",
-          "min_pydeck_version": null,
-          "max_pydeck_version": null
+          "min_pydeck_version": "1.0.0",
+          "max_pydeck_version": "1.0.0"
         }
       ]
     },
@@ -67,7 +73,7 @@
       "category": "sports",
       "summary": "Countdown to the next Formula 1 race weekend with track icon",
       "author": "PyDeck Team",
-      "latest": "1.0.3",
+      "latest": "2.0.0",
       "icon_path": "plugins/f1/icon.svg",
       "compatible_pydeck_versions": [
         "1.0"
@@ -76,7 +82,13 @@
         {
           "version": "1.0.3",
           "path": "plugins/f1/1.0.3",
-          "min_pydeck_version": null,
+          "min_pydeck_version": "1.0.0",
+          "max_pydeck_version": "1.0.0"
+        },
+        {
+          "version": "2.0.0",
+          "path": "plugins/f1/2.0.0",
+          "min_pydeck_version": "1.1.0",
           "max_pydeck_version": null
         }
       ],
@@ -108,8 +120,8 @@
         {
           "version": "1.1.0",
           "path": "plugins/finnhub/1.1.0",
-          "min_pydeck_version": null,
-          "max_pydeck_version": null
+          "min_pydeck_version": "1.0.0",
+          "max_pydeck_version": "1.0.0"
         }
       ]
     },
@@ -128,20 +140,20 @@
         {
           "version": "1.0.0",
           "path": "plugins/folders/1.0.0",
-          "min_pydeck_version": null,
-          "max_pydeck_version": null
+          "min_pydeck_version": "1.0.0",
+          "max_pydeck_version": "1.0.0"
         },
         {
           "version": "1.0.1",
           "path": "plugins/folders/1.0.1",
-          "min_pydeck_version": null,
-          "max_pydeck_version": null
+          "min_pydeck_version": "1.0.0",
+          "max_pydeck_version": "1.0.0"
         },
         {
           "version": "1.0.2",
           "path": "plugins/folders/1.0.2",
-          "min_pydeck_version": null,
-          "max_pydeck_version": null
+          "min_pydeck_version": "1.0.0",
+          "max_pydeck_version": "1.0.0"
         }
       ]
     },
@@ -160,14 +172,14 @@
         {
           "version": "1.1.0",
           "path": "plugins/home-assistant/1.1.0",
-          "min_pydeck_version": null,
-          "max_pydeck_version": null
+          "min_pydeck_version": "1.0.0",
+          "max_pydeck_version": "1.0.0"
         },
         {
           "version": "1.1.1",
           "path": "plugins/home-assistant/1.1.1",
-          "min_pydeck_version": null,
-          "max_pydeck_version": null
+          "min_pydeck_version": "1.0.0",
+          "max_pydeck_version": "1.0.0"
         }
       ]
     },
@@ -186,20 +198,20 @@
         {
           "version": "1.0.2",
           "path": "plugins/keyboard/1.0.2",
-          "min_pydeck_version": null,
-          "max_pydeck_version": null
+          "min_pydeck_version": "1.0.0",
+          "max_pydeck_version": "1.0.0"
         },
         {
           "version": "1.0.3",
           "path": "plugins/keyboard/1.0.3",
-          "min_pydeck_version": null,
-          "max_pydeck_version": null
+          "min_pydeck_version": "1.0.0",
+          "max_pydeck_version": "1.0.0"
         },
         {
           "version": "1.0.4",
           "path": "plugins/keyboard/1.0.4",
-          "min_pydeck_version": null,
-          "max_pydeck_version": null
+          "min_pydeck_version": "1.0.0",
+          "max_pydeck_version": "1.0.0"
         }
       ]
     },
@@ -218,8 +230,8 @@
         {
           "version": "1.0.0",
           "path": "plugins/media-control/1.0.0",
-          "min_pydeck_version": null,
-          "max_pydeck_version": null
+          "min_pydeck_version": "1.0.0",
+          "max_pydeck_version": "1.0.0"
         }
       ]
     },
@@ -238,20 +250,20 @@
         {
           "version": "1.1.0",
           "path": "plugins/MET/1.1.0",
-          "min_pydeck_version": null,
-          "max_pydeck_version": null
+          "min_pydeck_version": "1.0.0",
+          "max_pydeck_version": "1.0.0"
         },
         {
           "version": "1.1.1",
           "path": "plugins/MET/1.1.1",
-          "min_pydeck_version": null,
-          "max_pydeck_version": null
+          "min_pydeck_version": "1.0.0",
+          "max_pydeck_version": "1.0.0"
         },
         {
           "version": "1.1.2",
           "path": "plugins/MET/1.1.2",
-          "min_pydeck_version": null,
-          "max_pydeck_version": null
+          "min_pydeck_version": "1.0.0",
+          "max_pydeck_version": "1.0.0"
         }
       ],
       "licenses": [
@@ -277,20 +289,20 @@
         {
           "version": "1.0.4",
           "path": "plugins/spotify/1.0.4",
-          "min_pydeck_version": null,
-          "max_pydeck_version": null
+          "min_pydeck_version": "1.0.0",
+          "max_pydeck_version": "1.0.0"
         },
         {
           "version": "1.1.0",
           "path": "plugins/spotify/1.1.0",
-          "min_pydeck_version": null,
-          "max_pydeck_version": null
+          "min_pydeck_version": "1.0.0",
+          "max_pydeck_version": "1.0.0"
         },
         {
           "version": "1.1.1",
           "path": "plugins/spotify/1.1.1",
-          "min_pydeck_version": null,
-          "max_pydeck_version": null
+          "min_pydeck_version": "1.0.0",
+          "max_pydeck_version": "1.0.0"
         }
       ]
     },
@@ -300,7 +312,7 @@
       "category": "utilities",
       "summary": "Monitor CPU, RAM, GPU, and disk usage via top, sensors, df, and nvidia-smi/rocm-smi — no extra Python packages required",
       "author": "PyDeck Team",
-      "latest": "1.0.0",
+      "latest": "2.0.0",
       "icon_path": "plugins/system-monitor/icon.svg",
       "compatible_pydeck_versions": [
         "1.0"
@@ -309,7 +321,13 @@
         {
           "version": "1.0.0",
           "path": "plugins/system-monitor/1.0.0",
-          "min_pydeck_version": null,
+          "min_pydeck_version": "1.0.0",
+          "max_pydeck_version": "1.0.0"
+        },
+        {
+          "version": "2.0.0",
+          "path": "plugins/system-monitor/2.0.0",
+          "min_pydeck_version": "1.1.0",
           "max_pydeck_version": null
         }
       ]
@@ -329,13 +347,33 @@
         {
           "version": "1.0.0",
           "path": "plugins/utilities/1.0.0",
-          "min_pydeck_version": null,
-          "max_pydeck_version": null
+          "min_pydeck_version": "1.0.0",
+          "max_pydeck_version": "1.0.0"
         },
         {
           "version": "1.0.1",
           "path": "plugins/utilities/1.0.1",
-          "min_pydeck_version": null,
+          "min_pydeck_version": "1.0.0",
+          "max_pydeck_version": "1.0.0"
+        }
+      ]
+    },
+    {
+      "name": "Weather",
+      "slug": "weather",
+      "category": "utilities",
+      "summary": "Current weather and multi-hour forecasts powered by met.no",
+      "author": "PyDeck Team",
+      "latest": "2.0.0",
+      "icon_path": "",
+      "compatible_pydeck_versions": [
+        "1.0"
+      ],
+      "versions": [
+        {
+          "version": "2.0.0",
+          "path": "plugins/weather/2.0.0",
+          "min_pydeck_version": "1.1.0",
           "max_pydeck_version": null
         }
       ]
