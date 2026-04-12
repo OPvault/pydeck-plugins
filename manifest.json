@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "label": "Official · Canary",
-  "generated_at": "2026-04-12T17:54:59Z",
+  "generated_at": "2026-04-12T18:25:14Z",
   "plugins": [
     {
       "name": "Clock",
@@ -9,7 +9,7 @@
       "category": "utilities",
       "summary": "Display a live digital clock on a button",
       "author": "PyDeck Team",
-      "latest": "2.0.0",
+      "latest": "2.0.1",
       "icon_path": "plugins/clock/icon.svg",
       "compatible_pydeck_versions": [
         "1.0"
@@ -24,6 +24,12 @@
         {
           "version": "2.0.0",
           "path": "plugins/clock/2.0.0",
+          "min_pydeck_version": "1.1.0",
+          "max_pydeck_version": null
+        },
+        {
+          "version": "2.0.1",
+          "path": "plugins/clock/2.0.1",
           "min_pydeck_version": "1.1.0",
           "max_pydeck_version": null
         }
