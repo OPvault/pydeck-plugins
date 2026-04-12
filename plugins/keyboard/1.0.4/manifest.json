@@ -1,6 +1,6 @@
 {
   "name": "Keyboard",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Simulate keyboard presses and text input via xdotool on X11 when available, with evdev/uinput fallback for Wayland. Works on both X11 and Wayland. Requires the user to be in the 'input' group: sudo usermod -aG input $USER",
   "author": "PyDeck Team",
   "python_dependencies": ["evdev"],
@@ -8,11 +8,8 @@
     "evdev": ["UInput", "ecodes"],
     "time": ["sleep"]
   },
-<<<<<<< Updated upstream
-=======
   "post_install_script": "post_install.sh",
   "post_install_requires_sudo": true,
->>>>>>> Stashed changes
   "functions": {
     "press_key": {
       "label": "Press Key",

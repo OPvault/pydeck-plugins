@@ -1,0 +1,109 @@
+{
+  "name": "Folders",
+  "version": "1.0.2",
+  "description": "Navigate virtual folder pages on the Stream Deck",
+  "functions": {
+    "enter_folder": {
+      "label": "Enter Folder",
+      "description": "Switch deck buttons to a folder by folder id",
+      "sidebar_icon": "plugins/plugin/folders/img/folder_enter.png",
+      "default_display": {
+        "color": "#000000",
+        "text": "",
+        "image": "plugins/plugin/folders/img/folder_enter.png"
+      },
+      "ui": [
+        {
+          "type": "input",
+          "id": "folder_id",
+          "label": "Folder ID",
+          "placeholder": "gaming",
+          "default": ""
+        },
+        {
+          "type": "checkbox",
+          "id": "auto_return_enabled",
+          "label": "Enable Auto-Return",
+          "default": false
+        },
+        {
+          "type": "number",
+          "id": "auto_return_seconds",
+          "label": "Auto-Return Delay (seconds)",
+          "default": 5,
+          "visible_if": {
+            "field": "auto_return_enabled",
+            "value": true
+          }
+        },
+        {
+          "type": "checkbox",
+          "id": "auto_return_show_text",
+          "label": "Show Countdown On Return Button",
+          "default": true,
+          "visible_if": {
+            "field": "auto_return_enabled",
+            "value": true
+          }
+        }
+      ],
+      "actionable": true
+    },
+    "return_folder": {
+      "label": "Return Folder",
+      "description": "Return to parent folder or root",
+      "sidebar_icon": "plugins/plugin/folders/img/folder_return.png",
+      "default_display": {
+        "color": "#000000",
+        "text": "",
+        "image": "plugins/plugin/folders/img/folder_return.png"
+      },
+      "ui": [
+        {
+          "type": "select",
+          "id": "return_mode",
+          "label": "Return Mode",
+          "options": [
+            {
+              "label": "Parent Folder",
+              "value": "parent"
+            },
+            {
+              "label": "Root Folder",
+              "value": "root"
+            }
+          ],
+          "default": "parent"
+        }
+      ],
+      "actionable": true
+    },
+    "switch_profile": {
+      "label": "Switch Profile",
+      "description": "Switch to a specific profile",
+      "sidebar_icon": "plugins/plugin/folders/img/profile_switch.png",
+      "default_display": {
+        "color": "#000000",
+        "text": "",
+        "image": "plugins/plugin/folders/img/profile_switch.png"
+      },
+      "ui": [
+        {
+          "type": "api_select",
+          "id": "profile_name",
+          "label": "Profile",
+          "api": "profiles",
+          "search_placeholder": "Search profiles\u2026",
+          "display": {
+            "label": "label",
+            "value": "value"
+          },
+          "default": ""
+        }
+      ],
+      "actionable": true
+    }
+  },
+  "author": "PyDeck Team",
+  "actionable": true
+}
