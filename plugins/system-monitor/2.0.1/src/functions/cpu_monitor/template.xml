@@ -1,0 +1,10 @@
+<template name="cpu_monitor" title="CPU" description="Live CPU usage">
+  <box class="face">
+    <text class="header">CPU</text>
+    <text class="{val_class}">{pct}%</text>
+    <text class="{sub_class}">{temp}</text>
+    <box class="bar-track">
+      <progress value="{pct}" track-color="#21262d" fill-color="{bar_color}" height="5" width="100%" />
+    </box>
+  </box>
+</template>

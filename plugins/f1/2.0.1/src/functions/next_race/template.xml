@@ -1,0 +1,10 @@
+<template name="next_race" title="F1 Next Race" description="Countdown to the next race" icon="assets/icons/f1.svg">
+  <box class="race-bg">
+    <text class="session-label">{session_label}</text>
+    <text class="track-label">{track_label}</text>
+    <box class="track-wrap">
+      <img src="{track_src}" width="56" height="38" fit="contain" />
+    </box>
+    <text class="{countdown_class}">{countdown}</text>
+  </box>
+</template>

@@ -1,0 +1,10 @@
+<template name="gpu_monitor" title="GPU" description="Live GPU stats">
+  <box class="face">
+    <text class="header">GPU</text>
+    <text class="{val_class}">{temp}</text>
+    <text class="{sub_class}">{usage}</text>
+    <box class="bar-track">
+      <progress value="{bar_val}" track-color="#21262d" fill-color="{bar_color}" height="5" width="100%" />
+    </box>
+  </box>
+</template>
