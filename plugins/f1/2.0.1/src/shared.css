@@ -1,0 +1,116 @@
+:root {
+  --bg: {_button_color};
+  --text-color: #ffffff;
+  --label-color: #e6e6e6;
+  --team-bg: {team_bg_color};
+}
+
+/* ── Next Race ── */
+
+.race-bg {
+  background: var(--bg);
+  padding: 3;
+  direction: column;
+  align: center;
+  justify: center;
+  gap: 0;
+}
+
+.track-wrap {
+  direction: column;
+  align: center;
+  justify: center;
+  height: 50%;
+}
+
+.session-label {
+  color: var(--label-color);
+  font-size: 0.75em;
+  font-weight: bold;
+  text-align: center;
+}
+
+.track-label {
+  color: var(--text-color);
+  font-size: 0.75em;
+  text-align: center;
+  width: 100%;
+}
+
+.countdown {
+  color: var(--text-color);
+  font-size: 0.75em;
+  font-weight: bold;
+  text-align: center;
+}
+
+.countdown-sm {
+  color: var(--text-color);
+  font-size: 0.6em;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* ── Driver Points ── */
+
+.driver-bg {
+  background: var(--bg);
+  padding: 4;
+  direction: column;
+  align: center;
+  justify: center;
+  gap: 2;
+}
+
+.driver-img-wrap {
+  direction: column;
+  align: center;
+  justify: center;
+  height: 44;
+}
+
+.driver-code {
+  color: var(--label-color);
+  font-size: 1em;
+  font-weight: bold;
+  text-align: center;
+}
+
+.driver-info {
+  color: var(--text-color);
+  font-size: 0.75em;
+  font-weight: bold;
+  text-align: center;
+}
+
+.driver-info-sm {
+  color: var(--text-color);
+  font-size: 0.55em;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* ── Constructor Points ── */
+
+.team-bg {
+  background: var(--team-bg);
+  padding: 6;
+  direction: column;
+  align: center;
+  justify: center;
+  gap: 2;
+}
+
+.team-code {
+  color: var(--text-color);
+  font-size: 2em;
+  font-weight: bold;
+  text-align: center;
+}
+
+.team-info {
+  color: var(--text-color);
+  font-size: 0.75em;
+  font-weight: bold;
+  text-align: center;
+}
