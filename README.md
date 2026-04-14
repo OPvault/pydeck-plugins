@@ -37,6 +37,18 @@ pydeck-plugins/
             └── ...            # Any additional files (CSS, helpers, assets)
 ```
 
+## PDK plugin creator (development)
+
+To generate a new **PDK** plugin tree directly inside a local **pydeck** checkout (`plugins/plugin/<slug>/`), use the scaffold tool:
+
+```bash
+python -m tools.pdk_create
+```
+
+It resolves the `plugins/plugin/` directory the same way as **`sync_from_pydeck.py`** (saved `~/.config/pydeck/pydeck-plugins/path.json`, `PYDECK_SOURCE`, candidates, etc.). If you already configured sync, no extra path setup is needed.
+
+Documentation: [PDK Plugin Creator](https://docs.pydeck.no/pydeck-plugins/PDK_CREATE/) (pydeck-docs).
+
 ## Adding a plugin
 
 1. Create the version folder: `plugins/<slug>/<version>/` with at minimum `manifest.json` and `plugin.py`.
