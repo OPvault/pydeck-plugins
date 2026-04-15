@@ -15,22 +15,33 @@ from .paths import (
     resolve_plugin_parent,
 )
 
-_SLUG_RE = re.compile(r"^[a-z0-9][a-z0-9_-]*$")
 _FUNC_RE = re.compile(r"^[a-z][a-z0-9_]*$")
+
+# Match PyDeck's RDNN rules (see pydeck ``lib/plugin_id.py``).
+_RDNN_RE = re.compile(
+    r"^(?:[a-z0-9](?:[a-z0-9_-]*[a-z0-9])?)(?:\.[a-z0-9](?:[a-z0-9_-]*[a-z0-9])?){2,}$",
+)
 
 
 def _err(msg: str) -> None:
     print(msg, file=sys.stderr)
 
 
-def validate_slug(slug: str) -> str:
-    slug = slug.strip().lower()
-    if not _SLUG_RE.match(slug):
+def validate_rdnn_plugin_id(plugin_id: str) -> bool:
+    s = (plugin_id or "").strip()
+    return bool(s) and bool(_RDNN_RE.fullmatch(s))
+
+
+def validate_plugin_id(raw: str) -> str:
+    """Validate and return the RDNN plugin id (install directory name)."""
+    s = raw.strip()
+    if not validate_rdnn_plugin_id(s):
         raise ValueError(
-            "Invalid slug: use lowercase letters, digits, underscores, hyphens "
-            "(must start with a letter or digit).",
+            "Invalid plugin id: use reverse-DNS form with at least three labels, "
+            "e.g. com.example.myplugin or no.pydeck.myplugin "
+            "(lowercase letters, digits, hyphen, underscore per label).",
         )
-    return slug
+    return s
 
 
 def validate_functions(raw: str) -> list[str]:
@@ -52,9 +63,14 @@ def interactive_defaults() -> dict:
     print("PyDeck PDK plugin creator — interactive scaffold\n")
     slug = ""
     while True:
-        slug = input("Plugin slug (folder name) [my_plugin]: ").strip() or "my_plugin"
+        slug = (
+            input(
+                "RDNN plugin id (install folder name) [no.pydeck.my_plugin]: ",
+            ).strip()
+            or "no.pydeck.my_plugin"
+        )
         try:
-            slug = validate_slug(slug)
+            slug = validate_plugin_id(slug)
             break
         except ValueError as e:
             _err(str(e))
@@ -85,7 +101,7 @@ def interactive_defaults() -> dict:
 
 def build_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(
-        description="Create a PyDeck PDK plugin under plugins/plugin/<slug>/ "
+        description="Create a PyDeck PDK plugin under plugins/plugin/<rdnn-id>/ "
         "inside a pydeck checkout. Resolves the plugins/plugin directory the "
         "same way as sync_from_pydeck.py (path.json, candidates, PYDECK_SOURCE).",
     )
@@ -101,8 +117,14 @@ def build_parser() -> argparse.ArgumentParser:
         "Ignored if --pydeck-source is set.",
     )
     p.add_argument(
+        "--plugin-id",
+        dest="plugin_id",
+        metavar="RDNN",
+        help="RDNN plugin id / install folder name (e.g. no.pydeck.my_plugin)",
+    )
+    p.add_argument(
         "--slug",
-        help="Plugin directory name (lowercase, a-z0-9_-)",
+        help="Deprecated alias for --plugin-id (RDNN)",
     )
     p.add_argument(
         "--name",
@@ -192,11 +214,14 @@ def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
 
     if args.non_interactive:
-        if not args.slug or not args.name:
-            _err("--non-interactive requires --slug and --name.")
+        chosen_id = (args.plugin_id or args.slug or "").strip()
+        if not chosen_id or not args.name:
+            _err("--non-interactive requires --plugin-id (or --slug) and --name.")
             return 2
+        if args.slug and not args.plugin_id:
+            _err("Warning: --slug is deprecated; prefer --plugin-id (RDNN).")
         try:
-            slug = validate_slug(args.slug)
+            slug = validate_plugin_id(chosen_id)
             functions = validate_functions(
                 args.functions or "main",
             )
@@ -222,7 +247,7 @@ def main(argv: list[str] | None = None) -> int:
     else:
         data = interactive_defaults()
         try:
-            slug = validate_slug(data["slug"])
+            slug = validate_plugin_id(data["slug"])
             functions = data["functions"]
         except ValueError as e:
             _err(str(e))

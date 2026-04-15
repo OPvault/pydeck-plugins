@@ -1,5 +1,5 @@
 {
-  "name": "System Monitor",
+  "name": "System Monitor (Legacy)",
   "version": "1.0.0",
   "description": "Monitor CPU, RAM, GPU, and disk usage via top, sensors, df, and nvidia-smi/rocm-smi — no extra Python packages required",
   "author": "PyDeck Team",

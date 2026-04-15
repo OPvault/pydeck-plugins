@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Sync plugins from a local pydeck source tree into this marketplace repo.
+"""Sync plugins from a local PyDeck plugin directory into this marketplace repo.
 
 Usage
 -----
@@ -25,9 +25,13 @@ The confirmed source path is stored at:
 On first run (or after --regen-conf) the script auto-detects and asks you
 to confirm the path, then saves it so subsequent runs require no input.
 
+Auto-detection prefers **``$XDG_DATA_HOME/pydeck/plugin``** (default
+**``~/.local/share/pydeck/plugin``**), then legacy **``<pydeck-checkout>/plugins/plugin``**
+paths if you still develop from an unmigrated tree.
+
 Workflow
 --------
-For every plugin directory found in the pydeck source tree:
+For every plugin directory found in the pydeck plugin directory:
 
   1. If the slug does **not** exist in this repo → treat as a brand-new plugin
      and copy all its files into plugins/<slug>/<version>/.
@@ -53,6 +57,7 @@ import argparse
 import difflib
 import filecmp
 import json
+import os
 import shutil
 import subprocess
 import sys
@@ -97,13 +102,29 @@ REPO_ONLY_FILES: frozenset[str] = frozenset({
 EXCLUDE_DIRS: frozenset[str] = frozenset({"__pycache__"})
 EXCLUDE_SUFFIXES: frozenset[str] = frozenset({".pyc", ".pyo"})
 
-# ── Candidate pydeck source paths (auto-detection order) ──────────────────────
+# ── Candidate pydeck plugin directories (auto-detection order) ───────────────
+# PyDeck installs plugins under $XDG_DATA_HOME/pydeck/plugin (default
+# ~/.local/share/pydeck/plugin). Legacy checkouts may still use <repo>/plugins/plugin.
+
+
+def _xdg_data_plugin_dir() -> Path:
+    raw = (os.environ.get("XDG_DATA_HOME") or "").strip()
+    base = Path(raw).expanduser().resolve() if raw else Path.home() / ".local" / "share"
+    return base / "pydeck" / "plugin"
+
 
 _CANDIDATES: list[Path] = [
+    _xdg_data_plugin_dir(),
     Path.home() / "Documents" / "GitHub" / "pydeck" / "plugins" / "plugin",
     REPO_ROOT.parents[0] / "pydeck" / "plugins" / "plugin",
     Path.home() / "pydeck" / "plugins" / "plugin",
 ]
+
+
+def pydeck_plugin_source_candidates() -> list[Path]:
+    """Return the ordered paths probed by auto-detection (for other tooling)."""
+
+    return list(_CANDIDATES)
 
 # ── Config helpers ─────────────────────────────────────────────────────────────
 
@@ -395,10 +416,16 @@ def _prompt_for_path(detected: Optional[Path], yes: bool) -> Path:
             return detected
 
     if not detected:
-        print("Could not auto-detect the pydeck plugins/plugin/ directory.")
+        print(
+            "Could not auto-detect the plugin directory "
+            "(try ~/.local/share/pydeck/plugin or your pydeck checkout plugins/plugin/)."
+        )
 
     while True:
-        raw = input("Enter the full path to pydeck's plugins/plugin/ directory: ").strip()
+        raw = input(
+            "Enter the full path to the plugin directory "
+            "(e.g. ~/.local/share/pydeck/plugin or …/pydeck/plugins/plugin): "
+        ).strip()
         p = Path(raw).expanduser().resolve()
         if p.is_dir():
             return p
@@ -592,7 +619,10 @@ def main() -> None:
     parser.add_argument(
         "--pydeck-source",
         metavar="PATH",
-        help="Path to pydeck's plugins/plugin/ directory (overrides saved config)",
+        help=(
+            "Plugin install directory: ~/.local/share/pydeck/plugin (default layout) "
+            "or legacy …/pydeck/plugins/plugin (overrides saved config)"
+        ),
     )
     parser.add_argument(
         "--regen-conf",

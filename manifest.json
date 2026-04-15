@@ -1,15 +1,35 @@
 {
   "schema_version": 1,
   "label": "Official · Canary",
-  "generated_at": "2026-04-14T17:44:23Z",
+  "generated_at": "2026-04-15T19:48:03Z",
   "plugins": [
     {
       "name": "Clock",
+      "slug": "no.pydeck.clock",
+      "category": "utilities",
+      "summary": "Displays the current time with a stylish gradient background",
+      "author": "PyDeck Team",
+      "latest": "2.0.2",
+      "icon_path": "",
+      "compatible_pydeck_versions": [
+        "1.0"
+      ],
+      "versions": [
+        {
+          "version": "2.0.2",
+          "path": "plugins/no.pydeck.clock/2.0.2",
+          "min_pydeck_version": "1.1.0",
+          "max_pydeck_version": null
+        }
+      ]
+    },
+    {
+      "name": "Clock (Legacy)",
       "slug": "clock",
       "category": "utilities",
       "summary": "Display a live digital clock on a button",
       "author": "PyDeck Team",
-      "latest": "2.0.2",
+      "latest": "1.1.0",
       "icon_path": "plugins/clock/icon.svg",
       "compatible_pydeck_versions": [
         "1.0"
@@ -20,24 +40,6 @@
           "path": "plugins/clock/1.1.0",
           "min_pydeck_version": "1.0.0",
           "max_pydeck_version": "1.0.0"
-        },
-        {
-          "version": "2.0.0",
-          "path": "plugins/clock/2.0.0",
-          "min_pydeck_version": "1.1.0",
-          "max_pydeck_version": null
-        },
-        {
-          "version": "2.0.1",
-          "path": "plugins/clock/2.0.1",
-          "min_pydeck_version": "1.1.0",
-          "max_pydeck_version": null
-        },
-        {
-          "version": "2.0.2",
-          "path": "plugins/clock/2.0.2",
-          "min_pydeck_version": "1.1.0",
-          "max_pydeck_version": null
         }
       ]
     },
@@ -81,11 +83,31 @@
     },
     {
       "name": "F1",
+      "slug": "no.pydeck.f1",
+      "category": "utilities",
+      "summary": "Formula 1 race countdown, driver standings, and constructor standings",
+      "author": "PyDeck Team",
+      "latest": "2.0.1",
+      "icon_path": "",
+      "compatible_pydeck_versions": [
+        "1.0"
+      ],
+      "versions": [
+        {
+          "version": "2.0.1",
+          "path": "plugins/no.pydeck.f1/2.0.1",
+          "min_pydeck_version": "1.1.0",
+          "max_pydeck_version": null
+        }
+      ]
+    },
+    {
+      "name": "F1 (Legacy)",
       "slug": "f1",
       "category": "sports",
       "summary": "Countdown to the next Formula 1 race weekend with track icon",
       "author": "PyDeck Team",
-      "latest": "2.0.1",
+      "latest": "1.0.3",
       "icon_path": "plugins/f1/icon.svg",
       "compatible_pydeck_versions": [
         "1.0"
@@ -96,18 +118,6 @@
           "path": "plugins/f1/1.0.3",
           "min_pydeck_version": "1.0.0",
           "max_pydeck_version": "1.0.0"
-        },
-        {
-          "version": "2.0.0",
-          "path": "plugins/f1/2.0.0",
-          "min_pydeck_version": "1.1.0",
-          "max_pydeck_version": null
-        },
-        {
-          "version": "2.0.1",
-          "path": "plugins/f1/2.0.1",
-          "min_pydeck_version": "1.1.0",
-          "max_pydeck_version": null
         }
       ],
       "licenses": [
@@ -294,11 +304,31 @@
     },
     {
       "name": "Spotify",
+      "slug": "no.pydeck.spotify",
+      "category": "utilities",
+      "summary": "Control Spotify playback via the Web API (PDK)",
+      "author": "PyDeck Team",
+      "latest": "2.0.1",
+      "icon_path": "",
+      "compatible_pydeck_versions": [
+        "1.0"
+      ],
+      "versions": [
+        {
+          "version": "2.0.1",
+          "path": "plugins/no.pydeck.spotify/2.0.1",
+          "min_pydeck_version": "1.1.0",
+          "max_pydeck_version": null
+        }
+      ]
+    },
+    {
+      "name": "Spotify (Legacy)",
       "slug": "spotify",
       "category": "media",
       "summary": "Control Spotify playback via the Web API",
       "author": "PyDeck Team",
-      "latest": "2.0.1",
+      "latest": "1.1.1",
       "icon_path": "plugins/spotify/icon.svg",
       "compatible_pydeck_versions": [
         "1.0"
@@ -321,28 +351,36 @@
           "path": "plugins/spotify/1.1.1",
           "min_pydeck_version": "1.0.0",
           "max_pydeck_version": "1.0.0"
-        },
-        {
-          "version": "2.0.0",
-          "path": "plugins/spotify/2.0.0",
-          "min_pydeck_version": "1.1.0",
-          "max_pydeck_version": null
-        },
+        }
+      ]
+    },
+    {
+      "name": "System Monitor",
+      "slug": "no.pydeck.system-monitor",
+      "category": "utilities",
+      "summary": "Monitor CPU, RAM, GPU, and disk usage — no extra Python packages required",
+      "author": "PyDeck Team",
+      "latest": "2.0.1",
+      "icon_path": "",
+      "compatible_pydeck_versions": [
+        "1.0"
+      ],
+      "versions": [
         {
           "version": "2.0.1",
-          "path": "plugins/spotify/2.0.1",
+          "path": "plugins/no.pydeck.system-monitor/2.0.1",
           "min_pydeck_version": "1.1.0",
           "max_pydeck_version": null
         }
       ]
     },
     {
-      "name": "System Monitor",
+      "name": "System Monitor (Legacy)",
       "slug": "system-monitor",
       "category": "utilities",
       "summary": "Monitor CPU, RAM, GPU, and disk usage via top, sensors, df, and nvidia-smi/rocm-smi — no extra Python packages required",
       "author": "PyDeck Team",
-      "latest": "2.0.1",
+      "latest": "1.0.0",
       "icon_path": "plugins/system-monitor/icon.svg",
       "compatible_pydeck_versions": [
         "1.0"
@@ -353,18 +391,6 @@
           "path": "plugins/system-monitor/1.0.0",
           "min_pydeck_version": "1.0.0",
           "max_pydeck_version": "1.0.0"
-        },
-        {
-          "version": "2.0.0",
-          "path": "plugins/system-monitor/2.0.0",
-          "min_pydeck_version": "1.1.0",
-          "max_pydeck_version": null
-        },
-        {
-          "version": "2.0.1",
-          "path": "plugins/system-monitor/2.0.1",
-          "min_pydeck_version": "1.1.0",
-          "max_pydeck_version": null
         }
       ]
     },
@@ -396,34 +422,21 @@
     },
     {
       "name": "Weather",
-      "slug": "weather",
-      "category": "weather",
+      "slug": "no.pydeck.weather",
+      "category": "utilities",
       "summary": "Current weather and multi-hour forecasts powered by met.no",
       "author": "PyDeck Team",
       "latest": "2.0.1",
-      "icon_path": "plugins/weather/icon.png",
+      "icon_path": "",
       "compatible_pydeck_versions": [
         "1.0"
       ],
       "versions": [
         {
-          "version": "2.0.0",
-          "path": "plugins/weather/2.0.0",
-          "min_pydeck_version": "1.1.0",
-          "max_pydeck_version": null
-        },
-        {
           "version": "2.0.1",
-          "path": "plugins/weather/2.0.1",
+          "path": "plugins/no.pydeck.weather/2.0.1",
           "min_pydeck_version": "1.1.0",
           "max_pydeck_version": null
-        }
-      ],
-      "licenses": [
-        {
-          "name": "MET Norway",
-          "file": "lisence.txt",
-          "description": "Used to fetch current weather conditions and forecasts from met.no. Powers the temperature display, weather icon, and location-based updates."
         }
       ]
     }

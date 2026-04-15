@@ -1,9 +1,0 @@
-<template name="driver_points" title="F1 Driver Points" description="Driver championship standings" icon="img/f1.svg">
-  <box class="driver-bg">
-    <text class="driver-code">{driver_code}</text>
-    <box class="driver-img-wrap">
-      <img src="{driver_img}" width="40" height="40" fit="contain" />
-    </box>
-    <text class="{driver_info_class}">{driver_info}</text>
-  </box>
-</template>

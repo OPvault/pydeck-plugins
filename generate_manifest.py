@@ -11,6 +11,14 @@ Options
     --output PATH     Output file path     (default: manifest.json)
     --dry-run         Print the result to stdout instead of writing it
 
+Syncing from a live PyDeck install
+----------------------------------
+Use **``sync_from_pydeck.py``** in this repo to copy plugin sources into
+``plugins/<slug>/<version>/``. That script resolves the install directory the
+same way as the app: **``$XDG_DATA_HOME/pydeck/plugin``** (default
+**``~/.local/share/pydeck/plugin``**), then legacy **``<checkout>/plugins/plugin``**
+paths. This file only reads the **catalog** tree under ``plugins/`` here.
+
 Discovery logic
 ---------------
 For each plugins/<slug>/ directory:
@@ -37,6 +45,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import shutil
 import sys
 from datetime import datetime, timezone
@@ -53,6 +62,15 @@ SCHEMA_VERSION = 1
 DEFAULT_LABEL  = "Official · Canary"
 DEFAULT_PYDECK = "1.0.0"
 ICON_PRIORITY  = ("icon.svg", "icon.png")
+
+
+def default_pydeck_plugin_install_dir() -> Path:
+    """Same default as ``sync_from_pydeck`` first candidate: live PyDeck plugin data dir."""
+
+    raw = (os.environ.get("XDG_DATA_HOME") or "").strip()
+    base = Path(raw).expanduser().resolve() if raw else Path.home() / ".local" / "share"
+    return base / "pydeck" / "plugin"
+
 
 # ── Semver helpers ─────────────────────────────────────────────────────────────
 
@@ -260,8 +278,13 @@ def generate(label: str, output: Path, dry_run: bool) -> None:
 
 
 def main() -> None:
+    plugin_hint = default_pydeck_plugin_install_dir()
     parser = argparse.ArgumentParser(
-        description="Generate the root manifest.json for the pydeck-plugins repo.",
+        description=(
+            "Generate the root manifest.json for the pydeck-plugins repo.\n\n"
+            f"To populate version folders from a running PyDeck, use sync_from_pydeck.py "
+            f"(defaults to plugin data dir: {plugin_hint})."
+        ),
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
     parser.add_argument(

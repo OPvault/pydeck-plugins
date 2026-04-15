@@ -9,7 +9,7 @@ PyDeck uses a two-repo architecture:
 - **pydeck** — the main app that runs on your machine (Flask server, hardware listener, web UI)
 - **pydeck-plugins** *(this repo)* — a static file store and manifest, hosted on GitHub
 
-When you install a plugin through the marketplace UI, PyDeck reads the root `manifest.json` to find the plugin, then downloads its files from the matching version folder directly into `plugins/plugin/<slug>/` on your machine.
+When you install a plugin through the marketplace UI, PyDeck reads the root `manifest.json` to find the plugin, then downloads its files from the matching version folder directly into `plugins/plugin/<rdnn-id>/` on your machine (reverse-DNS plugin id, e.g. `no.pydeck.spotify`).
 
 ## Available plugins
 
@@ -29,7 +29,7 @@ When you install a plugin through the marketplace UI, PyDeck reads the root `man
 pydeck-plugins/
 ├── manifest.json              # Root catalog index — lists all plugins and versions
 └── plugins/
-    └── <slug>/
+    └── <rdnn-id>/
         ├── icon.svg
         └── <version>/
             ├── manifest.json  # Plugin metadata read by PyDeck after install
@@ -39,7 +39,7 @@ pydeck-plugins/
 
 ## PDK plugin creator (development)
 
-To generate a new **PDK** plugin tree directly inside a local **pydeck** checkout (`plugins/plugin/<slug>/`), use the scaffold tool:
+To generate a new **PDK** plugin tree directly inside a local **pydeck** checkout (`plugins/plugin/<rdnn-id>/`), use the scaffold tool:
 
 ```bash
 python -m tools.pdk_create
@@ -51,8 +51,8 @@ Documentation: [PDK Plugin Creator](https://docs.pydeck.no/pydeck-plugins/PDK_CR
 
 ## Adding a plugin
 
-1. Create the version folder: `plugins/<slug>/<version>/` with at minimum `manifest.json` and `plugin.py`.
-2. Add an entry to the root `manifest.json` with the correct `slug`, `latest`, and `versions[].path`.
+1. Create the version folder: `plugins/<rdnn-id>/<version>/` with at minimum `manifest.json` and `plugin.py`.
+2. Add an entry to the root `manifest.json` with the correct `slug` (same RDNN id as the folder), `latest`, and `versions[].path`.
 3. Commit and push both changes together.
 
 See the [pydeck-docs](https://github.com/opvault/pydeck-docs) repo for the full catalog format reference and plugin manifest and `plugin.py` API.
