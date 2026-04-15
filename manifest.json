@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "label": "Official · Canary",
-  "generated_at": "2026-04-15T19:48:03Z",
+  "generated_at": "2026-04-15T19:56:30Z",
   "plugins": [
     {
       "name": "Clock",
@@ -10,7 +10,7 @@
       "summary": "Displays the current time with a stylish gradient background",
       "author": "PyDeck Team",
       "latest": "2.0.2",
-      "icon_path": "",
+      "icon_path": "plugins/no.pydeck.clock/icon.svg",
       "compatible_pydeck_versions": [
         "1.0"
       ],
@@ -84,11 +84,11 @@
     {
       "name": "F1",
       "slug": "no.pydeck.f1",
-      "category": "utilities",
+      "category": "sports",
       "summary": "Formula 1 race countdown, driver standings, and constructor standings",
       "author": "PyDeck Team",
       "latest": "2.0.1",
-      "icon_path": "",
+      "icon_path": "plugins/no.pydeck.f1/icon.svg",
       "compatible_pydeck_versions": [
         "1.0"
       ],
@@ -98,6 +98,18 @@
           "path": "plugins/no.pydeck.f1/2.0.1",
           "min_pydeck_version": "1.1.0",
           "max_pydeck_version": null
+        }
+      ],
+      "licenses": [
+        {
+          "name": "OpenF1",
+          "file": "LICENSE-openf1",
+          "description": "Used to fetch race data, and the current race weekend schedule. Powers the race countdown and track icon display."
+        },
+        {
+          "name": "Jolpica F1",
+          "file": "LICENSE-jolpica",
+          "description": "Used to fetch historical driver and constructor championship standings and points. Powers the Driver Points and Constructor Points buttons."
         }
       ]
     },
@@ -305,11 +317,11 @@
     {
       "name": "Spotify",
       "slug": "no.pydeck.spotify",
-      "category": "utilities",
+      "category": "media",
       "summary": "Control Spotify playback via the Web API (PDK)",
       "author": "PyDeck Team",
       "latest": "2.0.1",
-      "icon_path": "",
+      "icon_path": "plugins/no.pydeck.spotify/icon.svg",
       "compatible_pydeck_versions": [
         "1.0"
       ],
@@ -361,7 +373,7 @@
       "summary": "Monitor CPU, RAM, GPU, and disk usage — no extra Python packages required",
       "author": "PyDeck Team",
       "latest": "2.0.1",
-      "icon_path": "",
+      "icon_path": "plugins/no.pydeck.system-monitor/icon.svg",
       "compatible_pydeck_versions": [
         "1.0"
       ],
@@ -423,11 +435,11 @@
     {
       "name": "Weather",
       "slug": "no.pydeck.weather",
-      "category": "utilities",
+      "category": "weather",
       "summary": "Current weather and multi-hour forecasts powered by met.no",
       "author": "PyDeck Team",
       "latest": "2.0.1",
-      "icon_path": "",
+      "icon_path": "plugins/no.pydeck.weather/icon.png",
       "compatible_pydeck_versions": [
         "1.0"
       ],
@@ -437,6 +449,13 @@
           "path": "plugins/no.pydeck.weather/2.0.1",
           "min_pydeck_version": "1.1.0",
           "max_pydeck_version": null
+        }
+      ],
+      "licenses": [
+        {
+          "name": "MET Norway",
+          "file": "lisence.txt",
+          "description": "Used to fetch current weather conditions and forecasts from met.no. Powers the temperature display, weather icon, and location-based updates."
         }
       ]
     }

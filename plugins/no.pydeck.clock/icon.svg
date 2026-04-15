@@ -1,0 +1,16 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+	<defs>
+		<image  width="64" height="64" id="img1" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABAAQMAAACQp+OdAAAAAXNSR0IB2cksfwAAAANQTFRF9Z4LbGXy/QAAABJJREFUeJxjZIACxlHGKIN0BgBLYABBTENKrgAAAABJRU5ErkJggg=="/>
+	</defs>
+	<style>
+		.s0 { fill: none;stroke: #ffffff;stroke-width: 2.5 } 
+		.s1 { fill: #ffffff } 
+		.s2 { fill: #000000;stroke: #ffffff;stroke-linecap: round;stroke-width: 3.5 } 
+		.s3 { fill: #000000;stroke: #ffffff;stroke-linecap: round;stroke-width: 2.5 } 
+	</style>
+	<use id="Layer 1" href="#img1" x="0" y="0"/>
+	<path fill-rule="evenodd" class="s0" d="m32 50c-9.95 0-18-8.05-18-18 0-9.95 8.05-18 18-18 9.95 0 18 8.05 18 18 0 9.95-8.05 18-18 18z"/>
+	<path fill-rule="evenodd" class="s1" d="m32 34.5c-1.38 0-2.5-1.12-2.5-2.5 0-1.38 1.12-2.5 2.5-2.5 1.38 0 2.5 1.12 2.5 2.5 0 1.38-1.12 2.5-2.5 2.5z"/>
+	<path fill-rule="evenodd" class="s2" d="m32 32l-9-5"/>
+	<path fill-rule="evenodd" class="s3" d="m32 32l12-7"/>
+</svg>

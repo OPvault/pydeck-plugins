@@ -1,0 +1,7 @@
+{
+  "category": "sports",
+  "licenses": [
+    { "name": "OpenF1", "file": "LICENSE-openf1", "description": "Used to fetch race data, and the current race weekend schedule. Powers the race countdown and track icon display." },
+    { "name": "Jolpica F1", "file": "LICENSE-jolpica", "description": "Used to fetch historical driver and constructor championship standings and points. Powers the Driver Points and Constructor Points buttons." }
+  ]
+}
