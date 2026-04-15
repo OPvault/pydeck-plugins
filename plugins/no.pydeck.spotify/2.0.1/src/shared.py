@@ -24,7 +24,7 @@ from spotify_client import SpotifyClient, SpotifyError, _DEFAULT_REDIRECT_URI  #
 def _resolve_redirect_uri() -> str:
     try:
         from lib import oauth as _oauth_lib
-        return _oauth_lib.get_redirect_uri("spotify-pdk")
+        return _oauth_lib.get_redirect_uri("spotify")
     except Exception:
         return _DEFAULT_REDIRECT_URI
 
@@ -32,7 +32,7 @@ def _resolve_redirect_uri() -> str:
 _REDIRECT_URI = _resolve_redirect_uri()
 
 _CREDS_PATH = Path.home() / ".config" / "pydeck" / "core" / "credentials.json"
-_PLUGIN_NAME = "spotify-pdk"
+_PLUGIN_NAME = "spotify"
 
 _client_cache: dict[tuple[str, str], SpotifyClient] = {}
 
