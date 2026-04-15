@@ -1,5 +1,0 @@
-<template name="next_track">
-  <box class="action-bg">
-    <img src="{icon_src}" class="action-icon" fit="contain" />
-  </box>
-</template>

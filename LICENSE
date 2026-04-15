@@ -27,11 +27,11 @@ used solely to identify the third-party services that the corresponding plugins
 integrate with. This project is not affiliated with, endorsed by, or sponsored
 by any of these companies.
 
-- Discord logo (plugins/discord/icon.svg)
+- Discord logo (plugins/no.pydeck.discord/icon.svg)
   © Discord Inc. Used in accordance with Discord's Brand Guidelines.
   https://discord.com/branding
 
-- Spotify logo (plugins/spotify/icon.svg)
+- Spotify logo (plugins/no.pydeck.spotify/icon.svg)
   © Spotify AB. Used in accordance with Spotify's Design Guidelines.
   https://developer.spotify.com/documentation/design
 

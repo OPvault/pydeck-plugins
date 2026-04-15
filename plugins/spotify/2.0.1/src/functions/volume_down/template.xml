@@ -1,6 +1,0 @@
-<template name="volume_down">
-  <box class="action-bg">
-    <img src="{icon_src}" class="action-icon" fit="contain" />
-    <text class="vol-label">{volume_label}</text>
-  </box>
-</template>

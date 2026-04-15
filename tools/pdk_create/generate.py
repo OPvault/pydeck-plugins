@@ -1,4 +1,4 @@
-"""Write a PDK new-layout plugin tree under plugins/plugin/<slug>/."""
+"""Write a PDK new-layout plugin tree under plugins/plugin/<rdnn-plugin-id>/."""
 
 from __future__ import annotations
 
@@ -17,7 +17,7 @@ Preset = Literal["counter", "static"]
 class PluginSpec:
     """Inputs for scaffolding."""
 
-    slug: str
+    slug: str  # RDNN plugin id (install directory name)
     name: str
     description: str
     author: str
@@ -213,7 +213,7 @@ def write_plugin(
     *,
     force: bool = False,
 ) -> None:
-    """Write the full tree to *plugin_root* (plugins/plugin/<slug>)."""
+    """Write the full tree to *plugin_root* (plugins/plugin/<rdnn-id>)."""
     if plugin_root.exists():
         if not plugin_root.is_dir():
             raise NotADirectoryError(f"Not a directory: {plugin_root}")
