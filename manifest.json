@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "label": "Official · Canary",
-  "generated_at": "2026-04-15T19:56:30Z",
+  "generated_at": "2026-04-17T19:53:51Z",
   "plugins": [
     {
       "name": "Clock",
@@ -229,7 +229,7 @@
       "category": "utilities",
       "summary": "Simulate keyboard presses and text input via xdotool on X11 when available, with evdev/uinput fallback for Wayland. Works on both X11 and Wayland. Requires the user to be in the 'input' group: sudo usermod -aG input $USER",
       "author": "PyDeck Team",
-      "latest": "1.0.4",
+      "latest": "1.0.5",
       "icon_path": "plugins/keyboard/icon.svg",
       "compatible_pydeck_versions": [
         "1.0"
@@ -250,6 +250,12 @@
         {
           "version": "1.0.4",
           "path": "plugins/keyboard/1.0.4",
+          "min_pydeck_version": "1.0.0",
+          "max_pydeck_version": "1.0.0"
+        },
+        {
+          "version": "1.0.5",
+          "path": "plugins/keyboard/1.0.5",
           "min_pydeck_version": "1.0.0",
           "max_pydeck_version": "1.0.0"
         }
