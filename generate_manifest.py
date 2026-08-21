@@ -29,7 +29,9 @@ For each plugins/<slug>/ directory:
 
   2. Per-version fields (name, description → summary, author,
      min_pydeck_version, max_pydeck_version) are read from the version's
-     own manifest.json.
+     own manifest.json.  If the latest version's manifest declares a
+     "documentation" file (markdown), the entry also gets a "doc_path"
+     (repo-relative path to that file) and "show_markdown_after_install".
 
   3. Catalog-only fields (category, compatible_pydeck_versions, summary
      override) are read from an optional plugins/<slug>/catalog.json.
@@ -229,6 +231,19 @@ def _build_plugin_entry(
         "compatible_pydeck_versions": compat,
         "versions":                 versions,
     }
+
+    # ── Bundled markdown documentation (latest version only) ──────────────────
+    # A plugin version may ship a markdown file referenced by "documentation".
+    # Surface a repo-relative path so the marketplace UI can fetch & render it,
+    # plus the flag that asks PyDeck to pop the doc up right after install.
+    doc_rel = latest_meta.get("documentation")
+    if doc_rel:
+        latest_path = versions[-1]["path"]
+        entry["doc_path"] = f"{latest_path}/{str(doc_rel).strip('/')}"
+        entry["show_markdown_after_install"] = bool(
+            latest_meta.get("show_markdown_after_install", False)
+        )
+
     if licenses:
         entry["licenses"] = licenses
     return entry

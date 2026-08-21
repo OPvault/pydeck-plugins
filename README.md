@@ -34,18 +34,38 @@ pydeck-plugins/
         └── <version>/
             ├── manifest.json  # Plugin metadata read by PyDeck after install
             ├── plugin.py      # Python functions called on button press
+            ├── DOCS.md        # Optional: bundled markdown docs (see below)
             └── ...            # Any additional files (CSS, helpers, assets)
 ```
+
+## Plugin documentation (markdown)
+
+A plugin version can ship a markdown file (e.g. `DOCS.md`) that PyDeck renders in
+the marketplace and, optionally, as a popup right after installation. Two fields in
+the version's `manifest.json` drive this:
+
+| Field | Type | Meaning |
+|:---|:---|:---|
+| `documentation` | string | Path to the markdown file, relative to the version folder (e.g. `"DOCS.md"`). |
+| `show_markdown_after_install` | bool | `true` → PyDeck pops the rendered doc up automatically after install. `false`/absent → the doc is only shown when the user opens the plugin in the marketplace. |
+
+`generate_manifest.py` reads these from the **latest** version's manifest and adds a
+repo-relative `doc_path` (e.g. `plugins/discord/1.1.4/DOCS.md`) plus
+`show_markdown_after_install` to the plugin's entry in the root `manifest.json`, so the
+marketplace can fetch and render the doc without installing first. The markdown file is
+downloaded with the plugin like any other file, so installed plugins can render it from
+disk too.
 
 ## PDK plugin creator (development)
 
 To generate a new **PDK** plugin tree directly inside a local **pydeck** checkout (`plugins/plugin/<rdnn-id>/`), use the scaffold tool:
 
 ```bash
+pip install -r tools/pdk_create/requirements.txt   # Textual TUI (interactive mode)
 python -m tools.pdk_create
 ```
 
-It resolves the `plugins/plugin/` directory the same way as **`sync_from_pydeck.py`** (saved `~/.config/pydeck/pydeck-plugins/path.json`, `PYDECK_SOURCE`, candidates, etc.). If you already configured sync, no extra path setup is needed.
+Without Textual, interactive mode falls back to line prompts. It resolves the `plugins/plugin/` directory the same way as **`sync_from_pydeck.py`** (saved `~/.config/pydeck/pydeck-plugins/path.json`, `PYDECK_SOURCE`, candidates, etc.). If you already configured sync, no extra path setup is needed.
 
 Documentation: [PDK Plugin Creator](https://docs.pydeck.no/pydeck-plugins/PDK_CREATE/) (pydeck-docs).
 
