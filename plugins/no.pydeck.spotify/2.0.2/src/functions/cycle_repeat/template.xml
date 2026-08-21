@@ -1,0 +1,6 @@
+<template name="cycle_repeat">
+  <box class="action-bg">
+    <img src="{icon_src}" class="action-icon" fit="contain" />
+    <text class="{status_class}">{status_label}</text>
+  </box>
+</template>

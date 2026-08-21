@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "label": "Official · Canary",
-  "generated_at": "2026-04-17T19:53:51Z",
+  "generated_at": "2026-08-21T19:00:25Z",
   "plugins": [
     {
       "name": "Clock",
@@ -49,7 +49,7 @@
       "category": "communication",
       "summary": "Control Discord voice state (mute/deafen) via RPC",
       "author": "PyDeck Team",
-      "latest": "1.1.3",
+      "latest": "1.1.4",
       "icon_path": "plugins/discord/icon.svg",
       "compatible_pydeck_versions": [
         "1.0"
@@ -78,8 +78,16 @@
           "path": "plugins/discord/1.1.3",
           "min_pydeck_version": "1.0.0",
           "max_pydeck_version": "1.0.0"
+        },
+        {
+          "version": "1.1.4",
+          "path": "plugins/discord/1.1.4",
+          "min_pydeck_version": "1.1.0",
+          "max_pydeck_version": null
         }
-      ]
+      ],
+      "doc_path": "plugins/discord/1.1.4/DOCS.md",
+      "show_markdown_after_install": true
     },
     {
       "name": "F1",
@@ -326,7 +334,7 @@
       "category": "media",
       "summary": "Control Spotify playback via the Web API (PDK)",
       "author": "PyDeck Team",
-      "latest": "2.0.1",
+      "latest": "2.0.2",
       "icon_path": "plugins/no.pydeck.spotify/icon.svg",
       "compatible_pydeck_versions": [
         "1.0"
@@ -337,8 +345,16 @@
           "path": "plugins/no.pydeck.spotify/2.0.1",
           "min_pydeck_version": "1.1.0",
           "max_pydeck_version": null
+        },
+        {
+          "version": "2.0.2",
+          "path": "plugins/no.pydeck.spotify/2.0.2",
+          "min_pydeck_version": "1.1.0",
+          "max_pydeck_version": null
         }
-      ]
+      ],
+      "doc_path": "plugins/no.pydeck.spotify/2.0.2/DOCS.md",
+      "show_markdown_after_install": true
     },
     {
       "name": "Spotify (Legacy)",
@@ -346,7 +362,7 @@
       "category": "media",
       "summary": "Control Spotify playback via the Web API",
       "author": "PyDeck Team",
-      "latest": "1.1.1",
+      "latest": "1.1.2",
       "icon_path": "plugins/spotify/icon.svg",
       "compatible_pydeck_versions": [
         "1.0"
@@ -369,8 +385,16 @@
           "path": "plugins/spotify/1.1.1",
           "min_pydeck_version": "1.0.0",
           "max_pydeck_version": "1.0.0"
+        },
+        {
+          "version": "1.1.2",
+          "path": "plugins/spotify/1.1.2",
+          "min_pydeck_version": "1.1.0",
+          "max_pydeck_version": null
         }
-      ]
+      ],
+      "doc_path": "plugins/spotify/1.1.2/DOCS.md",
+      "show_markdown_after_install": true
     },
     {
       "name": "System Monitor",
