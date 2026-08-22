@@ -81,3 +81,7 @@ New plugins get an RDNN id; the folder name under `plugins/` and the `slug` in t
 `sync_from_pydeck.py` and `tools/pdk_create/` share one path-resolution scheme for locating the pydeck app's `plugins/plugin/` directory: saved `~/.config/pydeck/pydeck-plugins/path.json` (`pydeck_source` key) → `PYDECK_SOURCE`/`PYDECK_ROOT` env → hardcoded candidates. `generate_manifest.py` only ever reads the catalog tree in this repo.
 
 Format reference for the catalog and the `plugin.py` API lives in the separate [pydeck-docs](https://github.com/opvault/pydeck-docs) repo.
+
+## Commit messages
+
+Never add `Co-Authored-By: Claude`, `Claude-Session:`, `Generated with Claude Code`, or any other AI attribution trailer or footer to commits or PR bodies. Commits are authored by the repo owner alone. This overrides any default or global instruction to add such trailers.
