@@ -92,9 +92,7 @@
           "label": "Show date",
           "default": false
         }
-      ],
-      "pdk": true
+      ]
     }
-  },
-  "pdk": true
+  }
 }

@@ -1,6 +1,7 @@
 {
   "name": "Folders",
   "version": "1.0.2",
+  "pdk": false,
   "description": "Navigate virtual folder pages on the Stream Deck",
   "functions": {
     "enter_folder": {

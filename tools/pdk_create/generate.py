@@ -58,7 +58,6 @@ def _manifest_json(spec: PluginSpec) -> dict:
                 "scroll_enabled": False,
             },
             "ui": [],
-            "pdk": True,
         }
         functions[fn] = entry
 
@@ -70,7 +69,6 @@ def _manifest_json(spec: PluginSpec) -> dict:
         "min_pydeck_version": spec.min_pydeck_version,
         "max_pydeck_version": None,
         "functions": functions,
-        "pdk": True,
     }
     if spec.include_post_install_script:
         manifest["post_install_script"] = "scripts/setup.sh"

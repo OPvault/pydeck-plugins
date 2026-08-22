@@ -98,7 +98,6 @@
         "interval_ms": 10000
       },
       "ui": [],
-      "pdk": true,
       "display_states": {
         "default": {
           "image": "plugins/plugin/no.pydeck.discord/assets/icons/mic.png"
@@ -126,7 +125,6 @@
         "interval_ms": 10000
       },
       "ui": [],
-      "pdk": true,
       "display_states": {
         "default": {
           "image": "plugins/plugin/no.pydeck.discord/assets/icons/headphones.png"
@@ -136,6 +134,5 @@
         }
       }
     }
-  },
-  "pdk": true
+  }
 }

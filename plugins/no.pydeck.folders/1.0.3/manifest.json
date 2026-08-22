@@ -52,8 +52,7 @@
           }
         }
       ],
-      "actionable": true,
-      "pdk": true
+      "actionable": true
     },
     "return_folder": {
       "label": "Return Folder",
@@ -82,8 +81,7 @@
           "default": "parent"
         }
       ],
-      "actionable": true,
-      "pdk": true
+      "actionable": true
     },
     "switch_profile": {
       "label": "Switch Profile",
@@ -108,9 +106,7 @@
           "default": ""
         }
       ],
-      "actionable": true,
-      "pdk": true
+      "actionable": true
     }
-  },
-  "pdk": true
+  }
 }

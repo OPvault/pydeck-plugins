@@ -1,6 +1,7 @@
 {
   "name": "Media Control",
   "version": "1.0.0",
+  "pdk": false,
   "description": "Control media playback on Linux (play/pause, next, previous, volume)",
   "author": "PyDeck Team",
   "permissions": {

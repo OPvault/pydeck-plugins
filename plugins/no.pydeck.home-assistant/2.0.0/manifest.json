@@ -55,7 +55,6 @@
           ]
         }
       ],
-      "pdk": true,
       "poll": {
         "function": "on_poll",
         "interval_ms": 3000
@@ -115,14 +114,12 @@
           ]
         }
       ],
-      "pdk": true,
       "poll": {
         "function": "on_poll",
         "interval_ms": 3000
       }
     }
   },
-  "pdk": true,
   "python_dependencies": [
     "Pillow"
   ],

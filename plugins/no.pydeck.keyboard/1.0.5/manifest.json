@@ -48,8 +48,7 @@
           "min": 0,
           "max": 5000
         }
-      ],
-      "pdk": true
+      ]
     },
     "type_text": {
       "label": "Type Text",
@@ -77,9 +76,7 @@
           "min": 0,
           "max": 1000
         }
-      ],
-      "pdk": true
+      ]
     }
-  },
-  "pdk": true
+  }
 }

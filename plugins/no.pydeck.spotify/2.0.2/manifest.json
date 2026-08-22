@@ -53,22 +53,19 @@
           "label": "Show Time Left",
           "default": false
         }
-      ],
-      "pdk": true
+      ]
     },
     "next_track": {
       "label": "Next Track",
       "description": "Skip to the next Spotify track",
       "sidebar_icon": "assets/icons/Next.png",
-      "disableGallery": true,
-      "pdk": true
+      "disableGallery": true
     },
     "prev_track": {
       "label": "Previous Track",
       "description": "Go back to the previous Spotify track",
       "sidebar_icon": "assets/icons/Previous.png",
-      "disableGallery": true,
-      "pdk": true
+      "disableGallery": true
     },
     "volume_up": {
       "label": "Volume Up",
@@ -91,8 +88,7 @@
           "label": "Show Volume %",
           "default": false
         }
-      ],
-      "pdk": true
+      ]
     },
     "volume_down": {
       "label": "Volume Down",
@@ -115,8 +111,7 @@
           "label": "Show Volume %",
           "default": false
         }
-      ],
-      "pdk": true
+      ]
     },
     "set_volume": {
       "label": "Set Volume",
@@ -139,25 +134,21 @@
           "label": "Show Volume %",
           "default": false
         }
-      ],
-      "pdk": true
+      ]
     },
     "toggle_shuffle": {
       "label": "Shuffle",
       "description": "Toggle Spotify shuffle mode on/off",
       "sidebar_icon": "assets/icons/Shuffle.png",
       "disableGallery": true,
-      "poll": { "function": "on_poll", "interval_ms": 5000 },
-      "pdk": true
+      "poll": { "function": "on_poll", "interval_ms": 5000 }
     },
     "cycle_repeat": {
       "label": "Repeat",
       "description": "Cycle repeat mode: off \u2192 context \u2192 track \u2192 off",
       "sidebar_icon": "assets/icons/Repeat.png",
       "disableGallery": true,
-      "poll": { "function": "on_poll", "interval_ms": 5000 },
-      "pdk": true
+      "poll": { "function": "on_poll", "interval_ms": 5000 }
     }
-  },
-  "pdk": true
+  }
 }

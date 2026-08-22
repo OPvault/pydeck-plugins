@@ -59,8 +59,7 @@
             }
           ]
         }
-      ],
-      "pdk": true
+      ]
     },
     "ram_monitor": {
       "label": "RAM",
@@ -96,8 +95,7 @@
           "label": "Show Used / Total",
           "default": true
         }
-      ],
-      "pdk": true
+      ]
     },
     "gpu_monitor": {
       "label": "GPU",
@@ -141,8 +139,7 @@
             }
           ]
         }
-      ],
-      "pdk": true
+      ]
     },
     "disk_monitor": {
       "label": "Disk",
@@ -178,9 +175,7 @@
           "default": "/",
           "placeholder": "/"
         }
-      ],
-      "pdk": true
+      ]
     }
-  },
-  "pdk": true
+  }
 }

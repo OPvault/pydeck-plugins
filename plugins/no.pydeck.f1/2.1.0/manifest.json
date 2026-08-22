@@ -65,8 +65,7 @@
             { "type": "checkbox", "id": "show_country_flag",  "label": "Country Flag Emoji",   "default": false, "visible_if": { "field": "show_track_label", "value": "true" } }
           ]
         }
-      ],
-      "pdk": true
+      ]
     },
     "driver_points": {
       "label": "F1 Driver Points",
@@ -105,8 +104,7 @@
             { "type": "checkbox", "id": "show_points_from_leader",  "label": "Gap to Leader",      "default": false }
           ]
         }
-      ],
-      "pdk": true
+      ]
     },
     "constructor_points": {
       "label": "F1 Constructor Points",
@@ -134,9 +132,7 @@
           },
           "default": ""
         }
-      ],
-      "pdk": true
+      ]
     }
-  },
-  "pdk": true
+  }
 }

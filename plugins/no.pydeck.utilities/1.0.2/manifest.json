@@ -6,7 +6,6 @@
   "min_pydeck_version": "1.1.0",
   "max_pydeck_version": null,
   "changelog": "CHANGELOG.md",
-  "pdk": true,
   "permissions": {
     "webbrowser": ["open"],
     "urllib.request": ["Request", "urlopen"],
@@ -42,8 +41,7 @@
             "value": "value"
           }
         }
-      ],
-      "pdk": true
+      ]
     },
     "send_request": {
       "label": "HTTP Request",
@@ -82,8 +80,7 @@
           "placeholder": "Optional request body",
           "default": ""
         }
-      ],
-      "pdk": true
+      ]
     },
     "run_script": {
       "label": "Run Script",
@@ -148,8 +145,7 @@
             "value": "python"
           }
         }
-      ],
-      "pdk": true
+      ]
     }
   }
 }

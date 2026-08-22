@@ -78,8 +78,7 @@
           "label": "Dynamic background based on weather",
           "default": true
         }
-      ],
-      "pdk": true
+      ]
     },
     "forecast": {
       "label": "Multiple Forecasts",
@@ -175,9 +174,7 @@
           "label": "Dynamic background based on weather",
           "default": true
         }
-      ],
-      "pdk": true
+      ]
     }
-  },
-  "pdk": true
+  }
 }

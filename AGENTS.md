@@ -63,8 +63,8 @@ The version `manifest.json` may set `documentation` (path to a markdown file, e.
 
 **Two generations coexist.** The PDK 2.x migration is partly done:
 
-- *PDK 2.x* — RDNN slug (`no.pydeck.spotify`), `"pdk": true`, `src/functions/<fn>/handler.py` + `template.xml`, `src/shared.py`, `assets/`, and a manifest declaring `functions`, `permissions`, `ui` widgets, `poll`, and `oauth`/`credentials`.
-- *Legacy 1.x* — bare slug, flat `plugin.py` + `options.json` + `style.css`.
+- *PDK 2.x* — RDNN slug (`no.pydeck.spotify`), `src/functions/<fn>/handler.py` + `template.xml`, `src/shared.py`, `assets/`, and a manifest declaring `functions`, `permissions`, `ui` widgets, `poll`, and `oauth`/`credentials`. The generation is read off those sources — a plugin `manifest.json` never declares `"pdk": true` (the core ignores the key if it is there).
+- *Legacy 1.x* — bare slug, flat `plugin.py` + `options.json` + `style.css`, and `"pdk": false` in the manifest to mark it as classic.
 
 Migrated: clock, f1, spotify, system-monitor, weather, home-assistant. The legacy duplicates of the first four were deleted in August 2026, and `MET` went with them (it was functionally superseded by `no.pydeck.weather`). `home-assistant` is mid-migration: legacy `home-assistant` 1.1.1 and PDK `no.pydeck.home-assistant` 2.0.0 are both published, so both appear in the catalog.
 
