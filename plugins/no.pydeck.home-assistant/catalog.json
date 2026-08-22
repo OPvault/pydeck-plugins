@@ -1,0 +1,7 @@
+{
+  "category": "home-automation",
+  "compatible_pydeck_versions": ["1.0"],
+  "licenses": [
+    { "name": "Material Design Icons", "file": "meta/licenses/LICENSE-mdi", "description": "Entity icons are fetched from the Material Design Icons set and rasterized locally. Powers the icon on both the HA Toggle and HA Display buttons." }
+  ]
+}

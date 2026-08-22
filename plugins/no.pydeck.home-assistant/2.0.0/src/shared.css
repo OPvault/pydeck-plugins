@@ -1,0 +1,57 @@
+:root {
+  --bg: {_button_gradient};
+  --fg: #ffffff;
+  --muted: #9fb0c7;
+  --accent: #ffd54a;
+}
+
+.face {
+  background: var(--bg);
+  padding: 3;
+  direction: column;
+  align: center;
+  justify: center;
+  gap: 1;
+}
+
+.name {
+  color: var(--muted);
+  font-size: 0.58em;
+  text-align: center;
+  width: 100%;
+}
+
+.value {
+  color: var(--fg);
+  font-size: 1.0em;
+  font-weight: bold;
+  text-align: center;
+}
+
+.value-sm {
+  color: var(--fg);
+  font-size: 0.7em;
+  font-weight: bold;
+  text-align: center;
+  width: 100%;
+}
+
+.state-on {
+  color: var(--accent);
+  font-size: 0.6em;
+  font-weight: bold;
+  text-align: center;
+}
+
+.state-off {
+  color: var(--muted);
+  font-size: 0.6em;
+  text-align: center;
+}
+
+.error {
+  color: #ff6b6b;
+  font-size: 0.6em;
+  text-align: center;
+  width: 100%;
+}
