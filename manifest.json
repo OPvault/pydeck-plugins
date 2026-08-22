@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "label": "Official · Canary",
-  "generated_at": "2026-08-21T19:10:44Z",
+  "label": "Official · Testing",
+  "generated_at": "2026-08-22T15:00:54Z",
   "plugins": [
     {
       "name": "Clock",
@@ -21,7 +21,8 @@
           "min_pydeck_version": "1.1.0",
           "max_pydeck_version": null
         }
-      ]
+      ],
+      "pdk": true
     },
     {
       "name": "Discord",
@@ -66,6 +67,7 @@
           "max_pydeck_version": null
         }
       ],
+      "pdk": false,
       "doc_path": "plugins/discord/1.1.4/DOCS.md",
       "show_markdown_after_install": true
     },
@@ -75,7 +77,7 @@
       "category": "sports",
       "summary": "Formula 1 race countdown, driver standings, and constructor standings",
       "author": "PyDeck Team",
-      "latest": "2.0.1",
+      "latest": "2.1.0",
       "icon_path": "plugins/no.pydeck.f1/icon.svg",
       "compatible_pydeck_versions": [
         "1.0"
@@ -86,18 +88,25 @@
           "path": "plugins/no.pydeck.f1/2.0.1",
           "min_pydeck_version": "1.1.0",
           "max_pydeck_version": null
+        },
+        {
+          "version": "2.1.0",
+          "path": "plugins/no.pydeck.f1/2.1.0",
+          "min_pydeck_version": "1.1.0",
+          "max_pydeck_version": null
         }
       ],
+      "pdk": true,
       "licenses": [
-        {
-          "name": "OpenF1",
-          "file": "LICENSE-openf1",
-          "description": "Used to fetch race data, and the current race weekend schedule. Powers the race countdown and track icon display."
-        },
         {
           "name": "Jolpica F1",
           "file": "LICENSE-jolpica",
-          "description": "Used to fetch historical driver and constructor championship standings and points. Powers the Driver Points and Constructor Points buttons."
+          "description": "Used to fetch the race calendar, session times, and driver and constructor championship standings. Powers the race countdown, Driver Points, and Constructor Points buttons."
+        },
+        {
+          "name": "OpenF1",
+          "file": "LICENSE-openf1",
+          "description": "Used to fetch circuit images and driver photos. Powers the track icon and the Driver Points headshot."
         }
       ]
     },
@@ -119,7 +128,8 @@
           "min_pydeck_version": "1.0.0",
           "max_pydeck_version": "1.0.0"
         }
-      ]
+      ],
+      "pdk": false
     },
     {
       "name": "Folders",
@@ -151,7 +161,8 @@
           "min_pydeck_version": "1.0.0",
           "max_pydeck_version": "1.0.0"
         }
-      ]
+      ],
+      "pdk": false
     },
     {
       "name": "Home Assistant",
@@ -176,6 +187,37 @@
           "path": "plugins/home-assistant/1.1.1",
           "min_pydeck_version": "1.0.0",
           "max_pydeck_version": "1.0.0"
+        }
+      ],
+      "pdk": false
+    },
+    {
+      "name": "Home Assistant",
+      "slug": "no.pydeck.home-assistant",
+      "category": "home-automation",
+      "summary": "Control and monitor Home Assistant entities",
+      "author": "PyDeck Team",
+      "latest": "2.0.0",
+      "icon_path": "plugins/no.pydeck.home-assistant/icon.png",
+      "compatible_pydeck_versions": [
+        "1.0"
+      ],
+      "versions": [
+        {
+          "version": "2.0.0",
+          "path": "plugins/no.pydeck.home-assistant/2.0.0",
+          "min_pydeck_version": "1.1.0",
+          "max_pydeck_version": null
+        }
+      ],
+      "pdk": true,
+      "doc_path": "plugins/no.pydeck.home-assistant/2.0.0/DOCS.md",
+      "show_markdown_after_install": true,
+      "licenses": [
+        {
+          "name": "Material Design Icons",
+          "file": "meta/licenses/LICENSE-mdi",
+          "description": "Entity icons are fetched from the Material Design Icons set and rasterized locally. Powers the icon on both the HA Toggle and HA Display buttons."
         }
       ]
     },
@@ -215,7 +257,8 @@
           "min_pydeck_version": "1.0.0",
           "max_pydeck_version": "1.0.0"
         }
-      ]
+      ],
+      "pdk": false
     },
     {
       "name": "Media Control",
@@ -235,7 +278,29 @@
           "min_pydeck_version": "1.0.0",
           "max_pydeck_version": "1.0.0"
         }
-      ]
+      ],
+      "pdk": false
+    },
+    {
+      "name": "Postinstall Test",
+      "slug": "test-postinstall",
+      "category": "utilities",
+      "summary": "A local test plugin that exercises the postinstall approval flow.",
+      "author": "PyDeck",
+      "latest": "1.0.1",
+      "icon_path": "",
+      "compatible_pydeck_versions": [
+        "1.0"
+      ],
+      "versions": [
+        {
+          "version": "1.0.1",
+          "path": "plugins/test-postinstall/1.0.1",
+          "min_pydeck_version": "1.0.0",
+          "max_pydeck_version": "1.0.0"
+        }
+      ],
+      "pdk": false
     },
     {
       "name": "Spotify",
@@ -243,7 +308,7 @@
       "category": "media",
       "summary": "Control Spotify playback via the Web API (PDK)",
       "author": "PyDeck Team",
-      "latest": "2.0.2",
+      "latest": "2.0.3",
       "icon_path": "plugins/no.pydeck.spotify/icon.svg",
       "compatible_pydeck_versions": [
         "1.0"
@@ -260,9 +325,16 @@
           "path": "plugins/no.pydeck.spotify/2.0.2",
           "min_pydeck_version": "1.1.0",
           "max_pydeck_version": null
+        },
+        {
+          "version": "2.0.3",
+          "path": "plugins/no.pydeck.spotify/2.0.3",
+          "min_pydeck_version": "1.1.0",
+          "max_pydeck_version": null
         }
       ],
-      "doc_path": "plugins/no.pydeck.spotify/2.0.2/DOCS.md",
+      "pdk": true,
+      "doc_path": "plugins/no.pydeck.spotify/2.0.3/DOCS.md",
       "show_markdown_after_install": true
     },
     {
@@ -283,7 +355,8 @@
           "min_pydeck_version": "1.1.0",
           "max_pydeck_version": null
         }
-      ]
+      ],
+      "pdk": true
     },
     {
       "name": "Utilities",
@@ -309,7 +382,8 @@
           "min_pydeck_version": "1.0.0",
           "max_pydeck_version": "1.0.0"
         }
-      ]
+      ],
+      "pdk": false
     },
     {
       "name": "Weather",
@@ -330,6 +404,7 @@
           "max_pydeck_version": null
         }
       ],
+      "pdk": true,
       "licenses": [
         {
           "name": "MET Norway",
