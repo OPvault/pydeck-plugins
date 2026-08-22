@@ -1,0 +1,20 @@
+<template name="toggle" title="HA Toggle" description="Toggle a Home Assistant entity on/off">
+  <box class="face">
+    <img src="{icon_src}" width="{icon_w}" height="{icon_h}" fit="contain" />
+    <buttonlabel class="name">{name}</buttonlabel>
+    <text class="{state_class}">{state_text}</text>
+  </box>
+</template>
+
+<template name="toggle-nolabel" title="HA Toggle" description="Toggle a Home Assistant entity on/off">
+  <box class="face">
+    <img src="{icon_src}" width="{icon_w}" height="{icon_h}" fit="contain" />
+    <text class="{state_class}">{state_text}</text>
+  </box>
+</template>
+
+<template name="toggle-error" title="HA Toggle" description="Toggle a Home Assistant entity on/off">
+  <box class="face">
+    <marquee class="error">{error}</marquee>
+  </box>
+</template>
