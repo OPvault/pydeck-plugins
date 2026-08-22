@@ -1,0 +1,2067 @@
+{
+  "name": "Clock",
+  "version": "3.0.0",
+  "description": "Analog and digital clocks, world clocks and countdown timers, in 32 appearance styles.",
+  "author": "PyDeck Team",
+  "min_pydeck_version": "1.1.0",
+  "max_pydeck_version": null,
+  "changelog": "CHANGELOG.md",
+  "functions": {
+    "clock": {
+      "label": "My Clock",
+      "description": "Display a custom analog or digital clock.",
+      "title_readonly": true,
+      "disableGallary": true,
+      "default_display": {
+        "color": "#000000",
+        "text": "",
+        "text_position": "bottom",
+        "scroll_enabled": false
+      },
+      "poll": {
+        "function": "on_poll",
+        "interval_ms": 1000
+      },
+      "ui": [
+        {
+          "type": "radio",
+          "id": "display_mode",
+          "label": "Display",
+          "options": [
+            {
+              "label": "Digital",
+              "value": "digital"
+            },
+            {
+              "label": "Analog",
+              "value": "analog"
+            }
+          ],
+          "default": "digital"
+        },
+        {
+          "type": "select",
+          "id": "digital_style",
+          "label": "Digital style",
+          "options": [
+            {
+              "label": "Classic",
+              "value": "classic"
+            },
+            {
+              "label": "Bold",
+              "value": "bold"
+            },
+            {
+              "label": "Light",
+              "value": "light"
+            },
+            {
+              "label": "Mono",
+              "value": "mono"
+            },
+            {
+              "label": "LCD",
+              "value": "lcd"
+            },
+            {
+              "label": "Tiles",
+              "value": "tiles"
+            },
+            {
+              "label": "Neon",
+              "value": "neon"
+            },
+            {
+              "label": "Terminal",
+              "value": "terminal"
+            },
+            {
+              "label": "Card",
+              "value": "card"
+            },
+            {
+              "label": "Stacked",
+              "value": "stacked"
+            },
+            {
+              "label": "Headline",
+              "value": "headline"
+            },
+            {
+              "label": "Ticker",
+              "value": "ticker"
+            },
+            {
+              "label": "Outline",
+              "value": "outline"
+            },
+            {
+              "label": "Sunrise",
+              "value": "sunrise"
+            },
+            {
+              "label": "Minimal",
+              "value": "minimal"
+            },
+            {
+              "label": "Badge",
+              "value": "badge"
+            }
+          ],
+          "default": "classic",
+          "visible_if": {
+            "field": "display_mode",
+            "value": "digital"
+          }
+        },
+        {
+          "type": "select",
+          "id": "analog_style",
+          "label": "Analog style",
+          "options": [
+            {
+              "label": "Classic",
+              "value": "classic"
+            },
+            {
+              "label": "Minimal",
+              "value": "minimal"
+            },
+            {
+              "label": "Bauhaus",
+              "value": "bauhaus"
+            },
+            {
+              "label": "Railway",
+              "value": "railway"
+            },
+            {
+              "label": "Chronograph",
+              "value": "chrono"
+            },
+            {
+              "label": "Neon",
+              "value": "neon"
+            },
+            {
+              "label": "Outline",
+              "value": "outline"
+            },
+            {
+              "label": "Numerals",
+              "value": "numerals"
+            },
+            {
+              "label": "Blueprint",
+              "value": "blueprint"
+            },
+            {
+              "label": "Gold",
+              "value": "gold"
+            },
+            {
+              "label": "Dots",
+              "value": "dots"
+            },
+            {
+              "label": "Halo",
+              "value": "halo"
+            },
+            {
+              "label": "Skeleton",
+              "value": "skeleton"
+            },
+            {
+              "label": "Retro",
+              "value": "retro"
+            },
+            {
+              "label": "Aviator",
+              "value": "aviator"
+            },
+            {
+              "label": "Midnight",
+              "value": "midnight"
+            }
+          ],
+          "default": "classic",
+          "visible_if": {
+            "field": "display_mode",
+            "value": "analog"
+          }
+        },
+        {
+          "type": "select",
+          "id": "timezone",
+          "label": "Location",
+          "options": [
+            {
+              "label": "Local (System)",
+              "value": "local"
+            },
+            {
+              "label": "UTC",
+              "value": "UTC"
+            },
+            {
+              "label": "Honolulu",
+              "value": "Pacific/Honolulu"
+            },
+            {
+              "label": "Anchorage",
+              "value": "America/Anchorage"
+            },
+            {
+              "label": "Los Angeles",
+              "value": "America/Los_Angeles"
+            },
+            {
+              "label": "Vancouver",
+              "value": "America/Vancouver"
+            },
+            {
+              "label": "Tijuana",
+              "value": "America/Tijuana"
+            },
+            {
+              "label": "Phoenix",
+              "value": "America/Phoenix"
+            },
+            {
+              "label": "Denver",
+              "value": "America/Denver"
+            },
+            {
+              "label": "Edmonton",
+              "value": "America/Edmonton"
+            },
+            {
+              "label": "Chicago",
+              "value": "America/Chicago"
+            },
+            {
+              "label": "Winnipeg",
+              "value": "America/Winnipeg"
+            },
+            {
+              "label": "Mexico City",
+              "value": "America/Mexico_City"
+            },
+            {
+              "label": "Guatemala City",
+              "value": "America/Guatemala"
+            },
+            {
+              "label": "New York",
+              "value": "America/New_York"
+            },
+            {
+              "label": "Toronto",
+              "value": "America/Toronto"
+            },
+            {
+              "label": "Detroit",
+              "value": "America/Detroit"
+            },
+            {
+              "label": "Havana",
+              "value": "America/Havana"
+            },
+            {
+              "label": "Panama City",
+              "value": "America/Panama"
+            },
+            {
+              "label": "Bogota",
+              "value": "America/Bogota"
+            },
+            {
+              "label": "Lima",
+              "value": "America/Lima"
+            },
+            {
+              "label": "Caracas",
+              "value": "America/Caracas"
+            },
+            {
+              "label": "Halifax",
+              "value": "America/Halifax"
+            },
+            {
+              "label": "Santiago",
+              "value": "America/Santiago"
+            },
+            {
+              "label": "La Paz",
+              "value": "America/La_Paz"
+            },
+            {
+              "label": "Asuncion",
+              "value": "America/Asuncion"
+            },
+            {
+              "label": "Sao Paulo",
+              "value": "America/Sao_Paulo"
+            },
+            {
+              "label": "Buenos Aires",
+              "value": "America/Argentina/Buenos_Aires"
+            },
+            {
+              "label": "Montevideo",
+              "value": "America/Montevideo"
+            },
+            {
+              "label": "St. John's",
+              "value": "America/St_Johns"
+            },
+            {
+              "label": "Azores",
+              "value": "Atlantic/Azores"
+            },
+            {
+              "label": "Reykjavik",
+              "value": "Atlantic/Reykjavik"
+            },
+            {
+              "label": "Lisbon",
+              "value": "Europe/Lisbon"
+            },
+            {
+              "label": "Dublin",
+              "value": "Europe/Dublin"
+            },
+            {
+              "label": "London",
+              "value": "Europe/London"
+            },
+            {
+              "label": "Casablanca",
+              "value": "Africa/Casablanca"
+            },
+            {
+              "label": "Lagos",
+              "value": "Africa/Lagos"
+            },
+            {
+              "label": "Algiers",
+              "value": "Africa/Algiers"
+            },
+            {
+              "label": "Madrid",
+              "value": "Europe/Madrid"
+            },
+            {
+              "label": "Paris",
+              "value": "Europe/Paris"
+            },
+            {
+              "label": "Brussels",
+              "value": "Europe/Brussels"
+            },
+            {
+              "label": "Amsterdam",
+              "value": "Europe/Amsterdam"
+            },
+            {
+              "label": "Berlin",
+              "value": "Europe/Berlin"
+            },
+            {
+              "label": "Zurich",
+              "value": "Europe/Zurich"
+            },
+            {
+              "label": "Vienna",
+              "value": "Europe/Vienna"
+            },
+            {
+              "label": "Prague",
+              "value": "Europe/Prague"
+            },
+            {
+              "label": "Rome",
+              "value": "Europe/Rome"
+            },
+            {
+              "label": "Copenhagen",
+              "value": "Europe/Copenhagen"
+            },
+            {
+              "label": "Oslo",
+              "value": "Europe/Oslo"
+            },
+            {
+              "label": "Stockholm",
+              "value": "Europe/Stockholm"
+            },
+            {
+              "label": "Warsaw",
+              "value": "Europe/Warsaw"
+            },
+            {
+              "label": "Budapest",
+              "value": "Europe/Budapest"
+            },
+            {
+              "label": "Belgrade",
+              "value": "Europe/Belgrade"
+            },
+            {
+              "label": "Malta",
+              "value": "Europe/Malta"
+            },
+            {
+              "label": "Cairo",
+              "value": "Africa/Cairo"
+            },
+            {
+              "label": "Johannesburg",
+              "value": "Africa/Johannesburg"
+            },
+            {
+              "label": "Athens",
+              "value": "Europe/Athens"
+            },
+            {
+              "label": "Helsinki",
+              "value": "Europe/Helsinki"
+            },
+            {
+              "label": "Bucharest",
+              "value": "Europe/Bucharest"
+            },
+            {
+              "label": "Kyiv",
+              "value": "Europe/Kyiv"
+            },
+            {
+              "label": "Riga",
+              "value": "Europe/Riga"
+            },
+            {
+              "label": "Jerusalem",
+              "value": "Asia/Jerusalem"
+            },
+            {
+              "label": "Nairobi",
+              "value": "Africa/Nairobi"
+            },
+            {
+              "label": "Istanbul",
+              "value": "Europe/Istanbul"
+            },
+            {
+              "label": "Moscow",
+              "value": "Europe/Moscow"
+            },
+            {
+              "label": "Riyadh",
+              "value": "Asia/Riyadh"
+            },
+            {
+              "label": "Baghdad",
+              "value": "Asia/Baghdad"
+            },
+            {
+              "label": "Tehran",
+              "value": "Asia/Tehran"
+            },
+            {
+              "label": "Dubai",
+              "value": "Asia/Dubai"
+            },
+            {
+              "label": "Baku",
+              "value": "Asia/Baku"
+            },
+            {
+              "label": "Karachi",
+              "value": "Asia/Karachi"
+            },
+            {
+              "label": "Tashkent",
+              "value": "Asia/Tashkent"
+            },
+            {
+              "label": "Mumbai / Delhi",
+              "value": "Asia/Kolkata"
+            },
+            {
+              "label": "Colombo",
+              "value": "Asia/Colombo"
+            },
+            {
+              "label": "Kathmandu",
+              "value": "Asia/Kathmandu"
+            },
+            {
+              "label": "Dhaka",
+              "value": "Asia/Dhaka"
+            },
+            {
+              "label": "Yangon",
+              "value": "Asia/Yangon"
+            },
+            {
+              "label": "Bangkok",
+              "value": "Asia/Bangkok"
+            },
+            {
+              "label": "Jakarta",
+              "value": "Asia/Jakarta"
+            },
+            {
+              "label": "Ho Chi Minh City",
+              "value": "Asia/Ho_Chi_Minh"
+            },
+            {
+              "label": "Singapore",
+              "value": "Asia/Singapore"
+            },
+            {
+              "label": "Kuala Lumpur",
+              "value": "Asia/Kuala_Lumpur"
+            },
+            {
+              "label": "Manila",
+              "value": "Asia/Manila"
+            },
+            {
+              "label": "Hong Kong",
+              "value": "Asia/Hong_Kong"
+            },
+            {
+              "label": "Taipei",
+              "value": "Asia/Taipei"
+            },
+            {
+              "label": "Shanghai",
+              "value": "Asia/Shanghai"
+            },
+            {
+              "label": "Perth",
+              "value": "Australia/Perth"
+            },
+            {
+              "label": "Seoul",
+              "value": "Asia/Seoul"
+            },
+            {
+              "label": "Tokyo",
+              "value": "Asia/Tokyo"
+            },
+            {
+              "label": "Adelaide",
+              "value": "Australia/Adelaide"
+            },
+            {
+              "label": "Brisbane",
+              "value": "Australia/Brisbane"
+            },
+            {
+              "label": "Sydney",
+              "value": "Australia/Sydney"
+            },
+            {
+              "label": "Melbourne",
+              "value": "Australia/Melbourne"
+            },
+            {
+              "label": "Honiara",
+              "value": "Pacific/Guadalcanal"
+            },
+            {
+              "label": "Auckland",
+              "value": "Pacific/Auckland"
+            },
+            {
+              "label": "Suva",
+              "value": "Pacific/Fiji"
+            }
+          ],
+          "default": "local"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_location",
+          "label": "Show location name",
+          "default": false
+        },
+        {
+          "type": "input",
+          "id": "location_label",
+          "label": "Custom location name",
+          "placeholder": "Home",
+          "default": ""
+        },
+        {
+          "type": "select",
+          "id": "hour_format",
+          "label": "Time format",
+          "options": [
+            {
+              "label": "24-hour",
+              "value": "24"
+            },
+            {
+              "label": "12-hour (AM/PM)",
+              "value": "12"
+            }
+          ],
+          "default": "24"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_seconds",
+          "label": "Show seconds",
+          "default": false,
+          "visible_if": {
+            "field": "display_mode",
+            "value": "digital"
+          }
+        },
+        {
+          "type": "checkbox",
+          "id": "show_second_hand",
+          "label": "Show second hand",
+          "default": true,
+          "visible_if": {
+            "field": "display_mode",
+            "value": "analog"
+          }
+        },
+        {
+          "type": "checkbox",
+          "id": "show_date",
+          "label": "Show date",
+          "default": false
+        },
+        {
+          "type": "select",
+          "id": "date_format",
+          "label": "Date format",
+          "options": [
+            {
+              "label": "Month day (Feb 10)",
+              "value": "auto"
+            },
+            {
+              "label": "MM/DD/YY",
+              "value": "md"
+            },
+            {
+              "label": "DD/MM/YY",
+              "value": "dm"
+            },
+            {
+              "label": "DD.MM.YY",
+              "value": "dot"
+            },
+            {
+              "label": "YYYY-MM-DD",
+              "value": "iso"
+            },
+            {
+              "label": "Month day, year",
+              "value": "long"
+            }
+          ],
+          "default": "auto",
+          "visible_if": {
+            "field": "show_date",
+            "value": "true"
+          }
+        },
+        {
+          "type": "checkbox",
+          "id": "show_weekday",
+          "label": "Show weekday",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "long_weekday",
+          "label": "Full weekday name",
+          "default": false,
+          "visible_if": {
+            "field": "show_weekday",
+            "value": "true"
+          }
+        },
+        {
+          "type": "select",
+          "id": "color_source",
+          "label": "Colors",
+          "options": [
+            {
+              "label": "Theme palette",
+              "value": "style"
+            },
+            {
+              "label": "Button color",
+              "value": "button"
+            },
+            {
+              "label": "Custom",
+              "value": "custom"
+            }
+          ],
+          "default": "style"
+        },
+        {
+          "type": "input",
+          "id": "custom_bg",
+          "label": "Background color",
+          "placeholder": "#101016",
+          "default": "",
+          "visible_if": {
+            "field": "color_source",
+            "value": "custom"
+          }
+        },
+        {
+          "type": "input",
+          "id": "custom_fg",
+          "label": "Time color",
+          "placeholder": "#ffffff",
+          "default": "",
+          "visible_if": {
+            "field": "color_source",
+            "value": "custom"
+          }
+        },
+        {
+          "type": "input",
+          "id": "custom_accent",
+          "label": "Accent color",
+          "placeholder": "#ff4b4b",
+          "default": "",
+          "visible_if": {
+            "field": "color_source",
+            "value": "custom"
+          }
+        },
+        {
+          "type": "input",
+          "id": "custom_format",
+          "label": "Custom time format",
+          "placeholder": "%H:%M  \u00b7  strftime, overrides the time format above",
+          "default": ""
+        }
+      ]
+    },
+    "world_clock": {
+      "label": "World Clock",
+      "description": "Display time zones around the world.",
+      "title_readonly": true,
+      "disableGallary": true,
+      "default_display": {
+        "color": "#000000",
+        "text": "",
+        "text_position": "bottom",
+        "scroll_enabled": false
+      },
+      "poll": {
+        "function": "on_poll",
+        "interval_ms": 1000
+      },
+      "ui": [
+        {
+          "type": "radio",
+          "id": "display_mode",
+          "label": "Display",
+          "options": [
+            {
+              "label": "Digital",
+              "value": "digital"
+            },
+            {
+              "label": "Analog",
+              "value": "analog"
+            }
+          ],
+          "default": "digital"
+        },
+        {
+          "type": "select",
+          "id": "digital_style",
+          "label": "Digital style",
+          "options": [
+            {
+              "label": "Classic",
+              "value": "classic"
+            },
+            {
+              "label": "Bold",
+              "value": "bold"
+            },
+            {
+              "label": "Light",
+              "value": "light"
+            },
+            {
+              "label": "Mono",
+              "value": "mono"
+            },
+            {
+              "label": "LCD",
+              "value": "lcd"
+            },
+            {
+              "label": "Tiles",
+              "value": "tiles"
+            },
+            {
+              "label": "Neon",
+              "value": "neon"
+            },
+            {
+              "label": "Terminal",
+              "value": "terminal"
+            },
+            {
+              "label": "Card",
+              "value": "card"
+            },
+            {
+              "label": "Stacked",
+              "value": "stacked"
+            },
+            {
+              "label": "Headline",
+              "value": "headline"
+            },
+            {
+              "label": "Ticker",
+              "value": "ticker"
+            },
+            {
+              "label": "Outline",
+              "value": "outline"
+            },
+            {
+              "label": "Sunrise",
+              "value": "sunrise"
+            },
+            {
+              "label": "Minimal",
+              "value": "minimal"
+            },
+            {
+              "label": "Badge",
+              "value": "badge"
+            }
+          ],
+          "default": "classic",
+          "visible_if": {
+            "field": "display_mode",
+            "value": "digital"
+          }
+        },
+        {
+          "type": "select",
+          "id": "analog_style",
+          "label": "Analog style",
+          "options": [
+            {
+              "label": "Classic",
+              "value": "classic"
+            },
+            {
+              "label": "Minimal",
+              "value": "minimal"
+            },
+            {
+              "label": "Bauhaus",
+              "value": "bauhaus"
+            },
+            {
+              "label": "Railway",
+              "value": "railway"
+            },
+            {
+              "label": "Chronograph",
+              "value": "chrono"
+            },
+            {
+              "label": "Neon",
+              "value": "neon"
+            },
+            {
+              "label": "Outline",
+              "value": "outline"
+            },
+            {
+              "label": "Numerals",
+              "value": "numerals"
+            },
+            {
+              "label": "Blueprint",
+              "value": "blueprint"
+            },
+            {
+              "label": "Gold",
+              "value": "gold"
+            },
+            {
+              "label": "Dots",
+              "value": "dots"
+            },
+            {
+              "label": "Halo",
+              "value": "halo"
+            },
+            {
+              "label": "Skeleton",
+              "value": "skeleton"
+            },
+            {
+              "label": "Retro",
+              "value": "retro"
+            },
+            {
+              "label": "Aviator",
+              "value": "aviator"
+            },
+            {
+              "label": "Midnight",
+              "value": "midnight"
+            }
+          ],
+          "default": "classic",
+          "visible_if": {
+            "field": "display_mode",
+            "value": "analog"
+          }
+        },
+        {
+          "type": "select",
+          "id": "timezone",
+          "label": "Location",
+          "options": [
+            {
+              "label": "UTC",
+              "value": "UTC"
+            },
+            {
+              "label": "Honolulu",
+              "value": "Pacific/Honolulu"
+            },
+            {
+              "label": "Anchorage",
+              "value": "America/Anchorage"
+            },
+            {
+              "label": "Los Angeles",
+              "value": "America/Los_Angeles"
+            },
+            {
+              "label": "Vancouver",
+              "value": "America/Vancouver"
+            },
+            {
+              "label": "Tijuana",
+              "value": "America/Tijuana"
+            },
+            {
+              "label": "Phoenix",
+              "value": "America/Phoenix"
+            },
+            {
+              "label": "Denver",
+              "value": "America/Denver"
+            },
+            {
+              "label": "Edmonton",
+              "value": "America/Edmonton"
+            },
+            {
+              "label": "Chicago",
+              "value": "America/Chicago"
+            },
+            {
+              "label": "Winnipeg",
+              "value": "America/Winnipeg"
+            },
+            {
+              "label": "Mexico City",
+              "value": "America/Mexico_City"
+            },
+            {
+              "label": "Guatemala City",
+              "value": "America/Guatemala"
+            },
+            {
+              "label": "New York",
+              "value": "America/New_York"
+            },
+            {
+              "label": "Toronto",
+              "value": "America/Toronto"
+            },
+            {
+              "label": "Detroit",
+              "value": "America/Detroit"
+            },
+            {
+              "label": "Havana",
+              "value": "America/Havana"
+            },
+            {
+              "label": "Panama City",
+              "value": "America/Panama"
+            },
+            {
+              "label": "Bogota",
+              "value": "America/Bogota"
+            },
+            {
+              "label": "Lima",
+              "value": "America/Lima"
+            },
+            {
+              "label": "Caracas",
+              "value": "America/Caracas"
+            },
+            {
+              "label": "Halifax",
+              "value": "America/Halifax"
+            },
+            {
+              "label": "Santiago",
+              "value": "America/Santiago"
+            },
+            {
+              "label": "La Paz",
+              "value": "America/La_Paz"
+            },
+            {
+              "label": "Asuncion",
+              "value": "America/Asuncion"
+            },
+            {
+              "label": "Sao Paulo",
+              "value": "America/Sao_Paulo"
+            },
+            {
+              "label": "Buenos Aires",
+              "value": "America/Argentina/Buenos_Aires"
+            },
+            {
+              "label": "Montevideo",
+              "value": "America/Montevideo"
+            },
+            {
+              "label": "St. John's",
+              "value": "America/St_Johns"
+            },
+            {
+              "label": "Azores",
+              "value": "Atlantic/Azores"
+            },
+            {
+              "label": "Reykjavik",
+              "value": "Atlantic/Reykjavik"
+            },
+            {
+              "label": "Lisbon",
+              "value": "Europe/Lisbon"
+            },
+            {
+              "label": "Dublin",
+              "value": "Europe/Dublin"
+            },
+            {
+              "label": "London",
+              "value": "Europe/London"
+            },
+            {
+              "label": "Casablanca",
+              "value": "Africa/Casablanca"
+            },
+            {
+              "label": "Lagos",
+              "value": "Africa/Lagos"
+            },
+            {
+              "label": "Algiers",
+              "value": "Africa/Algiers"
+            },
+            {
+              "label": "Madrid",
+              "value": "Europe/Madrid"
+            },
+            {
+              "label": "Paris",
+              "value": "Europe/Paris"
+            },
+            {
+              "label": "Brussels",
+              "value": "Europe/Brussels"
+            },
+            {
+              "label": "Amsterdam",
+              "value": "Europe/Amsterdam"
+            },
+            {
+              "label": "Berlin",
+              "value": "Europe/Berlin"
+            },
+            {
+              "label": "Zurich",
+              "value": "Europe/Zurich"
+            },
+            {
+              "label": "Vienna",
+              "value": "Europe/Vienna"
+            },
+            {
+              "label": "Prague",
+              "value": "Europe/Prague"
+            },
+            {
+              "label": "Rome",
+              "value": "Europe/Rome"
+            },
+            {
+              "label": "Copenhagen",
+              "value": "Europe/Copenhagen"
+            },
+            {
+              "label": "Oslo",
+              "value": "Europe/Oslo"
+            },
+            {
+              "label": "Stockholm",
+              "value": "Europe/Stockholm"
+            },
+            {
+              "label": "Warsaw",
+              "value": "Europe/Warsaw"
+            },
+            {
+              "label": "Budapest",
+              "value": "Europe/Budapest"
+            },
+            {
+              "label": "Belgrade",
+              "value": "Europe/Belgrade"
+            },
+            {
+              "label": "Malta",
+              "value": "Europe/Malta"
+            },
+            {
+              "label": "Cairo",
+              "value": "Africa/Cairo"
+            },
+            {
+              "label": "Johannesburg",
+              "value": "Africa/Johannesburg"
+            },
+            {
+              "label": "Athens",
+              "value": "Europe/Athens"
+            },
+            {
+              "label": "Helsinki",
+              "value": "Europe/Helsinki"
+            },
+            {
+              "label": "Bucharest",
+              "value": "Europe/Bucharest"
+            },
+            {
+              "label": "Kyiv",
+              "value": "Europe/Kyiv"
+            },
+            {
+              "label": "Riga",
+              "value": "Europe/Riga"
+            },
+            {
+              "label": "Jerusalem",
+              "value": "Asia/Jerusalem"
+            },
+            {
+              "label": "Nairobi",
+              "value": "Africa/Nairobi"
+            },
+            {
+              "label": "Istanbul",
+              "value": "Europe/Istanbul"
+            },
+            {
+              "label": "Moscow",
+              "value": "Europe/Moscow"
+            },
+            {
+              "label": "Riyadh",
+              "value": "Asia/Riyadh"
+            },
+            {
+              "label": "Baghdad",
+              "value": "Asia/Baghdad"
+            },
+            {
+              "label": "Tehran",
+              "value": "Asia/Tehran"
+            },
+            {
+              "label": "Dubai",
+              "value": "Asia/Dubai"
+            },
+            {
+              "label": "Baku",
+              "value": "Asia/Baku"
+            },
+            {
+              "label": "Karachi",
+              "value": "Asia/Karachi"
+            },
+            {
+              "label": "Tashkent",
+              "value": "Asia/Tashkent"
+            },
+            {
+              "label": "Mumbai / Delhi",
+              "value": "Asia/Kolkata"
+            },
+            {
+              "label": "Colombo",
+              "value": "Asia/Colombo"
+            },
+            {
+              "label": "Kathmandu",
+              "value": "Asia/Kathmandu"
+            },
+            {
+              "label": "Dhaka",
+              "value": "Asia/Dhaka"
+            },
+            {
+              "label": "Yangon",
+              "value": "Asia/Yangon"
+            },
+            {
+              "label": "Bangkok",
+              "value": "Asia/Bangkok"
+            },
+            {
+              "label": "Jakarta",
+              "value": "Asia/Jakarta"
+            },
+            {
+              "label": "Ho Chi Minh City",
+              "value": "Asia/Ho_Chi_Minh"
+            },
+            {
+              "label": "Singapore",
+              "value": "Asia/Singapore"
+            },
+            {
+              "label": "Kuala Lumpur",
+              "value": "Asia/Kuala_Lumpur"
+            },
+            {
+              "label": "Manila",
+              "value": "Asia/Manila"
+            },
+            {
+              "label": "Hong Kong",
+              "value": "Asia/Hong_Kong"
+            },
+            {
+              "label": "Taipei",
+              "value": "Asia/Taipei"
+            },
+            {
+              "label": "Shanghai",
+              "value": "Asia/Shanghai"
+            },
+            {
+              "label": "Perth",
+              "value": "Australia/Perth"
+            },
+            {
+              "label": "Seoul",
+              "value": "Asia/Seoul"
+            },
+            {
+              "label": "Tokyo",
+              "value": "Asia/Tokyo"
+            },
+            {
+              "label": "Adelaide",
+              "value": "Australia/Adelaide"
+            },
+            {
+              "label": "Brisbane",
+              "value": "Australia/Brisbane"
+            },
+            {
+              "label": "Sydney",
+              "value": "Australia/Sydney"
+            },
+            {
+              "label": "Melbourne",
+              "value": "Australia/Melbourne"
+            },
+            {
+              "label": "Honiara",
+              "value": "Pacific/Guadalcanal"
+            },
+            {
+              "label": "Auckland",
+              "value": "Pacific/Auckland"
+            },
+            {
+              "label": "Suva",
+              "value": "Pacific/Fiji"
+            }
+          ],
+          "default": "Europe/London"
+        },
+        {
+          "type": "input",
+          "id": "location_label",
+          "label": "Custom location name",
+          "placeholder": "London",
+          "default": ""
+        },
+        {
+          "type": "select",
+          "id": "timezone_2",
+          "label": "Additional location",
+          "options": [
+            {
+              "label": "None",
+              "value": ""
+            },
+            {
+              "label": "UTC",
+              "value": "UTC"
+            },
+            {
+              "label": "Honolulu",
+              "value": "Pacific/Honolulu"
+            },
+            {
+              "label": "Anchorage",
+              "value": "America/Anchorage"
+            },
+            {
+              "label": "Los Angeles",
+              "value": "America/Los_Angeles"
+            },
+            {
+              "label": "Vancouver",
+              "value": "America/Vancouver"
+            },
+            {
+              "label": "Tijuana",
+              "value": "America/Tijuana"
+            },
+            {
+              "label": "Phoenix",
+              "value": "America/Phoenix"
+            },
+            {
+              "label": "Denver",
+              "value": "America/Denver"
+            },
+            {
+              "label": "Edmonton",
+              "value": "America/Edmonton"
+            },
+            {
+              "label": "Chicago",
+              "value": "America/Chicago"
+            },
+            {
+              "label": "Winnipeg",
+              "value": "America/Winnipeg"
+            },
+            {
+              "label": "Mexico City",
+              "value": "America/Mexico_City"
+            },
+            {
+              "label": "Guatemala City",
+              "value": "America/Guatemala"
+            },
+            {
+              "label": "New York",
+              "value": "America/New_York"
+            },
+            {
+              "label": "Toronto",
+              "value": "America/Toronto"
+            },
+            {
+              "label": "Detroit",
+              "value": "America/Detroit"
+            },
+            {
+              "label": "Havana",
+              "value": "America/Havana"
+            },
+            {
+              "label": "Panama City",
+              "value": "America/Panama"
+            },
+            {
+              "label": "Bogota",
+              "value": "America/Bogota"
+            },
+            {
+              "label": "Lima",
+              "value": "America/Lima"
+            },
+            {
+              "label": "Caracas",
+              "value": "America/Caracas"
+            },
+            {
+              "label": "Halifax",
+              "value": "America/Halifax"
+            },
+            {
+              "label": "Santiago",
+              "value": "America/Santiago"
+            },
+            {
+              "label": "La Paz",
+              "value": "America/La_Paz"
+            },
+            {
+              "label": "Asuncion",
+              "value": "America/Asuncion"
+            },
+            {
+              "label": "Sao Paulo",
+              "value": "America/Sao_Paulo"
+            },
+            {
+              "label": "Buenos Aires",
+              "value": "America/Argentina/Buenos_Aires"
+            },
+            {
+              "label": "Montevideo",
+              "value": "America/Montevideo"
+            },
+            {
+              "label": "St. John's",
+              "value": "America/St_Johns"
+            },
+            {
+              "label": "Azores",
+              "value": "Atlantic/Azores"
+            },
+            {
+              "label": "Reykjavik",
+              "value": "Atlantic/Reykjavik"
+            },
+            {
+              "label": "Lisbon",
+              "value": "Europe/Lisbon"
+            },
+            {
+              "label": "Dublin",
+              "value": "Europe/Dublin"
+            },
+            {
+              "label": "London",
+              "value": "Europe/London"
+            },
+            {
+              "label": "Casablanca",
+              "value": "Africa/Casablanca"
+            },
+            {
+              "label": "Lagos",
+              "value": "Africa/Lagos"
+            },
+            {
+              "label": "Algiers",
+              "value": "Africa/Algiers"
+            },
+            {
+              "label": "Madrid",
+              "value": "Europe/Madrid"
+            },
+            {
+              "label": "Paris",
+              "value": "Europe/Paris"
+            },
+            {
+              "label": "Brussels",
+              "value": "Europe/Brussels"
+            },
+            {
+              "label": "Amsterdam",
+              "value": "Europe/Amsterdam"
+            },
+            {
+              "label": "Berlin",
+              "value": "Europe/Berlin"
+            },
+            {
+              "label": "Zurich",
+              "value": "Europe/Zurich"
+            },
+            {
+              "label": "Vienna",
+              "value": "Europe/Vienna"
+            },
+            {
+              "label": "Prague",
+              "value": "Europe/Prague"
+            },
+            {
+              "label": "Rome",
+              "value": "Europe/Rome"
+            },
+            {
+              "label": "Copenhagen",
+              "value": "Europe/Copenhagen"
+            },
+            {
+              "label": "Oslo",
+              "value": "Europe/Oslo"
+            },
+            {
+              "label": "Stockholm",
+              "value": "Europe/Stockholm"
+            },
+            {
+              "label": "Warsaw",
+              "value": "Europe/Warsaw"
+            },
+            {
+              "label": "Budapest",
+              "value": "Europe/Budapest"
+            },
+            {
+              "label": "Belgrade",
+              "value": "Europe/Belgrade"
+            },
+            {
+              "label": "Malta",
+              "value": "Europe/Malta"
+            },
+            {
+              "label": "Cairo",
+              "value": "Africa/Cairo"
+            },
+            {
+              "label": "Johannesburg",
+              "value": "Africa/Johannesburg"
+            },
+            {
+              "label": "Athens",
+              "value": "Europe/Athens"
+            },
+            {
+              "label": "Helsinki",
+              "value": "Europe/Helsinki"
+            },
+            {
+              "label": "Bucharest",
+              "value": "Europe/Bucharest"
+            },
+            {
+              "label": "Kyiv",
+              "value": "Europe/Kyiv"
+            },
+            {
+              "label": "Riga",
+              "value": "Europe/Riga"
+            },
+            {
+              "label": "Jerusalem",
+              "value": "Asia/Jerusalem"
+            },
+            {
+              "label": "Nairobi",
+              "value": "Africa/Nairobi"
+            },
+            {
+              "label": "Istanbul",
+              "value": "Europe/Istanbul"
+            },
+            {
+              "label": "Moscow",
+              "value": "Europe/Moscow"
+            },
+            {
+              "label": "Riyadh",
+              "value": "Asia/Riyadh"
+            },
+            {
+              "label": "Baghdad",
+              "value": "Asia/Baghdad"
+            },
+            {
+              "label": "Tehran",
+              "value": "Asia/Tehran"
+            },
+            {
+              "label": "Dubai",
+              "value": "Asia/Dubai"
+            },
+            {
+              "label": "Baku",
+              "value": "Asia/Baku"
+            },
+            {
+              "label": "Karachi",
+              "value": "Asia/Karachi"
+            },
+            {
+              "label": "Tashkent",
+              "value": "Asia/Tashkent"
+            },
+            {
+              "label": "Mumbai / Delhi",
+              "value": "Asia/Kolkata"
+            },
+            {
+              "label": "Colombo",
+              "value": "Asia/Colombo"
+            },
+            {
+              "label": "Kathmandu",
+              "value": "Asia/Kathmandu"
+            },
+            {
+              "label": "Dhaka",
+              "value": "Asia/Dhaka"
+            },
+            {
+              "label": "Yangon",
+              "value": "Asia/Yangon"
+            },
+            {
+              "label": "Bangkok",
+              "value": "Asia/Bangkok"
+            },
+            {
+              "label": "Jakarta",
+              "value": "Asia/Jakarta"
+            },
+            {
+              "label": "Ho Chi Minh City",
+              "value": "Asia/Ho_Chi_Minh"
+            },
+            {
+              "label": "Singapore",
+              "value": "Asia/Singapore"
+            },
+            {
+              "label": "Kuala Lumpur",
+              "value": "Asia/Kuala_Lumpur"
+            },
+            {
+              "label": "Manila",
+              "value": "Asia/Manila"
+            },
+            {
+              "label": "Hong Kong",
+              "value": "Asia/Hong_Kong"
+            },
+            {
+              "label": "Taipei",
+              "value": "Asia/Taipei"
+            },
+            {
+              "label": "Shanghai",
+              "value": "Asia/Shanghai"
+            },
+            {
+              "label": "Perth",
+              "value": "Australia/Perth"
+            },
+            {
+              "label": "Seoul",
+              "value": "Asia/Seoul"
+            },
+            {
+              "label": "Tokyo",
+              "value": "Asia/Tokyo"
+            },
+            {
+              "label": "Adelaide",
+              "value": "Australia/Adelaide"
+            },
+            {
+              "label": "Brisbane",
+              "value": "Australia/Brisbane"
+            },
+            {
+              "label": "Sydney",
+              "value": "Australia/Sydney"
+            },
+            {
+              "label": "Melbourne",
+              "value": "Australia/Melbourne"
+            },
+            {
+              "label": "Honiara",
+              "value": "Pacific/Guadalcanal"
+            },
+            {
+              "label": "Auckland",
+              "value": "Pacific/Auckland"
+            },
+            {
+              "label": "Suva",
+              "value": "Pacific/Fiji"
+            }
+          ],
+          "default": ""
+        },
+        {
+          "type": "input",
+          "id": "location_label_2",
+          "label": "Additional location name",
+          "placeholder": "Tokyo",
+          "default": "",
+          "visible_if": {
+            "field": "timezone_2",
+            "not_value": ""
+          }
+        },
+        {
+          "type": "select",
+          "id": "hour_format",
+          "label": "Time format",
+          "options": [
+            {
+              "label": "24-hour",
+              "value": "24"
+            },
+            {
+              "label": "12-hour (AM/PM)",
+              "value": "12"
+            }
+          ],
+          "default": "24"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_seconds",
+          "label": "Show seconds",
+          "default": false,
+          "visible_if": {
+            "field": "display_mode",
+            "value": "digital"
+          }
+        },
+        {
+          "type": "checkbox",
+          "id": "show_second_hand",
+          "label": "Show second hand",
+          "default": true,
+          "visible_if": {
+            "field": "display_mode",
+            "value": "analog"
+          }
+        },
+        {
+          "type": "checkbox",
+          "id": "show_date",
+          "label": "Show date",
+          "default": false
+        },
+        {
+          "type": "select",
+          "id": "date_format",
+          "label": "Date format",
+          "options": [
+            {
+              "label": "Month day (Feb 10)",
+              "value": "auto"
+            },
+            {
+              "label": "MM/DD/YY",
+              "value": "md"
+            },
+            {
+              "label": "DD/MM/YY",
+              "value": "dm"
+            },
+            {
+              "label": "DD.MM.YY",
+              "value": "dot"
+            },
+            {
+              "label": "YYYY-MM-DD",
+              "value": "iso"
+            },
+            {
+              "label": "Month day, year",
+              "value": "long"
+            }
+          ],
+          "default": "auto",
+          "visible_if": {
+            "field": "show_date",
+            "value": "true"
+          }
+        },
+        {
+          "type": "checkbox",
+          "id": "show_weekday",
+          "label": "Show weekday",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "long_weekday",
+          "label": "Full weekday name",
+          "default": false,
+          "visible_if": {
+            "field": "show_weekday",
+            "value": "true"
+          }
+        },
+        {
+          "type": "select",
+          "id": "color_source",
+          "label": "Colors",
+          "options": [
+            {
+              "label": "Theme palette",
+              "value": "style"
+            },
+            {
+              "label": "Button color",
+              "value": "button"
+            },
+            {
+              "label": "Custom",
+              "value": "custom"
+            }
+          ],
+          "default": "style"
+        },
+        {
+          "type": "input",
+          "id": "custom_bg",
+          "label": "Background color",
+          "placeholder": "#101016",
+          "default": "",
+          "visible_if": {
+            "field": "color_source",
+            "value": "custom"
+          }
+        },
+        {
+          "type": "input",
+          "id": "custom_fg",
+          "label": "Time color",
+          "placeholder": "#ffffff",
+          "default": "",
+          "visible_if": {
+            "field": "color_source",
+            "value": "custom"
+          }
+        },
+        {
+          "type": "input",
+          "id": "custom_accent",
+          "label": "Accent color",
+          "placeholder": "#ff4b4b",
+          "default": "",
+          "visible_if": {
+            "field": "color_source",
+            "value": "custom"
+          }
+        },
+        {
+          "type": "input",
+          "id": "custom_format",
+          "label": "Custom time format",
+          "placeholder": "%H:%M  \u00b7  strftime, overrides the time format above",
+          "default": ""
+        }
+      ]
+    },
+    "countdown": {
+      "label": "Countdown",
+      "description": "Start a countdown timer. Press to start or pause; press again at zero to reset.",
+      "title_readonly": true,
+      "disableGallary": true,
+      "default_display": {
+        "color": "#000000",
+        "text": "",
+        "text_position": "bottom",
+        "scroll_enabled": false
+      },
+      "poll": {
+        "function": "on_poll",
+        "interval_ms": 1000
+      },
+      "ui": [
+        {
+          "type": "input",
+          "id": "duration",
+          "label": "Duration",
+          "placeholder": "5:00, 25m, 1h30m or 90",
+          "default": "5:00"
+        },
+        {
+          "type": "input",
+          "id": "label",
+          "label": "Label",
+          "placeholder": "Timer",
+          "default": "Timer"
+        },
+        {
+          "type": "select",
+          "id": "on_finish",
+          "label": "At zero",
+          "options": [
+            {
+              "label": "Hold at 0:00",
+              "value": "zero"
+            },
+            {
+              "label": "Count up",
+              "value": "countup"
+            }
+          ],
+          "default": "zero"
+        },
+        {
+          "type": "select",
+          "id": "digital_style",
+          "label": "Style",
+          "options": [
+            {
+              "label": "Classic",
+              "value": "classic"
+            },
+            {
+              "label": "Bold",
+              "value": "bold"
+            },
+            {
+              "label": "Light",
+              "value": "light"
+            },
+            {
+              "label": "Mono",
+              "value": "mono"
+            },
+            {
+              "label": "LCD",
+              "value": "lcd"
+            },
+            {
+              "label": "Tiles",
+              "value": "tiles"
+            },
+            {
+              "label": "Neon",
+              "value": "neon"
+            },
+            {
+              "label": "Terminal",
+              "value": "terminal"
+            },
+            {
+              "label": "Card",
+              "value": "card"
+            },
+            {
+              "label": "Stacked",
+              "value": "stacked"
+            },
+            {
+              "label": "Headline",
+              "value": "headline"
+            },
+            {
+              "label": "Ticker",
+              "value": "ticker"
+            },
+            {
+              "label": "Outline",
+              "value": "outline"
+            },
+            {
+              "label": "Sunrise",
+              "value": "sunrise"
+            },
+            {
+              "label": "Minimal",
+              "value": "minimal"
+            },
+            {
+              "label": "Badge",
+              "value": "badge"
+            }
+          ],
+          "default": "classic"
+        },
+        {
+          "type": "select",
+          "id": "color_source",
+          "label": "Colors",
+          "options": [
+            {
+              "label": "Theme palette",
+              "value": "style"
+            },
+            {
+              "label": "Button color",
+              "value": "button"
+            },
+            {
+              "label": "Custom",
+              "value": "custom"
+            }
+          ],
+          "default": "style"
+        },
+        {
+          "type": "input",
+          "id": "custom_bg",
+          "label": "Background color",
+          "placeholder": "#101016",
+          "default": "",
+          "visible_if": {
+            "field": "color_source",
+            "value": "custom"
+          }
+        },
+        {
+          "type": "input",
+          "id": "custom_fg",
+          "label": "Time color",
+          "placeholder": "#ffffff",
+          "default": "",
+          "visible_if": {
+            "field": "color_source",
+            "value": "custom"
+          }
+        },
+        {
+          "type": "input",
+          "id": "custom_accent",
+          "label": "Accent color",
+          "placeholder": "#ff4b4b",
+          "default": "",
+          "visible_if": {
+            "field": "color_source",
+            "value": "custom"
+          }
+        }
+      ]
+    }
+  }
+}

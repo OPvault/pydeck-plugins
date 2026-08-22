@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "label": "Official · Testing",
-  "generated_at": "2026-08-22T17:04:06Z",
+  "generated_at": "2026-08-22T18:51:03Z",
   "plugins": [
     {
       "name": "Clock",
@@ -9,8 +9,8 @@
       "category": "utilities",
       "summary": "Displays the current time with a stylish gradient background",
       "author": "PyDeck Team",
-      "latest": "2.0.2",
-      "icon_path": "plugins/no.pydeck.clock/icon.svg",
+      "latest": "3.0.0",
+      "icon_path": "plugins/no.pydeck.clock/icon.png",
       "compatible_pydeck_versions": [
         "1.0"
       ],
@@ -18,6 +18,12 @@
         {
           "version": "2.0.2",
           "path": "plugins/no.pydeck.clock/2.0.2",
+          "min_pydeck_version": "1.1.0",
+          "max_pydeck_version": null
+        },
+        {
+          "version": "3.0.0",
+          "path": "plugins/no.pydeck.clock/3.0.0",
           "min_pydeck_version": "1.1.0",
           "max_pydeck_version": null
         }
@@ -272,7 +278,7 @@
       "category": "media",
       "summary": "Control Spotify playback via the Web API (PDK)",
       "author": "PyDeck Team",
-      "latest": "2.0.4",
+      "latest": "2.0.5",
       "icon_path": "plugins/no.pydeck.spotify/icon.svg",
       "compatible_pydeck_versions": [
         "1.0"
@@ -301,10 +307,16 @@
           "path": "plugins/no.pydeck.spotify/2.0.4",
           "min_pydeck_version": "1.1.0",
           "max_pydeck_version": null
+        },
+        {
+          "version": "2.0.5",
+          "path": "plugins/no.pydeck.spotify/2.0.5",
+          "min_pydeck_version": "1.1.0",
+          "max_pydeck_version": null
         }
       ],
       "pdk": true,
-      "doc_path": "plugins/no.pydeck.spotify/2.0.4/DOCS.md",
+      "doc_path": "plugins/no.pydeck.spotify/2.0.5/DOCS.md",
       "show_markdown_after_install": true
     },
     {
