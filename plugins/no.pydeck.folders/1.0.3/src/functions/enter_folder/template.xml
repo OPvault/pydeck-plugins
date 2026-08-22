@@ -1,0 +1,5 @@
+<template name="enter_folder" title="Enter Folder" description="Switch deck buttons to a folder by folder id">
+  <box class="folder-bg">
+    <img src="{icon_src}" class="folder-icon" fit="contain" />
+  </box>
+</template>

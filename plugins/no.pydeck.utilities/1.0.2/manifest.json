@@ -1,0 +1,155 @@
+{
+  "name": "Utilities",
+  "version": "1.0.2",
+  "description": "Open URLs, send HTTP requests, and run scripts",
+  "author": "PyDeck Team",
+  "min_pydeck_version": "1.1.0",
+  "max_pydeck_version": null,
+  "changelog": "CHANGELOG.md",
+  "pdk": true,
+  "permissions": {
+    "webbrowser": ["open"],
+    "urllib.request": ["Request", "urlopen"],
+    "urllib.error": ["HTTPError", "URLError"],
+    "subprocess": ["Popen", "TimeoutExpired"],
+    "shlex": ["split"],
+    "pathlib": ["Path"]
+  },
+  "functions": {
+    "open_url": {
+      "label": "Open URL",
+      "description": "Launch a custom URL in your default browser",
+      "sidebar_icon": "assets/icons/browser.svg",
+      "default_display": {
+        "color": "#2563eb",
+        "image": "plugins/plugin/no.pydeck.utilities/assets/icons/browser.svg"
+      },
+      "ui": [
+        {
+          "type": "input",
+          "id": "url",
+          "label": "URL",
+          "default": "https://www.google.com"
+        },
+        {
+          "type": "api_select",
+          "id": "browser",
+          "label": "Browser",
+          "default": "default",
+          "api": "browsers",
+          "display": {
+            "label": "label",
+            "value": "value"
+          }
+        }
+      ],
+      "pdk": true
+    },
+    "send_request": {
+      "label": "HTTP Request",
+      "description": "Send a request with a selected HTTP method and optional data",
+      "sidebar_icon": "assets/icons/web_request.svg",
+      "default_display": {
+        "color": "#2563eb",
+        "image": "plugins/plugin/no.pydeck.utilities/assets/icons/web_request.svg"
+      },
+      "ui": [
+        {
+          "type": "input",
+          "id": "url",
+          "label": "URL",
+          "placeholder": "https://example.com/api",
+          "default": ""
+        },
+        {
+          "type": "select",
+          "id": "method",
+          "label": "Method",
+          "default": "POST",
+          "options": [
+            {"label": "GET", "value": "GET"},
+            {"label": "POST", "value": "POST"},
+            {"label": "PUT", "value": "PUT"},
+            {"label": "PATCH", "value": "PATCH"},
+            {"label": "DELETE", "value": "DELETE"},
+            {"label": "HEAD", "value": "HEAD"}
+          ]
+        },
+        {
+          "type": "input",
+          "id": "data",
+          "label": "Data",
+          "placeholder": "Optional request body",
+          "default": ""
+        }
+      ],
+      "pdk": true
+    },
+    "run_script": {
+      "label": "Run Script",
+      "description": "Execute a Bash or Python script file",
+      "sidebar_icon": "assets/icons/run_script.svg",
+      "default_display": {
+        "color": "#2563eb",
+        "image": "plugins/plugin/no.pydeck.utilities/assets/icons/run_script.svg"
+      },
+      "poll": {
+        "function": "on_poll",
+        "interval_ms": 250
+      },
+      "ui": [
+        {
+          "type": "select",
+          "id": "runtime",
+          "label": "Runtime",
+          "default": "bash",
+          "options": [
+            {"label": "Bash", "value": "bash"},
+            {"label": "Python", "value": "python"}
+          ]
+        },
+        {
+          "type": "input",
+          "id": "script_path",
+          "label": "Script Path",
+          "placeholder": "/home/user/script.sh",
+          "default": ""
+        },
+        {
+          "type": "input",
+          "id": "args",
+          "label": "Arguments",
+          "placeholder": "--flag value",
+          "default": ""
+        },
+        {
+          "type": "input",
+          "id": "working_dir",
+          "label": "Working Directory (optional)",
+          "placeholder": "/home/user/projects",
+          "default": ""
+        },
+        {
+          "type": "number",
+          "id": "timeout_seconds",
+          "label": "Timeout (seconds)",
+          "default": 30,
+          "min": 1,
+          "max": 600
+        },
+        {
+          "type": "input",
+          "id": "python_executable",
+          "label": "Python Executable",
+          "placeholder": "python3",
+          "default": "python3",
+          "visible_if": {
+            "field": "runtime",
+            "value": "python"
+          }
+        }
+      ],
+      "pdk": true
+    }
+  }
+}

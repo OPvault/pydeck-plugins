@@ -1,0 +1,141 @@
+{
+  "name": "Discord",
+  "version": "2.0.0",
+  "description": "Control Discord voice state (mute/deafen) via RPC",
+  "author": "PyDeck Team",
+  "min_pydeck_version": "1.1.0",
+  "max_pydeck_version": null,
+  "changelog": "CHANGELOG.md",
+  "documentation": "DOCS.md",
+  "show_markdown_after_install": true,
+  "oauth": {
+    "authorize_url": "https://discord.com/api/oauth2/authorize",
+    "token_url": "https://discord.com/api/oauth2/token",
+    "scopes": "rpc rpc.voice.read rpc.voice.write",
+    "auth_method": "post",
+    "user_agent": "DiscordBot (pydeck, 1.0)"
+  },
+  "credentials": [
+    {
+      "id": "client_id",
+      "label": "Client ID",
+      "type": "text"
+    },
+    {
+      "id": "client_secret",
+      "label": "Client Secret",
+      "type": "password"
+    }
+  ],
+  "permissions": {
+    "socket": [
+      "socket",
+      "AF_UNIX",
+      "SOCK_STREAM"
+    ],
+    "json": [
+      "dumps",
+      "loads"
+    ],
+    "os": [
+      "path",
+      "environ",
+      "listdir"
+    ],
+    "struct": [
+      "pack",
+      "unpack"
+    ],
+    "time": [
+      "time",
+      "monotonic"
+    ],
+    "threading": [
+      "Thread",
+      "Lock"
+    ],
+    "queue": [
+      "Queue"
+    ],
+    "uuid": [
+      "uuid4"
+    ],
+    "urllib.request": [
+      "urlopen",
+      "Request"
+    ],
+    "urllib.parse": [
+      "urlencode"
+    ],
+    "pathlib": [
+      "Path"
+    ],
+    "importlib.util": [
+      "spec_from_file_location",
+      "module_from_spec"
+    ],
+    "sys": [
+      "path",
+      "modules"
+    ]
+  },
+  "functions": {
+    "toggle_mute": {
+      "label": "Toggle Mute",
+      "description": "Toggle Discord microphone mute",
+      "sidebar_icon": "assets/icons/mute_0.png",
+      "title_readonly": true,
+      "disableGallary": false,
+      "disableGallery": false,
+      "default_display": {
+        "color": "#5865f2",
+        "text": "",
+        "text_position": "bottom",
+        "scroll_enabled": false
+      },
+      "poll": {
+        "function": "on_poll",
+        "interval_ms": 10000
+      },
+      "ui": [],
+      "pdk": true,
+      "display_states": {
+        "default": {
+          "image": "plugins/plugin/no.pydeck.discord/assets/icons/mic.png"
+        },
+        "active": {
+          "image": "plugins/plugin/no.pydeck.discord/assets/icons/mic_off.png"
+        }
+      }
+    },
+    "toggle_deafen": {
+      "label": "Toggle Deafen",
+      "description": "Toggle Discord deafen (mic + audio)",
+      "sidebar_icon": "assets/icons/deafen_0.png",
+      "title_readonly": true,
+      "disableGallary": false,
+      "disableGallery": false,
+      "default_display": {
+        "color": "#5865f2",
+        "text": "",
+        "text_position": "bottom",
+        "scroll_enabled": false
+      },
+      "poll": {
+        "function": "on_poll",
+        "interval_ms": 10000
+      },
+      "ui": [],
+      "pdk": true,
+      "display_states": {
+        "default": {
+          "image": "plugins/plugin/no.pydeck.discord/assets/icons/headphones.png"
+        },
+        "active": {
+          "image": "plugins/plugin/no.pydeck.discord/assets/icons/headphones_off.png"
+        }
+      }
+    }
+  },
+  "pdk": true
+}

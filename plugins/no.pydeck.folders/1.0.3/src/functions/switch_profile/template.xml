@@ -1,0 +1,5 @@
+<template name="switch_profile" title="Switch Profile" description="Switch to a specific profile">
+  <box class="folder-bg">
+    <img src="{icon_src}" class="folder-icon" fit="contain" />
+  </box>
+</template>

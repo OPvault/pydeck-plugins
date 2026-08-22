@@ -1,0 +1,5 @@
+<template name="return_folder" title="Return Folder" description="Return to parent folder or root">
+  <box class="folder-bg">
+    <img src="{icon_src}" class="folder-icon" fit="contain" />
+  </box>
+</template>
