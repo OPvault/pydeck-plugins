@@ -1,0 +1,12 @@
+<template name="play_pause" title="Play / Pause" description="Toggle playback">
+  <box class="face">
+    <img src="{icon_src}" class="icon" fit="contain" />
+  </box>
+</template>
+
+<template name="play_pause-track" title="Play / Pause" description="Toggle playback">
+  <box class="face face-track">
+    <img src="{icon_src}" class="icon-track" fit="contain" />
+    <marquee class="track" speed="30">{track_label}</marquee>
+  </box>
+</template>

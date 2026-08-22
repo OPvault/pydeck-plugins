@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "label": "Official · Testing",
-  "generated_at": "2026-08-22T18:55:55Z",
+  "generated_at": "2026-08-22T19:33:09Z",
   "plugins": [
     {
       "name": "Clock",
@@ -27,8 +27,7 @@
           "min_pydeck_version": "1.1.0",
           "max_pydeck_version": null
         }
-      ],
-      "pdk": true
+      ]
     },
     {
       "name": "Discord",
@@ -49,7 +48,6 @@
           "max_pydeck_version": null
         }
       ],
-      "pdk": true,
       "doc_path": "plugins/no.pydeck.discord/2.0.0/DOCS.md",
       "show_markdown_after_install": true
     },
@@ -78,7 +76,6 @@
           "max_pydeck_version": null
         }
       ],
-      "pdk": true,
       "licenses": [
         {
           "name": "Jolpica F1",
@@ -131,8 +128,7 @@
           "min_pydeck_version": "1.1.0",
           "max_pydeck_version": null
         }
-      ],
-      "pdk": true
+      ]
     },
     {
       "name": "Home Assistant",
@@ -140,7 +136,7 @@
       "category": "home-automation",
       "summary": "Control and monitor Home Assistant entities",
       "author": "PyDeck Team",
-      "latest": "2.0.2",
+      "latest": "2.0.3",
       "icon_path": "plugins/no.pydeck.home-assistant/icon.png",
       "compatible_pydeck_versions": [
         "1.0"
@@ -163,10 +159,15 @@
           "path": "plugins/no.pydeck.home-assistant/2.0.2",
           "min_pydeck_version": "1.1.0",
           "max_pydeck_version": null
+        },
+        {
+          "version": "2.0.3",
+          "path": "plugins/no.pydeck.home-assistant/2.0.3",
+          "min_pydeck_version": "1.1.0",
+          "max_pydeck_version": null
         }
       ],
-      "pdk": true,
-      "doc_path": "plugins/no.pydeck.home-assistant/2.0.2/DOCS.md",
+      "doc_path": "plugins/no.pydeck.home-assistant/2.0.3/DOCS.md",
       "show_markdown_after_install": true,
       "licenses": [
         {
@@ -194,29 +195,29 @@
           "min_pydeck_version": "1.1.0",
           "max_pydeck_version": null
         }
-      ],
-      "pdk": true
+      ]
     },
     {
       "name": "Media Control",
-      "slug": "media-control",
+      "slug": "no.pydeck.media-control",
       "category": "media",
       "summary": "Control media playback on Linux (play/pause, next, previous, volume)",
       "author": "PyDeck Team",
-      "latest": "1.0.0",
-      "icon_path": "plugins/media-control/icon.svg",
+      "latest": "2.0.0",
+      "icon_path": "plugins/no.pydeck.media-control/icon.svg",
       "compatible_pydeck_versions": [
         "1.0"
       ],
       "versions": [
         {
-          "version": "1.0.0",
-          "path": "plugins/media-control/1.0.0",
-          "min_pydeck_version": "1.0.0",
-          "max_pydeck_version": "1.0.0"
+          "version": "2.0.0",
+          "path": "plugins/no.pydeck.media-control/2.0.0",
+          "min_pydeck_version": "1.1.0",
+          "max_pydeck_version": null
         }
       ],
-      "pdk": false
+      "doc_path": "plugins/no.pydeck.media-control/2.0.0/DOCS.md",
+      "show_markdown_after_install": false
     },
     {
       "name": "Postinstall Test",
@@ -282,7 +283,6 @@
           "max_pydeck_version": null
         }
       ],
-      "pdk": true,
       "doc_path": "plugins/no.pydeck.spotify/2.0.5/DOCS.md",
       "show_markdown_after_install": true
     },
@@ -304,8 +304,7 @@
           "min_pydeck_version": "1.1.0",
           "max_pydeck_version": null
         }
-      ],
-      "pdk": true
+      ]
     },
     {
       "name": "Utilities",
@@ -325,8 +324,7 @@
           "min_pydeck_version": "1.1.0",
           "max_pydeck_version": null
         }
-      ],
-      "pdk": true
+      ]
     },
     {
       "name": "Weather",
@@ -347,7 +345,6 @@
           "max_pydeck_version": null
         }
       ],
-      "pdk": true,
       "licenses": [
         {
           "name": "MET Norway",

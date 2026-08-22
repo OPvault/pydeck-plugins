@@ -1,0 +1,63 @@
+/* no.pydeck.media-control — white glyphs on the user's button colour. */
+
+:root {
+  --bg: {_button_color};
+  --muted: #b03a2e;
+  --text: #ffffff;
+}
+
+.face {
+  background: var(--bg);
+  direction: column;
+  align: center;
+  justify: center;
+  gap: -4;
+}
+
+/* Mute toggle only: the sink is muted. */
+.face-muted {
+  background: var(--muted);
+}
+
+.icon {
+  width: 56;
+  height: 56;
+}
+
+/* Shrunk so a volume % fits under it. */
+.icon-sm {
+  width: 42;
+  height: 42;
+}
+
+/* Play/Pause with a now-playing line: the marquee needs its own row, so
+   this face drops the negative gap the icon-only tiles use. */
+.face-track {
+  gap: 2;
+  padding: 4 2;
+}
+
+.icon-track {
+  width: 40;
+  height: 40;
+}
+
+.glyph {
+  width: 78%;
+  height: 78%;
+}
+
+.label {
+  color: var(--text);
+  font-size: 15;
+  font-weight: bold;
+  text-align: center;
+}
+
+.track {
+  color: var(--text);
+  font-size: 12;
+  font-weight: bold;
+  text-stroke: 1 rgba(0, 0, 0, 0.55);
+  width: 100%;
+}
