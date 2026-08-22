@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "label": "Official · Testing",
-  "generated_at": "2026-08-22T18:51:03Z",
+  "generated_at": "2026-08-22T18:55:55Z",
   "plugins": [
     {
       "name": "Clock",
@@ -107,39 +107,6 @@
         {
           "version": "1.1.0",
           "path": "plugins/finnhub/1.1.0",
-          "min_pydeck_version": "1.0.0",
-          "max_pydeck_version": "1.0.0"
-        }
-      ],
-      "pdk": false
-    },
-    {
-      "name": "Folders",
-      "slug": "folders",
-      "category": "utilities",
-      "summary": "Navigate virtual folder pages on the Stream Deck",
-      "author": "PyDeck Team",
-      "latest": "1.0.2",
-      "icon_path": "plugins/folders/icon.png",
-      "compatible_pydeck_versions": [
-        "1.0"
-      ],
-      "versions": [
-        {
-          "version": "1.0.0",
-          "path": "plugins/folders/1.0.0",
-          "min_pydeck_version": "1.0.0",
-          "max_pydeck_version": "1.0.0"
-        },
-        {
-          "version": "1.0.1",
-          "path": "plugins/folders/1.0.1",
-          "min_pydeck_version": "1.0.0",
-          "max_pydeck_version": "1.0.0"
-        },
-        {
-          "version": "1.0.2",
-          "path": "plugins/folders/1.0.2",
           "min_pydeck_version": "1.0.0",
           "max_pydeck_version": "1.0.0"
         }
