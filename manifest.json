@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "label": "Official · Testing",
-  "generated_at": "2026-08-22T20:31:05Z",
+  "generated_at": "2026-08-22T20:38:24Z",
   "plugins": [
     {
       "name": "Clock",
@@ -226,27 +226,6 @@
       ],
       "doc_path": "plugins/no.pydeck.media-control/2.0.0/DOCS.md",
       "show_markdown_after_install": false
-    },
-    {
-      "name": "Postinstall Test",
-      "slug": "test-postinstall",
-      "category": "utilities",
-      "summary": "A local test plugin that exercises the postinstall approval flow.",
-      "author": "PyDeck",
-      "latest": "1.0.1",
-      "icon_path": "",
-      "compatible_pydeck_versions": [
-        "1.0"
-      ],
-      "versions": [
-        {
-          "version": "1.0.1",
-          "path": "plugins/test-postinstall/1.0.1",
-          "min_pydeck_version": "1.0.0",
-          "max_pydeck_version": "1.0.0"
-        }
-      ],
-      "pdk": false
     },
     {
       "name": "Spotify",

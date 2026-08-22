@@ -46,7 +46,7 @@ Two things that bite:
 - **Always pass `--label`.** The default is `Official · Testing`; running it unqualified on `canary` or `stable` silently demotes the channel label.
 - **Regenerate in place.** Catalog-only fields resolve as `catalog.json` > *the existing root manifest* > defaults. Plugins without a `catalog.json` (most of them) get their `category`, `summary`, and `licenses` from the previous `manifest.json`. Delete or truncate that file first and those fields are lost.
 
-Other generator behavior worth knowing: version dirs must parse as a semver tuple or they're ignored; empty version dirs are purged from disk; the highest version supplies `name`/`author`/`doc_path`; `icon.svg` wins over `icon.png` at the slug root and a missing icon is a warning plus an empty `icon_path` (`test-postinstall` is currently in that state); a version manifest with no `max_pydeck_version` is written as `"1.0.0"`, not null — an absent field pins the plugin rather than leaving it open.
+Other generator behavior worth knowing: version dirs must parse as a semver tuple or they're ignored; empty version dirs are purged from disk; the highest version supplies `name`/`author`/`doc_path`; `icon.svg` wins over `icon.png` at the slug root and a missing icon is a warning plus an empty `icon_path`; a version manifest with no `max_pydeck_version` is written as `"1.0.0"`, not null — an absent field pins the plugin rather than leaving it open.
 
 ## Plugin package layout
 
@@ -66,7 +66,7 @@ The version `manifest.json` may set `documentation` (path to a markdown file, e.
 - *PDK 2.x* — RDNN slug (`no.pydeck.spotify`), `src/functions/<fn>/handler.py` + `template.xml`, `src/shared.py`, `assets/`, and a manifest declaring `functions`, `permissions`, `ui` widgets, `poll`, and `oauth`/`credentials`. The generation is read off those sources — a plugin `manifest.json` never declares `"pdk": true` (the core ignores the key if it is there).
 - *Legacy 1.x* — bare slug, flat `plugin.py` + `options.json` + `style.css`, and `"pdk": false` in the manifest to mark it as classic.
 
-Each legacy folder was deleted as its migration landed — clock, f1, spotify and system-monitor in August 2026, then home-assistant, and `finnhub` last with its 2.0.0 release. `MET` went with them (functionally superseded by `no.pydeck.weather`). The only classic entry left is `test-postinstall`, a fixture for the post-install approval flow rather than a real plugin.
+Each legacy folder was deleted as its migration landed — clock, f1, spotify and system-monitor in August 2026, then home-assistant, and `finnhub` last with its 2.0.0 release. `MET` went with them (functionally superseded by `no.pydeck.weather`), and the `test-postinstall` fixture — the last entry carrying `"pdk": false` — was dropped once it had served its purpose. Nothing in the catalog is classic any more.
 
 `pdk` is a **pass-through, not a derived field**: the generator copies `"pdk": false` out of the latest version manifest and writes nothing otherwise, so an absent key means PDK. The marketplace tags *Classic* on `pdk === false`. A new classic plugin would have to declare the flag itself.
 
