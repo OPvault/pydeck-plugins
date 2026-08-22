@@ -46,7 +46,7 @@ Two things that bite:
 - **Always pass `--label`.** The default is `Official · Testing`; running it unqualified on `canary` or `stable` silently demotes the channel label.
 - **Regenerate in place.** Catalog-only fields resolve as `catalog.json` > *the existing root manifest* > defaults. Plugins without a `catalog.json` (most of them) get their `category`, `summary`, and `licenses` from the previous `manifest.json`. Delete or truncate that file first and those fields are lost.
 
-Other generator behavior worth knowing: version dirs must parse as a semver tuple or they're ignored; empty version dirs are purged from disk; the highest version supplies `name`/`author`/`doc_path`; `icon.svg` wins over `icon.png` at the slug root and a missing icon is a warning plus an empty `icon_path` (finnhub is currently in that state); a version manifest with no `max_pydeck_version` is written as `"1.0.0"`, not null — an absent field pins the plugin rather than leaving it open.
+Other generator behavior worth knowing: version dirs must parse as a semver tuple or they're ignored; empty version dirs are purged from disk; the highest version supplies `name`/`author`/`doc_path`; `icon.svg` wins over `icon.png` at the slug root and a missing icon is a warning plus an empty `icon_path` (`test-postinstall` is currently in that state); a version manifest with no `max_pydeck_version` is written as `"1.0.0"`, not null — an absent field pins the plugin rather than leaving it open.
 
 ## Plugin package layout
 
@@ -61,16 +61,14 @@ plugins/<slug>/
 
 The version `manifest.json` may set `documentation` (path to a markdown file, e.g. `DOCS.md`) and `show_markdown_after_install`; the generator turns those into a repo-relative `doc_path` on the plugin entry so the marketplace can render docs without installing.
 
-**Two generations coexist.** The PDK 2.x migration is partly done:
+**The PDK 2.x migration is done.** Every plugin folder under `plugins/` is on the PDK layout; the legacy format is documented here because the catalog still has to represent it:
 
 - *PDK 2.x* — RDNN slug (`no.pydeck.spotify`), `src/functions/<fn>/handler.py` + `template.xml`, `src/shared.py`, `assets/`, and a manifest declaring `functions`, `permissions`, `ui` widgets, `poll`, and `oauth`/`credentials`. The generation is read off those sources — a plugin `manifest.json` never declares `"pdk": true` (the core ignores the key if it is there).
 - *Legacy 1.x* — bare slug, flat `plugin.py` + `options.json` + `style.css`, and `"pdk": false` in the manifest to mark it as classic.
 
-Migrated: clock, f1, spotify, system-monitor, weather, home-assistant. The legacy duplicates of the first four were deleted in August 2026, and `MET` went with them (it was functionally superseded by `no.pydeck.weather`). `home-assistant` is mid-migration: legacy `home-assistant` 1.1.1 and PDK `no.pydeck.home-assistant` 2.0.0 are both published, so both appear in the catalog.
+Each legacy folder was deleted as its migration landed — clock, f1, spotify and system-monitor in August 2026, then home-assistant, and `finnhub` last with its 2.0.0 release. `MET` went with them (functionally superseded by `no.pydeck.weather`). The only classic entry left is `test-postinstall`, a fixture for the post-install approval flow rather than a real plugin.
 
-Still on the legacy layout, and the only copy of themselves — do not delete: `discord`, `finnhub`, `folders`, `keyboard`, `media-control`, `utilities`. (`test-postinstall` is a fixture for the post-install approval flow, not a real plugin.)
-
-The generator records which generation each entry is on as a `pdk` boolean, read off the latest version folder; the marketplace tags the non-PDK ones as *Classic*.
+`pdk` is a **pass-through, not a derived field**: the generator copies `"pdk": false` out of the latest version manifest and writes nothing otherwise, so an absent key means PDK. The marketplace tags *Classic* on `pdk === false`. A new classic plugin would have to declare the flag itself.
 
 New plugins get an RDNN id; the folder name under `plugins/` and the `slug` in the manifest must match it.
 

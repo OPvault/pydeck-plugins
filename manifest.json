@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "label": "Official · Testing",
-  "generated_at": "2026-08-22T19:33:09Z",
+  "generated_at": "2026-08-22T20:31:05Z",
   "plugins": [
     {
       "name": "Clock",
@@ -91,24 +91,32 @@
     },
     {
       "name": "Finnhub",
-      "slug": "finnhub",
+      "slug": "no.pydeck.finnhub",
       "category": "utilities",
       "summary": "Display live market prices from Finnhub (stocks, crypto, oil)",
       "author": "PyDeck Team",
-      "latest": "1.1.0",
-      "icon_path": "",
+      "latest": "2.0.0",
+      "icon_path": "plugins/no.pydeck.finnhub/icon.png",
       "compatible_pydeck_versions": [
         "1.0"
       ],
       "versions": [
         {
-          "version": "1.1.0",
-          "path": "plugins/finnhub/1.1.0",
-          "min_pydeck_version": "1.0.0",
-          "max_pydeck_version": "1.0.0"
+          "version": "2.0.0",
+          "path": "plugins/no.pydeck.finnhub/2.0.0",
+          "min_pydeck_version": "1.1.0",
+          "max_pydeck_version": null
         }
       ],
-      "pdk": false
+      "doc_path": "plugins/no.pydeck.finnhub/2.0.0/DOCS.md",
+      "show_markdown_after_install": true,
+      "licenses": [
+        {
+          "name": "Finnhub",
+          "file": "meta/licenses/LICENSE-finnhub",
+          "description": "Quotes and candle data are requested from the Finnhub REST API with the user's own API key. Powers every value the Market Price button draws."
+        }
+      ]
     },
     {
       "name": "Folders",

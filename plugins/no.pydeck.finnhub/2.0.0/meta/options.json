@@ -1,0 +1,20 @@
+{
+  "description": "Display live market prices from Finnhub (stocks, crypto, oil)",
+  "features": [
+    "Single symbol quote — stocks, crypto, or commodities",
+    "Optional change line for 1h, 1d, or 1w, coloured by direction",
+    "Freeform symbol entry with aliases like BTC, ETH, oil, brent, wti, and gold",
+    "Configurable decimal precision and optional currency suffix",
+    "Press to refresh now; polls every 15 seconds otherwise"
+  ],
+  "tags": [
+    "pdk",
+    "stocks",
+    "crypto",
+    "oil",
+    "finnhub",
+    "finance",
+    "market",
+    "quote"
+  ]
+}

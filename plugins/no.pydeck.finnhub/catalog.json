@@ -1,0 +1,8 @@
+{
+  "category": "utilities",
+  "compatible_pydeck_versions": ["1.0"],
+  "summary": "Display live market prices from Finnhub (stocks, crypto, oil)",
+  "licenses": [
+    { "name": "Finnhub", "file": "meta/licenses/LICENSE-finnhub", "description": "Quotes and candle data are requested from the Finnhub REST API with the user's own API key. Powers every value the Market Price button draws." }
+  ]
+}

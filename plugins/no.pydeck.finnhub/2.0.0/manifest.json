@@ -1,0 +1,100 @@
+{
+  "name": "Finnhub",
+  "version": "2.0.0",
+  "description": "Display live market prices from Finnhub (stocks, crypto, oil)",
+  "author": "PyDeck Team",
+  "min_pydeck_version": "1.1.0",
+  "max_pydeck_version": null,
+  "changelog": "CHANGELOG.md",
+  "credentials": [
+    {
+      "id": "api_key",
+      "label": "API Key",
+      "type": "password"
+    }
+  ],
+  "permissions": {
+    "json": ["loads"],
+    "urllib.request": ["Request", "urlopen"],
+    "urllib.parse": ["urlencode"],
+    "urllib.error": ["HTTPError", "URLError"],
+    "pathlib": ["Path"],
+    "time": ["time"]
+  },
+  "documentation": "DOCS.md",
+  "show_markdown_after_install": true,
+  "functions": {
+    "quote": {
+      "label": "Market Price",
+      "description": "Display one market symbol quote using Finnhub",
+      "sidebar_icon": "assets/icons/stock.svg",
+      "title_readonly": true,
+      "disableGallary": true,
+      "disableGallery": true,
+      "default_display": {
+        "color": "#0f4c81",
+        "text": "",
+        "scroll_enabled": false
+      },
+      "poll": {
+        "function": "on_poll",
+        "interval_ms": 15000
+      },
+      "ui": [
+        {
+          "type": "input",
+          "id": "symbol",
+          "label": "Symbol",
+          "placeholder": "AAPL, BTC, ETH, oil, brent, wti, or a Finnhub symbol",
+          "default": "AAPL",
+          "autosave": "off",
+          "help_text": "Common aliases like BTC, ETH, oil, brent, wti, and gold are supported, and the plugin picks the matching Finnhub feed automatically.",
+          "help_label": "Browse Finnhub symbols",
+          "help_url": "https://finnhub.io/docs/api/stock-symbols"
+        },
+        {
+          "type": "number",
+          "id": "decimals",
+          "label": "Decimal Places",
+          "default": 2,
+          "min": 0,
+          "max": 8
+        },
+        {
+          "type": "group",
+          "id": "quote_display_group",
+          "label": "Display",
+          "fields": [
+            {
+              "type": "checkbox",
+              "id": "show_change",
+              "label": "Show Change",
+              "default": false
+            },
+            {
+              "type": "select",
+              "id": "change_period",
+              "label": "Change Period",
+              "default": "day",
+              "visible_if": {
+                "field": "show_change",
+                "value": true
+              },
+              "options": [
+                { "label": "1 Hour", "value": "hour" },
+                { "label": "1 Day", "value": "day" },
+                { "label": "1 Week", "value": "week" }
+              ]
+            },
+            {
+              "type": "checkbox",
+              "id": "show_currency",
+              "label": "Show Currency Code",
+              "default": false
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

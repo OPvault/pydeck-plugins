@@ -1,0 +1,81 @@
+:root {
+  --bg: {_button_gradient};
+  --symbol: #cddce8;
+  --price: #ffffff;
+  --period: #8fa3b5;
+  --up: #3ddc84;
+  --down: #ff6b6b;
+  --flat: #b8c4d0;
+  --error: #ffab91;
+}
+
+.face {
+  background: var(--bg);
+  padding: 4;
+  direction: column;
+  align: center;
+  justify: center;
+  gap: 2;
+}
+
+/* ── Roles: colour and weight only ── */
+
+.sym {
+  color: var(--symbol);
+  font-weight: bold;
+  text-align: center;
+}
+
+.price {
+  color: var(--price);
+  font-weight: bold;
+  text-align: center;
+}
+
+.chg {
+  font-weight: bold;
+  text-align: center;
+}
+
+.chg-up   { color: var(--up); }
+.chg-down { color: var(--down); }
+.chg-flat { color: var(--flat); }
+
+.err {
+  color: var(--error);
+  text-align: center;
+}
+
+.chg-row {
+  direction: row;
+  align: center;
+  justify: center;
+  gap: 3;
+}
+
+.period {
+  color: var(--period);
+  font-size: 8;
+  text-align: center;
+}
+
+/*
+ * ── Sizes ──
+ *
+ * <text> does not wrap or shrink, so each line is measured in the handler and
+ * paired with the largest size class it fits into — see fit_size() in
+ * src/shared.py.  Keep this ladder in step with _SIZES there.
+ */
+
+.sz-24 { font-size: 24; }
+.sz-21 { font-size: 21; }
+.sz-18 { font-size: 18; }
+.sz-16 { font-size: 16; }
+.sz-14 { font-size: 14; }
+.sz-13 { font-size: 13; }
+.sz-12 { font-size: 12; }
+.sz-11 { font-size: 11; }
+.sz-10 { font-size: 10; }
+.sz-9  { font-size: 9; }
+.sz-8  { font-size: 8; }
+.sz-7  { font-size: 7; }

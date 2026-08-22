@@ -40,6 +40,11 @@ For each plugins/<slug>/ directory:
 
   4. The icon path is auto-detected: icon.svg is preferred over icon.png.
 
+  5. "pdk" is copied through only when the latest version's manifest declares
+     it as false, which is how a classic plugin marks itself.  It is never
+     derived from the version folder and never written as true: an absent key
+     means PDK, and the marketplace tags Classic on `pdk === false`.
+
 Plugins are written in alphabetical order by name.
 """
 
@@ -145,37 +150,6 @@ def _catalog_meta(slug_dir: Path) -> Dict[str, Any]:
         return {}
 
 
-# Mirrors lib/plugin.py:_PDK_LEGACY_SKIP_DIRS in the PyDeck core.
-PDK_SKIP_DIRS = {"__pycache__", "img", "storage", "node_modules",
-                 "src", "assets", "meta", "scripts"}
-
-
-def _is_pdk_version(version_dir: Path) -> bool:
-    """Whether a version folder holds PDK XML sources rather than classic ones.
-
-    Deliberately mirrors ``lib/plugin.py:_pdk_sources_present`` in the PyDeck
-    core, so the catalog's answer matches what the app decides after install:
-    the new ``src/functions/<fn>/template.xml`` layout, a legacy root
-    ``plugin.xml``, or a legacy per-function subdirectory holding XML.
-    """
-    funcs_dir = version_dir / "src" / "functions"
-    if funcs_dir.is_dir():
-        for child in funcs_dir.iterdir():
-            if child.is_dir() and (child / "template.xml").is_file():
-                return True
-    if (version_dir / "plugin.xml").is_file():
-        return True
-    for child in version_dir.iterdir():
-        if (
-            child.is_dir()
-            and not child.name.startswith(".")
-            and child.name not in PDK_SKIP_DIRS
-            and any(child.glob("*.xml"))
-        ):
-            return True
-    return False
-
-
 def _read_version_manifest(version_dir: Path) -> Optional[Dict[str, Any]]:
     """Read and return the parsed manifest.json inside a version directory."""
     f = version_dir / "manifest.json"
@@ -208,7 +182,6 @@ def _build_plugin_entry(
     # ── Read all version manifests ────────────────────────────────────────────
     versions: List[Dict[str, Any]] = []
     latest_meta: Optional[Dict[str, Any]] = None
-    latest_dir: Optional[Path] = None
 
     for vdir in version_dirs:
         vmeta = _read_version_manifest(vdir)
@@ -221,7 +194,6 @@ def _build_plugin_entry(
             "max_pydeck_version": vmeta["max_pydeck_version"] if "max_pydeck_version" in vmeta else DEFAULT_PYDECK,
         })
         latest_meta = vmeta   # last (highest) version wins
-        latest_dir = vdir
 
     if not versions or latest_meta is None:
         print(f"  SKIP {slug}: no readable version manifests", file=sys.stderr)
@@ -263,12 +235,15 @@ def _build_plugin_entry(
         "icon_path":                icon,
         "compatible_pydeck_versions": compat,
         "versions":                 versions,
-        # Which generation the latest version is built on. The marketplace tags
-        # classic plugins from this, and only the catalog can answer it: an
-        # installed copy may sit under an RDNN alias holding a different
-        # generation than the entry it resolves from.
-        "pdk":                      _is_pdk_version(latest_dir) if latest_dir else False,
     }
+
+    # ── Classic marker ────────────────────────────────────────────────────────
+    # Only a plugin that declares "pdk": false in its own version manifest is
+    # carried through as classic; the key is never derived from the version
+    # folder's contents and never written as true. An absent key means PDK,
+    # which is what the marketplace assumes (it tags Classic on `pdk === false`).
+    if latest_meta.get("pdk") is False:
+        entry["pdk"] = False
 
     # ── Bundled markdown documentation (latest version only) ──────────────────
     # A plugin version may ship a markdown file referenced by "documentation".
