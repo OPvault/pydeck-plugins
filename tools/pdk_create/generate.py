@@ -25,6 +25,7 @@ class PluginSpec:
     functions: List[str]
     preset: Preset
     min_pydeck_version: str = "1.1.0"
+    include_post_install_script: bool = False
 
 
 def _write_text(path: Path, content: str) -> None:
@@ -61,7 +62,7 @@ def _manifest_json(spec: PluginSpec) -> dict:
         }
         functions[fn] = entry
 
-    return {
+    manifest: dict = {
         "name": spec.name,
         "version": spec.version,
         "description": spec.description,
@@ -71,6 +72,9 @@ def _manifest_json(spec: PluginSpec) -> dict:
         "functions": functions,
         "pdk": True,
     }
+    if spec.include_post_install_script:
+        manifest["post_install_script"] = "scripts/setup.sh"
+    return manifest
 
 
 def _shared_py(spec: PluginSpec) -> str:
@@ -228,7 +232,8 @@ def write_plugin(
     (plugin_root / "src" / "functions").mkdir(parents=True, exist_ok=True)
     (plugin_root / "assets" / "icons").mkdir(parents=True, exist_ok=True)
     (plugin_root / "assets" / "fonts").mkdir(parents=True, exist_ok=True)
-    (plugin_root / "scripts").mkdir(parents=True, exist_ok=True)
+    if spec.include_post_install_script:
+        (plugin_root / "scripts").mkdir(parents=True, exist_ok=True)
     (plugin_root / "meta" / "licenses").mkdir(parents=True, exist_ok=True)
 
     _write_text(plugin_root / "manifest.json", json.dumps(_manifest_json(spec), indent=2) + "\n")
@@ -244,9 +249,10 @@ def write_plugin(
     _write_text(plugin_root / "assets" / "icons" / ".gitkeep", "")
     _write_text(plugin_root / "assets" / "fonts" / ".gitkeep", "")
 
-    setup = plugin_root / "scripts" / "setup.sh"
-    _write_text(setup, _setup_sh(spec))
-    _chmod_exec(setup)
+    if spec.include_post_install_script:
+        setup = plugin_root / "scripts" / "setup.sh"
+        _write_text(setup, _setup_sh(spec))
+        _chmod_exec(setup)
 
     _write_text(plugin_root / "meta" / "options.json", _options_json(spec))
     _write_text(plugin_root / "meta" / "licenses" / "LICENSE-main", _license_main(spec))

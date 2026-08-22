@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import argparse
-import re
 import sys
 from pathlib import Path
 
@@ -14,49 +13,12 @@ from .paths import (
     prompt_for_plugin_parent,
     resolve_plugin_parent,
 )
-
-_FUNC_RE = re.compile(r"^[a-z][a-z0-9_]*$")
-
-# Match PyDeck's RDNN rules (see pydeck ``lib/plugin_id.py``).
-_RDNN_RE = re.compile(
-    r"^(?:[a-z0-9](?:[a-z0-9_-]*[a-z0-9])?)(?:\.[a-z0-9](?:[a-z0-9_-]*[a-z0-9])?){2,}$",
-)
+from .session import InteractiveOutcome
+from .validators import validate_functions, validate_plugin_id
 
 
 def _err(msg: str) -> None:
     print(msg, file=sys.stderr)
-
-
-def validate_rdnn_plugin_id(plugin_id: str) -> bool:
-    s = (plugin_id or "").strip()
-    return bool(s) and bool(_RDNN_RE.fullmatch(s))
-
-
-def validate_plugin_id(raw: str) -> str:
-    """Validate and return the RDNN plugin id (install directory name)."""
-    s = raw.strip()
-    if not validate_rdnn_plugin_id(s):
-        raise ValueError(
-            "Invalid plugin id: use reverse-DNS form with at least three labels, "
-            "e.g. com.example.myplugin or no.pydeck.myplugin "
-            "(lowercase letters, digits, hyphen, underscore per label).",
-        )
-    return s
-
-
-def validate_functions(raw: str) -> list[str]:
-    parts = [p.strip() for p in raw.replace(";", ",").split(",") if p.strip()]
-    if not parts:
-        raise ValueError("At least one function id is required.")
-    out: list[str] = []
-    for p in parts:
-        if not _FUNC_RE.match(p):
-            raise ValueError(
-                f"Invalid function id {p!r}: use snake_case (letter first, then "
-                "letters, digits, underscores).",
-            )
-        out.append(p)
-    return out
 
 
 def interactive_defaults() -> dict:
@@ -87,6 +49,10 @@ def interactive_defaults() -> dict:
         _err("Unknown preset; using static.")
         preset_in = "static"
     min_pv = input("min_pydeck_version [1.1.0]: ").strip() or "1.1.0"
+    post_in = input(
+        "Include post-install script (scripts/setup.sh + manifest)? [y/N]: ",
+    ).strip().lower()
+    include_post = post_in in ("y", "yes")
     return {
         "slug": slug,
         "name": name,
@@ -96,7 +62,48 @@ def interactive_defaults() -> dict:
         "functions": functions,
         "preset": preset_in,
         "min_pydeck_version": min_pv,
+        "include_post_install_script": include_post,
     }
+
+
+def _stdin_interactive_outcome(args: argparse.Namespace) -> InteractiveOutcome | None:
+    print(
+        "Note: Textual is not installed; using line prompts. "
+        "For the TUI: pip install -r tools/pdk_create/requirements.txt\n",
+        file=sys.stderr,
+    )
+    data = interactive_defaults()
+    slug = data["slug"]
+    functions = data["functions"]
+    try:
+        plugins_dir = _resolve_plugins_dir(args, interactive=True)
+    except FileNotFoundError:
+        raise
+    preset = data["preset"]
+    if preset not in ("counter", "static"):
+        preset = "static"
+    spec = PluginSpec(
+        slug=slug,
+        name=data["name"],
+        description=data["description"],
+        author=data["author"],
+        version=data["version"],
+        functions=functions,
+        preset=preset,
+        min_pydeck_version=data["min_pydeck_version"],
+        include_post_install_script=data["include_post_install_script"],
+    )
+    plugin_root = plugins_dir / spec.slug
+    force = False
+    if plugin_root.exists() and any(plugin_root.iterdir()):
+        yn = input(
+            f"{plugin_root} exists and is not empty. Overwrite? [y/N]: ",
+        ).strip().lower()
+        if yn not in ("y", "yes"):
+            print("Aborted.")
+            return None
+        force = True
+    return InteractiveOutcome(plugins_dir=plugins_dir, spec=spec, force=force)
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -161,6 +168,11 @@ def build_parser() -> argparse.ArgumentParser:
         default="1.1.0",
         dest="min_pydeck_version",
         help="Written to manifest.json",
+    )
+    p.add_argument(
+        "--post-install",
+        action="store_true",
+        help="Create scripts/setup.sh and set manifest post_install_script",
     )
     p.add_argument(
         "--non-interactive",
@@ -242,46 +254,36 @@ def main(argv: list[str] | None = None) -> int:
             functions=functions,
             preset=args.preset,
             min_pydeck_version=args.min_pydeck_version,
+            include_post_install_script=args.post_install,
         )
         plugin_root = plugins_dir / spec.slug
+        force = args.force
     else:
-        data = interactive_defaults()
+        pre = resolve_plugin_parent(args.pydeck_source, args.pydeck_root)
+        detected = first_existing_candidate()
         try:
-            slug = validate_plugin_id(data["slug"])
-            functions = data["functions"]
-        except ValueError as e:
-            _err(str(e))
-            return 2
-        try:
-            plugins_dir = _resolve_plugins_dir(args, interactive=True)
-        except FileNotFoundError as e:
-            _err(str(e))
-            return 2
-        preset = data["preset"]
-        if preset not in ("counter", "static"):
-            preset = "static"
-        spec = PluginSpec(
-            slug=slug,
-            name=data["name"],
-            description=data["description"],
-            author=data["author"],
-            version=data["version"],
-            functions=functions,
-            preset=preset,
-            min_pydeck_version=data["min_pydeck_version"],
-        )
-        plugin_root = plugins_dir / spec.slug
-        if plugin_root.exists() and any(plugin_root.iterdir()):
-            yn = input(
-                f"{plugin_root} exists and is not empty. Overwrite? [y/N]: ",
-            ).strip().lower()
-            if yn not in ("y", "yes"):
-                print("Aborted.")
-                return 1
-            args.force = True
+            from .tui import run_interactive_tui
+        except ImportError:
+            try:
+                outcome = _stdin_interactive_outcome(args)
+            except ValueError:
+                return 2
+            except FileNotFoundError as e:
+                _err(str(e))
+                return 2
+        else:
+            outcome = run_interactive_tui(
+                pre_resolved_plugin_parent=pre,
+                detected_candidate=detected,
+            )
+        if outcome is None:
+            return 1
+        plugin_root = outcome.plugins_dir / outcome.spec.slug
+        spec = outcome.spec
+        force = outcome.force
 
     try:
-        write_plugin(plugin_root, spec, force=args.force)
+        write_plugin(plugin_root, spec, force=force)
     except (FileExistsError, NotADirectoryError) as e:
         _err(str(e))
         return 1
