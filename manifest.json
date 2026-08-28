@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "label": "Official · Stable",
+  "label": "Stable",
   "root_url": "https://raw.githubusercontent.com/OPvault/pydeck-plugins/stable/",
   "generated_at": "2026-04-03T23:19:48Z",
   "plugins": [
