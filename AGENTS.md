@@ -8,7 +8,12 @@ A **static plugin catalog** for [PyDeck](https://github.com/opvault/pydeck) — 
 
 ## Branches are release channels
 
-`testing`, `canary`, and `stable` are parallel channels of the same catalog, each distinguished by the `label` field in its `manifest.json` (`Official · Testing` / `· Canary` / `· Stable`). Users pick a channel in the marketplace UI.
+`testing`, `canary`, and `stable` are parallel channels of the same catalog, each distinguished by the `label` field in its `manifest.json` (`Testing` / `Canary` / `Stable`). Users pick a channel in the marketplace UI.
+
+The label names the channel only. PyDeck marks a catalog **Official** itself, from the host it
+was fetched from (`*.pydeck.no`, or a `raw.githubusercontent.com` URL under `OPvault`) — never
+from anything the manifest claims, which any catalog could forge. Do not put "Official" back
+in the label.
 
 The promotion chain runs **testing → canary → stable**.
 
@@ -20,7 +25,7 @@ The promotion chain runs **testing → canary → stable**.
 
 ```bash
 # Regenerate root manifest.json after ANY change under plugins/
-python generate_manifest.py --label "Official · Testing"
+python generate_manifest.py --label "Testing"
 python generate_manifest.py --dry-run          # print, don't write
 
 # Pull plugin sources from a live PyDeck install into this repo
@@ -44,7 +49,7 @@ python -m tools.pdk_create --non-interactive --plugin-id no.pydeck.foo --name Fo
 
 Two things that bite:
 
-- **Always pass `--label`.** The default is `Official · Testing`; running it unqualified on `canary` or `stable` silently demotes the channel label.
+- **Always pass `--label`.** The default is `Testing`; running it unqualified on `canary` or `stable` silently demotes the channel label.
 - **Regenerate in place.** Catalog-only fields resolve as `catalog.json` > *the existing root manifest* > defaults. Plugins without a `catalog.json` (most of them) get their `category`, `summary`, and `licenses` from the previous `manifest.json`. Delete or truncate that file first and those fields are lost.
 
 Other generator behavior worth knowing: version dirs must parse as a semver tuple or they're ignored; empty version dirs are purged from disk; the highest version supplies `name`/`author`/`doc_path`; `icon.svg` wins over `icon.png` at the slug root and a missing icon is a warning plus an empty `icon_path`; a version manifest with no `max_pydeck_version` is written as `"1.0.0"`, not null — an absent field pins the plugin rather than leaving it open.

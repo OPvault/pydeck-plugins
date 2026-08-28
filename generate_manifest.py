@@ -7,7 +7,7 @@ Usage
 
 Options
 -------
-    --label TEXT      Catalog label string (default: "Official · Testing")
+    --label TEXT      Catalog label string (default: "Testing")
     --output PATH     Output file path     (default: manifest.json)
     --dry-run         Print the result to stdout instead of writing it
 
@@ -74,7 +74,7 @@ PLUGINS_DIR  = REPO_ROOT / "plugins"
 ROOT_MANIFEST = REPO_ROOT / "manifest.json"
 
 SCHEMA_VERSION = 1
-DEFAULT_LABEL  = "Official · Testing"
+DEFAULT_LABEL  = "Testing"
 DEFAULT_PYDECK = "1.0.0"
 ICON_PRIORITY  = ("icon.svg", "icon.png")
 # Conventional changelog filename, used when a version manifest does not name

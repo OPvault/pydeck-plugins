@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "label": "Official · Testing",
+  "label": "Testing",
   "root_url": "https://raw.githubusercontent.com/OPvault/pydeck-plugins/testing/",
   "generated_at": "2026-08-28T11:45:26Z",
   "plugins": [
