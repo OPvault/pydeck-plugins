@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "label": "Official · Canary",
+  "label": "Canary",
   "root_url": "https://raw.githubusercontent.com/OPvault/pydeck-plugins/canary/",
   "generated_at": "2026-04-06T20:43:05Z",
   "plugins": [

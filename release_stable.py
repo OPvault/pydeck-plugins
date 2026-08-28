@@ -4,12 +4,12 @@
 Steps
 -----
 1. Verify the working tree is clean and we are on canary.
-2. Regenerate manifest.json with label "Official · Stable".
+2. Regenerate manifest.json with label "Stable".
 3. Commit that change on canary.
 4. Merge canary into stable (fast-forward).
 5. Push stable.
 6. Switch back to canary.
-7. Regenerate manifest.json with label "Official · Canary".
+7. Regenerate manifest.json with label "Canary".
 8. Commit and push canary.
 
 Usage
@@ -26,8 +26,8 @@ from pathlib import Path
 
 REPO_ROOT     = Path(__file__).resolve().parent
 GENERATOR     = REPO_ROOT / "generate_manifest.py"
-DEFAULT_STABLE = "Official · Stable"
-DEFAULT_CANARY = "Official · Canary"
+DEFAULT_STABLE = "Stable"
+DEFAULT_CANARY = "Canary"
 
 # Step 1 regenerates the *stable* manifest while still standing on canary, so
 # the generator's branch-derived default would stamp canary's URL onto stable.
