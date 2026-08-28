@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "label": "Official · Testing",
-  "generated_at": "2026-08-22T20:38:24Z",
+  "generated_at": "2026-08-28T11:45:26Z",
   "plugins": [
     {
       "name": "Clock",
@@ -19,13 +19,15 @@
           "version": "2.0.2",
           "path": "plugins/no.pydeck.clock/2.0.2",
           "min_pydeck_version": "1.1.0",
-          "max_pydeck_version": null
+          "max_pydeck_version": null,
+          "changelog_path": "plugins/no.pydeck.clock/2.0.2/CHANGELOG.md"
         },
         {
           "version": "3.0.0",
           "path": "plugins/no.pydeck.clock/3.0.0",
           "min_pydeck_version": "1.1.0",
-          "max_pydeck_version": null
+          "max_pydeck_version": null,
+          "changelog_path": "plugins/no.pydeck.clock/3.0.0/CHANGELOG.md"
         }
       ]
     },
@@ -45,7 +47,8 @@
           "version": "2.0.0",
           "path": "plugins/no.pydeck.discord/2.0.0",
           "min_pydeck_version": "1.1.0",
-          "max_pydeck_version": null
+          "max_pydeck_version": null,
+          "changelog_path": "plugins/no.pydeck.discord/2.0.0/CHANGELOG.md"
         }
       ],
       "doc_path": "plugins/no.pydeck.discord/2.0.0/DOCS.md",
@@ -67,13 +70,15 @@
           "version": "2.0.1",
           "path": "plugins/no.pydeck.f1/2.0.1",
           "min_pydeck_version": "1.1.0",
-          "max_pydeck_version": null
+          "max_pydeck_version": null,
+          "changelog_path": "plugins/no.pydeck.f1/2.0.1/CHANGELOG.md"
         },
         {
           "version": "2.1.0",
           "path": "plugins/no.pydeck.f1/2.1.0",
           "min_pydeck_version": "1.1.0",
-          "max_pydeck_version": null
+          "max_pydeck_version": null,
+          "changelog_path": "plugins/no.pydeck.f1/2.1.0/CHANGELOG.md"
         }
       ],
       "licenses": [
@@ -105,7 +110,8 @@
           "version": "2.0.0",
           "path": "plugins/no.pydeck.finnhub/2.0.0",
           "min_pydeck_version": "1.1.0",
-          "max_pydeck_version": null
+          "max_pydeck_version": null,
+          "changelog_path": "plugins/no.pydeck.finnhub/2.0.0/CHANGELOG.md"
         }
       ],
       "doc_path": "plugins/no.pydeck.finnhub/2.0.0/DOCS.md",
@@ -134,7 +140,8 @@
           "version": "1.0.3",
           "path": "plugins/no.pydeck.folders/1.0.3",
           "min_pydeck_version": "1.1.0",
-          "max_pydeck_version": null
+          "max_pydeck_version": null,
+          "changelog_path": "plugins/no.pydeck.folders/1.0.3/CHANGELOG.md"
         }
       ]
     },
@@ -154,25 +161,29 @@
           "version": "2.0.0",
           "path": "plugins/no.pydeck.home-assistant/2.0.0",
           "min_pydeck_version": "1.1.0",
-          "max_pydeck_version": null
+          "max_pydeck_version": null,
+          "changelog_path": "plugins/no.pydeck.home-assistant/2.0.0/CHANGELOG.md"
         },
         {
           "version": "2.0.1",
           "path": "plugins/no.pydeck.home-assistant/2.0.1",
           "min_pydeck_version": "1.1.0",
-          "max_pydeck_version": null
+          "max_pydeck_version": null,
+          "changelog_path": "plugins/no.pydeck.home-assistant/2.0.1/CHANGELOG.md"
         },
         {
           "version": "2.0.2",
           "path": "plugins/no.pydeck.home-assistant/2.0.2",
           "min_pydeck_version": "1.1.0",
-          "max_pydeck_version": null
+          "max_pydeck_version": null,
+          "changelog_path": "plugins/no.pydeck.home-assistant/2.0.2/CHANGELOG.md"
         },
         {
           "version": "2.0.3",
           "path": "plugins/no.pydeck.home-assistant/2.0.3",
           "min_pydeck_version": "1.1.0",
-          "max_pydeck_version": null
+          "max_pydeck_version": null,
+          "changelog_path": "plugins/no.pydeck.home-assistant/2.0.3/CHANGELOG.md"
         }
       ],
       "doc_path": "plugins/no.pydeck.home-assistant/2.0.3/DOCS.md",
@@ -201,7 +212,8 @@
           "version": "1.0.5",
           "path": "plugins/no.pydeck.keyboard/1.0.5",
           "min_pydeck_version": "1.1.0",
-          "max_pydeck_version": null
+          "max_pydeck_version": null,
+          "changelog_path": "plugins/no.pydeck.keyboard/1.0.5/CHANGELOG.md"
         }
       ]
     },
@@ -221,7 +233,8 @@
           "version": "2.0.0",
           "path": "plugins/no.pydeck.media-control/2.0.0",
           "min_pydeck_version": "1.1.0",
-          "max_pydeck_version": null
+          "max_pydeck_version": null,
+          "changelog_path": "plugins/no.pydeck.media-control/2.0.0/CHANGELOG.md"
         }
       ],
       "doc_path": "plugins/no.pydeck.media-control/2.0.0/DOCS.md",
@@ -233,7 +246,7 @@
       "category": "media",
       "summary": "Control Spotify playback via the Web API (PDK)",
       "author": "PyDeck Team",
-      "latest": "2.0.5",
+      "latest": "2.0.6",
       "icon_path": "plugins/no.pydeck.spotify/icon.svg",
       "compatible_pydeck_versions": [
         "1.0"
@@ -243,34 +256,46 @@
           "version": "2.0.1",
           "path": "plugins/no.pydeck.spotify/2.0.1",
           "min_pydeck_version": "1.1.0",
-          "max_pydeck_version": null
+          "max_pydeck_version": null,
+          "changelog_path": "plugins/no.pydeck.spotify/2.0.1/CHANGELOG.md"
         },
         {
           "version": "2.0.2",
           "path": "plugins/no.pydeck.spotify/2.0.2",
           "min_pydeck_version": "1.1.0",
-          "max_pydeck_version": null
+          "max_pydeck_version": null,
+          "changelog_path": "plugins/no.pydeck.spotify/2.0.2/CHANGELOG.md"
         },
         {
           "version": "2.0.3",
           "path": "plugins/no.pydeck.spotify/2.0.3",
           "min_pydeck_version": "1.1.0",
-          "max_pydeck_version": null
+          "max_pydeck_version": null,
+          "changelog_path": "plugins/no.pydeck.spotify/2.0.3/CHANGELOG.md"
         },
         {
           "version": "2.0.4",
           "path": "plugins/no.pydeck.spotify/2.0.4",
           "min_pydeck_version": "1.1.0",
-          "max_pydeck_version": null
+          "max_pydeck_version": null,
+          "changelog_path": "plugins/no.pydeck.spotify/2.0.4/CHANGELOG.md"
         },
         {
           "version": "2.0.5",
           "path": "plugins/no.pydeck.spotify/2.0.5",
           "min_pydeck_version": "1.1.0",
-          "max_pydeck_version": null
+          "max_pydeck_version": null,
+          "changelog_path": "plugins/no.pydeck.spotify/2.0.5/CHANGELOG.md"
+        },
+        {
+          "version": "2.0.6",
+          "path": "plugins/no.pydeck.spotify/2.0.6",
+          "min_pydeck_version": "1.1.0",
+          "max_pydeck_version": null,
+          "changelog_path": "plugins/no.pydeck.spotify/2.0.6/CHANGELOG.md"
         }
       ],
-      "doc_path": "plugins/no.pydeck.spotify/2.0.5/DOCS.md",
+      "doc_path": "plugins/no.pydeck.spotify/2.0.6/DOCS.md",
       "show_markdown_after_install": true
     },
     {
@@ -289,7 +314,8 @@
           "version": "2.0.1",
           "path": "plugins/no.pydeck.system-monitor/2.0.1",
           "min_pydeck_version": "1.1.0",
-          "max_pydeck_version": null
+          "max_pydeck_version": null,
+          "changelog_path": "plugins/no.pydeck.system-monitor/2.0.1/CHANGELOG.md"
         }
       ]
     },
@@ -309,7 +335,8 @@
           "version": "1.0.2",
           "path": "plugins/no.pydeck.utilities/1.0.2",
           "min_pydeck_version": "1.1.0",
-          "max_pydeck_version": null
+          "max_pydeck_version": null,
+          "changelog_path": "plugins/no.pydeck.utilities/1.0.2/CHANGELOG.md"
         }
       ]
     },
@@ -329,7 +356,8 @@
           "version": "2.0.1",
           "path": "plugins/no.pydeck.weather/2.0.1",
           "min_pydeck_version": "1.1.0",
-          "max_pydeck_version": null
+          "max_pydeck_version": null,
+          "changelog_path": "plugins/no.pydeck.weather/2.0.1/CHANGELOG.md"
         }
       ],
       "licenses": [
