@@ -26,6 +26,7 @@ python generate_manifest.py --dry-run          # print, don't write
 # Pull plugin sources from a live PyDeck install into this repo
 python sync_from_pydeck.py --list-plugins      # NEW/CHANGED/UNCHANGED report
 python sync_from_pydeck.py --plugin <slug> --dry-run
+python sync_from_pydeck.py --plugin <slug> --changelog "Fixed X" --changelog "Added Y"
 python sync_from_pydeck.py --regen-conf        # re-prompt for the source path
 
 # Promote canary → stable (relabels, merges, pushes, restores canary label)
@@ -56,6 +57,7 @@ plugins/<slug>/
 ├── icon.svg | icon.png
 └── <version>/
     ├── manifest.json     # source of truth for name, author, version, min/max_pydeck_version
+    ├── CHANGELOG.md      # cumulative, newest first — every plugin ships one
     └── ...
 ```
 
@@ -72,9 +74,45 @@ Each legacy folder was deleted as its migration landed — clock, f1, spotify an
 
 New plugins get an RDNN id; the folder name under `plugins/` and the `slug` in the manifest must match it.
 
+## Every plugin version ships a CHANGELOG.md
+
+`CHANGELOG.md` at the root of a version folder is a **standard, not an option** — the manifest declares it as `"changelog": "CHANGELOG.md"` (what `pdk_create` scaffolds), and the generator also picks the file up by name when the key is missing, so an older plugin gets one for free.
+
+**A version's file holds only that version's own changes.** One bare section, no title and no preamble, with `### Added` / `### Changed` / `### Fixed` / `### Removed` groups beneath the version heading:
+
+```markdown
+## 2.0.6 — 2026-08-28
+
+### Fixed
+
+- The track label sat off-centre. A percentage width resolves against the parent
+  box rather than its content box, so the horizontal padding on the row pushed
+  every full-width child to the right; the inset is now vertical only.
+- Dropped an invalid `text-anchor` declaration from the shared stylesheet.
+```
+
+That is the entire file. Write entries that explain what changed *and why it mattered* — the reader is deciding whether to upgrade, and "fixed a bug" tells them nothing. Only the `##` line is parsed, so the `###` groups are free-form and optional. Nothing is repeated between versions, and a published version's changelog never has to be touched again — which is what lets the file be written once, in the commit that ships the version, and left alone forever.
+
+PyDeck assembles the range it needs by **concatenating one file per version, newest first**: the update badge on a card fetches every version above the installed one, the corner button fetches them all. So the generator emits `changelog_path` on each entry in `versions`, not on the plugin:
+
+```json
+"versions": [
+  { "version": "2.0.6", "path": "plugins/no.pydeck.spotify/2.0.6",
+    "changelog_path": "plugins/no.pydeck.spotify/2.0.6/CHANGELOG.md" },
+  { "version": "2.0.5", "path": "plugins/no.pydeck.spotify/2.0.5",
+    "changelog_path": "plugins/no.pydeck.spotify/2.0.5/CHANGELOG.md" }
+]
+```
+
+Headings are parsed as `## <version> — <date>`, so write the version first. A version with no changelog is simply skipped when assembling — coverage does not have to be complete.
+
+The changelog is written by `sync_from_pydeck.py`, never diffed by it: a file only the repo has must not read as a deletion, and a changelog edit on its own is not a reason to publish a new version. That means a hand-edit to a version folder's `CHANGELOG.md` will *not* propagate back to the live install — edit the install's copy, or pass `--changelog`.
+
 ## Tooling internals
 
 `sync_from_pydeck.py` is the normal path for updating a plugin: it diffs the live install against this repo's latest version folder, and when files differ but the version is unchanged it **bumps the patch segment and writes that back into the pydeck source manifest** before copying into a new version folder. It runs `generate_manifest.py` when it finishes (`--no-generate` to skip).
+
+Publishing a version also brings its `CHANGELOG.md` up to date: the live install's copy wins, the previous repo version supplies the history when the install has none, and a section for the new version is prepended unless one is already there. The result is written into **both** the version folder and the live install. Bullets come from `--changelog TEXT` (repeatable), else an interactive prompt, else a placeholder line; `--no-changelog` skips the whole step. Since the flag applies to every plugin in the run, pair it with `--plugin`.
 
 `sync_from_pydeck.py` and `tools/pdk_create/` share one path-resolution scheme for locating the pydeck app's `plugins/plugin/` directory: saved `~/.config/pydeck/pydeck-plugins/path.json` (`pydeck_source` key) → `PYDECK_SOURCE`/`PYDECK_ROOT` env → hardcoded candidates. `generate_manifest.py` only ever reads the catalog tree in this repo.
 

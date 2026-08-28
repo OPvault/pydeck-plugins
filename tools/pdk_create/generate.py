@@ -7,6 +7,7 @@ import json
 import shutil
 import stat
 from dataclasses import dataclass
+from datetime import date
 from pathlib import Path
 from typing import List, Literal
 
@@ -68,6 +69,7 @@ def _manifest_json(spec: PluginSpec) -> dict:
         "author": spec.author,
         "min_pydeck_version": spec.min_pydeck_version,
         "max_pydeck_version": None,
+        "changelog": "CHANGELOG.md",
         "functions": functions,
     }
     if spec.include_post_install_script:
@@ -192,6 +194,14 @@ def _options_json(spec: PluginSpec) -> str:
     return json.dumps(data, indent=2) + "\n"
 
 
+def _changelog_md(spec: PluginSpec) -> str:
+    """One section covering this version only — PyDeck joins versions itself."""
+    return f"""## {spec.version} — {date.today().isoformat()}
+
+- Initial release.
+"""
+
+
 def _license_main(spec: PluginSpec) -> str:
     return f"""License placeholder for {spec.name}
 
@@ -235,6 +245,7 @@ def write_plugin(
     (plugin_root / "meta" / "licenses").mkdir(parents=True, exist_ok=True)
 
     _write_text(plugin_root / "manifest.json", json.dumps(_manifest_json(spec), indent=2) + "\n")
+    _write_text(plugin_root / "CHANGELOG.md", _changelog_md(spec))
     _write_text(plugin_root / "src" / "shared.py", _shared_py(spec))
     _write_text(plugin_root / "src" / "shared.css", _shared_css())
 

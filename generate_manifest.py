@@ -33,6 +33,13 @@ For each plugins/<slug>/ directory:
      "documentation" file (markdown), the entry also gets a "doc_path"
      (repo-relative path to that file) and "show_markdown_after_install".
 
+     Every version folder is also probed for a changelog, which becomes that
+     version's "changelog_path" inside "versions".  Each file holds only its
+     own version's changes, so the marketplace stitches the range it needs
+     together rather than slicing one cumulative file.  The manifest's
+     "changelog" key names the file explicitly; CHANGELOG.md is the
+     conventional fallback every plugin gets without declaring anything.
+
   3. Catalog-only fields (category, compatible_pydeck_versions, summary
      override) are read from an optional plugins/<slug>/catalog.json.
      When that file is absent the script falls back to the matching entry
@@ -69,6 +76,9 @@ SCHEMA_VERSION = 1
 DEFAULT_LABEL  = "Official · Testing"
 DEFAULT_PYDECK = "1.0.0"
 ICON_PRIORITY  = ("icon.svg", "icon.png")
+# Conventional changelog filename, used when a version manifest does not name
+# one itself. Shipping this file is all a plugin has to do to get a changelog.
+CHANGELOG_FILE = "CHANGELOG.md"
 
 
 def default_pydeck_plugin_install_dir() -> Path:
@@ -163,6 +173,25 @@ def _read_version_manifest(version_dir: Path) -> Optional[Dict[str, Any]]:
         return None
 
 
+def _changelog_rel(version_dir: Path, vmeta: Dict[str, Any]) -> Optional[str]:
+    """Return the version-relative changelog filename, or None if there is none.
+
+    A manifest may name the file with "changelog"; otherwise the conventional
+    CHANGELOG.md is picked up automatically. Either way the file has to exist.
+    """
+    declared = str(vmeta.get("changelog") or "").strip("/")
+    name = declared or CHANGELOG_FILE
+    if (version_dir / name).is_file():
+        return name
+    if declared:
+        print(
+            f"  WARNING: {version_dir / declared} is declared as the changelog "
+            f"but does not exist",
+            file=sys.stderr,
+        )
+    return None
+
+
 def _build_plugin_entry(
     slug: str,
     slug_dir: Path,
@@ -187,12 +216,19 @@ def _build_plugin_entry(
         vmeta = _read_version_manifest(vdir)
         if vmeta is None:
             continue
-        versions.append({
+        entry_version: Dict[str, Any] = {
             "version":           vdir.name,
             "path":              f"plugins/{slug_dir.name}/{vdir.name}",
             "min_pydeck_version": vmeta["min_pydeck_version"] if "min_pydeck_version" in vmeta else DEFAULT_PYDECK,
             "max_pydeck_version": vmeta["max_pydeck_version"] if "max_pydeck_version" in vmeta else DEFAULT_PYDECK,
-        })
+        }
+        # Each version ships only its own changes, so the path belongs on the
+        # version rather than the plugin: the marketplace fetches one file per
+        # version in the range it is showing and concatenates them.
+        changelog_rel = _changelog_rel(vdir, vmeta)
+        if changelog_rel:
+            entry_version["changelog_path"] = f"{entry_version['path']}/{changelog_rel}"
+        versions.append(entry_version)
         latest_meta = vmeta   # last (highest) version wins
 
     if not versions or latest_meta is None:

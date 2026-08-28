@@ -14,6 +14,9 @@ Options
     --no-diff              Suppress the coloured per-file diff (shown by default)
     --no-generate          Skip running generate_manifest.py at the end
     --yes                  Skip confirmation prompts (non-interactive)
+    --changelog TEXT       Changelog bullet for the version being published
+                           (repeatable; skips the prompt)
+    --no-changelog         Don't touch CHANGELOG.md at all
     --regen-conf           Re-prompt for the source path and save it again
 
 Config
@@ -47,6 +50,12 @@ For every plugin directory found in the pydeck plugin directory:
      - Files differ and the manifest already has a higher version → copy into
        a new version folder using that version as-is.
 
+  3. Whenever a version is published, its CHANGELOG.md is written: one section
+     covering just that version. The install's CHANGELOG.md acts as the draft
+     for the next release — its bullets are picked up, or --changelog / a
+     prompt supplies them. The finished section is written into the new version
+     folder and back into the install.
+
 After all plugins have been processed, generate_manifest.py is run so the
 root manifest.json stays current.
 """
@@ -58,9 +67,11 @@ import difflib
 import filecmp
 import json
 import os
+import re
 import shutil
 import subprocess
 import sys
+from datetime import date
 from pathlib import Path
 from typing import Optional
 
@@ -101,6 +112,20 @@ REPO_ONLY_FILES: frozenset[str] = frozenset({
 # Directories / suffixes to ignore when copying or comparing source files.
 EXCLUDE_DIRS: frozenset[str] = frozenset({"__pycache__"})
 EXCLUDE_SUFFIXES: frozenset[str] = frozenset({".pyc", ".pyo"})
+
+# ── Changelog ──────────────────────────────────────────────────────────────────
+# Every plugin version ships a CHANGELOG.md holding *only that version's own
+# changes* — one bare section, no title. The marketplace concatenates the files
+# for the versions it is showing, so nothing repeats and a published version's
+# file never needs touching again. It is written by this script rather than
+# compared: a changelog that only the repo has must not read as a deletion, and
+# a changelog edit on its own is not a reason to publish a new version.
+
+CHANGELOG_FILE = "CHANGELOG.md"
+CHANGELOG_DEFAULT_NOTE = "Updated plugin files."
+
+# Files that never take part in the source ↔ repo comparison.
+COMPARE_IGNORED: frozenset[str] = REPO_ONLY_FILES | {CHANGELOG_FILE}
 
 # ── Candidate pydeck plugin directories (auto-detection order) ───────────────
 # PyDeck installs plugins under $XDG_DATA_HOME/pydeck/plugin (default
@@ -247,6 +272,104 @@ def _write_version(manifest_path: Path, new_version: str) -> None:
         updated = json.dumps(data, indent=2, ensure_ascii=False) + "\n"
     manifest_path.write_text(updated)
 
+# ── Changelog ──────────────────────────────────────────────────────────────────
+
+def _changelog_name(manifest_path: Path) -> str:
+    """Return the changelog filename a manifest declares, else the default."""
+    try:
+        declared = json.loads(manifest_path.read_text()).get("changelog")
+    except (json.JSONDecodeError, OSError):
+        declared = None
+    return str(declared).strip("/") if declared else CHANGELOG_FILE
+
+
+def _has_version_section(text: str, version: str) -> bool:
+    """True if the changelog already has a heading for *version*."""
+    # The trailing guard stops "1.0" from matching a "## 1.0.1" heading.
+    pattern = rf"^#{{1,3}}\s+v?\[?{re.escape(version)}\]?(?![.\d])"
+    return re.search(pattern, text, re.MULTILINE) is not None
+
+
+def _draft_notes(text: str) -> list[str]:
+    """Bullet lines from the install's changelog draft.
+
+    Only what sits *above* the first version heading counts. Anything from that
+    heading down is an already-published section, and harvesting it would copy
+    a whole history into the new version's file.
+    """
+    draft = re.split(r"^##\s", text, maxsplit=1, flags=re.MULTILINE)[0]
+    return [
+        line.strip()[2:].strip()
+        for line in draft.splitlines()
+        if line.strip().startswith("- ") and line.strip()[2:].strip()
+    ]
+
+
+def _changelog_section(version: str, notes: list[str]) -> str:
+    """Render the one section that is this version's whole changelog file."""
+    body = "\n".join(f"- {note}" for note in notes)
+    return f"## {version} — {date.today().isoformat()}\n\n{body}\n"
+
+
+def _prompt_changelog_notes(slug: str, version: str) -> list[str]:
+    """Ask for the bullets describing *version*; blank line ends the list."""
+    print(f"\n{_BOLD}Changelog for {slug} {version}{_RESET} "
+          f"{_DIM}(one bullet per line, empty line to finish){_RESET}")
+    notes: list[str] = []
+    while True:
+        try:
+            line = input("  - ").strip()
+        except EOFError:
+            break
+        if not line:
+            break
+        notes.append(line)
+    return notes
+
+
+def _sync_changelog(
+    slug: str,
+    source_plugin_dir: Path,
+    dest_version_dir: Path,
+    version: str,
+    notes: Optional[list[str]],
+    dry_run: bool,
+    interactive: bool,
+) -> str:
+    """Write *version*'s changelog section into the repo and the live install.
+
+    The install's changelog is the draft for whatever ships next: if it already
+    carries a heading for this version it is taken verbatim, otherwise its
+    bullets seed the new section. Returns a short note for the status line.
+    """
+    filename = _changelog_name(source_plugin_dir / "manifest.json")
+    source_file = source_plugin_dir / filename
+    draft = source_file.read_text(encoding="utf-8") if source_file.is_file() else ""
+
+    if _has_version_section(draft, version):
+        section = draft.strip() + "\n"
+        note = f" (changelog for {version} taken from the install)"
+    else:
+        if notes is None:
+            notes = _draft_notes(draft)
+            if not notes and interactive:
+                notes = _prompt_changelog_notes(slug, version)
+        section = _changelog_section(version, notes or [CHANGELOG_DEFAULT_NOTE])
+        note = f" (+ changelog {version})"
+
+    if not dry_run:
+        _write_changelog(source_file, dest_version_dir / filename, section)
+    return note
+
+
+def _write_changelog(source_file: Path, dest_file: Path, text: str) -> None:
+    """Write the changelog to both the live install and the new version folder."""
+    source_file.parent.mkdir(parents=True, exist_ok=True)
+    source_file.write_text(text, encoding="utf-8")
+    dest_file.parent.mkdir(parents=True, exist_ok=True)
+    dest_file.write_text(text, encoding="utf-8")
+
+
 # ── Comparison ─────────────────────────────────────────────────────────────────
 
 def _json_equal(a: Path, b: Path) -> bool:
@@ -260,7 +383,7 @@ def _json_equal(a: Path, b: Path) -> bool:
 def _files_changed(source_files: dict[str, Path], repo_version_dir: Path) -> bool:
     """Return True if any source file differs from the installed version."""
     for rel, src_path in source_files.items():
-        if Path(rel).name in REPO_ONLY_FILES:
+        if Path(rel).name in COMPARE_IGNORED:
             continue
         repo_path = repo_version_dir / rel
         if not repo_path.exists():
@@ -275,7 +398,7 @@ def _files_changed(source_files: dict[str, Path], repo_version_dir: Path) -> boo
     for repo_path in repo_version_dir.rglob("*"):
         if not repo_path.is_file():
             continue
-        if repo_path.name in REPO_ONLY_FILES:
+        if repo_path.name in COMPARE_IGNORED:
             continue
         rel = str(repo_path.relative_to(repo_version_dir))
         if any(part in EXCLUDE_DIRS for part in Path(rel).parts):
@@ -345,7 +468,7 @@ def _print_plugin_diff(
 
     # Changed / added files.
     for rel, src_path in sorted(source_files.items()):
-        if Path(rel).name in REPO_ONLY_FILES:
+        if Path(rel).name in COMPARE_IGNORED:
             continue
         repo_path = repo_version_dir / rel
         if not repo_path.exists():
@@ -363,7 +486,7 @@ def _print_plugin_diff(
     for repo_path in sorted(repo_version_dir.rglob("*")):
         if not repo_path.is_file():
             continue
-        if repo_path.name in REPO_ONLY_FILES:
+        if repo_path.name in COMPARE_IGNORED:
             continue
         rel = str(repo_path.relative_to(repo_version_dir))
         if any(part in EXCLUDE_DIRS for part in Path(rel).parts):
@@ -473,6 +596,9 @@ def _sync_plugin(
     source_plugin_dir: Path,
     dry_run: bool,
     show_diff: bool = False,
+    changelog_notes: Optional[list[str]] = None,
+    write_changelog: bool = True,
+    interactive: bool = False,
 ) -> str:
     """Sync one plugin. Returns a human-readable status line."""
     source_files = _source_files(source_plugin_dir)
@@ -481,14 +607,20 @@ def _sync_plugin(
 
     slug_dir = PLUGINS_DIR / slug
     tag = "[DRY RUN] " if dry_run else ""
+    src_manifest = source_plugin_dir / "manifest.json"
 
     # ── Brand-new plugin ──────────────────────────────────────────────────────
     if not slug_dir.exists() or _latest_version_dir(slug_dir) is None:
-        src_manifest = source_plugin_dir / "manifest.json"
         version = _read_version(src_manifest) if src_manifest.exists() else "1.0.0"
         dest_version_dir = slug_dir / version
         _copy_plugin_to_repo(source_files, dest_version_dir, dry_run)
-        return f"  {tag}NEW     {slug}  →  {dest_version_dir.relative_to(REPO_ROOT)}"
+        note = ""
+        if write_changelog:
+            note = _sync_changelog(
+                slug, source_plugin_dir, dest_version_dir,
+                version, changelog_notes, dry_run, interactive,
+            )
+        return f"  {tag}NEW     {slug}  →  {dest_version_dir.relative_to(REPO_ROOT)}{note}"
 
     # ── Existing plugin ───────────────────────────────────────────────────────
     latest_dir = _latest_version_dir(slug_dir)  # type: ignore[arg-type]
@@ -499,7 +631,6 @@ def _sync_plugin(
     if show_diff:
         _print_plugin_diff(slug, source_files, latest_dir)
 
-    src_manifest = source_plugin_dir / "manifest.json"
     src_version  = _read_version(src_manifest) if src_manifest.exists() else latest_dir.name
     repo_version = latest_dir.name
 
@@ -516,9 +647,15 @@ def _sync_plugin(
 
     dest_version_dir = slug_dir / new_version
     _copy_plugin_to_repo(source_files, dest_version_dir, dry_run)
+    changelog_note = ""
+    if write_changelog:
+        changelog_note = _sync_changelog(
+            slug, source_plugin_dir, dest_version_dir,
+            new_version, changelog_notes, dry_run, interactive,
+        )
     return (
         f"  {tag}UPDATE  {slug}  →  "
-        f"{dest_version_dir.relative_to(REPO_ROOT)}{bump_note}"
+        f"{dest_version_dir.relative_to(REPO_ROOT)}{bump_note}{changelog_note}"
     )
 
 # ── Main ───────────────────────────────────────────────────────────────────────
@@ -593,6 +730,9 @@ def sync_all(
     dry_run: bool,
     show_diff: bool = False,
     selected_plugins: Optional[list[str]] = None,
+    changelog_notes: Optional[list[str]] = None,
+    write_changelog: bool = True,
+    interactive: bool = False,
 ) -> None:
     _purge_empty_version_dirs(PLUGINS_DIR)
 
@@ -604,7 +744,15 @@ def sync_all(
 
     print(f"Scanning {len(slug_dirs)} source plugin(s)…\n")
     for slug_dir in slug_dirs:
-        print(_sync_plugin(slug_dir.name, slug_dir, dry_run, show_diff=show_diff))
+        print(_sync_plugin(
+            slug_dir.name,
+            slug_dir,
+            dry_run,
+            show_diff=show_diff,
+            changelog_notes=changelog_notes,
+            write_changelog=write_changelog,
+            interactive=interactive,
+        ))
 
 
 def main() -> None:
@@ -660,6 +808,21 @@ def main() -> None:
         action="store_true",
         help="Suppress the coloured per-file diff (shown by default)",
     )
+    parser.add_argument(
+        "--changelog",
+        action="append",
+        metavar="TEXT",
+        help=(
+            f"Bullet for the published version's {CHANGELOG_FILE} entry "
+            "(repeat for several; skips the prompt). Applies to every plugin "
+            "synced in this run, so pair it with --plugin"
+        ),
+    )
+    parser.add_argument(
+        "--no-changelog",
+        action="store_true",
+        help=f"Leave {CHANGELOG_FILE} untouched",
+    )
     args = parser.parse_args()
 
     source = _resolve_source(
@@ -686,6 +849,9 @@ def main() -> None:
         dry_run=args.dry_run,
         show_diff=not args.no_diff,
         selected_plugins=selected_plugins,
+        changelog_notes=[n for n in (args.changelog or []) if n.strip()] or None,
+        write_changelog=not args.no_changelog,
+        interactive=not args.yes and not args.dry_run and sys.stdin.isatty(),
     )
 
     if not args.no_generate:
