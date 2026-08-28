@@ -29,6 +29,13 @@ GENERATOR     = REPO_ROOT / "generate_manifest.py"
 DEFAULT_STABLE = "Official · Stable"
 DEFAULT_CANARY = "Official · Canary"
 
+# Step 1 regenerates the *stable* manifest while still standing on canary, so
+# the generator's branch-derived default would stamp canary's URL onto stable.
+# Both roots are therefore passed explicitly.
+RAW_BASE       = "https://raw.githubusercontent.com/OPvault/pydeck-plugins"
+DEFAULT_STABLE_ROOT = f"{RAW_BASE}/stable/"
+DEFAULT_CANARY_ROOT = f"{RAW_BASE}/canary/"
+
 
 def run(cmd: list[str], dry_run: bool = False, check: bool = True) -> subprocess.CompletedProcess:
     print(f"  $ {' '.join(cmd)}")
@@ -65,11 +72,13 @@ def working_tree_clean() -> bool:
     return True
 
 
-def generate(label: str, dry_run: bool) -> None:
-    run(["python3", str(GENERATOR), "--label", label], dry_run=dry_run)
+def generate(label: str, root_url: str, dry_run: bool) -> None:
+    run(["python3", str(GENERATOR), "--label", label, "--root-url", root_url],
+        dry_run=dry_run)
 
 
-def release(stable_label: str, canary_label: str, dry_run: bool) -> None:
+def release(stable_label: str, canary_label: str,
+            stable_root: str, canary_root: str, dry_run: bool) -> None:
     # ── Pre-flight checks ──────────────────────────────────────────────────────
     branch = current_branch()
     if branch != "canary":
@@ -81,7 +90,7 @@ def release(stable_label: str, canary_label: str, dry_run: bool) -> None:
         sys.exit(1)
 
     print(f"\n── Step 1: set manifest label → \"{stable_label}\"")
-    generate(stable_label, dry_run)
+    generate(stable_label, stable_root, dry_run)
 
     print(f"\n── Step 2: commit on canary")
     run(["git", "add", "manifest.json"], dry_run=dry_run)
@@ -98,7 +107,7 @@ def release(stable_label: str, canary_label: str, dry_run: bool) -> None:
     run(["git", "checkout", "canary"], dry_run=dry_run)
 
     print(f"\n── Step 6: restore manifest label → \"{canary_label}\"")
-    generate(canary_label, dry_run)
+    generate(canary_label, canary_root, dry_run)
 
     print(f"\n── Step 7: commit and push canary")
     run(["git", "add", "manifest.json"], dry_run=dry_run)
@@ -117,10 +126,15 @@ def main() -> None:
                         help=f'Label to write before merging (default: "{DEFAULT_STABLE}")')
     parser.add_argument("--canary-label", default=DEFAULT_CANARY,
                         help=f'Label to restore on canary after merge (default: "{DEFAULT_CANARY}")')
+    parser.add_argument("--stable-root-url", default=DEFAULT_STABLE_ROOT,
+                        help=f'root_url to write before merging (default: "{DEFAULT_STABLE_ROOT}")')
+    parser.add_argument("--canary-root-url", default=DEFAULT_CANARY_ROOT,
+                        help=f'root_url to restore on canary after merge (default: "{DEFAULT_CANARY_ROOT}")')
     parser.add_argument("--dry-run", action="store_true",
                         help="Print all steps without executing any git commands or file writes")
     args = parser.parse_args()
-    release(args.stable_label, args.canary_label, args.dry_run)
+    release(args.stable_label, args.canary_label,
+            args.stable_root_url, args.canary_root_url, args.dry_run)
 
 
 if __name__ == "__main__":
