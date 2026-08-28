@@ -1,3 +1,4 @@
 {
-  "category": "utilities"
+  "category": "utilities",
+  "summary": "Monitor CPU, RAM, GPU, disk, network and battery in 18 themes and 5 layouts — no extra Python packages required"
 }

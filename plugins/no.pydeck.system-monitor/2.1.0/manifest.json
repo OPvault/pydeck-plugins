@@ -1,0 +1,2307 @@
+{
+  "name": "System Monitor",
+  "version": "2.1.0",
+  "description": "Monitor CPU, RAM, GPU, disk, network and battery in 18 themes and 5 layouts — no extra Python packages required",
+  "author": "PyDeck Team",
+  "min_pydeck_version": "1.1.0",
+  "max_pydeck_version": null,
+  "documentation": "DOCS.md",
+  "changelog": "CHANGELOG.md",
+  "permissions": {
+    "json": [
+      "loads"
+    ],
+    "os": [
+      "statvfs"
+    ],
+    "pathlib": [
+      "Path"
+    ],
+    "re": [
+      "search",
+      "match",
+      "IGNORECASE"
+    ],
+    "shutil": [
+      "which"
+    ],
+    "subprocess": [
+      "run"
+    ],
+    "time": [
+      "monotonic"
+    ]
+  },
+  "functions": {
+    "cpu_monitor": {
+      "label": "CPU",
+      "description": "Live CPU usage, temperature, clock speed and load average",
+      "title_readonly": true,
+      "disableGallary": true,
+      "gradient": true,
+      "default_display": {
+        "color": "#0d1117",
+        "text": "CPU",
+        "text_position": "bottom",
+        "scroll_enabled": false
+      },
+      "poll": {
+        "function": "on_poll",
+        "interval_ms": 2000
+      },
+      "ui": [
+        {
+          "type": "select",
+          "id": "cpu_backend",
+          "label": "Data Source",
+          "default": "auto",
+          "options": [
+            {
+              "label": "Auto-detect",
+              "value": "auto"
+            },
+            {
+              "label": "/proc/stat (kernel, fastest)",
+              "value": "procstat"
+            },
+            {
+              "label": "vmstat",
+              "value": "vmstat"
+            },
+            {
+              "label": "mpstat",
+              "value": "mpstat"
+            },
+            {
+              "label": "top",
+              "value": "top"
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "id": "metric_group",
+          "label": "Readings",
+          "fields": [
+            {
+              "type": "select",
+              "id": "primary",
+              "label": "Main Value",
+              "default": "usage",
+              "options": [
+                {
+                  "label": "Usage %",
+                  "value": "usage"
+                },
+                {
+                  "label": "Temperature",
+                  "value": "temp"
+                },
+                {
+                  "label": "Load average",
+                  "value": "load"
+                },
+                {
+                  "label": "Clock speed",
+                  "value": "freq"
+                }
+              ]
+            },
+            {
+              "type": "select",
+              "id": "sub_metric",
+              "label": "Sub Line",
+              "default": "temp",
+              "options": [
+                {
+                  "label": "Temperature",
+                  "value": "temp"
+                },
+                {
+                  "label": "Clock speed",
+                  "value": "freq"
+                },
+                {
+                  "label": "Load average",
+                  "value": "load"
+                },
+                {
+                  "label": "Core count",
+                  "value": "cores"
+                },
+                {
+                  "label": "Usage %",
+                  "value": "usage"
+                },
+                {
+                  "label": "Uptime",
+                  "value": "uptime"
+                },
+                {
+                  "label": "Nothing",
+                  "value": "none"
+                }
+              ]
+            },
+            {
+              "type": "select",
+              "id": "temp_unit",
+              "label": "Temperature Unit",
+              "default": "C",
+              "options": [
+                {
+                  "label": "Celsius (°C)",
+                  "value": "C"
+                },
+                {
+                  "label": "Fahrenheit (°F)",
+                  "value": "F"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "id": "appearance_group",
+          "label": "Appearance",
+          "fields": [
+            {
+              "type": "select",
+              "id": "theme",
+              "label": "Theme",
+              "default": "classic",
+              "options": [
+                {
+                  "label": "Classic",
+                  "value": "classic"
+                },
+                {
+                  "label": "Carbon",
+                  "value": "carbon"
+                },
+                {
+                  "label": "Slate",
+                  "value": "slate"
+                },
+                {
+                  "label": "Light",
+                  "value": "light"
+                },
+                {
+                  "label": "Paper",
+                  "value": "paper"
+                },
+                {
+                  "label": "Mono",
+                  "value": "mono"
+                },
+                {
+                  "label": "Terminal",
+                  "value": "terminal"
+                },
+                {
+                  "label": "LCD",
+                  "value": "lcd"
+                },
+                {
+                  "label": "Amber",
+                  "value": "amber"
+                },
+                {
+                  "label": "Neon",
+                  "value": "neon"
+                },
+                {
+                  "label": "Midnight",
+                  "value": "midnight"
+                },
+                {
+                  "label": "Ocean",
+                  "value": "ocean"
+                },
+                {
+                  "label": "Sunset",
+                  "value": "sunset"
+                },
+                {
+                  "label": "Blueprint",
+                  "value": "blueprint"
+                },
+                {
+                  "label": "Nord",
+                  "value": "nord"
+                },
+                {
+                  "label": "Dracula",
+                  "value": "dracula"
+                },
+                {
+                  "label": "Gruvbox",
+                  "value": "gruvbox"
+                },
+                {
+                  "label": "Solarized",
+                  "value": "solarized"
+                }
+              ]
+            },
+            {
+              "type": "select",
+              "id": "layout",
+              "label": "Layout",
+              "default": "stat",
+              "options": [
+                {
+                  "label": "Stat",
+                  "value": "stat"
+                },
+                {
+                  "label": "Minimal",
+                  "value": "minimal"
+                },
+                {
+                  "label": "Gauge",
+                  "value": "gauge"
+                },
+                {
+                  "label": "Split",
+                  "value": "split"
+                },
+                {
+                  "label": "Graph",
+                  "value": "graph"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "id": "display_group",
+          "label": "Display",
+          "fields": [
+            {
+              "type": "checkbox",
+              "id": "show_header",
+              "label": "Header",
+              "default": true
+            },
+            {
+              "type": "input",
+              "id": "header_text",
+              "label": "Header Text",
+              "default": "",
+              "placeholder": "CPU"
+            },
+            {
+              "type": "checkbox",
+              "id": "show_sub",
+              "label": "Sub Line",
+              "default": true
+            },
+            {
+              "type": "checkbox",
+              "id": "show_bar",
+              "label": "Bar",
+              "default": true
+            },
+            {
+              "type": "checkbox",
+              "id": "decimals",
+              "label": "One Decimal Place",
+              "default": false
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "id": "color_group",
+          "label": "Colours",
+          "fields": [
+            {
+              "type": "select",
+              "id": "color_source",
+              "label": "Palette",
+              "default": "theme",
+              "options": [
+                {
+                  "label": "Theme",
+                  "value": "theme"
+                },
+                {
+                  "label": "Button colour",
+                  "value": "button"
+                },
+                {
+                  "label": "Custom",
+                  "value": "custom"
+                }
+              ]
+            },
+            {
+              "type": "input",
+              "id": "custom_bg",
+              "label": "Background",
+              "default": "",
+              "placeholder": "#0d1117",
+              "visible_if": {
+                "field": "color_source",
+                "value": "custom"
+              }
+            },
+            {
+              "type": "input",
+              "id": "custom_fg",
+              "label": "Value Colour",
+              "default": "",
+              "placeholder": "#e6edf3",
+              "visible_if": {
+                "field": "color_source",
+                "value": "custom"
+              }
+            },
+            {
+              "type": "input",
+              "id": "custom_accent",
+              "label": "Accent Colour",
+              "default": "",
+              "placeholder": "#58a6ff",
+              "visible_if": {
+                "field": "color_source",
+                "value": "custom"
+              }
+            },
+            {
+              "type": "select",
+              "id": "tint",
+              "label": "Threshold Tint",
+              "default": "auto",
+              "options": [
+                {
+                  "label": "Follow the reading",
+                  "value": "auto"
+                },
+                {
+                  "label": "Follow the temperature",
+                  "value": "temp"
+                },
+                {
+                  "label": "Off",
+                  "value": "off"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "id": "threshold_group",
+          "label": "Thresholds",
+          "fields": [
+            {
+              "type": "number",
+              "id": "warn_at",
+              "label": "Warn At (%)",
+              "default": 60,
+              "min": 0,
+              "max": 100,
+              "visible_if": {
+                "field": "tint",
+                "not_value": "off"
+              }
+            },
+            {
+              "type": "number",
+              "id": "crit_at",
+              "label": "Critical At (%)",
+              "default": 85,
+              "min": 0,
+              "max": 100,
+              "visible_if": {
+                "field": "tint",
+                "not_value": "off"
+              }
+            },
+            {
+              "type": "number",
+              "id": "temp_warn_at",
+              "label": "Warn At (°C)",
+              "default": 65,
+              "min": 0,
+              "max": 150,
+              "visible_if": {
+                "field": "tint",
+                "value": "temp"
+              }
+            },
+            {
+              "type": "number",
+              "id": "temp_crit_at",
+              "label": "Critical At (°C)",
+              "default": 85,
+              "min": 0,
+              "max": 150,
+              "visible_if": {
+                "field": "tint",
+                "value": "temp"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "ram_monitor": {
+      "label": "RAM",
+      "description": "Live memory usage, with the used / total breakdown and swap",
+      "title_readonly": true,
+      "disableGallary": true,
+      "gradient": true,
+      "default_display": {
+        "color": "#0d1117",
+        "text": "RAM",
+        "text_position": "bottom",
+        "scroll_enabled": false
+      },
+      "poll": {
+        "function": "on_poll",
+        "interval_ms": 2000
+      },
+      "ui": [
+        {
+          "type": "select",
+          "id": "ram_backend",
+          "label": "Data Source",
+          "default": "auto",
+          "options": [
+            {
+              "label": "Auto-detect",
+              "value": "auto"
+            },
+            {
+              "label": "/proc/meminfo (kernel, fastest)",
+              "value": "procmeminfo"
+            },
+            {
+              "label": "free",
+              "value": "free"
+            },
+            {
+              "label": "top",
+              "value": "top"
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "id": "metric_group",
+          "label": "Readings",
+          "fields": [
+            {
+              "type": "select",
+              "id": "primary",
+              "label": "Main Value",
+              "default": "usage",
+              "options": [
+                {
+                  "label": "Usage %",
+                  "value": "usage"
+                },
+                {
+                  "label": "Used",
+                  "value": "used"
+                },
+                {
+                  "label": "Available",
+                  "value": "avail"
+                },
+                {
+                  "label": "Swap %",
+                  "value": "swap"
+                }
+              ]
+            },
+            {
+              "type": "select",
+              "id": "sub_metric",
+              "label": "Sub Line",
+              "default": "pair",
+              "options": [
+                {
+                  "label": "Used / total",
+                  "value": "pair"
+                },
+                {
+                  "label": "Available",
+                  "value": "avail"
+                },
+                {
+                  "label": "Swap %",
+                  "value": "swap"
+                },
+                {
+                  "label": "Swap used / total",
+                  "value": "swap_pair"
+                },
+                {
+                  "label": "Usage %",
+                  "value": "usage"
+                },
+                {
+                  "label": "Nothing",
+                  "value": "none"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "id": "appearance_group",
+          "label": "Appearance",
+          "fields": [
+            {
+              "type": "select",
+              "id": "theme",
+              "label": "Theme",
+              "default": "classic",
+              "options": [
+                {
+                  "label": "Classic",
+                  "value": "classic"
+                },
+                {
+                  "label": "Carbon",
+                  "value": "carbon"
+                },
+                {
+                  "label": "Slate",
+                  "value": "slate"
+                },
+                {
+                  "label": "Light",
+                  "value": "light"
+                },
+                {
+                  "label": "Paper",
+                  "value": "paper"
+                },
+                {
+                  "label": "Mono",
+                  "value": "mono"
+                },
+                {
+                  "label": "Terminal",
+                  "value": "terminal"
+                },
+                {
+                  "label": "LCD",
+                  "value": "lcd"
+                },
+                {
+                  "label": "Amber",
+                  "value": "amber"
+                },
+                {
+                  "label": "Neon",
+                  "value": "neon"
+                },
+                {
+                  "label": "Midnight",
+                  "value": "midnight"
+                },
+                {
+                  "label": "Ocean",
+                  "value": "ocean"
+                },
+                {
+                  "label": "Sunset",
+                  "value": "sunset"
+                },
+                {
+                  "label": "Blueprint",
+                  "value": "blueprint"
+                },
+                {
+                  "label": "Nord",
+                  "value": "nord"
+                },
+                {
+                  "label": "Dracula",
+                  "value": "dracula"
+                },
+                {
+                  "label": "Gruvbox",
+                  "value": "gruvbox"
+                },
+                {
+                  "label": "Solarized",
+                  "value": "solarized"
+                }
+              ]
+            },
+            {
+              "type": "select",
+              "id": "layout",
+              "label": "Layout",
+              "default": "stat",
+              "options": [
+                {
+                  "label": "Stat",
+                  "value": "stat"
+                },
+                {
+                  "label": "Minimal",
+                  "value": "minimal"
+                },
+                {
+                  "label": "Gauge",
+                  "value": "gauge"
+                },
+                {
+                  "label": "Split",
+                  "value": "split"
+                },
+                {
+                  "label": "Graph",
+                  "value": "graph"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "id": "display_group",
+          "label": "Display",
+          "fields": [
+            {
+              "type": "checkbox",
+              "id": "show_header",
+              "label": "Header",
+              "default": true
+            },
+            {
+              "type": "input",
+              "id": "header_text",
+              "label": "Header Text",
+              "default": "",
+              "placeholder": "RAM"
+            },
+            {
+              "type": "checkbox",
+              "id": "show_sub",
+              "label": "Sub Line",
+              "default": true
+            },
+            {
+              "type": "checkbox",
+              "id": "show_bar",
+              "label": "Bar",
+              "default": true
+            },
+            {
+              "type": "checkbox",
+              "id": "decimals",
+              "label": "One Decimal Place",
+              "default": false
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "id": "color_group",
+          "label": "Colours",
+          "fields": [
+            {
+              "type": "select",
+              "id": "color_source",
+              "label": "Palette",
+              "default": "theme",
+              "options": [
+                {
+                  "label": "Theme",
+                  "value": "theme"
+                },
+                {
+                  "label": "Button colour",
+                  "value": "button"
+                },
+                {
+                  "label": "Custom",
+                  "value": "custom"
+                }
+              ]
+            },
+            {
+              "type": "input",
+              "id": "custom_bg",
+              "label": "Background",
+              "default": "",
+              "placeholder": "#0d1117",
+              "visible_if": {
+                "field": "color_source",
+                "value": "custom"
+              }
+            },
+            {
+              "type": "input",
+              "id": "custom_fg",
+              "label": "Value Colour",
+              "default": "",
+              "placeholder": "#e6edf3",
+              "visible_if": {
+                "field": "color_source",
+                "value": "custom"
+              }
+            },
+            {
+              "type": "input",
+              "id": "custom_accent",
+              "label": "Accent Colour",
+              "default": "",
+              "placeholder": "#58a6ff",
+              "visible_if": {
+                "field": "color_source",
+                "value": "custom"
+              }
+            },
+            {
+              "type": "select",
+              "id": "tint",
+              "label": "Threshold Tint",
+              "default": "auto",
+              "options": [
+                {
+                  "label": "Follow the reading",
+                  "value": "auto"
+                },
+                {
+                  "label": "Off",
+                  "value": "off"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "id": "threshold_group",
+          "label": "Thresholds",
+          "fields": [
+            {
+              "type": "number",
+              "id": "warn_at",
+              "label": "Warn At (%)",
+              "default": 70,
+              "min": 0,
+              "max": 100,
+              "visible_if": {
+                "field": "tint",
+                "not_value": "off"
+              }
+            },
+            {
+              "type": "number",
+              "id": "crit_at",
+              "label": "Critical At (%)",
+              "default": 90,
+              "min": 0,
+              "max": 100,
+              "visible_if": {
+                "field": "tint",
+                "not_value": "off"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "gpu_monitor": {
+      "label": "GPU",
+      "description": "Live GPU utilisation, temperature, VRAM and board power",
+      "title_readonly": true,
+      "disableGallary": true,
+      "gradient": true,
+      "default_display": {
+        "color": "#0d1117",
+        "text": "GPU",
+        "text_position": "bottom",
+        "scroll_enabled": false
+      },
+      "poll": {
+        "function": "on_poll",
+        "interval_ms": 3000
+      },
+      "ui": [
+        {
+          "type": "select",
+          "id": "gpu_backend",
+          "label": "Backend",
+          "default": "auto",
+          "options": [
+            {
+              "label": "Auto-detect",
+              "value": "auto"
+            },
+            {
+              "label": "NVIDIA (nvidia-smi)",
+              "value": "nvidia"
+            },
+            {
+              "label": "AMD (rocm-smi)",
+              "value": "amd"
+            },
+            {
+              "label": "sysfs (nouveau / AMD / Intel)",
+              "value": "sysfs"
+            }
+          ]
+        },
+        {
+          "type": "number",
+          "id": "gpu_index",
+          "label": "GPU Number",
+          "default": 0,
+          "min": 0,
+          "max": 7
+        },
+        {
+          "type": "group",
+          "id": "metric_group",
+          "label": "Readings",
+          "fields": [
+            {
+              "type": "select",
+              "id": "primary",
+              "label": "Main Value",
+              "default": "usage",
+              "options": [
+                {
+                  "label": "Usage %",
+                  "value": "usage"
+                },
+                {
+                  "label": "Temperature",
+                  "value": "temp"
+                },
+                {
+                  "label": "VRAM",
+                  "value": "mem"
+                },
+                {
+                  "label": "Power draw",
+                  "value": "power"
+                }
+              ]
+            },
+            {
+              "type": "select",
+              "id": "sub_metric",
+              "label": "Sub Line",
+              "default": "temp",
+              "options": [
+                {
+                  "label": "Temperature",
+                  "value": "temp"
+                },
+                {
+                  "label": "VRAM",
+                  "value": "mem"
+                },
+                {
+                  "label": "Power draw",
+                  "value": "power"
+                },
+                {
+                  "label": "Usage %",
+                  "value": "usage"
+                },
+                {
+                  "label": "Board name",
+                  "value": "name"
+                },
+                {
+                  "label": "Nothing",
+                  "value": "none"
+                }
+              ]
+            },
+            {
+              "type": "select",
+              "id": "temp_unit",
+              "label": "Temperature Unit",
+              "default": "C",
+              "options": [
+                {
+                  "label": "Celsius (°C)",
+                  "value": "C"
+                },
+                {
+                  "label": "Fahrenheit (°F)",
+                  "value": "F"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "id": "appearance_group",
+          "label": "Appearance",
+          "fields": [
+            {
+              "type": "select",
+              "id": "theme",
+              "label": "Theme",
+              "default": "classic",
+              "options": [
+                {
+                  "label": "Classic",
+                  "value": "classic"
+                },
+                {
+                  "label": "Carbon",
+                  "value": "carbon"
+                },
+                {
+                  "label": "Slate",
+                  "value": "slate"
+                },
+                {
+                  "label": "Light",
+                  "value": "light"
+                },
+                {
+                  "label": "Paper",
+                  "value": "paper"
+                },
+                {
+                  "label": "Mono",
+                  "value": "mono"
+                },
+                {
+                  "label": "Terminal",
+                  "value": "terminal"
+                },
+                {
+                  "label": "LCD",
+                  "value": "lcd"
+                },
+                {
+                  "label": "Amber",
+                  "value": "amber"
+                },
+                {
+                  "label": "Neon",
+                  "value": "neon"
+                },
+                {
+                  "label": "Midnight",
+                  "value": "midnight"
+                },
+                {
+                  "label": "Ocean",
+                  "value": "ocean"
+                },
+                {
+                  "label": "Sunset",
+                  "value": "sunset"
+                },
+                {
+                  "label": "Blueprint",
+                  "value": "blueprint"
+                },
+                {
+                  "label": "Nord",
+                  "value": "nord"
+                },
+                {
+                  "label": "Dracula",
+                  "value": "dracula"
+                },
+                {
+                  "label": "Gruvbox",
+                  "value": "gruvbox"
+                },
+                {
+                  "label": "Solarized",
+                  "value": "solarized"
+                }
+              ]
+            },
+            {
+              "type": "select",
+              "id": "layout",
+              "label": "Layout",
+              "default": "stat",
+              "options": [
+                {
+                  "label": "Stat",
+                  "value": "stat"
+                },
+                {
+                  "label": "Minimal",
+                  "value": "minimal"
+                },
+                {
+                  "label": "Gauge",
+                  "value": "gauge"
+                },
+                {
+                  "label": "Split",
+                  "value": "split"
+                },
+                {
+                  "label": "Graph",
+                  "value": "graph"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "id": "display_group",
+          "label": "Display",
+          "fields": [
+            {
+              "type": "checkbox",
+              "id": "show_header",
+              "label": "Header",
+              "default": true
+            },
+            {
+              "type": "input",
+              "id": "header_text",
+              "label": "Header Text",
+              "default": "",
+              "placeholder": "GPU"
+            },
+            {
+              "type": "checkbox",
+              "id": "show_sub",
+              "label": "Sub Line",
+              "default": true
+            },
+            {
+              "type": "checkbox",
+              "id": "show_bar",
+              "label": "Bar",
+              "default": true
+            },
+            {
+              "type": "checkbox",
+              "id": "decimals",
+              "label": "One Decimal Place",
+              "default": false
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "id": "color_group",
+          "label": "Colours",
+          "fields": [
+            {
+              "type": "select",
+              "id": "color_source",
+              "label": "Palette",
+              "default": "theme",
+              "options": [
+                {
+                  "label": "Theme",
+                  "value": "theme"
+                },
+                {
+                  "label": "Button colour",
+                  "value": "button"
+                },
+                {
+                  "label": "Custom",
+                  "value": "custom"
+                }
+              ]
+            },
+            {
+              "type": "input",
+              "id": "custom_bg",
+              "label": "Background",
+              "default": "",
+              "placeholder": "#0d1117",
+              "visible_if": {
+                "field": "color_source",
+                "value": "custom"
+              }
+            },
+            {
+              "type": "input",
+              "id": "custom_fg",
+              "label": "Value Colour",
+              "default": "",
+              "placeholder": "#e6edf3",
+              "visible_if": {
+                "field": "color_source",
+                "value": "custom"
+              }
+            },
+            {
+              "type": "input",
+              "id": "custom_accent",
+              "label": "Accent Colour",
+              "default": "",
+              "placeholder": "#58a6ff",
+              "visible_if": {
+                "field": "color_source",
+                "value": "custom"
+              }
+            },
+            {
+              "type": "select",
+              "id": "tint",
+              "label": "Threshold Tint",
+              "default": "auto",
+              "options": [
+                {
+                  "label": "Follow the reading",
+                  "value": "auto"
+                },
+                {
+                  "label": "Follow the temperature",
+                  "value": "temp"
+                },
+                {
+                  "label": "Off",
+                  "value": "off"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "id": "threshold_group",
+          "label": "Thresholds",
+          "fields": [
+            {
+              "type": "number",
+              "id": "warn_at",
+              "label": "Warn At (%)",
+              "default": 60,
+              "min": 0,
+              "max": 100,
+              "visible_if": {
+                "field": "tint",
+                "not_value": "off"
+              }
+            },
+            {
+              "type": "number",
+              "id": "crit_at",
+              "label": "Critical At (%)",
+              "default": 85,
+              "min": 0,
+              "max": 100,
+              "visible_if": {
+                "field": "tint",
+                "not_value": "off"
+              }
+            },
+            {
+              "type": "number",
+              "id": "temp_warn_at",
+              "label": "Warn At (°C)",
+              "default": 70,
+              "min": 0,
+              "max": 150,
+              "visible_if": {
+                "field": "tint",
+                "value": "temp"
+              }
+            },
+            {
+              "type": "number",
+              "id": "temp_crit_at",
+              "label": "Critical At (°C)",
+              "default": 85,
+              "min": 0,
+              "max": 150,
+              "visible_if": {
+                "field": "tint",
+                "value": "temp"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "disk_monitor": {
+      "label": "Disk",
+      "description": "Live disk usage for a chosen mount point",
+      "title_readonly": true,
+      "disableGallary": true,
+      "gradient": true,
+      "default_display": {
+        "color": "#0d1117",
+        "text": "Disk",
+        "text_position": "bottom",
+        "scroll_enabled": false
+      },
+      "poll": {
+        "function": "on_poll",
+        "interval_ms": 10000
+      },
+      "ui": [
+        {
+          "type": "select",
+          "id": "disk_backend",
+          "label": "Data Source",
+          "default": "auto",
+          "options": [
+            {
+              "label": "Auto-detect",
+              "value": "auto"
+            },
+            {
+              "label": "os.statvfs (kernel, fastest)",
+              "value": "statvfs"
+            },
+            {
+              "label": "df",
+              "value": "df"
+            }
+          ]
+        },
+        {
+          "type": "input",
+          "id": "path",
+          "label": "Mount Point",
+          "default": "/",
+          "placeholder": "/"
+        },
+        {
+          "type": "group",
+          "id": "metric_group",
+          "label": "Readings",
+          "fields": [
+            {
+              "type": "select",
+              "id": "primary",
+              "label": "Main Value",
+              "default": "usage",
+              "options": [
+                {
+                  "label": "Usage %",
+                  "value": "usage"
+                },
+                {
+                  "label": "Used",
+                  "value": "used"
+                },
+                {
+                  "label": "Free",
+                  "value": "free"
+                }
+              ]
+            },
+            {
+              "type": "select",
+              "id": "sub_metric",
+              "label": "Sub Line",
+              "default": "pair",
+              "options": [
+                {
+                  "label": "Used / total",
+                  "value": "pair"
+                },
+                {
+                  "label": "Free",
+                  "value": "free"
+                },
+                {
+                  "label": "Total",
+                  "value": "total"
+                },
+                {
+                  "label": "Usage %",
+                  "value": "usage"
+                },
+                {
+                  "label": "Mount point",
+                  "value": "mount"
+                },
+                {
+                  "label": "Nothing",
+                  "value": "none"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "id": "appearance_group",
+          "label": "Appearance",
+          "fields": [
+            {
+              "type": "select",
+              "id": "theme",
+              "label": "Theme",
+              "default": "classic",
+              "options": [
+                {
+                  "label": "Classic",
+                  "value": "classic"
+                },
+                {
+                  "label": "Carbon",
+                  "value": "carbon"
+                },
+                {
+                  "label": "Slate",
+                  "value": "slate"
+                },
+                {
+                  "label": "Light",
+                  "value": "light"
+                },
+                {
+                  "label": "Paper",
+                  "value": "paper"
+                },
+                {
+                  "label": "Mono",
+                  "value": "mono"
+                },
+                {
+                  "label": "Terminal",
+                  "value": "terminal"
+                },
+                {
+                  "label": "LCD",
+                  "value": "lcd"
+                },
+                {
+                  "label": "Amber",
+                  "value": "amber"
+                },
+                {
+                  "label": "Neon",
+                  "value": "neon"
+                },
+                {
+                  "label": "Midnight",
+                  "value": "midnight"
+                },
+                {
+                  "label": "Ocean",
+                  "value": "ocean"
+                },
+                {
+                  "label": "Sunset",
+                  "value": "sunset"
+                },
+                {
+                  "label": "Blueprint",
+                  "value": "blueprint"
+                },
+                {
+                  "label": "Nord",
+                  "value": "nord"
+                },
+                {
+                  "label": "Dracula",
+                  "value": "dracula"
+                },
+                {
+                  "label": "Gruvbox",
+                  "value": "gruvbox"
+                },
+                {
+                  "label": "Solarized",
+                  "value": "solarized"
+                }
+              ]
+            },
+            {
+              "type": "select",
+              "id": "layout",
+              "label": "Layout",
+              "default": "stat",
+              "options": [
+                {
+                  "label": "Stat",
+                  "value": "stat"
+                },
+                {
+                  "label": "Minimal",
+                  "value": "minimal"
+                },
+                {
+                  "label": "Gauge",
+                  "value": "gauge"
+                },
+                {
+                  "label": "Split",
+                  "value": "split"
+                },
+                {
+                  "label": "Graph",
+                  "value": "graph"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "id": "display_group",
+          "label": "Display",
+          "fields": [
+            {
+              "type": "checkbox",
+              "id": "show_header",
+              "label": "Header",
+              "default": true
+            },
+            {
+              "type": "input",
+              "id": "header_text",
+              "label": "Header Text",
+              "default": "",
+              "placeholder": "Disk"
+            },
+            {
+              "type": "checkbox",
+              "id": "show_sub",
+              "label": "Sub Line",
+              "default": true
+            },
+            {
+              "type": "checkbox",
+              "id": "show_bar",
+              "label": "Bar",
+              "default": true
+            },
+            {
+              "type": "checkbox",
+              "id": "decimals",
+              "label": "One Decimal Place",
+              "default": false
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "id": "color_group",
+          "label": "Colours",
+          "fields": [
+            {
+              "type": "select",
+              "id": "color_source",
+              "label": "Palette",
+              "default": "theme",
+              "options": [
+                {
+                  "label": "Theme",
+                  "value": "theme"
+                },
+                {
+                  "label": "Button colour",
+                  "value": "button"
+                },
+                {
+                  "label": "Custom",
+                  "value": "custom"
+                }
+              ]
+            },
+            {
+              "type": "input",
+              "id": "custom_bg",
+              "label": "Background",
+              "default": "",
+              "placeholder": "#0d1117",
+              "visible_if": {
+                "field": "color_source",
+                "value": "custom"
+              }
+            },
+            {
+              "type": "input",
+              "id": "custom_fg",
+              "label": "Value Colour",
+              "default": "",
+              "placeholder": "#e6edf3",
+              "visible_if": {
+                "field": "color_source",
+                "value": "custom"
+              }
+            },
+            {
+              "type": "input",
+              "id": "custom_accent",
+              "label": "Accent Colour",
+              "default": "",
+              "placeholder": "#58a6ff",
+              "visible_if": {
+                "field": "color_source",
+                "value": "custom"
+              }
+            },
+            {
+              "type": "select",
+              "id": "tint",
+              "label": "Threshold Tint",
+              "default": "auto",
+              "options": [
+                {
+                  "label": "Follow the reading",
+                  "value": "auto"
+                },
+                {
+                  "label": "Off",
+                  "value": "off"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "id": "threshold_group",
+          "label": "Thresholds",
+          "fields": [
+            {
+              "type": "number",
+              "id": "warn_at",
+              "label": "Warn At (%)",
+              "default": 75,
+              "min": 0,
+              "max": 100,
+              "visible_if": {
+                "field": "tint",
+                "not_value": "off"
+              }
+            },
+            {
+              "type": "number",
+              "id": "crit_at",
+              "label": "Critical At (%)",
+              "default": 90,
+              "min": 0,
+              "max": 100,
+              "visible_if": {
+                "field": "tint",
+                "not_value": "off"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "net_monitor": {
+      "label": "Network",
+      "description": "Live download and upload rates for one interface or all of them",
+      "title_readonly": true,
+      "disableGallary": true,
+      "gradient": true,
+      "default_display": {
+        "color": "#0d1117",
+        "text": "Net",
+        "text_position": "bottom",
+        "scroll_enabled": false
+      },
+      "poll": {
+        "function": "on_poll",
+        "interval_ms": 2000
+      },
+      "ui": [
+        {
+          "type": "api_select",
+          "id": "interface",
+          "label": "Interface",
+          "api": "interfaces",
+          "default": "",
+          "display": {
+            "label": "label",
+            "value": "value"
+          }
+        },
+        {
+          "type": "group",
+          "id": "metric_group",
+          "label": "Readings",
+          "fields": [
+            {
+              "type": "select",
+              "id": "primary",
+              "label": "Main Value",
+              "default": "down",
+              "options": [
+                {
+                  "label": "Download",
+                  "value": "down"
+                },
+                {
+                  "label": "Upload",
+                  "value": "up"
+                },
+                {
+                  "label": "Combined",
+                  "value": "total"
+                }
+              ]
+            },
+            {
+              "type": "select",
+              "id": "sub_metric",
+              "label": "Sub Line",
+              "default": "up",
+              "options": [
+                {
+                  "label": "Upload",
+                  "value": "up"
+                },
+                {
+                  "label": "Download",
+                  "value": "down"
+                },
+                {
+                  "label": "Combined",
+                  "value": "total"
+                },
+                {
+                  "label": "Interface name",
+                  "value": "iface"
+                },
+                {
+                  "label": "Nothing",
+                  "value": "none"
+                }
+              ]
+            },
+            {
+              "type": "select",
+              "id": "units",
+              "label": "Units",
+              "default": "bytes",
+              "options": [
+                {
+                  "label": "Bytes (MB/s)",
+                  "value": "bytes"
+                },
+                {
+                  "label": "Bits (Mbit/s)",
+                  "value": "bits"
+                }
+              ]
+            },
+            {
+              "type": "number",
+              "id": "scale",
+              "label": "Bar Full Scale",
+              "default": 100,
+              "min": 1,
+              "max": 100000
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "id": "appearance_group",
+          "label": "Appearance",
+          "fields": [
+            {
+              "type": "select",
+              "id": "theme",
+              "label": "Theme",
+              "default": "classic",
+              "options": [
+                {
+                  "label": "Classic",
+                  "value": "classic"
+                },
+                {
+                  "label": "Carbon",
+                  "value": "carbon"
+                },
+                {
+                  "label": "Slate",
+                  "value": "slate"
+                },
+                {
+                  "label": "Light",
+                  "value": "light"
+                },
+                {
+                  "label": "Paper",
+                  "value": "paper"
+                },
+                {
+                  "label": "Mono",
+                  "value": "mono"
+                },
+                {
+                  "label": "Terminal",
+                  "value": "terminal"
+                },
+                {
+                  "label": "LCD",
+                  "value": "lcd"
+                },
+                {
+                  "label": "Amber",
+                  "value": "amber"
+                },
+                {
+                  "label": "Neon",
+                  "value": "neon"
+                },
+                {
+                  "label": "Midnight",
+                  "value": "midnight"
+                },
+                {
+                  "label": "Ocean",
+                  "value": "ocean"
+                },
+                {
+                  "label": "Sunset",
+                  "value": "sunset"
+                },
+                {
+                  "label": "Blueprint",
+                  "value": "blueprint"
+                },
+                {
+                  "label": "Nord",
+                  "value": "nord"
+                },
+                {
+                  "label": "Dracula",
+                  "value": "dracula"
+                },
+                {
+                  "label": "Gruvbox",
+                  "value": "gruvbox"
+                },
+                {
+                  "label": "Solarized",
+                  "value": "solarized"
+                }
+              ]
+            },
+            {
+              "type": "select",
+              "id": "layout",
+              "label": "Layout",
+              "default": "stat",
+              "options": [
+                {
+                  "label": "Stat",
+                  "value": "stat"
+                },
+                {
+                  "label": "Minimal",
+                  "value": "minimal"
+                },
+                {
+                  "label": "Gauge",
+                  "value": "gauge"
+                },
+                {
+                  "label": "Split",
+                  "value": "split"
+                },
+                {
+                  "label": "Graph",
+                  "value": "graph"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "id": "display_group",
+          "label": "Display",
+          "fields": [
+            {
+              "type": "checkbox",
+              "id": "show_header",
+              "label": "Header",
+              "default": true
+            },
+            {
+              "type": "input",
+              "id": "header_text",
+              "label": "Header Text",
+              "default": "",
+              "placeholder": "Net"
+            },
+            {
+              "type": "checkbox",
+              "id": "show_sub",
+              "label": "Sub Line",
+              "default": true
+            },
+            {
+              "type": "checkbox",
+              "id": "show_bar",
+              "label": "Bar",
+              "default": true
+            },
+            {
+              "type": "checkbox",
+              "id": "decimals",
+              "label": "One Decimal Place",
+              "default": false
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "id": "color_group",
+          "label": "Colours",
+          "fields": [
+            {
+              "type": "select",
+              "id": "color_source",
+              "label": "Palette",
+              "default": "theme",
+              "options": [
+                {
+                  "label": "Theme",
+                  "value": "theme"
+                },
+                {
+                  "label": "Button colour",
+                  "value": "button"
+                },
+                {
+                  "label": "Custom",
+                  "value": "custom"
+                }
+              ]
+            },
+            {
+              "type": "input",
+              "id": "custom_bg",
+              "label": "Background",
+              "default": "",
+              "placeholder": "#0d1117",
+              "visible_if": {
+                "field": "color_source",
+                "value": "custom"
+              }
+            },
+            {
+              "type": "input",
+              "id": "custom_fg",
+              "label": "Value Colour",
+              "default": "",
+              "placeholder": "#e6edf3",
+              "visible_if": {
+                "field": "color_source",
+                "value": "custom"
+              }
+            },
+            {
+              "type": "input",
+              "id": "custom_accent",
+              "label": "Accent Colour",
+              "default": "",
+              "placeholder": "#58a6ff",
+              "visible_if": {
+                "field": "color_source",
+                "value": "custom"
+              }
+            },
+            {
+              "type": "select",
+              "id": "tint",
+              "label": "Threshold Tint",
+              "default": "auto",
+              "options": [
+                {
+                  "label": "Follow the reading",
+                  "value": "auto"
+                },
+                {
+                  "label": "Off",
+                  "value": "off"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "id": "threshold_group",
+          "label": "Thresholds",
+          "fields": [
+            {
+              "type": "number",
+              "id": "warn_at",
+              "label": "Warn At (%)",
+              "default": 60,
+              "min": 0,
+              "max": 100,
+              "visible_if": {
+                "field": "tint",
+                "not_value": "off"
+              }
+            },
+            {
+              "type": "number",
+              "id": "crit_at",
+              "label": "Critical At (%)",
+              "default": 85,
+              "min": 0,
+              "max": 100,
+              "visible_if": {
+                "field": "tint",
+                "not_value": "off"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "battery_monitor": {
+      "label": "Battery",
+      "description": "Charge, power draw and estimated time left",
+      "title_readonly": true,
+      "disableGallary": true,
+      "gradient": true,
+      "default_display": {
+        "color": "#0d1117",
+        "text": "Batt",
+        "text_position": "bottom",
+        "scroll_enabled": false
+      },
+      "poll": {
+        "function": "on_poll",
+        "interval_ms": 20000
+      },
+      "ui": [
+        {
+          "type": "group",
+          "id": "metric_group",
+          "label": "Readings",
+          "fields": [
+            {
+              "type": "select",
+              "id": "primary",
+              "label": "Main Value",
+              "default": "charge",
+              "options": [
+                {
+                  "label": "Charge %",
+                  "value": "charge"
+                },
+                {
+                  "label": "Power draw",
+                  "value": "power"
+                },
+                {
+                  "label": "Time left",
+                  "value": "time"
+                }
+              ]
+            },
+            {
+              "type": "select",
+              "id": "sub_metric",
+              "label": "Sub Line",
+              "default": "status",
+              "options": [
+                {
+                  "label": "Status",
+                  "value": "status"
+                },
+                {
+                  "label": "Time left",
+                  "value": "time"
+                },
+                {
+                  "label": "Power draw",
+                  "value": "power"
+                },
+                {
+                  "label": "Charge %",
+                  "value": "charge"
+                },
+                {
+                  "label": "Nothing",
+                  "value": "none"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "id": "appearance_group",
+          "label": "Appearance",
+          "fields": [
+            {
+              "type": "select",
+              "id": "theme",
+              "label": "Theme",
+              "default": "classic",
+              "options": [
+                {
+                  "label": "Classic",
+                  "value": "classic"
+                },
+                {
+                  "label": "Carbon",
+                  "value": "carbon"
+                },
+                {
+                  "label": "Slate",
+                  "value": "slate"
+                },
+                {
+                  "label": "Light",
+                  "value": "light"
+                },
+                {
+                  "label": "Paper",
+                  "value": "paper"
+                },
+                {
+                  "label": "Mono",
+                  "value": "mono"
+                },
+                {
+                  "label": "Terminal",
+                  "value": "terminal"
+                },
+                {
+                  "label": "LCD",
+                  "value": "lcd"
+                },
+                {
+                  "label": "Amber",
+                  "value": "amber"
+                },
+                {
+                  "label": "Neon",
+                  "value": "neon"
+                },
+                {
+                  "label": "Midnight",
+                  "value": "midnight"
+                },
+                {
+                  "label": "Ocean",
+                  "value": "ocean"
+                },
+                {
+                  "label": "Sunset",
+                  "value": "sunset"
+                },
+                {
+                  "label": "Blueprint",
+                  "value": "blueprint"
+                },
+                {
+                  "label": "Nord",
+                  "value": "nord"
+                },
+                {
+                  "label": "Dracula",
+                  "value": "dracula"
+                },
+                {
+                  "label": "Gruvbox",
+                  "value": "gruvbox"
+                },
+                {
+                  "label": "Solarized",
+                  "value": "solarized"
+                }
+              ]
+            },
+            {
+              "type": "select",
+              "id": "layout",
+              "label": "Layout",
+              "default": "stat",
+              "options": [
+                {
+                  "label": "Stat",
+                  "value": "stat"
+                },
+                {
+                  "label": "Minimal",
+                  "value": "minimal"
+                },
+                {
+                  "label": "Gauge",
+                  "value": "gauge"
+                },
+                {
+                  "label": "Split",
+                  "value": "split"
+                },
+                {
+                  "label": "Graph",
+                  "value": "graph"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "id": "display_group",
+          "label": "Display",
+          "fields": [
+            {
+              "type": "checkbox",
+              "id": "show_header",
+              "label": "Header",
+              "default": true
+            },
+            {
+              "type": "input",
+              "id": "header_text",
+              "label": "Header Text",
+              "default": "",
+              "placeholder": "Batt"
+            },
+            {
+              "type": "checkbox",
+              "id": "show_sub",
+              "label": "Sub Line",
+              "default": true
+            },
+            {
+              "type": "checkbox",
+              "id": "show_bar",
+              "label": "Bar",
+              "default": true
+            },
+            {
+              "type": "checkbox",
+              "id": "decimals",
+              "label": "One Decimal Place",
+              "default": false
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "id": "color_group",
+          "label": "Colours",
+          "fields": [
+            {
+              "type": "select",
+              "id": "color_source",
+              "label": "Palette",
+              "default": "theme",
+              "options": [
+                {
+                  "label": "Theme",
+                  "value": "theme"
+                },
+                {
+                  "label": "Button colour",
+                  "value": "button"
+                },
+                {
+                  "label": "Custom",
+                  "value": "custom"
+                }
+              ]
+            },
+            {
+              "type": "input",
+              "id": "custom_bg",
+              "label": "Background",
+              "default": "",
+              "placeholder": "#0d1117",
+              "visible_if": {
+                "field": "color_source",
+                "value": "custom"
+              }
+            },
+            {
+              "type": "input",
+              "id": "custom_fg",
+              "label": "Value Colour",
+              "default": "",
+              "placeholder": "#e6edf3",
+              "visible_if": {
+                "field": "color_source",
+                "value": "custom"
+              }
+            },
+            {
+              "type": "input",
+              "id": "custom_accent",
+              "label": "Accent Colour",
+              "default": "",
+              "placeholder": "#58a6ff",
+              "visible_if": {
+                "field": "color_source",
+                "value": "custom"
+              }
+            },
+            {
+              "type": "select",
+              "id": "tint",
+              "label": "Threshold Tint",
+              "default": "auto",
+              "options": [
+                {
+                  "label": "Follow the reading",
+                  "value": "auto"
+                },
+                {
+                  "label": "Off",
+                  "value": "off"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "id": "threshold_group",
+          "label": "Thresholds",
+          "fields": [
+            {
+              "type": "number",
+              "id": "warn_at",
+              "label": "Warn Below (%)",
+              "default": 30,
+              "min": 0,
+              "max": 100,
+              "visible_if": {
+                "field": "tint",
+                "not_value": "off"
+              }
+            },
+            {
+              "type": "number",
+              "id": "crit_at",
+              "label": "Critical Below (%)",
+              "default": 15,
+              "min": 0,
+              "max": 100,
+              "visible_if": {
+                "field": "tint",
+                "not_value": "off"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
