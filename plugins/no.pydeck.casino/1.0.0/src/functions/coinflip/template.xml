@@ -1,0 +1,13 @@
+<template name="coinflip" title="Coin Flip" description="Flip a coin for heads or tails" icon="assets/icons/coinflip.svg">
+  <box class="face">
+    <box class="coin" />
+    <box class="lens lens1" />
+    <box class="lens lens2" />
+    <box class="lens lens3" />
+    <box class="faces">
+      <text class="side heads">H</text>
+      <text class="side tails">T</text>
+    </box>
+    <text class="caption">{result_text}</text>
+  </box>
+</template>

@@ -2,8 +2,28 @@
   "schema_version": 1,
   "label": "Canary",
   "root_url": "https://raw.githubusercontent.com/OPvault/pydeck-plugins/canary/",
-  "generated_at": "2026-08-29T23:55:36Z",
+  "generated_at": "2026-08-29T23:56:11Z",
   "plugins": [
+    {
+      "name": "Casino",
+      "slug": "no.pydeck.casino",
+      "category": "games",
+      "summary": "Three games of chance on a button — roll a die, spin a roulette wheel, flip a coin",
+      "author": "PyDeck Team",
+      "latest": "1.0.0",
+      "icon_path": "plugins/no.pydeck.casino/icon.svg",
+      "compatible_pydeck_versions": [
+        "1.0"
+      ],
+      "versions": [
+        {
+          "version": "1.0.0",
+          "path": "plugins/no.pydeck.casino/1.0.0",
+          "min_pydeck_version": "1.1.0",
+          "max_pydeck_version": null
+        }
+      ]
+    },
     {
       "name": "Clock",
       "slug": "no.pydeck.clock",

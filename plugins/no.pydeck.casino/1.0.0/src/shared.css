@@ -1,0 +1,575 @@
+/* Casino — dice, roulette and a coin flip, all animated from the press itself.
+ *
+ * How a press-triggered animation works here
+ * -----------------------------------------
+ * PDK re-renders an animated button on a fixed ~15 FPS tick, and every frame
+ * is drawn from `time.monotonic()`. Handler state, by contrast, only changes
+ * on a press or a poll, and the poll floor is half a second — far too coarse
+ * to animate from. So none of the motion below is driven by state: it is
+ * driven by the clock, and the press only decides *when the clock started*.
+ *
+ * The trick is the delay slot of the `animation` shorthand. The renderer
+ * computes an animation's progress as `render_time - delay`, so a handler that
+ * writes its own `time.monotonic()` into that slot — `{roll_at}`, `{spin_at}`,
+ * `{flip_at}` below — makes progress read as "seconds since the press". Paired
+ * with an iteration count of 1, the animation therefore starts on the press,
+ * runs once, and freezes on its last keyframe for good. That last keyframe is
+ * itself a placeholder ({pip_tl}, {result_color}, {heads_size}, …), which is
+ * how a fixed stylesheet comes to rest on a random result: the tumbling is
+ * always the same, the landing is whatever the handler rolled.
+ *
+ * Before the first press every `*_at` is 0, so every animation is already long
+ * finished and each button sits on its resting face.
+ *
+ * Two consequences worth knowing when reading the rest of this file:
+ *
+ *   - Only paint-time properties can animate. Layout runs before the animation
+ *     values are applied, so `width`, `height`, `left` and `top` are fixed;
+ *     `background`, `border-color`, `border-width`, `color`, `rotate` and
+ *     `font-size` are read while drawing and do move. A face that squashes or
+ *     a number that pops is therefore font-size, never a scale transform.
+ *   - `rotate` renders the element on a layer its own size and does not expand
+ *     it, so anything that spins is given a square stage big enough to hold
+ *     the corners of what it carries.
+ *   - Text cannot be hidden by shrinking it away: a font cannot be loaded at
+ *     size 0 at all, and one pixel of a letter is still a visible pixel. Every
+ *     hidden face here is therefore a 1px letter inked in the colour of
+ *     whatever it sits on — the coin's gold, the wheel's hub, the button's
+ *     own colour — and grows into its real ink as it is revealed.
+ *
+ * Placeholders are interpolated across the whole stylesheet, comments
+ * included, so the state keys above are spelled without their braces.
+ * `var()` is not: custom properties are resolved for ordinary rules only,
+ * which is why every colour inside a @keyframes block is written out in full.
+ */
+
+:root {
+  --bg: {_button_gradient};
+
+  --gold: #d9b34a;
+  --gold-dim: #7a5f1d;
+
+  --ivory-hi: #ffffff;
+  --ivory-lo: #d5d7dc;
+
+  --wheel-hi: #2b2318;
+  --wheel-lo: #0f0c07;
+  --red: #d02f2f;
+  --black: #1e1e24;
+  --green: #17924f;
+}
+
+/* Every game paints the button's own colour first, so a user who recolours
+ * the button in the editor still gets their background under the table. */
+.face {
+  width: 100%;
+  height: 100%;
+  background: var(--bg);
+}
+
+/* ────────────────────────────── dice ──────────────────────────────
+ *
+ * The die is 56% of the button and its stage is the whole of it, so the die's
+ * diagonal (79% of the button) still clears the edges of the layer it turns
+ * on and no corner is ever clipped. Every size here is a percentage for the
+ * same reason: the canvas is 72px on most decks but 96 on an XL.
+ */
+
+.tumble {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  align: center;
+  justify: center;
+  animation: tumble 1.5s ease-out {roll_at}s 1;
+}
+
+.die {
+  width: 56%;
+  height: 56%;
+  border-radius: 8%;
+  background: linear-gradient(145deg, var(--ivory-hi), var(--ivory-lo));
+  border: 1 #9a9da5;
+}
+
+/* Seven fixed pip slots — the six a die uses plus the centre. Which of them
+ * are inked is decided per keyframe, so the face changes as the die turns. */
+.pip {
+  position: absolute;
+  width: 18%;
+  height: 18%;
+  border-radius: 9%;
+  background: transparent;
+}
+
+.tl { left: 12%; top: 12%; animation: pip-tl 1.5s linear {roll_at}s 1; }
+.tr { left: 70%; top: 12%; animation: pip-tr 1.5s linear {roll_at}s 1; }
+.ml { left: 12%; top: 41%; animation: pip-ml 1.5s linear {roll_at}s 1; }
+.mr { left: 70%; top: 41%; animation: pip-mr 1.5s linear {roll_at}s 1; }
+.bl { left: 12%; top: 70%; animation: pip-bl 1.5s linear {roll_at}s 1; }
+.br { left: 70%; top: 70%; animation: pip-br 1.5s linear {roll_at}s 1; }
+.c  { left: 41%; top: 41%; animation: pip-c  1.5s linear {roll_at}s 1; }
+
+/* Two turns, easing out, with a few degrees of overshoot at 90% so the die
+ * rocks back into place instead of gliding to a stop. */
+@keyframes tumble {
+  0% { rotate: 0; }
+  90% { rotate: 738; }
+  100% { rotate: 720; }
+}
+
+/* The five faces the die shows on its way down (2, 6, 3, 5, 1) and then the
+ * rolled one. Colours snap rather than fade: two stops one percent apart are
+ * far enough for the midpoint rule to switch cleanly, and a pip that fades in
+ * would read as a smudge at this size. The pip animations run `linear` while
+ * the die itself eases out, so the faces keep flicking at a steady 4 per
+ * second while the tumble is already slowing down. */
+@keyframes pip-tl {
+  0%, 16% { background: #1b1f27; }
+  17%, 33% { background: #1b1f27; }
+  34%, 50% { background: #1b1f27; }
+  51%, 67% { background: #1b1f27; }
+  68%, 84% { background: transparent; }
+  85%, 100% { background: {pip_tl}; }
+}
+@keyframes pip-tr {
+  0%, 16% { background: transparent; }
+  17%, 33% { background: #1b1f27; }
+  34%, 50% { background: transparent; }
+  51%, 67% { background: #1b1f27; }
+  68%, 84% { background: transparent; }
+  85%, 100% { background: {pip_tr}; }
+}
+@keyframes pip-ml {
+  0%, 16% { background: transparent; }
+  17%, 33% { background: #1b1f27; }
+  34%, 50% { background: transparent; }
+  51%, 67% { background: transparent; }
+  68%, 84% { background: transparent; }
+  85%, 100% { background: {pip_ml}; }
+}
+@keyframes pip-mr {
+  0%, 16% { background: transparent; }
+  17%, 33% { background: #1b1f27; }
+  34%, 50% { background: transparent; }
+  51%, 67% { background: transparent; }
+  68%, 84% { background: transparent; }
+  85%, 100% { background: {pip_mr}; }
+}
+@keyframes pip-bl {
+  0%, 16% { background: transparent; }
+  17%, 33% { background: #1b1f27; }
+  34%, 50% { background: transparent; }
+  51%, 67% { background: #1b1f27; }
+  68%, 84% { background: transparent; }
+  85%, 100% { background: {pip_bl}; }
+}
+@keyframes pip-br {
+  0%, 16% { background: #1b1f27; }
+  17%, 33% { background: #1b1f27; }
+  34%, 50% { background: #1b1f27; }
+  51%, 67% { background: #1b1f27; }
+  68%, 84% { background: transparent; }
+  85%, 100% { background: {pip_br}; }
+}
+@keyframes pip-c {
+  0%, 16% { background: transparent; }
+  17%, 33% { background: transparent; }
+  34%, 50% { background: #1b1f27; }
+  51%, 67% { background: #1b1f27; }
+  68%, 84% { background: #1b1f27; }
+  85%, 100% { background: {pip_c}; }
+}
+
+/* ───────────────────────────── roulette ─────────────────────────────
+ *
+ * A wheel with no numbers on it: twelve pockets on a ring, one of them green,
+ * and a ball running the other way round the track. The number the spin
+ * actually landed on is not on the wheel at all — it pops up on a disc over
+ * the hub once the wheel has stopped, coloured red, black or green.
+ */
+
+.rim {
+  position: absolute;
+  left: 3%;
+  top: 3%;
+  width: 94%;
+  height: 94%;
+  border-radius: 47%;
+  background: radial-gradient(var(--wheel-hi), var(--wheel-lo));
+  border: 2 #6b5426;
+}
+
+.wheel {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  animation: wheel-spin 2.8s ease-out {spin_at}s 1;
+}
+
+.pocket {
+  position: absolute;
+  width: 12.5%;
+  height: 12.5%;
+  border-radius: 6.25%;
+  border: 1 #8a7440;
+}
+
+.red { background: var(--red); }
+.black { background: var(--black); }
+.green { background: var(--green); }
+
+.k0 { left: 43.75%; top: 13.19%; }
+.k1 { left: 59.03%; top: 17.29%; }
+.k2 { left: 70.21%; top: 28.47%; }
+.k3 { left: 74.31%; top: 43.75%; }
+.k4 { left: 70.21%; top: 59.03%; }
+.k5 { left: 59.03%; top: 70.21%; }
+.k6 { left: 43.75%; top: 74.31%; }
+.k7 { left: 28.47%; top: 70.21%; }
+.k8 { left: 17.29%; top: 59.03%; }
+.k9 { left: 13.19%; top: 43.75%; }
+.k10 { left: 17.29%; top: 28.47%; }
+.k11 { left: 28.47%; top: 17.29%; }
+
+.hub {
+  position: absolute;
+  left: 36%;
+  top: 36%;
+  width: 28%;
+  height: 28%;
+  border-radius: 14%;
+  background: linear-gradient(145deg, var(--gold), var(--gold-dim));
+}
+
+/* Its own stage, so the ball orbits the centre of the button rather than
+ * spinning on the spot. */
+.ballstage {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  animation: ball-spin 2.8s ease-out {spin_at}s 1;
+}
+
+.ball {
+  position: absolute;
+  left: 46%;
+  top: 6%;
+  width: 8%;
+  height: 8%;
+  border-radius: 4%;
+  background: #f4f4f2;
+}
+
+/* Hidden for the whole spin — a transparent background paints nothing, and a
+ * transparent border-colour skips the border with it — then snapped on in one
+ * frame at 89%, by which time the eased wheel has all but stopped. */
+.disc {
+  position: absolute;
+  left: 27%;
+  top: 27%;
+  width: 46%;
+  height: 46%;
+  border-radius: 23%;
+  border: 2 transparent;
+  background: transparent;
+  animation: disc-in 2.8s linear {spin_at}s 1;
+}
+
+.num {
+  position: absolute;
+  left: -1;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  font-weight: bold;
+  font-size: 21;
+  color: #ffffff;
+  animation: num-in 2.8s linear {spin_at}s 1;
+}
+
+@keyframes wheel-spin {
+  0% { rotate: 0; }
+  92% { rotate: 1094; }
+  100% { rotate: 1080; }
+}
+
+@keyframes ball-spin {
+  0% { rotate: 0; }
+  100% { rotate: -1440; }
+}
+
+@keyframes disc-in {
+  0%, 88% { background: transparent; border-color: transparent; }
+  89%, 100% { background: {result_color}; border-color: {result_ring}; }
+}
+
+/* A number cannot scale, but it can be drawn at a different size every frame,
+ * which comes to the same thing: 1px is invisible, 27 overshoots, 21 settles.
+ * The text box keeps the size layout gave it, so the digits stay centred in
+ * the disc the whole way up. */
+@keyframes num-in {
+  0%, 88% { font-size: 1; color: #c9a24e; }
+  89% { font-size: 1; color: #ffffff; }
+  94% { font-size: 27; color: #ffffff; }
+  100% { font-size: 21; color: #ffffff; }
+}
+
+
+/* ───────────────────────────── coin flip ─────────────────────────────
+ *
+ * A coin turning end over end, drawn the only way a renderer without a third
+ * dimension can draw one: as four discs of the same width and falling height,
+ * stacked on one centre line and lit one at a time. Face-on is the round
+ * `.coin`; `.lens1` and `.lens2` are the same face foreshortened, each a shade
+ * darker because it catches less light; `.lens3` is the milled edge seen
+ * straight on. Turning the four on and off in order is a coin flipping.
+ *
+ * The heights are the odd pixel counts 45, 25, 11 and 3 at a 72px button —
+ * odd, because a common centre line at y=25.5 then puts every `top` on a whole
+ * pixel and the coin does not jitter up and down as it turns.
+ *
+ * Timing is `linear` and the turns are deliberately uneven — 15%, 18%, 25%,
+ * then 34% of the animation. With linear timing the spacing *is* the easing,
+ * so the coin leaves the hand in a blur and takes almost half a second over
+ * its last turn, which is the one you actually read. `ease-out` would have put
+ * that deceleration inside every turn instead of across them.
+ */
+
+.coin {
+  position: absolute;
+  left: 18.75%;
+  top: 4.1667%;
+  width: 62.5%;
+  height: 62.5%;
+  border-radius: 31.25%;
+  /* Width only: the rim's colour is turned on and off with the face it
+   * belongs to, so an edge-on coin does not leave a ring floating. */
+  border: 1 transparent;
+  background: transparent;
+  animation: turn-coin 1.7s linear {flip_at}s 1;
+}
+
+/* Same width and centre as the coin, so a lens reads as the same disc rather
+ * than a second object. A border-radius of exactly half the height rounds the
+ * ends off into a lens instead of a bar. */
+.lens {
+  position: absolute;
+  left: 18.75%;
+  width: 62.5%;
+  background: transparent;
+}
+
+.lens1 {
+  top: 18.0556%;
+  height: 34.7222%;
+  border-radius: 17.36%;
+  animation: turn-lens1 1.7s linear {flip_at}s 1;
+}
+
+.lens2 {
+  top: 27.7778%;
+  height: 15.2778%;
+  border-radius: 7.64%;
+  animation: turn-lens2 1.7s linear {flip_at}s 1;
+}
+
+.lens3 {
+  top: 33.3333%;
+  height: 4.1667%;
+  border-radius: 2.08%;
+  animation: turn-lens3 1.7s linear {flip_at}s 1;
+}
+
+/* The two faces, over every lens so a letter is never painted under one.
+ *
+ * `.faces` is the coin's own box and the letters sit inside it, which is what
+ * makes the nudge below expressible: a shape is drawn from its box truncated
+ * to whole pixels and spans one pixel less than its width, while text is
+ * centred on the box's true middle, so a letter lands up to a pixel and a half
+ * down and to the right of the disc it belongs on. One pixel back, measured
+ * against the rendered frame at 72, 80, 96 and 120px, is what centres it.
+ */
+.faces {
+  position: absolute;
+  left: 18.75%;
+  top: 4.1667%;
+  width: 62.5%;
+  height: 62.5%;
+}
+
+.side {
+  position: absolute;
+  left: -1;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  font-weight: bold;
+}
+
+.heads { animation: flip-heads 1.7s linear {flip_at}s 1; }
+.tails { animation: flip-tails 1.7s linear {flip_at}s 1; }
+
+.caption {
+  position: absolute;
+  left: -1;
+  top: 72%;
+  width: 100%;
+  height: 24%;
+  text-align: center;
+  font-weight: bold;
+  font-size: 12;
+  color: var(--gold);
+  animation: caption-in 1.7s linear {flip_at}s 1;
+}
+
+/* Which disc is showing, percent by percent. Generated from the turn schedule
+ * above, which is why the stops look arbitrary: each pair is one disc's slot,
+ * and the single stop on either side of it is that disc switched off. Two
+ * stops a percent apart swap in 17ms — a hard cut, not a fade, which is what a
+ * turning coin does.
+ *
+ * A colour must be written out in full inside a @keyframes block: custom
+ * properties are resolved for ordinary rules only. */
+@keyframes turn-coin {
+  0%, 1% { background: radial-gradient(#f6e39b, #c99b23); border-color: #8a6a15; }
+  2% { background: transparent; border-color: transparent; }
+  12% { background: transparent; border-color: transparent; }
+  13% { background: radial-gradient(#f6e39b, #c99b23); border-color: #8a6a15; }
+  17% { background: radial-gradient(#f6e39b, #c99b23); border-color: #8a6a15; }
+  18% { background: transparent; border-color: transparent; }
+  30% { background: transparent; border-color: transparent; }
+  31% { background: radial-gradient(#f6e39b, #c99b23); border-color: #8a6a15; }
+  36% { background: radial-gradient(#f6e39b, #c99b23); border-color: #8a6a15; }
+  37% { background: transparent; border-color: transparent; }
+  54% { background: transparent; border-color: transparent; }
+  55% { background: radial-gradient(#f6e39b, #c99b23); border-color: #8a6a15; }
+  62% { background: radial-gradient(#f6e39b, #c99b23); border-color: #8a6a15; }
+  63% { background: transparent; border-color: transparent; }
+  87% { background: transparent; border-color: transparent; }
+  88% { background: radial-gradient(#f6e39b, #c99b23); border-color: #8a6a15; }
+  100% { background: radial-gradient(#f6e39b, #c99b23); border-color: #8a6a15; }
+}
+
+@keyframes turn-lens1 {
+  0%, 1% { background: transparent; }
+  2% { background: linear-gradient(180deg, #f2dc90, #b98a1c); }
+  4% { background: linear-gradient(180deg, #f2dc90, #b98a1c); }
+  5% { background: transparent; }
+  10% { background: transparent; }
+  11%, 12% { background: linear-gradient(180deg, #f2dc90, #b98a1c); }
+  13% { background: transparent; }
+  17% { background: transparent; }
+  18% { background: linear-gradient(180deg, #f2dc90, #b98a1c); }
+  20% { background: linear-gradient(180deg, #f2dc90, #b98a1c); }
+  21% { background: transparent; }
+  27% { background: transparent; }
+  28% { background: linear-gradient(180deg, #f2dc90, #b98a1c); }
+  30% { background: linear-gradient(180deg, #f2dc90, #b98a1c); }
+  31% { background: transparent; }
+  36% { background: transparent; }
+  37% { background: linear-gradient(180deg, #f2dc90, #b98a1c); }
+  40% { background: linear-gradient(180deg, #f2dc90, #b98a1c); }
+  41% { background: transparent; }
+  50% { background: transparent; }
+  51% { background: linear-gradient(180deg, #f2dc90, #b98a1c); }
+  54% { background: linear-gradient(180deg, #f2dc90, #b98a1c); }
+  55% { background: transparent; }
+  62% { background: transparent; }
+  63% { background: linear-gradient(180deg, #f2dc90, #b98a1c); }
+  68% { background: linear-gradient(180deg, #f2dc90, #b98a1c); }
+  69% { background: transparent; }
+  81% { background: transparent; }
+  82% { background: linear-gradient(180deg, #f2dc90, #b98a1c); }
+  87% { background: linear-gradient(180deg, #f2dc90, #b98a1c); }
+  88% { background: transparent; }
+  100% { background: transparent; }
+}
+
+@keyframes turn-lens2 {
+  0% { background: transparent; }
+  4% { background: transparent; }
+  5%, 6% { background: linear-gradient(180deg, #d9bb63, #9b7717); }
+  7%, 8% { background: transparent; }
+  9%, 10% { background: linear-gradient(180deg, #d9bb63, #9b7717); }
+  11% { background: transparent; }
+  20% { background: transparent; }
+  21%, 22% { background: linear-gradient(180deg, #d9bb63, #9b7717); }
+  23% { background: transparent; }
+  25% { background: transparent; }
+  26%, 27% { background: linear-gradient(180deg, #d9bb63, #9b7717); }
+  28% { background: transparent; }
+  40% { background: transparent; }
+  41% { background: linear-gradient(180deg, #d9bb63, #9b7717); }
+  43% { background: linear-gradient(180deg, #d9bb63, #9b7717); }
+  44% { background: transparent; }
+  46% { background: transparent; }
+  47% { background: linear-gradient(180deg, #d9bb63, #9b7717); }
+  50% { background: linear-gradient(180deg, #d9bb63, #9b7717); }
+  51% { background: transparent; }
+  68% { background: transparent; }
+  69% { background: linear-gradient(180deg, #d9bb63, #9b7717); }
+  72% { background: linear-gradient(180deg, #d9bb63, #9b7717); }
+  73% { background: transparent; }
+  77% { background: transparent; }
+  78% { background: linear-gradient(180deg, #d9bb63, #9b7717); }
+  81% { background: linear-gradient(180deg, #d9bb63, #9b7717); }
+  82% { background: transparent; }
+  100% { background: transparent; }
+}
+
+@keyframes turn-lens3 {
+  0% { background: transparent; }
+  6% { background: transparent; }
+  7%, 8% { background: #8a6a15; }
+  9% { background: transparent; }
+  22% { background: transparent; }
+  23% { background: #8a6a15; }
+  25% { background: #8a6a15; }
+  26% { background: transparent; }
+  43% { background: transparent; }
+  44% { background: #8a6a15; }
+  46% { background: #8a6a15; }
+  47% { background: transparent; }
+  72% { background: transparent; }
+  73% { background: #8a6a15; }
+  77% { background: #8a6a15; }
+  78% { background: transparent; }
+  100% { background: transparent; }
+}
+
+/* The letters ride the turn instead of stepping through it: a size ramped from
+ * full to nothing between an open moment and the next edge-on one is a face
+ * going away, and the ink ramps with it, from the dark of a stamped letter to
+ * the coin's own gold — so the pixel that is left when the face is gone has
+ * nothing to show. The last stop of each is the handler's, which is what makes
+ * the coin land on the side it landed on. */
+@keyframes flip-heads {
+  0% { font-size: 25; color: #4a3607; }
+  7% { font-size: 1; color: #8a6a15; }
+  24% { font-size: 1; color: #8a6a15; }
+  33% { font-size: 25; color: #4a3607; }
+  45% { font-size: 1; color: #8a6a15; }
+  75% { font-size: 1; color: #8a6a15; }
+  92%, 100% { font-size: {heads_size}; color: {heads_ink}; }
+}
+
+@keyframes flip-tails {
+  0%, 7% { font-size: 1; color: #8a6a15; }
+  15% { font-size: 25; color: #4a3607; }
+  24% { font-size: 1; color: #8a6a15; }
+  45% { font-size: 1; color: #8a6a15; }
+  58% { font-size: 25; color: #4a3607; }
+  75% { font-size: 1; color: #8a6a15; }
+  92%, 100% { font-size: {tails_size}; color: {tails_ink}; }
+}
+
+/* Held in the button's own colour until the coin has all but landed, then cut
+ * to gold and grown into place. */
+@keyframes caption-in {
+  0%, 92% { font-size: 1; color: {_button_color}; }
+  93% { font-size: 14; color: #d9b34a; }
+  100% { font-size: 12; color: #d9b34a; }
+}

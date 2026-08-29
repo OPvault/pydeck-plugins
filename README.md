@@ -16,6 +16,7 @@ When you install a plugin through the marketplace UI, PyDeck reads the root `man
 | Plugin | Category | Summary |
 |:---|:---|:---|
 | Browser | Utilities | Open URLs in the default browser |
+| Casino | Games | Roll a die, spin a roulette wheel, or flip a coin |
 | Clock | Utilities | Display a live digital clock on a button |
 | Discord | Communication | Control Discord voice state (mute/deafen) via RPC |
 | Home Assistant | Home Automation | Control and monitor Home Assistant entities |
