@@ -1,0 +1,5 @@
+<template name="next_track" title="Next Track" description="Skip to the next track">
+  <box class="face">
+    <img src="{icon_src}" class="icon" fit="contain" />
+  </box>
+</template>

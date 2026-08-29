@@ -1,0 +1,14 @@
+/* no.pydeck.folders — icon faces (same layout pattern as no.pydeck.spotify actions). */
+
+.folder-bg {
+  background: {_button_color};
+  direction: column;
+  align: center;
+  justify: center;
+  gap: -4;
+}
+
+.folder-icon {
+  width: 56;
+  height: 56;
+}

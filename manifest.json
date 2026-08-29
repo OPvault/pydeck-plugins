@@ -2,7 +2,7 @@
   "schema_version": 1,
   "label": "Testing",
   "root_url": "https://raw.githubusercontent.com/OPvault/pydeck-plugins/testing/",
-  "generated_at": "2026-08-28T20:36:58Z",
+  "generated_at": "2026-08-29T18:16:35Z",
   "plugins": [
     {
       "name": "Clock",
@@ -38,7 +38,7 @@
       "category": "communication",
       "summary": "Control Discord voice state (mute/deafen) via RPC",
       "author": "PyDeck Team",
-      "latest": "2.0.0",
+      "latest": "2.0.1",
       "icon_path": "plugins/no.pydeck.discord/icon.svg",
       "compatible_pydeck_versions": [
         "1.0"
@@ -50,9 +50,16 @@
           "min_pydeck_version": "1.1.0",
           "max_pydeck_version": null,
           "changelog_path": "plugins/no.pydeck.discord/2.0.0/CHANGELOG.md"
+        },
+        {
+          "version": "2.0.1",
+          "path": "plugins/no.pydeck.discord/2.0.1",
+          "min_pydeck_version": "1.1.0",
+          "max_pydeck_version": null,
+          "changelog_path": "plugins/no.pydeck.discord/2.0.1/CHANGELOG.md"
         }
       ],
-      "doc_path": "plugins/no.pydeck.discord/2.0.0/DOCS.md",
+      "doc_path": "plugins/no.pydeck.discord/2.0.1/DOCS.md",
       "show_markdown_after_install": true
     },
     {
@@ -131,7 +138,7 @@
       "category": "utilities",
       "summary": "Navigate virtual folder pages on the Stream Deck",
       "author": "PyDeck Team",
-      "latest": "1.0.3",
+      "latest": "1.0.4",
       "icon_path": "plugins/no.pydeck.folders/icon.png",
       "compatible_pydeck_versions": [
         "1.0"
@@ -143,6 +150,13 @@
           "min_pydeck_version": "1.1.0",
           "max_pydeck_version": null,
           "changelog_path": "plugins/no.pydeck.folders/1.0.3/CHANGELOG.md"
+        },
+        {
+          "version": "1.0.4",
+          "path": "plugins/no.pydeck.folders/1.0.4",
+          "min_pydeck_version": "1.1.0",
+          "max_pydeck_version": null,
+          "changelog_path": "plugins/no.pydeck.folders/1.0.4/CHANGELOG.md"
         }
       ]
     },
@@ -203,7 +217,7 @@
       "category": "utilities",
       "summary": "Simulate keyboard presses and text input via xdotool on X11 when available, with evdev/uinput fallback for Wayland. Works on both X11 and Wayland. Requires the user to be in the 'input' group: sudo usermod -aG input $USER",
       "author": "PyDeck Team",
-      "latest": "1.0.5",
+      "latest": "1.0.6",
       "icon_path": "plugins/no.pydeck.keyboard/icon.svg",
       "compatible_pydeck_versions": [
         "1.0"
@@ -215,6 +229,13 @@
           "min_pydeck_version": "1.1.0",
           "max_pydeck_version": null,
           "changelog_path": "plugins/no.pydeck.keyboard/1.0.5/CHANGELOG.md"
+        },
+        {
+          "version": "1.0.6",
+          "path": "plugins/no.pydeck.keyboard/1.0.6",
+          "min_pydeck_version": "1.1.0",
+          "max_pydeck_version": null,
+          "changelog_path": "plugins/no.pydeck.keyboard/1.0.6/CHANGELOG.md"
         }
       ]
     },
@@ -224,7 +245,7 @@
       "category": "media",
       "summary": "Control media playback on Linux (play/pause, next, previous, volume)",
       "author": "PyDeck Team",
-      "latest": "2.0.0",
+      "latest": "2.0.1",
       "icon_path": "plugins/no.pydeck.media-control/icon.svg",
       "compatible_pydeck_versions": [
         "1.0"
@@ -236,9 +257,16 @@
           "min_pydeck_version": "1.1.0",
           "max_pydeck_version": null,
           "changelog_path": "plugins/no.pydeck.media-control/2.0.0/CHANGELOG.md"
+        },
+        {
+          "version": "2.0.1",
+          "path": "plugins/no.pydeck.media-control/2.0.1",
+          "min_pydeck_version": "1.1.0",
+          "max_pydeck_version": null,
+          "changelog_path": "plugins/no.pydeck.media-control/2.0.1/CHANGELOG.md"
         }
       ],
-      "doc_path": "plugins/no.pydeck.media-control/2.0.0/DOCS.md",
+      "doc_path": "plugins/no.pydeck.media-control/2.0.1/DOCS.md",
       "show_markdown_after_install": false
     },
     {
@@ -247,7 +275,7 @@
       "category": "media",
       "summary": "Control Spotify playback via the Web API (PDK)",
       "author": "PyDeck Team",
-      "latest": "2.0.6",
+      "latest": "2.0.7",
       "icon_path": "plugins/no.pydeck.spotify/icon.svg",
       "compatible_pydeck_versions": [
         "1.0"
@@ -294,9 +322,16 @@
           "min_pydeck_version": "1.1.0",
           "max_pydeck_version": null,
           "changelog_path": "plugins/no.pydeck.spotify/2.0.6/CHANGELOG.md"
+        },
+        {
+          "version": "2.0.7",
+          "path": "plugins/no.pydeck.spotify/2.0.7",
+          "min_pydeck_version": "1.1.0",
+          "max_pydeck_version": null,
+          "changelog_path": "plugins/no.pydeck.spotify/2.0.7/CHANGELOG.md"
         }
       ],
-      "doc_path": "plugins/no.pydeck.spotify/2.0.6/DOCS.md",
+      "doc_path": "plugins/no.pydeck.spotify/2.0.7/DOCS.md",
       "show_markdown_after_install": true
     },
     {
@@ -335,7 +370,7 @@
       "category": "utilities",
       "summary": "Open URLs, send HTTP requests, and run scripts",
       "author": "PyDeck Team",
-      "latest": "1.0.2",
+      "latest": "1.0.3",
       "icon_path": "plugins/no.pydeck.utilities/icon.svg",
       "compatible_pydeck_versions": [
         "1.0"
@@ -347,6 +382,13 @@
           "min_pydeck_version": "1.1.0",
           "max_pydeck_version": null,
           "changelog_path": "plugins/no.pydeck.utilities/1.0.2/CHANGELOG.md"
+        },
+        {
+          "version": "1.0.3",
+          "path": "plugins/no.pydeck.utilities/1.0.3",
+          "min_pydeck_version": "1.1.0",
+          "max_pydeck_version": null,
+          "changelog_path": "plugins/no.pydeck.utilities/1.0.3/CHANGELOG.md"
         }
       ]
     },

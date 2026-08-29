@@ -1,0 +1,15 @@
+/* no.pydeck.utilities — icon tiles (same pattern as no.pydeck.spotify actions). */
+
+.util-bg {
+  background: {_button_color};
+  direction: column;
+  align: center;
+  justify: center;
+  gap: -4;
+}
+
+/* Match classic utilities: icon fills the key (72×72 canvas). */
+.util-icon {
+  width: 72;
+  height: 72;
+}
