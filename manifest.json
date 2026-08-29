@@ -2,8 +2,35 @@
   "schema_version": 1,
   "label": "Testing",
   "root_url": "https://raw.githubusercontent.com/OPvault/pydeck-plugins/testing/",
-  "generated_at": "2026-08-29T23:29:14Z",
+  "generated_at": "2026-08-29T23:55:24Z",
   "plugins": [
+    {
+      "name": "Cava",
+      "slug": "no.pydeck.cava",
+      "category": [
+        "media",
+        "widgets",
+        "live-data"
+      ],
+      "summary": "Live audio spectrum on a key, driven by cava",
+      "author": "PyDeck Team",
+      "latest": "0.1.0",
+      "icon_path": "plugins/no.pydeck.cava/icon.svg",
+      "compatible_pydeck_versions": [
+        "1.1"
+      ],
+      "versions": [
+        {
+          "version": "0.1.0",
+          "path": "plugins/no.pydeck.cava/0.1.0",
+          "min_pydeck_version": "1.1.0",
+          "max_pydeck_version": null,
+          "changelog_path": "plugins/no.pydeck.cava/0.1.0/CHANGELOG.md"
+        }
+      ],
+      "doc_path": "plugins/no.pydeck.cava/0.1.0/DOCS.md",
+      "show_markdown_after_install": false
+    },
     {
       "name": "Clock",
       "slug": "no.pydeck.clock",

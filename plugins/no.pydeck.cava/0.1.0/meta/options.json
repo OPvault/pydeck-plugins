@@ -1,0 +1,14 @@
+{
+  "description": "Live audio spectrum on a key, driven by cava",
+  "features": [
+    "Live spectrum bars from cava",
+    "Four colour modes",
+    "Bottom, top and mirrored layouts"
+  ],
+  "tags": [
+    "pdk",
+    "audio",
+    "visualizer",
+    "cava"
+  ]
+}

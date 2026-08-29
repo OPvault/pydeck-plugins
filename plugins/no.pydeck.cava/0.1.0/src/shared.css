@@ -1,0 +1,68 @@
+/* Cava -- spectrum face.
+ *
+ * The renderer interpolates handler state into this text before parsing it,
+ * so every braced name is a value shared.py computed for the current poll.
+ * Lengths are percentages of the canvas so the face looks the same on a
+ * 72 px key and a 96 px XL one. */
+
+.face {
+  position: absolute;
+  left: 0; top: 0; width: 100%; height: 100%;
+  background: {_button_gradient};
+}
+
+/* A keyframe that changes nothing, on a box that draws nothing: it marks the
+ * face as animated, which is what makes PyDeck re-render it on the fast tick
+ * (~15 fps on the deck, ~5 fps in the browser) instead of once a second. */
+@keyframes live {
+  from { rotate: 0; }
+  to   { rotate: 0; }
+}
+.tick { position: absolute; left: 0; top: 0; width: 0; height: 0;
+        animation: live 1s linear infinite; }
+
+.b { position: absolute; width: {b_w}; border-radius: {b_r}; }
+.b1  { left: {b1_x}; top: {b1_y}; height: {b1_h}; background: {b1_c}; }
+.b2  { left: {b2_x}; top: {b2_y}; height: {b2_h}; background: {b2_c}; }
+.b3  { left: {b3_x}; top: {b3_y}; height: {b3_h}; background: {b3_c}; }
+.b4  { left: {b4_x}; top: {b4_y}; height: {b4_h}; background: {b4_c}; }
+.b5  { left: {b5_x}; top: {b5_y}; height: {b5_h}; background: {b5_c}; }
+.b6  { left: {b6_x}; top: {b6_y}; height: {b6_h}; background: {b6_c}; }
+.b7  { left: {b7_x}; top: {b7_y}; height: {b7_h}; background: {b7_c}; }
+.b8  { left: {b8_x}; top: {b8_y}; height: {b8_h}; background: {b8_c}; }
+.b9  { left: {b9_x}; top: {b9_y}; height: {b9_h}; background: {b9_c}; }
+.b10  { left: {b10_x}; top: {b10_y}; height: {b10_h}; background: {b10_c}; }
+.b11  { left: {b11_x}; top: {b11_y}; height: {b11_h}; background: {b11_c}; }
+.b12  { left: {b12_x}; top: {b12_y}; height: {b12_h}; background: {b12_c}; }
+.b13  { left: {b13_x}; top: {b13_y}; height: {b13_h}; background: {b13_c}; }
+.b14  { left: {b14_x}; top: {b14_y}; height: {b14_h}; background: {b14_c}; }
+.b15  { left: {b15_x}; top: {b15_y}; height: {b15_h}; background: {b15_c}; }
+.b16  { left: {b16_x}; top: {b16_y}; height: {b16_h}; background: {b16_c}; }
+.b17  { left: {b17_x}; top: {b17_y}; height: {b17_h}; background: {b17_c}; }
+.b18  { left: {b18_x}; top: {b18_y}; height: {b18_h}; background: {b18_c}; }
+.b19  { left: {b19_x}; top: {b19_y}; height: {b19_h}; background: {b19_c}; }
+.b20  { left: {b20_x}; top: {b20_y}; height: {b20_h}; background: {b20_c}; }
+.b21  { left: {b21_x}; top: {b21_y}; height: {b21_h}; background: {b21_c}; }
+.b22  { left: {b22_x}; top: {b22_y}; height: {b22_h}; background: {b22_c}; }
+.b23  { left: {b23_x}; top: {b23_y}; height: {b23_h}; background: {b23_c}; }
+.b24  { left: {b24_x}; top: {b24_y}; height: {b24_h}; background: {b24_c}; }
+.b25  { left: {b25_x}; top: {b25_y}; height: {b25_h}; background: {b25_c}; }
+.b26  { left: {b26_x}; top: {b26_y}; height: {b26_h}; background: {b26_c}; }
+.b27  { left: {b27_x}; top: {b27_y}; height: {b27_h}; background: {b27_c}; }
+.b28  { left: {b28_x}; top: {b28_y}; height: {b28_h}; background: {b28_c}; }
+.b29  { left: {b29_x}; top: {b29_y}; height: {b29_h}; background: {b29_c}; }
+.b30  { left: {b30_x}; top: {b30_y}; height: {b30_h}; background: {b30_c}; }
+.b31  { left: {b31_x}; top: {b31_y}; height: {b31_h}; background: {b31_c}; }
+.b32  { left: {b32_x}; top: {b32_y}; height: {b32_h}; background: {b32_c}; }
+
+.label {
+  position: absolute;
+  left: 0; top: {label_y}; width: 100%; height: {label_h};
+  font-size: 0.7em; color: {label_c}; text-align: center;
+}
+
+.msg {
+  position: absolute;
+  left: 0; top: 40%; width: 100%; height: 20%;
+  font-size: 0.65em; color: {msg_c}; text-align: center;
+}
