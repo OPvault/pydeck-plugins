@@ -2,7 +2,7 @@
   "schema_version": 1,
   "label": "Testing",
   "root_url": "https://raw.githubusercontent.com/OPvault/pydeck-plugins/testing/",
-  "generated_at": "2026-08-29T20:04:47Z",
+  "generated_at": "2026-08-29T23:29:14Z",
   "plugins": [
     {
       "name": "Clock",
@@ -46,7 +46,7 @@
       ],
       "summary": "Control Discord voice state (mute/deafen) via RPC",
       "author": "PyDeck Team",
-      "latest": "2.0.1",
+      "latest": "2.0.2",
       "icon_path": "plugins/no.pydeck.discord/icon.svg",
       "compatible_pydeck_versions": [
         "1.0"
@@ -65,9 +65,16 @@
           "min_pydeck_version": "1.1.0",
           "max_pydeck_version": null,
           "changelog_path": "plugins/no.pydeck.discord/2.0.1/CHANGELOG.md"
+        },
+        {
+          "version": "2.0.2",
+          "path": "plugins/no.pydeck.discord/2.0.2",
+          "min_pydeck_version": "1.1.0",
+          "max_pydeck_version": null,
+          "changelog_path": "plugins/no.pydeck.discord/2.0.2/CHANGELOG.md"
         }
       ],
-      "doc_path": "plugins/no.pydeck.discord/2.0.1/DOCS.md",
+      "doc_path": "plugins/no.pydeck.discord/2.0.2/DOCS.md",
       "show_markdown_after_install": true
     },
     {
@@ -190,7 +197,7 @@
       ],
       "summary": "Control and monitor Home Assistant entities",
       "author": "PyDeck Team",
-      "latest": "2.0.3",
+      "latest": "2.0.4",
       "icon_path": "plugins/no.pydeck.home-assistant/icon.png",
       "compatible_pydeck_versions": [
         "1.0"
@@ -223,9 +230,16 @@
           "min_pydeck_version": "1.1.0",
           "max_pydeck_version": null,
           "changelog_path": "plugins/no.pydeck.home-assistant/2.0.3/CHANGELOG.md"
+        },
+        {
+          "version": "2.0.4",
+          "path": "plugins/no.pydeck.home-assistant/2.0.4",
+          "min_pydeck_version": "1.1.0",
+          "max_pydeck_version": null,
+          "changelog_path": "plugins/no.pydeck.home-assistant/2.0.4/CHANGELOG.md"
         }
       ],
-      "doc_path": "plugins/no.pydeck.home-assistant/2.0.3/DOCS.md",
+      "doc_path": "plugins/no.pydeck.home-assistant/2.0.4/DOCS.md",
       "show_markdown_after_install": true,
       "licenses": [
         {
@@ -312,7 +326,7 @@
       ],
       "summary": "Control Spotify playback via the Web API (PDK)",
       "author": "PyDeck Team",
-      "latest": "2.0.7",
+      "latest": "2.0.8",
       "icon_path": "plugins/no.pydeck.spotify/icon.svg",
       "compatible_pydeck_versions": [
         "1.0"
@@ -366,9 +380,16 @@
           "min_pydeck_version": "1.1.0",
           "max_pydeck_version": null,
           "changelog_path": "plugins/no.pydeck.spotify/2.0.7/CHANGELOG.md"
+        },
+        {
+          "version": "2.0.8",
+          "path": "plugins/no.pydeck.spotify/2.0.8",
+          "min_pydeck_version": "1.1.0",
+          "max_pydeck_version": null,
+          "changelog_path": "plugins/no.pydeck.spotify/2.0.8/CHANGELOG.md"
         }
       ],
-      "doc_path": "plugins/no.pydeck.spotify/2.0.7/DOCS.md",
+      "doc_path": "plugins/no.pydeck.spotify/2.0.8/DOCS.md",
       "show_markdown_after_install": true
     },
     {
