@@ -43,6 +43,83 @@ python -m tools.pdk_create
 python -m tools.pdk_create --non-interactive --plugin-id no.pydeck.foo --name Foo
 ```
 
+## Making a new plugin
+
+New plugins are **not authored in this repo**. They are scaffolded and developed inside the live PyDeck plugin install (`~/.local/share/pydeck/plugin/<rdnn-id>/`, the path saved in `~/.config/pydeck/pydeck-plugins/path.json`), tested in the running app, and only synced into the catalog once the user says they are happy with the result. Every edit before that point is local to the install — nothing under `plugins/` in this repo is touched, and nothing is committed.
+
+### 1. Scaffold with `pdk_create`
+
+`python -m tools.pdk_create` is the only supported way to start a plugin — do not hand-build the tree. Textual is installed, so the bare command opens a TUI form (plugin root, RDNN id, display name, description, author, version, function ids, preset, `min_pydeck_version`, post-install checkbox; **Create plugin** writes, **Esc** cancels). The plugin-root field is pre-filled from `path.json`, so it already points at the live install. When Textual is missing the same questions are asked as line prompts.
+
+The TUI needs a real terminal, so as an agent use the flag form, which takes the same inputs:
+
+```bash
+python -m tools.pdk_create --non-interactive \
+  --plugin-id no.pydeck.foo --name "Foo" --description "What it does" \
+  --author "PyDeck Team" --version 0.1.0 --functions main,toggle --preset counter
+# add --post-install for scripts/setup.sh + manifest post_install_script
+# add --force to overwrite an existing non-empty <rdnn-id>/ folder (exit 1 otherwise)
+# --pydeck-source PATH aims it at another plugins directory (e.g. for a throwaway test)
+```
+
+**The author of every plugin in this catalog is `PyDeck Team`** — pass `--author "PyDeck Team"` (the scaffold defaults to `"You"`), and keep it that way in the version `manifest.json` and the `Copyright (c)` line of `meta/licenses/LICENSE-main`; the generator copies `author` straight into the root manifest. `--non-interactive` requires `--plugin-id` and `--name`; everything else defaults (`"PDK demo plugin"`, `"You"`, `0.1.0`, `main`, `static`, `1.1.0`). The id must be reverse-DNS with at least three labels (`no.pydeck.foo`); function ids are snake_case. Bad input exits 2 before anything is written. Presets: `static` is a label-only face, `counter` adds a `count` field that `on_press` increments.
+
+What gets written into `<plugins-dir>/<rdnn-id>/`:
+
+```
+manifest.json                      name/version/description/author, min_pydeck_version,
+                                   max_pydeck_version: null, "changelog": "CHANGELOG.md",
+                                   one entry per function (label, default_display, ui: [])
+CHANGELOG.md                       "## <version> — <today>" + "- Initial release."
+src/shared.py, src/shared.css      helpers + base stylesheet shared by every function
+src/functions/<fn>/handler.py      on_load / on_press (+ on_poll for counter)
+src/functions/<fn>/template.xml    <template name="<fn>"> face markup
+src/functions/<fn>/style.css       per-function overrides
+assets/icons/, assets/fonts/       empty (.gitkeep)
+meta/options.json                  description, features, tags
+meta/licenses/LICENSE-main         placeholder license text
+scripts/setup.sh                   only with --post-install
+```
+
+`max_pydeck_version` is written as an explicit `null`, which the generator passes through as-is — only an *absent* key gets pinned to `"1.0.0"`, so leave the key in place.
+
+### 2. Develop locally, get sign-off
+
+Edit the scaffold in the install: real logic in the handlers, faces in `template.xml`, styles, icons under `assets/`, the `ui` widgets / `permissions` / `poll` in `manifest.json`. Restart PyDeck to load it and iterate there. Replace the `- Initial release.` bullet in the install's `CHANGELOG.md` with what the version actually does — sync reads that file as the draft for the entry.
+
+Stop here until the user has tried the plugin and says it is good. Do not run sync, do not touch `plugins/`, do not commit, on your own initiative.
+
+### 3. Sync into the catalog
+
+Once approved:
+
+```bash
+python sync_from_pydeck.py --list-plugins            # the new slug shows as NEW
+python sync_from_pydeck.py --plugin no.pydeck.foo --dry-run
+python sync_from_pydeck.py --plugin no.pydeck.foo    # copies → plugins/no.pydeck.foo/<version>/
+```
+
+A NEW plugin is copied at the version its manifest declares (no bump), `__pycache__`/`.pyc` excluded. Its changelog comes from the install's `CHANGELOG.md` when one exists (the scaffold always ships one), so `--changelog` is only needed to override it. Sync ends by running `generate_manifest.py` itself with the default `Testing` label, which is right on `testing`; pass `--no-generate` and run it by hand when you need a different label or want to inspect first:
+
+```bash
+python generate_manifest.py --dry-run
+python generate_manifest.py --label "Testing"
+```
+
+### 4. Add the repo-only files, regenerate again
+
+Sync never copies `catalog.json`, `icon.svg`/`icon.png`, or root license files — those live only here, at `plugins/<slug>/`, not inside the version folder. A freshly synced plugin has none of them, so the first generate run warns `<slug> has no icon file` and falls back to `category: "utilities"`, `summary` = the manifest description, no `licenses`. Add them, then regenerate:
+
+- `plugins/<slug>/icon.svg` (preferred) or `icon.png`
+- `plugins/<slug>/catalog.json` with `category` (a list — see the other plugins), `compatible_pydeck_versions`, optional `summary`/`licenses`
+
+```bash
+python generate_manifest.py --label "Testing"
+git add plugins/no.pydeck.foo manifest.json
+```
+
+Later releases of the same plugin go through the normal update path in *Tooling internals*: edit the install, `sync_from_pydeck.py --plugin <slug> --changelog "..."`, which bumps the patch version and writes a new version folder.
+
 ## manifest.json is generated — never hand-edit it
 
 `generate_manifest.py` scans `plugins/`, so adding, removing, or bumping a plugin is a filesystem operation followed by a regeneration.
@@ -50,7 +127,7 @@ python -m tools.pdk_create --non-interactive --plugin-id no.pydeck.foo --name Fo
 Two things that bite:
 
 - **Always pass `--label`.** The default is `Testing`; running it unqualified on `canary` or `stable` silently demotes the channel label.
-- **Regenerate in place.** Catalog-only fields resolve as `catalog.json` > *the existing root manifest* > defaults. Plugins without a `catalog.json` (most of them) get their `category`, `summary`, and `licenses` from the previous `manifest.json`. Delete or truncate that file first and those fields are lost.
+- **Regenerate in place.** Catalog-only fields resolve as `catalog.json` > *the existing root manifest* > defaults. Every plugin currently ships a `catalog.json`, but any that lacks one gets its `category`, `summary`, and `licenses` from the previous `manifest.json`. Delete or truncate that file first and those fields are lost.
 
 Other generator behavior worth knowing: version dirs must parse as a semver tuple or they're ignored; empty version dirs are purged from disk; the highest version supplies `name`/`author`/`doc_path`; `icon.svg` wins over `icon.png` at the slug root and a missing icon is a warning plus an empty `icon_path`; a version manifest with no `max_pydeck_version` is written as `"1.0.0"`, not null — an absent field pins the plugin rather than leaving it open.
 
