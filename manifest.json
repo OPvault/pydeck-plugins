@@ -2,12 +2,16 @@
   "schema_version": 1,
   "label": "Testing",
   "root_url": "https://raw.githubusercontent.com/OPvault/pydeck-plugins/testing/",
-  "generated_at": "2026-08-29T18:16:35Z",
+  "generated_at": "2026-08-29T20:04:47Z",
   "plugins": [
     {
       "name": "Clock",
       "slug": "no.pydeck.clock",
-      "category": "utilities",
+      "category": [
+        "utilities",
+        "widgets",
+        "time"
+      ],
       "summary": "Displays the current time with a stylish gradient background",
       "author": "PyDeck Team",
       "latest": "3.0.0",
@@ -35,7 +39,11 @@
     {
       "name": "Discord",
       "slug": "no.pydeck.discord",
-      "category": "communication",
+      "category": [
+        "communication",
+        "controls",
+        "gaming"
+      ],
       "summary": "Control Discord voice state (mute/deafen) via RPC",
       "author": "PyDeck Team",
       "latest": "2.0.1",
@@ -65,7 +73,11 @@
     {
       "name": "F1",
       "slug": "no.pydeck.f1",
-      "category": "sports",
+      "category": [
+        "sports",
+        "widgets",
+        "live-data"
+      ],
       "summary": "Formula 1 race countdown, driver standings, and constructor standings",
       "author": "PyDeck Team",
       "latest": "2.1.0",
@@ -105,7 +117,11 @@
     {
       "name": "Finnhub",
       "slug": "no.pydeck.finnhub",
-      "category": "utilities",
+      "category": [
+        "finance",
+        "widgets",
+        "live-data"
+      ],
       "summary": "Display live market prices from Finnhub (stocks, crypto, oil)",
       "author": "PyDeck Team",
       "latest": "2.0.0",
@@ -135,7 +151,10 @@
     {
       "name": "Folders",
       "slug": "no.pydeck.folders",
-      "category": "utilities",
+      "category": [
+        "utilities",
+        "navigation"
+      ],
       "summary": "Navigate virtual folder pages on the Stream Deck",
       "author": "PyDeck Team",
       "latest": "1.0.4",
@@ -163,7 +182,12 @@
     {
       "name": "Home Assistant",
       "slug": "no.pydeck.home-assistant",
-      "category": "home-automation",
+      "category": [
+        "home-automation",
+        "controls",
+        "widgets",
+        "live-data"
+      ],
       "summary": "Control and monitor Home Assistant entities",
       "author": "PyDeck Team",
       "latest": "2.0.3",
@@ -214,7 +238,12 @@
     {
       "name": "Keyboard",
       "slug": "no.pydeck.keyboard",
-      "category": "utilities",
+      "category": [
+        "utilities",
+        "controls",
+        "input",
+        "automation"
+      ],
       "summary": "Simulate keyboard presses and text input via xdotool on X11 when available, with evdev/uinput fallback for Wayland. Works on both X11 and Wayland. Requires the user to be in the 'input' group: sudo usermod -aG input $USER",
       "author": "PyDeck Team",
       "latest": "1.0.6",
@@ -242,7 +271,10 @@
     {
       "name": "Media Control",
       "slug": "no.pydeck.media-control",
-      "category": "media",
+      "category": [
+        "media",
+        "controls"
+      ],
       "summary": "Control media playback on Linux (play/pause, next, previous, volume)",
       "author": "PyDeck Team",
       "latest": "2.0.1",
@@ -272,7 +304,12 @@
     {
       "name": "Spotify",
       "slug": "no.pydeck.spotify",
-      "category": "media",
+      "category": [
+        "media",
+        "controls",
+        "widgets",
+        "live-data"
+      ],
       "summary": "Control Spotify playback via the Web API (PDK)",
       "author": "PyDeck Team",
       "latest": "2.0.7",
@@ -337,7 +374,11 @@
     {
       "name": "System Monitor",
       "slug": "no.pydeck.system-monitor",
-      "category": "utilities",
+      "category": [
+        "utilities",
+        "widgets",
+        "system"
+      ],
       "summary": "Monitor CPU, RAM, GPU, disk, network and battery in 18 themes and 5 layouts — no extra Python packages required",
       "author": "PyDeck Team",
       "latest": "2.1.0",
@@ -367,7 +408,11 @@
     {
       "name": "Utilities",
       "slug": "no.pydeck.utilities",
-      "category": "utilities",
+      "category": [
+        "utilities",
+        "automation",
+        "web"
+      ],
       "summary": "Open URLs, send HTTP requests, and run scripts",
       "author": "PyDeck Team",
       "latest": "1.0.3",
@@ -395,7 +440,11 @@
     {
       "name": "Weather",
       "slug": "no.pydeck.weather",
-      "category": "weather",
+      "category": [
+        "weather",
+        "widgets",
+        "live-data"
+      ],
       "summary": "Current weather and multi-hour forecasts powered by met.no",
       "author": "PyDeck Team",
       "latest": "2.0.1",

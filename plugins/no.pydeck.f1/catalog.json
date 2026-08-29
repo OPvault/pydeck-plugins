@@ -1,7 +1,19 @@
 {
-  "category": "sports",
+  "category": [
+    "sports",
+    "widgets",
+    "live-data"
+  ],
   "licenses": [
-    { "name": "Jolpica F1", "file": "LICENSE-jolpica", "description": "Used to fetch the race calendar, session times, and driver and constructor championship standings. Powers the race countdown, Driver Points, and Constructor Points buttons." },
-    { "name": "OpenF1", "file": "LICENSE-openf1", "description": "Used to fetch circuit images and driver photos. Powers the track icon and the Driver Points headshot." }
+    {
+      "name": "Jolpica F1",
+      "file": "LICENSE-jolpica",
+      "description": "Used to fetch the race calendar, session times, and driver and constructor championship standings. Powers the race countdown, Driver Points, and Constructor Points buttons."
+    },
+    {
+      "name": "OpenF1",
+      "file": "LICENSE-openf1",
+      "description": "Used to fetch circuit images and driver photos. Powers the track icon and the Driver Points headshot."
+    }
   ]
 }

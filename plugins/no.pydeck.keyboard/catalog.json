@@ -1,4 +1,11 @@
 {
-  "category": "utilities",
-  "compatible_pydeck_versions": ["1.0"]
+  "category": [
+    "utilities",
+    "controls",
+    "input",
+    "automation"
+  ],
+  "compatible_pydeck_versions": [
+    "1.0"
+  ]
 }

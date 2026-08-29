@@ -1,3 +1,7 @@
 {
-  "category": "utilities"
+  "category": [
+    "utilities",
+    "widgets",
+    "time"
+  ]
 }

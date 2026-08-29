@@ -1,4 +1,11 @@
 {
-  "category": "media",
-  "compatible_pydeck_versions": ["1.0"]
+  "category": [
+    "media",
+    "controls",
+    "widgets",
+    "live-data"
+  ],
+  "compatible_pydeck_versions": [
+    "1.0"
+  ]
 }

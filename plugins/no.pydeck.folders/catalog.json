@@ -1,4 +1,9 @@
 {
-  "category": "utilities",
-  "compatible_pydeck_versions": ["1.0"]
+  "category": [
+    "utilities",
+    "navigation"
+  ],
+  "compatible_pydeck_versions": [
+    "1.0"
+  ]
 }
