@@ -1,7 +1,8 @@
 {
   "schema_version": 1,
-  "label": "Official · Canary",
-  "generated_at": "2026-04-17T19:53:51Z",
+  "label": "Canary",
+  "root_url": "https://raw.githubusercontent.com/OPvault/pydeck-plugins/canary/",
+  "generated_at": "2026-08-29T23:55:36Z",
   "plugins": [
     {
       "name": "Clock",
