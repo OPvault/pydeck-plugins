@@ -1,0 +1,83 @@
+/* Showcase — the button's own picture, with its own text over it.
+ *
+ * Everything on this face comes from the button itself, never from handler
+ * state: the reserved _button_image key is its picture, _button_gradient its
+ * colour, the three buttonlabel elements its three lines, and the numbered
+ * _button_text_*_1..3 keys the style the user set on each of those lines in
+ * the editor. PDK state is shared by every button running the same function,
+ * so anything routed through it would be overwritten by the next button's
+ * render and two showcase buttons would end up showing one picture.
+ *
+ * (Placeholders are interpolated across the whole stylesheet, comments
+ * included, so the key names above are spelled without their braces.) */
+
+:root {
+  --bg: {_button_gradient};
+}
+
+.face {
+  background: var(--bg);
+  width: 100%;
+  height: 100%;
+}
+
+/* Absolute, so the picture fills the face without pushing the text out of
+ * the flow. `cover` crops to the square rather than letterboxing. */
+.media {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* space-between pins the first line to the top and the last to the bottom,
+ * with the second centred -- so a line typed into the Top field lands at the
+ * top of the button whether or not the other two have anything in them. An
+ * empty line measures zero high and simply takes up no room. */
+.rows {
+  width: 100%;
+  height: 100%;
+  direction: column;
+  justify: space-between;
+  align: center;
+  padding: 3 0 3 0;
+}
+
+/* Full width, so a line longer than the button overflows its box and scrolls
+ * edge to edge rather than being cropped. A label left `auto` hugs its own
+ * text and could never overflow, which is what keeps a short line still.
+ *
+ * The stroke and shadow are what make the text readable over an arbitrary
+ * picture. A scrim behind the text would do it too, but it would still darken
+ * the button when the user asked for no text at all. */
+.line {
+  width: 100%;
+  text-align: center;
+  text-stroke: 1 #000000cc;
+  shadow: 0 1 2 #000000cc;
+}
+
+.top {
+  color: {_button_text_color_1};
+  font-size: {_button_text_size_1};
+  font-weight: {_button_text_weight_1};
+  font-style: {_button_text_style_1};
+  text-decoration: {_button_text_decoration_1};
+}
+
+.middle {
+  color: {_button_text_color_2};
+  font-size: {_button_text_size_2};
+  font-weight: {_button_text_weight_2};
+  font-style: {_button_text_style_2};
+  text-decoration: {_button_text_decoration_2};
+}
+
+.bottom {
+  color: {_button_text_color_3};
+  font-size: {_button_text_size_3};
+  font-weight: {_button_text_weight_3};
+  font-style: {_button_text_style_3};
+  text-decoration: {_button_text_decoration_3};
+}

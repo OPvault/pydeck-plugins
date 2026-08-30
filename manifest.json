@@ -2,7 +2,7 @@
   "schema_version": 1,
   "label": "Testing",
   "root_url": "https://raw.githubusercontent.com/OPvault/pydeck-plugins/testing/",
-  "generated_at": "2026-08-30T00:23:01Z",
+  "generated_at": "2026-08-30T00:23:19Z",
   "plugins": [
     {
       "name": "Casino",
@@ -367,6 +367,30 @@
       ],
       "doc_path": "plugins/no.pydeck.media-control/2.0.1/DOCS.md",
       "show_markdown_after_install": false
+    },
+    {
+      "name": "Showcase",
+      "slug": "no.pydeck.showcase",
+      "category": [
+        "widgets",
+        "utilities"
+      ],
+      "summary": "Decorative button that shows a picture or GIF with up to three lines of text, and does nothing when pressed",
+      "author": "PyDeck Team",
+      "latest": "1.0.0",
+      "icon_path": "plugins/no.pydeck.showcase/icon.svg",
+      "compatible_pydeck_versions": [
+        "1.1"
+      ],
+      "versions": [
+        {
+          "version": "1.0.0",
+          "path": "plugins/no.pydeck.showcase/1.0.0",
+          "min_pydeck_version": "1.1.0",
+          "max_pydeck_version": null,
+          "changelog_path": "plugins/no.pydeck.showcase/1.0.0/CHANGELOG.md"
+        }
+      ]
     },
     {
       "name": "Spotify",

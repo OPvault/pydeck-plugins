@@ -1,0 +1,10 @@
+{
+  "category": [
+    "widgets",
+    "utilities"
+  ],
+  "compatible_pydeck_versions": [
+    "1.1"
+  ],
+  "summary": "Decorative button that shows a picture or GIF with up to three lines of text, and does nothing when pressed"
+}

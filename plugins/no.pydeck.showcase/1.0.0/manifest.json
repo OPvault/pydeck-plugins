@@ -1,0 +1,26 @@
+{
+  "name": "Showcase",
+  "version": "1.0.0",
+  "description": "A button that only shows a picture or GIF with up to three lines of text",
+  "author": "PyDeck Team",
+  "min_pydeck_version": "1.1.0",
+  "max_pydeck_version": null,
+  "changelog": "CHANGELOG.md",
+  "functions": {
+    "showcase": {
+      "label": "Showcase",
+      "description": "Shows the button's image or GIF behind up to three lines of text. Pressing does nothing.",
+      "sidebar_icon": "assets/icons/showcase.svg",
+      "draws_button_image": true,
+      "default_display": {
+        "color": "#1b1f2a",
+        "text": "",
+        "text_size": 11,
+        "text_color": "#ffffff",
+        "scroll_enabled": true,
+        "scroll_speed": 22
+      },
+      "ui": []
+    }
+  }
+}
