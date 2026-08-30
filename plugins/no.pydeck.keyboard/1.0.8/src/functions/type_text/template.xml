@@ -1,0 +1,6 @@
+<template name="type_text" title="Type Text" description="Type a string of text as keyboard input (US layout)">
+  <box class="face">
+    <buttonlabel class="label">Type</buttonlabel>
+    <buttonlabel class="label">Shit</buttonlabel>
+  </box>
+</template>
