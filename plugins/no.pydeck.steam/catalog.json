@@ -1,0 +1,11 @@
+{
+  "category": [
+    "gaming",
+    "utilities",
+    "controls"
+  ],
+  "compatible_pydeck_versions": [
+    "1.1"
+  ],
+  "summary": "Launch installed Steam games from the deck, with the game's icon, logo or library poster as the key face"
+}

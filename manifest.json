@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "label": "Testing",
-  "root_url": "https://raw.githubusercontent.com/OPvault/pydeck-plugins/testing/",
-  "generated_at": "2026-08-30T00:23:19Z",
+  "root_url": "",
+  "generated_at": "2026-08-30T00:41:54Z",
   "plugins": [
     {
       "name": "Casino",
@@ -467,6 +467,33 @@
         }
       ],
       "doc_path": "plugins/no.pydeck.spotify/2.0.8/DOCS.md",
+      "show_markdown_after_install": true
+    },
+    {
+      "name": "Steam",
+      "slug": "no.pydeck.steam",
+      "category": [
+        "gaming",
+        "utilities",
+        "controls"
+      ],
+      "summary": "Launch installed Steam games from the deck, with the game's icon, logo or library poster as the key face",
+      "author": "PyDeck Team",
+      "latest": "0.1.0",
+      "icon_path": "plugins/no.pydeck.steam/icon.svg",
+      "compatible_pydeck_versions": [
+        "1.1"
+      ],
+      "versions": [
+        {
+          "version": "0.1.0",
+          "path": "plugins/no.pydeck.steam/0.1.0",
+          "min_pydeck_version": "1.1.0",
+          "max_pydeck_version": null,
+          "changelog_path": "plugins/no.pydeck.steam/0.1.0/CHANGELOG.md"
+        }
+      ],
+      "doc_path": "plugins/no.pydeck.steam/0.1.0/DOCS.md",
       "show_markdown_after_install": true
     },
     {
