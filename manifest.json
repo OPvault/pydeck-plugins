@@ -2,7 +2,7 @@
   "schema_version": 1,
   "label": "Testing",
   "root_url": "https://raw.githubusercontent.com/OPvault/pydeck-plugins/testing/",
-  "generated_at": "2026-08-30T02:00:17Z",
+  "generated_at": "2026-08-30T02:06:46Z",
   "plugins": [
     {
       "name": "Casino",
@@ -341,7 +341,7 @@
       ],
       "summary": "Simulate keyboard presses and text input via xdotool on X11 when available, with evdev/uinput fallback for Wayland. Works on both X11 and Wayland. Requires the user to be in the 'input' group: sudo usermod -aG input $USER",
       "author": "PyDeck Team",
-      "latest": "1.0.6",
+      "latest": "1.0.7",
       "icon_path": "plugins/no.pydeck.keyboard/icon.svg",
       "compatible_pydeck_versions": [
         "1.0"
@@ -360,6 +360,13 @@
           "min_pydeck_version": "1.1.0",
           "max_pydeck_version": null,
           "changelog_path": "plugins/no.pydeck.keyboard/1.0.6/CHANGELOG.md"
+        },
+        {
+          "version": "1.0.7",
+          "path": "plugins/no.pydeck.keyboard/1.0.7",
+          "min_pydeck_version": "1.1.0",
+          "max_pydeck_version": null,
+          "changelog_path": "plugins/no.pydeck.keyboard/1.0.7/CHANGELOG.md"
         }
       ]
     },
