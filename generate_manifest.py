@@ -108,18 +108,49 @@ def _git_output(*args: str) -> str:
     return r.stdout.strip() if r.returncode == 0 else ""
 
 
-def default_root_url() -> str:
-    """Raw base for the checked-out branch, or "" when it cannot be determined.
+def _current_branch() -> str:
+    """The branch being worked on, even when HEAD is detached mid-rebase.
 
-    Only a default: any script that writes a manifest for a branch other than
-    the one it is standing on must pass --root-url explicitly.
+    ``rev-parse --abbrev-ref HEAD`` answers "HEAD" while a rebase is in
+    progress, which is exactly when the manifest tends to be regenerated to
+    resolve a conflict -- and that used to blank root_url in the commit. Git
+    records the branch being rebased in rebase-merge/head-name (or
+    rebase-apply/head-name), so read it from there.
+    """
+    branch = _git_output("rev-parse", "--abbrev-ref", "HEAD")
+    if branch and branch != "HEAD":
+        return branch
+    git_dir = _git_output("rev-parse", "--git-dir")
+    for state in ("rebase-merge", "rebase-apply"):
+        head_name = Path(git_dir) / state / "head-name"
+        if git_dir and head_name.exists():
+            ref = head_name.read_text().strip()
+            return ref[len("refs/heads/"):] if ref.startswith("refs/heads/") else ref
+    return ""
+
+
+def _existing_root_url() -> str:
+    """root_url from the manifest already on disk, or ""."""
+    try:
+        return str(json.loads(ROOT_MANIFEST.read_text()).get("root_url", "") or "")
+    except (OSError, json.JSONDecodeError, AttributeError):
+        return ""
+
+
+def default_root_url() -> str:
+    """Raw base for the checked-out branch.
+
+    Falls back to whatever root_url the existing manifest carries when git
+    cannot say which branch this is, so a regeneration never silently erases
+    it. Only a default: any script that writes a manifest for a branch other
+    than the one it is standing on must pass --root-url explicitly.
     """
 
     remote = _git_output("remote", "get-url", "origin")
-    branch = _git_output("rev-parse", "--abbrev-ref", "HEAD")
+    branch = _current_branch()
     m = re.search(r"[:/]([^/:]+)/([^/]+?)(?:\.git)?/?$", remote)
-    if not m or not branch or branch == "HEAD":
-        return ""
+    if not m or not branch:
+        return _existing_root_url()
     return ROOT_URL_TEMPLATE.format(owner=m.group(1), repo=m.group(2), branch=branch)
 
 
