@@ -1,0 +1,124 @@
+{
+  "name": "Steam",
+  "version": "1.0.1",
+  "description": "Launch installed Steam games with their icon, logo or poster on the key",
+  "author": "PyDeck Team",
+  "min_pydeck_version": "1.1.0",
+  "max_pydeck_version": null,
+  "changelog": "CHANGELOG.md",
+  "documentation": "DOCS.md",
+  "show_markdown_after_install": true,
+  "permissions": {
+    "subprocess": [
+      "Popen",
+      "DEVNULL",
+      "DETACHED_PROCESS",
+      "CREATE_NEW_PROCESS_GROUP"
+    ],
+    "ctypes": [
+      "CDLL",
+      "c_bool"
+    ],
+    "shutil": [
+      "which",
+      "copyfile"
+    ],
+    "os": [
+      "environ",
+      "name"
+    ],
+    "winreg": [
+      "HKEY_CURRENT_USER",
+      "HKEY_LOCAL_MACHINE",
+      "OpenKey",
+      "QueryValueEx"
+    ],
+    "pathlib": [
+      "Path"
+    ],
+    "time": [
+      "monotonic"
+    ],
+    "re": [
+      "compile"
+    ]
+  },
+  "functions": {
+    "launch_game": {
+      "label": "Launch Game",
+      "description": "Launch an installed Steam game; the key shows its icon, logo or library poster",
+      "sidebar_icon": "assets/icons/steam.svg",
+      "disableGallery": true,
+      "default_display": {
+        "color": "#1b2838",
+        "text": "",
+        "scroll_enabled": false
+      },
+      "poll": {
+        "function": "on_poll",
+        "interval_ms": 1000
+      },
+      "ui": [
+        {
+          "type": "api_select",
+          "id": "appid",
+          "label": "Game",
+          "api": "games",
+          "search_placeholder": "Search installed games…",
+          "display": {
+            "label": "label",
+            "value": "value"
+          },
+          "default": ""
+        },
+        {
+          "type": "radio",
+          "id": "face",
+          "label": "Key face",
+          "default": "icon",
+          "options": [
+            {
+              "value": "icon",
+              "label": "Game icon"
+            },
+            {
+              "value": "logo",
+              "label": "Logo (library banner wordmark)"
+            },
+            {
+              "value": "poster",
+              "label": "Library poster"
+            }
+          ]
+        },
+        {
+          "type": "radio",
+          "id": "poster_fit",
+          "label": "Poster fit",
+          "default": "cover",
+          "options": [
+            {
+              "value": "cover",
+              "label": "Fill the key (crops top/bottom)"
+            },
+            {
+              "value": "contain",
+              "label": "Fit whole poster (bars at sides)"
+            }
+          ],
+          "visible_if": {
+            "field": "face",
+            "value": "poster"
+          }
+        },
+        {
+          "type": "checkbox",
+          "id": "show_title",
+          "label": "Show game title",
+          "default": false
+        }
+      ]
+    }
+  },
+  "compatibility": {"os": ["linux", "windows"]}
+}

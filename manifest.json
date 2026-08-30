@@ -2,7 +2,7 @@
   "schema_version": 1,
   "label": "Testing",
   "root_url": "https://raw.githubusercontent.com/OPvault/pydeck-plugins/testing/",
-  "generated_at": "2026-08-30T10:12:50Z",
+  "generated_at": "2026-08-30T12:40:05Z",
   "plugins": [
     {
       "name": "Casino",
@@ -139,7 +139,7 @@
       },
       "summary": "Control Discord voice state (mute/deafen) via RPC",
       "author": "PyDeck Team",
-      "latest": "2.0.2",
+      "latest": "2.0.3",
       "icon_path": "plugins/no.pydeck.discord/icon.svg",
       "compatible_pydeck_versions": [
         "1.0"
@@ -165,9 +165,16 @@
           "min_pydeck_version": "1.1.0",
           "max_pydeck_version": null,
           "changelog_path": "plugins/no.pydeck.discord/2.0.2/CHANGELOG.md"
+        },
+        {
+          "version": "2.0.3",
+          "path": "plugins/no.pydeck.discord/2.0.3",
+          "min_pydeck_version": "1.1.0",
+          "max_pydeck_version": null,
+          "changelog_path": "plugins/no.pydeck.discord/2.0.3/CHANGELOG.md"
         }
       ],
-      "doc_path": "plugins/no.pydeck.discord/2.0.2/DOCS.md",
+      "doc_path": "plugins/no.pydeck.discord/2.0.3/DOCS.md",
       "show_markdown_after_install": true
     },
     {
@@ -187,7 +194,7 @@
       },
       "summary": "Formula 1 race countdown, driver standings, and constructor standings",
       "author": "PyDeck Team",
-      "latest": "2.1.1",
+      "latest": "2.1.2",
       "icon_path": "plugins/no.pydeck.f1/icon.svg",
       "compatible_pydeck_versions": [
         "1.0"
@@ -213,6 +220,13 @@
           "min_pydeck_version": "1.1.0",
           "max_pydeck_version": null,
           "changelog_path": "plugins/no.pydeck.f1/2.1.1/CHANGELOG.md"
+        },
+        {
+          "version": "2.1.2",
+          "path": "plugins/no.pydeck.f1/2.1.2",
+          "min_pydeck_version": "1.1.0",
+          "max_pydeck_version": null,
+          "changelog_path": "plugins/no.pydeck.f1/2.1.2/CHANGELOG.md"
         }
       ],
       "licenses": [
@@ -325,7 +339,7 @@
       },
       "summary": "Control and monitor Home Assistant entities",
       "author": "PyDeck Team",
-      "latest": "2.0.5",
+      "latest": "2.0.6",
       "icon_path": "plugins/no.pydeck.home-assistant/icon.png",
       "compatible_pydeck_versions": [
         "1.0"
@@ -372,9 +386,16 @@
           "min_pydeck_version": "1.1.0",
           "max_pydeck_version": null,
           "changelog_path": "plugins/no.pydeck.home-assistant/2.0.5/CHANGELOG.md"
+        },
+        {
+          "version": "2.0.6",
+          "path": "plugins/no.pydeck.home-assistant/2.0.6",
+          "min_pydeck_version": "1.1.0",
+          "max_pydeck_version": null,
+          "changelog_path": "plugins/no.pydeck.home-assistant/2.0.6/CHANGELOG.md"
         }
       ],
-      "doc_path": "plugins/no.pydeck.home-assistant/2.0.5/DOCS.md",
+      "doc_path": "plugins/no.pydeck.home-assistant/2.0.6/DOCS.md",
       "show_markdown_after_install": true,
       "licenses": [
         {
@@ -624,12 +645,13 @@
       ],
       "compatibility": {
         "os": [
-          "linux"
+          "linux",
+          "windows"
         ]
       },
       "summary": "Launch installed Steam games from the deck, with the game's icon, logo or library poster as the key face",
       "author": "PyDeck Team",
-      "latest": "1.0.0",
+      "latest": "1.0.1",
       "icon_path": "plugins/no.pydeck.steam/icon.svg",
       "compatible_pydeck_versions": [
         "1.1"
@@ -641,9 +663,16 @@
           "min_pydeck_version": "1.1.0",
           "max_pydeck_version": null,
           "changelog_path": "plugins/no.pydeck.steam/1.0.0/CHANGELOG.md"
+        },
+        {
+          "version": "1.0.1",
+          "path": "plugins/no.pydeck.steam/1.0.1",
+          "min_pydeck_version": "1.1.0",
+          "max_pydeck_version": null,
+          "changelog_path": "plugins/no.pydeck.steam/1.0.1/CHANGELOG.md"
         }
       ],
-      "doc_path": "plugins/no.pydeck.steam/1.0.0/DOCS.md",
+      "doc_path": "plugins/no.pydeck.steam/1.0.1/DOCS.md",
       "show_markdown_after_install": true,
       "licenses": [
         {
@@ -783,7 +812,7 @@
       },
       "summary": "Current weather and multi-hour forecasts powered by met.no",
       "author": "PyDeck Team",
-      "latest": "2.0.2",
+      "latest": "2.0.3",
       "icon_path": "plugins/no.pydeck.weather/icon.png",
       "compatible_pydeck_versions": [
         "1.0"
@@ -802,6 +831,13 @@
           "min_pydeck_version": "1.1.0",
           "max_pydeck_version": null,
           "changelog_path": "plugins/no.pydeck.weather/2.0.2/CHANGELOG.md"
+        },
+        {
+          "version": "2.0.3",
+          "path": "plugins/no.pydeck.weather/2.0.3",
+          "min_pydeck_version": "1.1.0",
+          "max_pydeck_version": null,
+          "changelog_path": "plugins/no.pydeck.weather/2.0.3/CHANGELOG.md"
         }
       ],
       "licenses": [

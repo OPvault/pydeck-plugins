@@ -1,0 +1,10 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+	<style>
+		.s0 { fill: none;stroke: #ffffff;stroke-width: 2.5;stroke-linecap: round;stroke-linejoin: round }
+		.s1 { fill: #ffffff }
+	</style>
+	<path class="s0" d="m10 38h10l6-10h14l4 10h10v8h-44z"/>
+	<circle class="s0" cx="20" cy="46" r="5"/>
+	<circle class="s0" cx="44" cy="46" r="5"/>
+	<path class="s0" d="m26 18h12"/>
+</svg>
