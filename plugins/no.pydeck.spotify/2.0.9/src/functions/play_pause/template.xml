@@ -1,0 +1,15 @@
+<template name="play_pause">
+  <box class="pp-bg">
+    <img src="{art_src}" class="pp-art" fit="cover" />
+    <box class="pp-overlay">
+      <text class="pp-time">{time_left}</text>
+      <marquee class="pp-label" speed="30">{track_label}</marquee>
+    </box>
+  </box>
+</template>
+
+<template name="play_pause_idle">
+  <box class="idle-bg">
+    <img src="{idle_icon}" class="idle-icon" fit="contain" />
+  </box>
+</template>
