@@ -141,6 +141,21 @@ CHANGELOG_DEFAULT_NOTE = "Updated plugin files."
 # Files that never take part in the source ↔ repo comparison.
 COMPARE_IGNORED: frozenset[str] = REPO_ONLY_FILES | {CHANGELOG_FILE}
 
+
+def _is_repo_only(rel: Path) -> bool:
+    """True for a file at the plugin root that lives only in the catalog.
+
+    PyDeck downloads the plugin-root license files (``LICENSE``, but also the
+    per-dependency ``LICENSE-mdi`` / ``LICENSE-openf1`` style names) next to
+    the versioned source, so a fresh install always carries them. They are
+    neither compared nor copied; ``meta/licenses/…`` inside the source tree is
+    real plugin content and still takes part.
+    """
+    if len(rel.parts) != 1:
+        return False
+    name = rel.name
+    return name in REPO_ONLY_FILES or name.lower().startswith(("license", "lisence"))
+
 # ── Candidate pydeck plugin directories (auto-detection order) ───────────────
 # PyDeck installs plugins under $XDG_DATA_HOME/pydeck/plugin (default
 # ~/.local/share/pydeck/plugin). Legacy checkouts may still use <repo>/plugins/plugin.
@@ -226,6 +241,8 @@ def _source_files(plugin_dir: Path) -> dict[str, Path]:
             continue
         rel = p.relative_to(plugin_dir)
         if any(part in EXCLUDE_DIRS for part in rel.parts):
+            continue
+        if _is_repo_only(rel):
             continue
         result[str(rel)] = p
     return result
@@ -417,6 +434,8 @@ def _files_changed(source_files: dict[str, Path], repo_version_dir: Path) -> boo
         rel = str(repo_path.relative_to(repo_version_dir))
         if any(part in EXCLUDE_DIRS for part in Path(rel).parts):
             continue
+        if _is_repo_only(Path(rel)):
+            continue
         if rel not in source_files:
             return True
 
@@ -504,6 +523,8 @@ def _print_plugin_diff(
             continue
         rel = str(repo_path.relative_to(repo_version_dir))
         if any(part in EXCLUDE_DIRS for part in Path(rel).parts):
+            continue
+        if _is_repo_only(Path(rel)):
             continue
         if rel not in source_files:
             _print_file_diff(rel, None, repo_path)
