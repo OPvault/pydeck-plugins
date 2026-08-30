@@ -1,0 +1,153 @@
+{
+  "name": "Updates",
+  "version": "0.1.0",
+  "description": "Pending package updates from every installed package manager on one key",
+  "author": "PyDeck Team",
+  "min_pydeck_version": "1.1.0",
+  "max_pydeck_version": null,
+  "changelog": "CHANGELOG.md",
+  "functions": {
+    "counter": {
+      "label": "Updates",
+      "description": "Pending package updates across every installed package manager; press to re-check or upgrade",
+      "sidebar_icon": "assets/icons/updates.svg",
+      "title_readonly": true,
+      "disableGallary": true,
+      "disableGallery": true,
+      "default_display": {
+        "color": "#161b22",
+        "text": "",
+        "scroll_enabled": false
+      },
+      "poll": {
+        "function": "on_poll",
+        "interval_ms": 2000
+      },
+      "ui": [
+        {
+          "type": "group",
+          "id": "behaviour",
+          "label": "Behaviour",
+          "fields": [
+            {
+              "type": "number",
+              "id": "interval_minutes",
+              "label": "Check every (minutes)",
+              "default": 30,
+              "min": 1,
+              "max": 1440
+            },
+            {
+              "type": "select",
+              "id": "press_action",
+              "label": "On press",
+              "default": "refresh",
+              "options": [
+                {
+                  "label": "Re-check now",
+                  "value": "refresh"
+                },
+                {
+                  "label": "Open a terminal and upgrade",
+                  "value": "update"
+                },
+                {
+                  "label": "Upgrade, then re-check",
+                  "value": "both"
+                }
+              ]
+            },
+            {
+              "type": "input",
+              "id": "terminal",
+              "label": "Terminal",
+              "placeholder": "alacritty",
+              "default": "alacritty"
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "id": "appearance",
+          "label": "Appearance",
+          "fields": [
+            {
+              "type": "input",
+              "id": "label",
+              "label": "Label",
+              "default": "Updates"
+            },
+            {
+              "type": "checkbox",
+              "id": "show_breakdown",
+              "label": "Show per-manager breakdown",
+              "default": true
+            },
+            {
+              "type": "number",
+              "id": "warn_at",
+              "label": "Amber from (0 = never)",
+              "default": 10,
+              "min": 0,
+              "max": 100000
+            },
+            {
+              "type": "number",
+              "id": "crit_at",
+              "label": "Red from (0 = never)",
+              "default": 50,
+              "min": 0,
+              "max": 100000
+            },
+            {
+              "type": "input",
+              "id": "color_ok",
+              "label": "Colour: fine",
+              "default": "#7ee787"
+            },
+            {
+              "type": "input",
+              "id": "color_warn",
+              "label": "Colour: amber",
+              "default": "#ffd166"
+            },
+            {
+              "type": "input",
+              "id": "color_crit",
+              "label": "Colour: red",
+              "default": "#ff6b6b"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "permissions": {
+    "subprocess": [
+      "run",
+      "Popen",
+      "DEVNULL",
+      "TimeoutExpired"
+    ],
+    "threading": [
+      "Thread",
+      "Lock"
+    ],
+    "shutil": [
+      "which"
+    ],
+    "os": [
+      "environ"
+    ],
+    "time": [
+      "monotonic",
+      "sleep"
+    ],
+    "re": [
+      "compile"
+    ],
+    "shlex": [
+      "split"
+    ]
+  }
+}

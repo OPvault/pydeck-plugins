@@ -1,0 +1,15 @@
+{
+  "description": "Pending package updates from every installed package manager on one key",
+  "features": [
+    "Auto-detects pacman, AUR helpers, APT, DNF, Zypper, XBPS, eopkg, Portage, apk, pkg, Nix, Homebrew, Flatpak, Snap, pip, npm and cargo",
+    "Background checks that never block the deck",
+    "Colour thresholds and a per-manager breakdown",
+    "Press to refresh or to open a terminal and upgrade"
+  ],
+  "tags": [
+    "pdk",
+    "system",
+    "updates",
+    "packages"
+  ]
+}
