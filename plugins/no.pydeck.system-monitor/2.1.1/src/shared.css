@@ -1,0 +1,83 @@
+/* System Monitor -- one stylesheet for every readout.
+ *
+ * The renderer interpolates handler state into this text before parsing it, so
+ * every braced name below is a value shared.py computed for the current
+ * button: the theme supplies the ink, the layout supplies the geometry.
+ * Lengths are percentages of the canvas so a face looks the same on a 72 px
+ * key and a 96 px XL one.
+ */
+
+/* ---- canvas ------------------------------------------------------------ */
+
+.face {
+  position: absolute;
+  left: 0; top: 0; width: 100%; height: 100%;
+  background: {bg};
+}
+
+/* An optional plate between the background and everything else -- a border
+ * for Blueprint, a recessed panel for LCD. */
+.card {
+  position: absolute;
+  left: {card_x}; top: {card_y}; width: {card_w}; height: {card_h};
+  background: {card_c};
+  border-radius: {card_r};
+  border: {card_bw} {card_bc};
+}
+
+/* ---- text -------------------------------------------------------------- */
+
+/* The three rows are stacked and centred by the engine, and spaced with
+ * padding rather than a gap: a shared gap would show through a row the user
+ * turned off, because a hidden row is an empty string and not a missing box. */
+.stack {
+  position: absolute;
+  left: {col_x}; top: {col_y}; width: {col_w}; height: {col_h};
+  direction: column; justify: center; align: {col_al}; gap: 0;
+}
+
+.t1 { width: 100%; font-size: {s1_size}; color: {s1_c}; font-weight: {s1_wt};
+      font-family: {s1_ff}; text-align: {s1_al}; padding-top: {s1_pt}; }
+.t2 { width: 100%; font-size: {s2_size}; color: {s2_c}; font-weight: {s2_wt};
+      font-family: {s2_ff}; text-align: {s2_al}; padding-top: {s2_pt};
+      glow: {s2_glow}; }
+.t3 { width: 100%; font-size: {s3_size}; color: {s3_c}; font-weight: {s3_wt};
+      font-family: {s3_ff}; text-align: {s3_al}; padding-top: {s3_pt}; }
+
+/* ---- bars -------------------------------------------------------------- */
+
+/* Track and fill are two boxes rather than a <progress>, so the same pair of
+ * state keys drives a horizontal bar, a vertical one and the history plot. */
+.htrack { position: absolute; left: {bar_x}; top: {bar_y};
+          width: {bar_w}; height: {bar_h};
+          background: {bar_track}; border-radius: {bar_r}; }
+.hfill  { position: absolute; left: {bar_x}; top: {bar_y};
+          width: {bar_fw}; height: {bar_h};
+          background: {bar_fill}; border-radius: {bar_r}; }
+
+.vtrack { position: absolute; left: {vb_x}; top: {vb_y};
+          width: {vb_w}; height: {vb_h};
+          background: {vb_track}; border-radius: {vb_r}; }
+.vfill  { position: absolute; left: {vb_x}; top: {vb_fy};
+          width: {vb_w}; height: {vb_fh};
+          background: {vb_fill}; border-radius: {vb_r}; }
+
+/* ---- history plot ------------------------------------------------------ */
+
+/* One bar per kept sample, oldest at the left.  Each carries its own ink, so
+ * a spike that crossed the critical gate stays red as it scrolls away. */
+.g { position: absolute; width: {g_w}; border-radius: {g_r}; }
+.g1  { left: {g1_x}; top: {g1_y}; height: {g1_h}; background: {g1_c}; }
+.g2  { left: {g2_x}; top: {g2_y}; height: {g2_h}; background: {g2_c}; }
+.g3  { left: {g3_x}; top: {g3_y}; height: {g3_h}; background: {g3_c}; }
+.g4  { left: {g4_x}; top: {g4_y}; height: {g4_h}; background: {g4_c}; }
+.g5  { left: {g5_x}; top: {g5_y}; height: {g5_h}; background: {g5_c}; }
+.g6  { left: {g6_x}; top: {g6_y}; height: {g6_h}; background: {g6_c}; }
+.g7  { left: {g7_x}; top: {g7_y}; height: {g7_h}; background: {g7_c}; }
+.g8  { left: {g8_x}; top: {g8_y}; height: {g8_h}; background: {g8_c}; }
+.g9  { left: {g9_x}; top: {g9_y}; height: {g9_h}; background: {g9_c}; }
+.g10 { left: {g10_x}; top: {g10_y}; height: {g10_h}; background: {g10_c}; }
+.g11 { left: {g11_x}; top: {g11_y}; height: {g11_h}; background: {g11_c}; }
+.g12 { left: {g12_x}; top: {g12_y}; height: {g12_h}; background: {g12_c}; }
+.g13 { left: {g13_x}; top: {g13_y}; height: {g13_h}; background: {g13_c}; }
+.g14 { left: {g14_x}; top: {g14_y}; height: {g14_h}; background: {g14_c}; }

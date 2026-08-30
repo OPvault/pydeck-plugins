@@ -1,0 +1,12 @@
+<template name="countdown">
+  <box class="face">
+    <box class="card" />
+    <box class="dcol">
+      <text class="s1">{s1_t}</text>
+      <text class="s2">{s2_t}</text>
+      <text class="s3">{s3_t}</text>
+    </box>
+    <box class="track" />
+    <box class="fill" />
+  </box>
+</template>

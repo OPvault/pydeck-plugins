@@ -1,0 +1,67 @@
+<!-- Clock faces.  These templates are shared by every clock action: the handler
+     picks one through the reserved "_template" state key, so "My Clock" and
+     "World Clock" render from the same markup with different captions. -->
+
+<template name="analog">
+  <box class="face">
+    <circle class="dial" />
+
+    <box class="layer r0"><box class="tk tkmaj" /></box>
+    <box class="layer r1"><box class="tk tkmin" /></box>
+    <box class="layer r2"><box class="tk tkmin" /></box>
+    <box class="layer r3"><box class="tk tkmaj" /></box>
+    <box class="layer r4"><box class="tk tkmin" /></box>
+    <box class="layer r5"><box class="tk tkmin" /></box>
+    <box class="layer r6"><box class="tk tkmaj" /></box>
+    <box class="layer r7"><box class="tk tkmin" /></box>
+    <box class="layer r8"><box class="tk tkmin" /></box>
+    <box class="layer r9"><box class="tk tkmaj" /></box>
+    <box class="layer r10"><box class="tk tkmin" /></box>
+    <box class="layer r11"><box class="tk tkmin" /></box>
+
+    <text class="num n12">{n12_t}</text>
+    <text class="num n3">{n3_t}</text>
+    <text class="num n6">{n6_t}</text>
+    <text class="num n9">{n9_t}</text>
+
+    <text class="as1">{s1_t}</text>
+    <text class="as2">{s2_t}</text>
+    <text class="as3">{s3_t}</text>
+
+    <box class="layer lh"><box class="hand handh" /></box>
+    <box class="layer lm"><box class="hand handm" /></box>
+    <box class="layer ls"><box class="hand hands" /><box class="hand handt" /></box>
+
+    <circle class="hub" />
+  </box>
+</template>
+
+<template name="digital">
+  <box class="face">
+    <box class="card" />
+    <box class="bar" />
+    <box class="dcol">
+      <text class="s1">{s1_t}</text>
+      <text class="s2">{s2_t}</text>
+      <text class="s3">{s3_t}</text>
+      <text class="s4">{s4_t}</text>
+    </box>
+    <text class="as5">{s5_t}</text>
+  </box>
+</template>
+
+<template name="digital_boxed">
+  <box class="face">
+    <box class="tile tile1" />
+    <box class="tile tile2" />
+    <box class="tile tile3" />
+    <box class="tile tile4" />
+    <text class="dg dg1">{dg1_t}</text>
+    <text class="dg dg2">{dg2_t}</text>
+    <text class="dg dg3">{dg3_t}</text>
+    <text class="dg dg4">{dg4_t}</text>
+    <text class="colon">{colon_t}</text>
+    <text class="as1">{s1_t}</text>
+    <text class="as2">{s2_t}</text>
+  </box>
+</template>

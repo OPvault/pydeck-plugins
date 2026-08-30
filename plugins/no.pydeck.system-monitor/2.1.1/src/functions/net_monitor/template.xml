@@ -1,0 +1,35 @@
+<!-- Network readout.  One markup for every layout: the handler collapses the
+     parts its layout does not use to zero size and transparent ink, so the
+     Stat, Minimal, Gauge, Split and Graph faces all come out of this file. -->
+
+<template name="net_monitor" title="Network" description="Live download and upload rates">
+  <box class="face">
+    <box class="card" />
+
+    <box class="g g1" />
+    <box class="g g2" />
+    <box class="g g3" />
+    <box class="g g4" />
+    <box class="g g5" />
+    <box class="g g6" />
+    <box class="g g7" />
+    <box class="g g8" />
+    <box class="g g9" />
+    <box class="g g10" />
+    <box class="g g11" />
+    <box class="g g12" />
+    <box class="g g13" />
+    <box class="g g14" />
+
+    <box class="vtrack" />
+    <box class="vfill" />
+    <box class="htrack" />
+    <box class="hfill" />
+
+    <box class="stack">
+      <text class="t1">{s1_t}</text>
+      <text class="t2">{s2_t}</text>
+      <text class="t3">{s3_t}</text>
+    </box>
+  </box>
+</template>
