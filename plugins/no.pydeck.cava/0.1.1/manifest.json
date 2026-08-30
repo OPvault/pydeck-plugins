@@ -1,0 +1,317 @@
+{
+  "name": "Cava",
+  "version": "0.1.1",
+  "description": "Live audio spectrum on a key, driven by cava",
+  "author": "PyDeck Team",
+  "min_pydeck_version": "1.1.0",
+  "max_pydeck_version": null,
+  "documentation": "DOCS.md",
+  "changelog": "CHANGELOG.md",
+  "permissions": {
+    "subprocess": [
+      "Popen",
+      "TimeoutExpired"
+    ],
+    "threading": [
+      "Thread",
+      "Lock"
+    ],
+    "shutil": [
+      "which"
+    ],
+    "tempfile": [
+      "gettempdir"
+    ],
+    "os": [
+      "path",
+      "getuid",
+      "unlink"
+    ],
+    "time": [
+      "monotonic",
+      "sleep"
+    ],
+    "colorsys": [
+      "hls_to_rgb"
+    ],
+    "ctypes": [
+      "CDLL"
+    ],
+    "signal": [
+      "SIGTERM"
+    ],
+    "atexit": [
+      "register"
+    ]
+  },
+  "functions": {
+    "spectrum": {
+      "label": "Spectrum",
+      "description": "Audio spectrum bars from cava, redrawn on the fast animation tick",
+      "sidebar_icon": "assets/icons/cava.svg",
+      "disableGallary": true,
+      "disableGallery": true,
+      "gradient": true,
+      "default_display": {
+        "color": "#0b0f1a",
+        "text": "",
+        "text_position": "bottom",
+        "scroll_enabled": false
+      },
+      "poll": {
+        "function": "on_poll",
+        "interval_ms": 1000
+      },
+      "ui": [
+        {
+          "type": "group",
+          "id": "shape_group",
+          "label": "Shape",
+          "fields": [
+            {
+              "type": "select",
+              "id": "bars",
+              "label": "Bars",
+              "default": "12",
+              "options": [
+                {
+                  "label": "4",
+                  "value": "4"
+                },
+                {
+                  "label": "6",
+                  "value": "6"
+                },
+                {
+                  "label": "8",
+                  "value": "8"
+                },
+                {
+                  "label": "12",
+                  "value": "12"
+                },
+                {
+                  "label": "16",
+                  "value": "16"
+                },
+                {
+                  "label": "24",
+                  "value": "24"
+                },
+                {
+                  "label": "32",
+                  "value": "32"
+                }
+              ]
+            },
+            {
+              "type": "select",
+              "id": "style",
+              "label": "Style",
+              "default": "bars",
+              "options": [
+                {
+                  "label": "Bars from the bottom",
+                  "value": "bars"
+                },
+                {
+                  "label": "Mirrored around the middle",
+                  "value": "center"
+                },
+                {
+                  "label": "Bars from the top",
+                  "value": "top"
+                }
+              ]
+            },
+            {
+              "type": "select",
+              "id": "gap",
+              "label": "Gap",
+              "default": "normal",
+              "options": [
+                {
+                  "label": "None",
+                  "value": "none"
+                },
+                {
+                  "label": "Thin",
+                  "value": "thin"
+                },
+                {
+                  "label": "Normal",
+                  "value": "normal"
+                },
+                {
+                  "label": "Wide",
+                  "value": "wide"
+                }
+              ]
+            },
+            {
+              "type": "select",
+              "id": "corners",
+              "label": "Corners",
+              "default": "soft",
+              "options": [
+                {
+                  "label": "Square",
+                  "value": "square"
+                },
+                {
+                  "label": "Soft",
+                  "value": "soft"
+                },
+                {
+                  "label": "Round",
+                  "value": "round"
+                }
+              ]
+            },
+            {
+              "type": "checkbox",
+              "id": "show_floor",
+              "label": "Keep a thin floor when silent",
+              "default": true
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "id": "color_group",
+          "label": "Colour",
+          "fields": [
+            {
+              "type": "select",
+              "id": "color_mode",
+              "label": "Bar colour",
+              "default": "gradient",
+              "options": [
+                {
+                  "label": "Solid",
+                  "value": "solid"
+                },
+                {
+                  "label": "Level gradient (quiet → loud)",
+                  "value": "gradient"
+                },
+                {
+                  "label": "Spread across bars",
+                  "value": "spread"
+                },
+                {
+                  "label": "Rainbow",
+                  "value": "rainbow"
+                }
+              ]
+            },
+            {
+              "type": "input",
+              "id": "bar_color",
+              "label": "Bar colour (hex)",
+              "default": "#4f9cf9",
+              "placeholder": "#4f9cf9",
+              "visible_if": {
+                "field": "color_mode",
+                "not_value": "rainbow"
+              }
+            },
+            {
+              "type": "input",
+              "id": "bar_color_high",
+              "label": "Second colour (hex)",
+              "default": "#ff4f7a",
+              "placeholder": "#ff4f7a",
+              "visible_if": {
+                "field": "color_mode",
+                "not_value": "solid"
+              }
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "id": "audio_group",
+          "label": "Audio",
+          "fields": [
+            {
+              "type": "select",
+              "id": "source",
+              "label": "Input",
+              "default": "auto",
+              "options": [
+                {
+                  "label": "Auto (cava default)",
+                  "value": "auto"
+                },
+                {
+                  "label": "PipeWire",
+                  "value": "pipewire"
+                },
+                {
+                  "label": "PulseAudio",
+                  "value": "pulse"
+                },
+                {
+                  "label": "ALSA",
+                  "value": "alsa"
+                }
+              ]
+            },
+            {
+              "type": "number",
+              "id": "sensitivity",
+              "label": "Sensitivity (%)",
+              "default": 100,
+              "min": 10,
+              "max": 1000
+            },
+            {
+              "type": "select",
+              "id": "response",
+              "label": "Response",
+              "default": "peak",
+              "options": [
+                {
+                  "label": "Peak since last frame (lively)",
+                  "value": "peak"
+                },
+                {
+                  "label": "Average since last frame (smooth)",
+                  "value": "average"
+                },
+                {
+                  "label": "Latest frame only",
+                  "value": "latest"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "id": "label_group",
+          "label": "Label",
+          "fields": [
+            {
+              "type": "checkbox",
+              "id": "show_label",
+              "label": "Show the button title under the bars",
+              "default": false
+            },
+            {
+              "type": "input",
+              "id": "label_color",
+              "label": "Title colour (hex)",
+              "default": "#ffffff",
+              "visible_if": {
+                "field": "show_label",
+                "value": true
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

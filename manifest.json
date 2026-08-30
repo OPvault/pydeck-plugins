@@ -2,7 +2,7 @@
   "schema_version": 1,
   "label": "Testing",
   "root_url": "https://raw.githubusercontent.com/OPvault/pydeck-plugins/testing/",
-  "generated_at": "2026-08-30T00:23:19Z",
+  "generated_at": "2026-08-30T01:58:17Z",
   "plugins": [
     {
       "name": "Casino",
@@ -40,7 +40,7 @@
       ],
       "summary": "Live audio spectrum on a key, driven by cava",
       "author": "PyDeck Team",
-      "latest": "0.1.0",
+      "latest": "0.1.1",
       "icon_path": "plugins/no.pydeck.cava/icon.svg",
       "compatible_pydeck_versions": [
         "1.1"
@@ -52,9 +52,16 @@
           "min_pydeck_version": "1.1.0",
           "max_pydeck_version": null,
           "changelog_path": "plugins/no.pydeck.cava/0.1.0/CHANGELOG.md"
+        },
+        {
+          "version": "0.1.1",
+          "path": "plugins/no.pydeck.cava/0.1.1",
+          "min_pydeck_version": "1.1.0",
+          "max_pydeck_version": null,
+          "changelog_path": "plugins/no.pydeck.cava/0.1.1/CHANGELOG.md"
         }
       ],
-      "doc_path": "plugins/no.pydeck.cava/0.1.0/DOCS.md",
+      "doc_path": "plugins/no.pydeck.cava/0.1.1/DOCS.md",
       "show_markdown_after_install": false
     },
     {

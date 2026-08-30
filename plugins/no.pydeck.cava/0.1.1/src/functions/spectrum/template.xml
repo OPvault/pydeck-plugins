@@ -1,0 +1,43 @@
+<!-- Spectrum face: up to 32 bars, each an absolutely positioned box whose
+     geometry and colour come from handler state.  Bars beyond the configured
+     count collapse to zero size, so one markup serves every bar count. -->
+
+<template name="spectrum" title="Spectrum" description="Live audio spectrum bars from cava">
+  <box class="face">
+    <box class="tick" />
+    <box class="b b1" />
+    <box class="b b2" />
+    <box class="b b3" />
+    <box class="b b4" />
+    <box class="b b5" />
+    <box class="b b6" />
+    <box class="b b7" />
+    <box class="b b8" />
+    <box class="b b9" />
+    <box class="b b10" />
+    <box class="b b11" />
+    <box class="b b12" />
+    <box class="b b13" />
+    <box class="b b14" />
+    <box class="b b15" />
+    <box class="b b16" />
+    <box class="b b17" />
+    <box class="b b18" />
+    <box class="b b19" />
+    <box class="b b20" />
+    <box class="b b21" />
+    <box class="b b22" />
+    <box class="b b23" />
+    <box class="b b24" />
+    <box class="b b25" />
+    <box class="b b26" />
+    <box class="b b27" />
+    <box class="b b28" />
+    <box class="b b29" />
+    <box class="b b30" />
+    <box class="b b31" />
+    <box class="b b32" />
+    <buttonlabel class="label" />
+    <text class="msg">{msg}</text>
+  </box>
+</template>
