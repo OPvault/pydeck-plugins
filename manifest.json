@@ -2,7 +2,7 @@
   "schema_version": 1,
   "label": "Testing",
   "root_url": "https://raw.githubusercontent.com/OPvault/pydeck-plugins/testing/",
-  "generated_at": "2026-08-30T02:06:46Z",
+  "generated_at": "2026-08-30T09:12:29Z",
   "plugins": [
     {
       "name": "Casino",
@@ -11,6 +11,13 @@
         "gaming",
         "widgets"
       ],
+      "compatibility": {
+        "os": [
+          "linux",
+          "windows",
+          "macos"
+        ]
+      },
       "summary": "Three games of chance on a button — roll a die, spin a roulette wheel, flip a coin",
       "author": "PyDeck Team",
       "latest": "1.0.0",
@@ -38,6 +45,11 @@
         "widgets",
         "live-data"
       ],
+      "compatibility": {
+        "os": [
+          "linux"
+        ]
+      },
       "summary": "Live audio spectrum on a key, driven by cava",
       "author": "PyDeck Team",
       "latest": "0.1.1",
@@ -72,6 +84,13 @@
         "widgets",
         "time"
       ],
+      "compatibility": {
+        "os": [
+          "linux",
+          "windows",
+          "macos"
+        ]
+      },
       "summary": "Displays the current time with a stylish gradient background",
       "author": "PyDeck Team",
       "latest": "3.0.1",
@@ -111,6 +130,13 @@
         "controls",
         "gaming"
       ],
+      "compatibility": {
+        "os": [
+          "linux",
+          "windows",
+          "macos"
+        ]
+      },
       "summary": "Control Discord voice state (mute/deafen) via RPC",
       "author": "PyDeck Team",
       "latest": "2.0.2",
@@ -152,6 +178,13 @@
         "widgets",
         "live-data"
       ],
+      "compatibility": {
+        "os": [
+          "linux",
+          "windows",
+          "macos"
+        ]
+      },
       "summary": "Formula 1 race countdown, driver standings, and constructor standings",
       "author": "PyDeck Team",
       "latest": "2.1.1",
@@ -203,6 +236,13 @@
         "widgets",
         "live-data"
       ],
+      "compatibility": {
+        "os": [
+          "linux",
+          "windows",
+          "macos"
+        ]
+      },
       "summary": "Display live market prices from Finnhub (stocks, crypto, oil)",
       "author": "PyDeck Team",
       "latest": "2.0.0",
@@ -236,6 +276,13 @@
         "utilities",
         "navigation"
       ],
+      "compatibility": {
+        "os": [
+          "linux",
+          "windows",
+          "macos"
+        ]
+      },
       "summary": "Navigate virtual folder pages on the Stream Deck",
       "author": "PyDeck Team",
       "latest": "1.0.4",
@@ -269,6 +316,13 @@
         "widgets",
         "live-data"
       ],
+      "compatibility": {
+        "os": [
+          "linux",
+          "windows",
+          "macos"
+        ]
+      },
       "summary": "Control and monitor Home Assistant entities",
       "author": "PyDeck Team",
       "latest": "2.0.5",
@@ -339,6 +393,18 @@
         "input",
         "automation"
       ],
+      "compatibility": {
+        "os": [
+          "linux"
+        ],
+        "requires": [],
+        "optional": [
+          "x11",
+          "xdotool",
+          "wayland",
+          "evdev"
+        ]
+      },
       "summary": "Simulate keyboard presses and text input via xdotool on X11 when available, with evdev/uinput fallback for Wayland. Works on both X11 and Wayland. Requires the user to be in the 'input' group: sudo usermod -aG input $USER",
       "author": "PyDeck Team",
       "latest": "1.0.7",
@@ -377,6 +443,15 @@
         "media",
         "controls"
       ],
+      "compatibility": {
+        "os": [
+          "linux"
+        ],
+        "requires": [
+          "dbus",
+          "mpris"
+        ]
+      },
       "summary": "Control media playback on Linux (play/pause, next, previous, volume)",
       "author": "PyDeck Team",
       "latest": "2.0.1",
@@ -410,6 +485,13 @@
         "widgets",
         "utilities"
       ],
+      "compatibility": {
+        "os": [
+          "linux",
+          "windows",
+          "macos"
+        ]
+      },
       "summary": "Decorative button that shows a picture or GIF with up to three lines of text, and does nothing when pressed",
       "author": "PyDeck Team",
       "latest": "1.0.0",
@@ -436,6 +518,13 @@
         "widgets",
         "live-data"
       ],
+      "compatibility": {
+        "os": [
+          "linux",
+          "windows",
+          "macos"
+        ]
+      },
       "summary": "Control Spotify playback via the Web API (PDK)",
       "author": "PyDeck Team",
       "latest": "2.0.9",
@@ -519,6 +608,11 @@
         "utilities",
         "controls"
       ],
+      "compatibility": {
+        "os": [
+          "linux"
+        ]
+      },
       "summary": "Launch installed Steam games from the deck, with the game's icon, logo or library poster as the key face",
       "author": "PyDeck Team",
       "latest": "1.0.0",
@@ -553,6 +647,11 @@
         "widgets",
         "system"
       ],
+      "compatibility": {
+        "os": [
+          "linux"
+        ]
+      },
       "summary": "Monitor CPU, RAM, GPU, disk, network and battery in 18 themes and 5 layouts — no extra Python packages required",
       "author": "PyDeck Team",
       "latest": "2.1.1",
@@ -594,6 +693,11 @@
         "utilities",
         "widgets"
       ],
+      "compatibility": {
+        "os": [
+          "linux"
+        ]
+      },
       "summary": "Pending package updates from every installed package manager on one key — press to re-check or upgrade",
       "author": "PyDeck Team",
       "latest": "0.1.0",
@@ -619,6 +723,11 @@
         "automation",
         "web"
       ],
+      "compatibility": {
+        "os": [
+          "linux"
+        ]
+      },
       "summary": "Open URLs, send HTTP requests, and run scripts",
       "author": "PyDeck Team",
       "latest": "1.0.3",
@@ -651,6 +760,13 @@
         "widgets",
         "live-data"
       ],
+      "compatibility": {
+        "os": [
+          "linux",
+          "windows",
+          "macos"
+        ]
+      },
       "summary": "Current weather and multi-hour forecasts powered by met.no",
       "author": "PyDeck Team",
       "latest": "2.0.2",

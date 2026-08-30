@@ -201,5 +201,6 @@
     ]
   },
   "documentation": "DOCS.md",
-  "show_markdown_after_install": true
+  "show_markdown_after_install": true,
+  "compatibility": {"os": ["linux", "windows", "macos"]}
 }

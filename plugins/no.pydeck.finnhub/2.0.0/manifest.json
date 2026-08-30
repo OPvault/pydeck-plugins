@@ -96,5 +96,6 @@
         }
       ]
     }
-  }
+  },
+  "compatibility": {"os": ["linux", "windows", "macos"]}
 }

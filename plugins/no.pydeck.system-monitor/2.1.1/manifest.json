@@ -2309,5 +2309,6 @@
         }
       ]
     }
-  }
+  },
+  "compatibility": {"os": ["linux"]}
 }

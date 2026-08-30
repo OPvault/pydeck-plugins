@@ -108,5 +108,6 @@
       ],
       "actionable": true
     }
-  }
+  },
+  "compatibility": {"os": ["linux", "windows", "macos"]}
 }

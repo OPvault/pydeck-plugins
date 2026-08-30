@@ -52,6 +52,12 @@ For each plugins/<slug>/ directory:
      derived from the version folder and never written as true: an absent key
      means PDK, and the marketplace tags Classic on `pdk === false`.
 
+  6. "compatibility" is lifted from the latest version's manifest so the
+     marketplace can classify and filter without downloading every plugin.
+     catalog.json may override it outright for curation.  A plugin that
+     declares nothing gets no "compatibility" key — the marketplace shows it
+     as unverified rather than assuming it runs everywhere.
+
 Plugins are written in alphabetical order by name.
 """
 
@@ -339,11 +345,16 @@ def _build_plugin_entry(
         icon = ""
 
     licenses = catalog.get("licenses") or prev_entry.get("licenses") or []
+    # The authoritative platform declaration lives in the version manifest;
+    # catalog.json may replace it for curation. Sits next to category since
+    # both describe what the plugin is, before the version bookkeeping.
+    compatibility = catalog.get("compatibility") or latest_meta.get("compatibility")
 
     entry: Dict[str, Any] = {
         "name":                     name,
         "slug":                     slug,
         "category":                 category,
+        **({"compatibility": compatibility} if isinstance(compatibility, dict) and compatibility else {}),
         "summary":                  summary,
         "author":                   author,
         "latest":                   latest_version,

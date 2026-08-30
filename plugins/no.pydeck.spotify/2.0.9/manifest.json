@@ -174,5 +174,6 @@
       },
       "poll": { "function": "on_poll", "interval_ms": 5000 }
     }
-  }
+  },
+  "compatibility": {"os": ["linux", "windows", "macos"]}
 }

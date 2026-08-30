@@ -168,5 +168,6 @@
         }
       }
     }
-  }
+  },
+  "compatibility": {"os": ["linux"], "requires": ["dbus", "mpris"]}
 }

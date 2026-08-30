@@ -149,5 +149,6 @@
     "shlex": [
       "split"
     ]
-  }
+  },
+  "compatibility": {"os": ["linux"]}
 }

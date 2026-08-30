@@ -78,5 +78,6 @@
         }
       ]
     }
-  }
+  },
+  "compatibility": {"os": ["linux"], "requires": [], "optional": ["x11", "xdotool", "wayland", "evdev"]}
 }
