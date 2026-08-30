@@ -1,0 +1,11 @@
+{
+  "category": [
+    "system",
+    "utilities",
+    "widgets"
+  ],
+  "compatible_pydeck_versions": [
+    "1.1"
+  ],
+  "summary": "Pending package updates from every installed package manager on one key — press to re-check or upgrade"
+}
