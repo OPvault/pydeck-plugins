@@ -1,0 +1,10 @@
+{
+  "category": [
+    "gaming",
+    "widgets"
+  ],
+  "compatible_pydeck_versions": [
+    "1.1"
+  ],
+  "summary": "Three games of chance on a button — roll a die, spin a roulette wheel, flip a coin"
+}

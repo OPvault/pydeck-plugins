@@ -1,0 +1,90 @@
+{
+  "name": "Casino",
+  "version": "1.0.0",
+  "description": "Three games of chance on a button — roll a die, spin a roulette wheel, flip a coin",
+  "author": "PyDeck Team",
+  "min_pydeck_version": "1.1.0",
+  "max_pydeck_version": null,
+  "documentation": "DOCS.md",
+  "changelog": "CHANGELOG.md",
+  "permissions": {
+    "random": [
+      "randint",
+      "choice",
+      "random"
+    ],
+    "time": [
+      "monotonic"
+    ]
+  },
+  "functions": {
+    "dice": {
+      "label": "Dice",
+      "description": "Roll a single six-sided die — the die tumbles on the press and settles on the number it rolled",
+      "sidebar_icon": "assets/icons/dice.svg",
+      "log_format": {
+        "press": "rolled {result.roll}"
+      },
+      "title_readonly": true,
+      "disableGallary": true,
+      "disableGallery": true,
+      "default_display": {
+        "color": "#1d2430",
+        "text": "",
+        "scroll_enabled": false
+      },
+      "ui": []
+    },
+    "roulette": {
+      "label": "Roulette",
+      "description": "Spin the wheel — it stops on a number, red, black, or green for zero",
+      "sidebar_icon": "assets/icons/roulette.svg",
+      "log_format": {
+        "press": "landed on {result.number} {result.colour}"
+      },
+      "title_readonly": true,
+      "disableGallary": true,
+      "disableGallery": true,
+      "default_display": {
+        "color": "#0b3d2a",
+        "text": "",
+        "scroll_enabled": false
+      },
+      "ui": [
+        {
+          "type": "radio",
+          "id": "wheel_type",
+          "label": "Wheel",
+          "default": "european",
+          "options": [
+            {
+              "value": "european",
+              "label": "European (0-36)"
+            },
+            {
+              "value": "american",
+              "label": "American (0, 00-36)"
+            }
+          ]
+        }
+      ]
+    },
+    "coinflip": {
+      "label": "Coin Flip",
+      "description": "Flip a coin — it turns over on the press and lands on heads or tails",
+      "sidebar_icon": "assets/icons/coinflip.svg",
+      "log_format": {
+        "press": "landed on {result.side}"
+      },
+      "title_readonly": true,
+      "disableGallary": true,
+      "disableGallery": true,
+      "default_display": {
+        "color": "#151b26",
+        "text": "",
+        "scroll_enabled": false
+      },
+      "ui": []
+    }
+  }
+}
