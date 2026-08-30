@@ -1,0 +1,7 @@
+<template name="counter" title="Updates" description="Pending package updates across every installed package manager">
+  <box class="face">
+    <text class="label">{label}</text>
+    <text class="count">{count}</text>
+    <text class="sub">{sub}</text>
+  </box>
+</template>

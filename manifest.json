@@ -511,6 +511,27 @@
       "show_markdown_after_install": false
     },
     {
+      "name": "Updates",
+      "slug": "no.pydeck.updates",
+      "category": "utilities",
+      "summary": "Pending package updates from every installed package manager on one key",
+      "author": "PyDeck Team",
+      "latest": "0.1.0",
+      "icon_path": "",
+      "compatible_pydeck_versions": [
+        "1.0"
+      ],
+      "versions": [
+        {
+          "version": "0.1.0",
+          "path": "plugins/no.pydeck.updates/0.1.0",
+          "min_pydeck_version": "1.1.0",
+          "max_pydeck_version": null,
+          "changelog_path": "plugins/no.pydeck.updates/0.1.0/CHANGELOG.md"
+        }
+      ]
+    },
+    {
       "name": "Utilities",
       "slug": "no.pydeck.utilities",
       "category": [
