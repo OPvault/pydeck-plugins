@@ -1,3 +1,10 @@
 *__pycache__*
+
+# Tool caches, if a tool is ever run without PyDeck's cache-root settings
+# (PYTHONPYCACHEPREFIX) — everything here belongs in ~/.cache/pydeck.
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+
 *_now_playing.jpg
 _clock_*.png
