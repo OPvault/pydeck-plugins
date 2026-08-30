@@ -1,0 +1,23 @@
+# This catalog ships plugin sources verbatim, and sync_from_pydeck.py compares
+# them byte-for-byte against a live PyDeck install — which always writes LF. A
+# CRLF checkout (core.autocrlf=true, the Git for Windows default) therefore makes
+# every text file read as changed, so a single sync bumps the patch version of
+# every plugin in the catalog and publishes version folders with no real diff.
+#
+# Pin the working tree to LF on every platform. This overrides core.autocrlf, so
+# it holds for any clone regardless of the cloner's settings.
+* text=auto eol=lf
+
+# Assets Git must not touch or diff as text.
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.gif   binary
+*.ico   binary
+*.webp  binary
+*.ttf   binary
+*.otf   binary
+*.woff  binary
+*.woff2 binary
+*.pdf   binary
+*.zip   binary

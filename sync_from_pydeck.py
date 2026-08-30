@@ -78,6 +78,14 @@ if not _pycache_prefix:
     os.environ["PYTHONPYCACHEPREFIX"] = _pycache_prefix
 sys.pycache_prefix = _pycache_prefix
 
+# These scripts print ✓, → and en dashes. A Windows console hands Python a
+# cp1252 stdout, which cannot encode any of them, so a run that did all its work
+# correctly still died with UnicodeEncodeError on the first success line. Force
+# UTF-8 on the streams rather than dropping the glyphs.
+for _stream in (sys.stdout, sys.stderr):
+    if hasattr(_stream, "reconfigure"):
+        _stream.reconfigure(encoding="utf-8", errors="replace")
+
 import argparse
 import difflib
 import filecmp
