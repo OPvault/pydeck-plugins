@@ -2,7 +2,7 @@
   "schema_version": 1,
   "label": "Testing",
   "root_url": "https://raw.githubusercontent.com/OPvault/pydeck-plugins/testing/",
-  "generated_at": "2026-08-30T01:58:17Z",
+  "generated_at": "2026-08-30T01:58:18Z",
   "plugins": [
     {
       "name": "Casino",
@@ -541,13 +541,17 @@
     {
       "name": "Updates",
       "slug": "no.pydeck.updates",
-      "category": "utilities",
-      "summary": "Pending package updates from every installed package manager on one key",
+      "category": [
+        "system",
+        "utilities",
+        "widgets"
+      ],
+      "summary": "Pending package updates from every installed package manager on one key — press to re-check or upgrade",
       "author": "PyDeck Team",
       "latest": "0.1.0",
-      "icon_path": "",
+      "icon_path": "plugins/no.pydeck.updates/icon.svg",
       "compatible_pydeck_versions": [
-        "1.0"
+        "1.1"
       ],
       "versions": [
         {
