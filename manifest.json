@@ -74,7 +74,7 @@
       ],
       "summary": "Displays the current time with a stylish gradient background",
       "author": "PyDeck Team",
-      "latest": "3.0.0",
+      "latest": "3.0.1",
       "icon_path": "plugins/no.pydeck.clock/icon.png",
       "compatible_pydeck_versions": [
         "1.0"
@@ -93,6 +93,13 @@
           "min_pydeck_version": "1.1.0",
           "max_pydeck_version": null,
           "changelog_path": "plugins/no.pydeck.clock/3.0.0/CHANGELOG.md"
+        },
+        {
+          "version": "3.0.1",
+          "path": "plugins/no.pydeck.clock/3.0.1",
+          "min_pydeck_version": "1.1.0",
+          "max_pydeck_version": null,
+          "changelog_path": "plugins/no.pydeck.clock/3.0.1/CHANGELOG.md"
         }
       ]
     },
@@ -147,7 +154,7 @@
       ],
       "summary": "Formula 1 race countdown, driver standings, and constructor standings",
       "author": "PyDeck Team",
-      "latest": "2.1.0",
+      "latest": "2.1.1",
       "icon_path": "plugins/no.pydeck.f1/icon.svg",
       "compatible_pydeck_versions": [
         "1.0"
@@ -166,6 +173,13 @@
           "min_pydeck_version": "1.1.0",
           "max_pydeck_version": null,
           "changelog_path": "plugins/no.pydeck.f1/2.1.0/CHANGELOG.md"
+        },
+        {
+          "version": "2.1.1",
+          "path": "plugins/no.pydeck.f1/2.1.1",
+          "min_pydeck_version": "1.1.0",
+          "max_pydeck_version": null,
+          "changelog_path": "plugins/no.pydeck.f1/2.1.1/CHANGELOG.md"
         }
       ],
       "licenses": [
@@ -257,7 +271,7 @@
       ],
       "summary": "Control and monitor Home Assistant entities",
       "author": "PyDeck Team",
-      "latest": "2.0.4",
+      "latest": "2.0.5",
       "icon_path": "plugins/no.pydeck.home-assistant/icon.png",
       "compatible_pydeck_versions": [
         "1.0"
@@ -297,9 +311,16 @@
           "min_pydeck_version": "1.1.0",
           "max_pydeck_version": null,
           "changelog_path": "plugins/no.pydeck.home-assistant/2.0.4/CHANGELOG.md"
+        },
+        {
+          "version": "2.0.5",
+          "path": "plugins/no.pydeck.home-assistant/2.0.5",
+          "min_pydeck_version": "1.1.0",
+          "max_pydeck_version": null,
+          "changelog_path": "plugins/no.pydeck.home-assistant/2.0.5/CHANGELOG.md"
         }
       ],
-      "doc_path": "plugins/no.pydeck.home-assistant/2.0.4/DOCS.md",
+      "doc_path": "plugins/no.pydeck.home-assistant/2.0.5/DOCS.md",
       "show_markdown_after_install": true,
       "licenses": [
         {
@@ -486,7 +507,7 @@
       ],
       "summary": "Monitor CPU, RAM, GPU, disk, network and battery in 18 themes and 5 layouts — no extra Python packages required",
       "author": "PyDeck Team",
-      "latest": "2.1.0",
+      "latest": "2.1.1",
       "icon_path": "plugins/no.pydeck.system-monitor/icon.svg",
       "compatible_pydeck_versions": [
         "1.0"
@@ -505,9 +526,16 @@
           "min_pydeck_version": "1.1.0",
           "max_pydeck_version": null,
           "changelog_path": "plugins/no.pydeck.system-monitor/2.1.0/CHANGELOG.md"
+        },
+        {
+          "version": "2.1.1",
+          "path": "plugins/no.pydeck.system-monitor/2.1.1",
+          "min_pydeck_version": "1.1.0",
+          "max_pydeck_version": null,
+          "changelog_path": "plugins/no.pydeck.system-monitor/2.1.1/CHANGELOG.md"
         }
       ],
-      "doc_path": "plugins/no.pydeck.system-monitor/2.1.0/DOCS.md",
+      "doc_path": "plugins/no.pydeck.system-monitor/2.1.1/DOCS.md",
       "show_markdown_after_install": false
     },
     {
@@ -573,7 +601,7 @@
       ],
       "summary": "Current weather and multi-hour forecasts powered by met.no",
       "author": "PyDeck Team",
-      "latest": "2.0.1",
+      "latest": "2.0.2",
       "icon_path": "plugins/no.pydeck.weather/icon.png",
       "compatible_pydeck_versions": [
         "1.0"
@@ -585,6 +613,13 @@
           "min_pydeck_version": "1.1.0",
           "max_pydeck_version": null,
           "changelog_path": "plugins/no.pydeck.weather/2.0.1/CHANGELOG.md"
+        },
+        {
+          "version": "2.0.2",
+          "path": "plugins/no.pydeck.weather/2.0.2",
+          "min_pydeck_version": "1.1.0",
+          "max_pydeck_version": null,
+          "changelog_path": "plugins/no.pydeck.weather/2.0.2/CHANGELOG.md"
         }
       ],
       "licenses": [

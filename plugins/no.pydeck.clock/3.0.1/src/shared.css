@@ -1,0 +1,159 @@
+/* Clock -- one stylesheet for every face.
+ *
+ * The renderer interpolates handler state into this text before parsing it, so
+ * every braced name below is a value the Python side computed for the current
+ * button.  Lengths are percentages of the canvas so faces scale with key size.
+ */
+
+/* ---- canvas ------------------------------------------------------------ */
+
+.face {
+  position: absolute;
+  left: 0; top: 0; width: 100%; height: 100%;
+  background: {bg};
+}
+
+/* A full-canvas overlay.  Rotating one of these turns its contents about the
+ * centre of the key, which is what makes the analog hands work. */
+.layer {
+  position: absolute;
+  left: 0; top: 0; width: 100%; height: 100%;
+}
+
+/* ---- decorations ------------------------------------------------------- */
+
+.card {
+  position: absolute;
+  left: {card_x}; top: {card_y}; width: {card_w}; height: {card_h};
+  background: {card_c};
+  border-radius: {card_r};
+  border: {card_bw} {card_bc};
+}
+
+.bar {
+  position: absolute;
+  left: {bar_x}; top: {bar_y}; width: {bar_w}; height: {bar_h};
+  background: {bar_c};
+  border-radius: {bar_r};
+}
+
+/* ---- text slots -------------------------------------------------------- */
+
+/* Flow slots: stacked and centred by .dcol, spaced with padding because the
+ * layout engine has no margins and a shared gap would show through hidden
+ * (empty) rows. */
+.dcol {
+  position: absolute;
+  left: 0; top: {col_y}; width: 100%; height: {col_h};
+  direction: column; justify: center; align: center; gap: 0;
+}
+
+.s1 { font-size: {s1_size}; color: {s1_c}; font-weight: {s1_wt}; font-family: {s1_ff};
+      text-align: {s1_al}; padding-top: {s1_pt}; }
+.s2 { font-size: {s2_size}; color: {s2_c}; font-weight: {s2_wt}; font-family: {s2_ff};
+      text-align: {s2_al}; padding-top: {s2_pt}; }
+.s3 { font-size: {s3_size}; color: {s3_c}; font-weight: {s3_wt}; font-family: {s3_ff};
+      text-align: {s3_al}; padding-top: {s3_pt}; }
+.s4 { font-size: {s4_size}; color: {s4_c}; font-weight: {s4_wt}; font-family: {s4_ff};
+      text-align: {s4_al}; padding-top: {s4_pt}; }
+
+/* Absolute slots: same values, positioned by the handler instead of stacked. */
+.as1 { position: absolute; left: {s1_x}; top: {s1_y}; width: {s1_w}; height: 0;
+       font-size: {s1_size}; color: {s1_c}; font-weight: {s1_wt};
+       font-family: {s1_ff}; text-align: {s1_al}; }
+.as2 { position: absolute; left: {s2_x}; top: {s2_y}; width: {s2_w}; height: 0;
+       font-size: {s2_size}; color: {s2_c}; font-weight: {s2_wt};
+       font-family: {s2_ff}; text-align: {s2_al}; }
+.as3 { position: absolute; left: {s3_x}; top: {s3_y}; width: {s3_w}; height: 0;
+       font-size: {s3_size}; color: {s3_c}; font-weight: {s3_wt};
+       font-family: {s3_ff}; text-align: {s3_al}; }
+.as5 { position: absolute; left: {s5_x}; top: {s5_y}; width: {s5_w}; height: 0;
+       font-size: {s5_size}; color: {s5_c}; font-weight: {s5_wt};
+       font-family: {s5_ff}; text-align: {s5_al}; }
+
+/* ---- analog face ------------------------------------------------------- */
+
+.dial {
+  position: absolute;
+  left: {dial_off}; top: {dial_off}; width: {dial_size}; height: {dial_size};
+  background: {dial_fill};
+  border-color: {dial_ring};
+  stroke-width: {dial_ring_w};
+}
+
+.hub {
+  position: absolute;
+  left: {hub_x}; top: {hub_x}; width: {hub_size}; height: {hub_size};
+  background: {hub_c};
+  border-color: {hub_ring};
+  stroke-width: {hub_ring_w};
+}
+
+.tk { position: absolute; }
+.tk.tkmaj { left: {maj_x}; top: {maj_y}; width: {maj_w}; height: {maj_h};
+            background: {maj_c}; border-radius: {maj_r}; }
+.tk.tkmin { left: {mnr_x}; top: {mnr_y}; width: {mnr_w}; height: {mnr_h};
+            background: {mnr_c}; border-radius: {mnr_r}; }
+
+.hand { position: absolute; }
+.hand.handh { left: {hh_x}; top: {hh_y}; width: {hh_w}; height: {hh_h};
+              background: {hh_c}; border-radius: {hh_r}; }
+.hand.handm { left: {mh_x}; top: {mh_y}; width: {mh_w}; height: {mh_h};
+              background: {mh_c}; border-radius: {mh_r}; }
+.hand.hands { left: {sh_x}; top: {sh_y}; width: {sh_w}; height: {sh_h};
+              background: {sh_c}; border-radius: {sh_r}; }
+.hand.handt { left: {sh_x}; top: {st_y}; width: {sh_w}; height: {st_h};
+              background: {sh_c}; border-radius: {sh_r}; }
+
+/* Hour-mark rotations: fixed, one layer per hour position. */
+.r0  { rotate: 0; }
+.r1  { rotate: 30; }
+.r2  { rotate: 60; }
+.r3  { rotate: 90; }
+.r4  { rotate: 120; }
+.r5  { rotate: 150; }
+.r6  { rotate: 180; }
+.r7  { rotate: 210; }
+.r8  { rotate: 240; }
+.r9  { rotate: 270; }
+.r10 { rotate: 300; }
+.r11 { rotate: 330; }
+
+/* Hand rotations: live values from the handler. */
+.lh { rotate: {hh_deg}; }
+.lm { rotate: {mh_deg}; }
+.ls { rotate: {sh_deg}; }
+
+.num { position: absolute; height: 0; color: {num_c}; font-size: {num_size};
+       text-align: center; }
+.num.n12 { left: 0; top: {num_edge}; width: 100%; }
+.num.n6  { left: 0; bottom: {num_edge}; width: 100%; }
+.num.n3  { right: {num_side}; top: 50%; width: 16%; }
+.num.n9  { left: {num_side}; top: 50%; width: 16%; }
+
+/* ---- tiled digits ------------------------------------------------------ */
+
+.tile { position: absolute; top: {tile_y}; width: {tile_w}; height: {tile_h};
+        background: {tile_c}; border-radius: {tile_r}; }
+.tile.tile1 { left: {tile1_x}; }
+.tile.tile2 { left: {tile2_x}; }
+.tile.tile3 { left: {tile3_x}; background: {tile_hi}; }
+.tile.tile4 { left: {tile4_x}; }
+
+.dg { position: absolute; top: {dg_y}; height: 0; width: {tile_w};
+      color: {dg_c}; font-size: {dg_size}; font-weight: bold; text-align: center; }
+.dg.dg1 { left: {tile1_x}; }
+.dg.dg2 { left: {tile2_x}; }
+.dg.dg3 { left: {tile3_x}; }
+.dg.dg4 { left: {tile4_x}; }
+
+.colon { position: absolute; left: {colon_x}; top: {colon_y}; width: {colon_w};
+         height: 0; color: {colon_c}; font-size: {colon_size};
+         font-weight: bold; text-align: center; }
+
+/* ---- countdown --------------------------------------------------------- */
+
+.track { position: absolute; left: {pg_x}; top: {pg_y}; width: {pg_w};
+         height: {pg_h}; background: {pg_track}; border-radius: {pg_r}; }
+.fill  { position: absolute; left: {pg_x}; top: {pg_y}; width: {pg_fw};
+         height: {pg_h}; background: {pg_fill}; border-radius: {pg_r}; }

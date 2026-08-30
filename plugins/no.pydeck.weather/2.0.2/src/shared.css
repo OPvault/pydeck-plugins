@@ -1,0 +1,158 @@
+:root {
+  --bg-top: #0091fe;
+  --bg-bottom: #02cdf9;
+  --font: Arial;
+  --text-color: #ffffff;
+  --day-color: #e7e7e7;
+  --hi-color: #ffdd57;
+  --lo-color: #fff6d4de;
+}
+
+.bg {
+  background: linear-gradient(180deg, {bg_top}, {bg_bottom});
+  font-family: var(--font);
+  padding: 4;
+  direction: column;
+  align: center;
+  justify: center;
+  gap: 0;
+}
+
+.top {
+  height: 24;
+  direction: column;
+  align: center;
+  justify: end;
+}
+
+.bottom {
+  height: 24;
+  direction: column;
+  align: center;
+  justify: start;
+  padding-top: 5;
+}
+
+.temp {
+  color: var(--text-color);
+  font-size: 24;
+  font-weight: bold;
+  text-align: center;
+}
+
+.temp-sm {
+  color: var(--text-color);
+  font-size: 19;
+  font-weight: bold;
+  text-align: center;
+}
+
+.day {
+  color: var(--day-color);
+  font-size: 14;
+  font-weight: bold;
+  text-align: center;
+}
+
+.detail {
+  direction: row;
+  align: center;
+  justify: center;
+  gap: 0;
+}
+
+.detail-arrows {
+  direction: column;
+  align: center;
+  justify: center;
+  gap: 2;
+}
+
+.detail-vals {
+  direction: column;
+  align: start;
+  justify: center;
+  gap: 2;
+}
+
+.arrow-hi {
+  color: var(--hi-color);
+  font-size: 16;
+  font-weight: bold;
+  text-align: center;
+}
+
+.arrow-lo {
+  color: var(--lo-color);
+  font-size: 16;
+  font-weight: bold;
+  text-align: center;
+}
+
+.val-hi {
+  color: var(--hi-color);
+  font-size: 22;
+  font-weight: bold;
+  text-align: left;
+}
+
+.val-hi-sm {
+  color: var(--hi-color);
+  font-size: 17;
+  font-weight: bold;
+  text-align: left;
+}
+
+.val-lo {
+  color: var(--lo-color);
+  font-size: 22;
+  font-weight: bold;
+  text-align: left;
+}
+
+.val-lo-sm {
+  color: var(--lo-color);
+  font-size: 17;
+  font-weight: bold;
+  text-align: left;
+}
+
+/* ── Forecast ── */
+
+.fc-bg {
+  background: linear-gradient(180deg, {fc_bg_top}, {fc_bg_bottom});
+  font-family: var(--font);
+  padding: 2 1;
+  direction: column;
+  align: left;
+  justify: center;
+  gap: 6;
+}
+
+.fc-entry {
+  direction: row;
+  align: center;
+  justify: left;
+  gap: 4;
+}
+
+.fc-row {
+  color: var(--text-color);
+  font-size: 16;
+  font-weight: bold;
+  text-align: left;
+}
+
+.fc-row-sm {
+  color: var(--text-color);
+  font-size: 12;
+  font-weight: bold;
+  text-align: left;
+}
+
+.fc-row-xs {
+  color: var(--text-color);
+  font-size: 10;
+  font-weight: bold;
+  text-align: left;
+}
