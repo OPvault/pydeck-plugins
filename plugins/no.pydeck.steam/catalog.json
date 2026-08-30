@@ -1,0 +1,18 @@
+{
+  "category": [
+    "gaming",
+    "utilities",
+    "controls"
+  ],
+  "compatible_pydeck_versions": [
+    "1.1"
+  ],
+  "summary": "Launch installed Steam games from the deck, with the game's icon, logo or library poster as the key face",
+  "licenses": [
+    {
+      "name": "Steam trademark notice",
+      "file": "meta/licenses/LICENSE-steam-trademark",
+      "description": "The Steam logo is Valve's official artwork, used unmodified to identify the Steam client this plugin launches games through. Steam and the Steam logo are trademarks of Valve Corporation; this plugin is not affiliated with or endorsed by Valve."
+    }
+  ]
+}

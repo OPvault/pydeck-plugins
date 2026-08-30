@@ -1,0 +1,78 @@
+<template name="launch_game" title="Launch Game" description="Launch an installed Steam game; the key shows its library poster">
+  <box class="poster-bg">
+    <img src="{poster_src}" class="poster" fit="cover" />
+  </box>
+</template>
+
+<template name="launch_game_contain">
+  <box class="poster-bg">
+    <img src="{poster_src}" class="poster" fit="contain" />
+  </box>
+</template>
+
+<template name="launch_game_titled">
+  <box class="poster-bg overlay-stack">
+    <img src="{poster_src}" class="poster" fit="cover" />
+    <box class="poster-overlay">
+      <text class="status">{status}</text>
+      <marquee class="title" speed="30">{title}</marquee>
+    </box>
+  </box>
+</template>
+
+<template name="launch_game_titled_contain">
+  <box class="poster-bg overlay-stack">
+    <img src="{poster_src}" class="poster" fit="contain" />
+    <box class="poster-overlay">
+      <text class="status">{status}</text>
+      <marquee class="title" speed="30">{title}</marquee>
+    </box>
+  </box>
+</template>
+
+<template name="launch_game_icon">
+  <box class="poster-bg">
+    <img src="{game_icon_src}" class="poster" fit="cover" />
+  </box>
+</template>
+
+<template name="launch_game_icon_titled">
+  <box class="poster-bg overlay-stack">
+    <img src="{game_icon_src}" class="poster" fit="cover" />
+    <box class="poster-overlay">
+      <text class="status">{status}</text>
+      <marquee class="title" speed="30">{title}</marquee>
+    </box>
+  </box>
+</template>
+
+<template name="launch_game_logo">
+  <box class="logo-bg">
+    <img src="{logo_src}" class="logo" fit="contain" />
+  </box>
+</template>
+
+<template name="launch_game_logo_titled">
+  <box class="logo-bg overlay-stack">
+    <img src="{logo_src}" class="logo" fit="contain" />
+    <box class="poster-overlay">
+      <text class="status">{status}</text>
+      <marquee class="title" speed="30">{title}</marquee>
+    </box>
+  </box>
+</template>
+
+<template name="launch_game_text">
+  <box class="text-bg">
+    <img src="{icon_src}" class="small-icon" fit="contain" />
+    <marquee class="title" speed="30">{title}</marquee>
+    <text class="status">{status}</text>
+  </box>
+</template>
+
+<template name="launch_game_idle">
+  <box class="idle-bg">
+    <img src="{icon_src}" class="idle-icon" fit="contain" />
+    <text class="idle-label">{label}</text>
+  </box>
+</template>
