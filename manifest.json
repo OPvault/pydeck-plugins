@@ -2,7 +2,7 @@
   "schema_version": 1,
   "label": "Testing",
   "root_url": "https://raw.githubusercontent.com/OPvault/pydeck-plugins/testing/",
-  "generated_at": "2026-09-12T19:04:21Z",
+  "generated_at": "2026-09-12T20:57:04Z",
   "plugins": [
     {
       "name": "Casino",
@@ -346,7 +346,7 @@
       },
       "summary": "Control and monitor Home Assistant entities",
       "author": "PyDeck Team",
-      "latest": "2.0.6",
+      "latest": "2.0.7",
       "icon_path": "plugins/no.pydeck.home-assistant/icon.png",
       "compatible_pydeck_versions": [
         "1.0"
@@ -400,9 +400,16 @@
           "min_pydeck_version": "1.1.0",
           "max_pydeck_version": null,
           "changelog_path": "plugins/no.pydeck.home-assistant/2.0.6/CHANGELOG.md"
+        },
+        {
+          "version": "2.0.7",
+          "path": "plugins/no.pydeck.home-assistant/2.0.7",
+          "min_pydeck_version": "1.1.0",
+          "max_pydeck_version": null,
+          "changelog_path": "plugins/no.pydeck.home-assistant/2.0.7/CHANGELOG.md"
         }
       ],
-      "doc_path": "plugins/no.pydeck.home-assistant/2.0.6/DOCS.md",
+      "doc_path": "plugins/no.pydeck.home-assistant/2.0.7/DOCS.md",
       "show_markdown_after_install": true,
       "licenses": [
         {
