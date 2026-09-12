@@ -1,0 +1,13 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+	<style>
+		.s0 { fill: none;stroke: #ffffff;stroke-width: 2.5;stroke-linecap: round;stroke-linejoin: round }
+	</style>
+	<!-- text cursor (I-beam) -->
+	<path class="s0" d="m22 14h4c2 0 4 1.5 4 4v28c0 2.5-2 4-4 4h-4"/>
+	<path class="s0" d="m38 14h-4c-2 0-4 1.5-4 4v28c0 2.5 2 4 4 4h4"/>
+	<!-- typed text lines -->
+	<path class="s0" d="m44 24h10"/>
+	<path class="s0" d="m44 32h8"/>
+	<path class="s0" d="m10 24h6"/>
+	<path class="s0" d="m10 32h4"/>
+</svg>

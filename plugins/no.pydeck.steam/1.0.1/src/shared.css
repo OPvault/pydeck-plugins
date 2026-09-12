@@ -1,0 +1,105 @@
+:root {
+  --bg: {_button_color};
+  --fg: #ffffff;
+  --fg-dim: rgba(255, 255, 255, 0.75);
+  --stroke: #1b2838;
+}
+
+/* ── Poster face ── */
+
+.poster-bg {
+  background: var(--bg);
+  direction: column;
+  padding: 0;
+}
+
+.poster {
+  width: 100%;
+  height: 100%;
+}
+
+/* Stack the overlay on top of the poster (negative gap pulls the second
+   child back over the first, the same trick the Spotify plugin uses). */
+.overlay-stack {
+  gap: -72;
+}
+
+.poster-overlay {
+  width: 100%;
+  height: 100%;
+  direction: column;
+  justify: space-between;
+  padding: 2 0;
+}
+
+.title {
+  color: var(--fg);
+  font-size: 12;
+  font-weight: bold;
+  text-stroke: 1 var(--stroke);
+  width: 100%;
+  text-align: center;
+}
+
+.status {
+  color: var(--fg);
+  font-size: 10;
+  font-weight: bold;
+  text-stroke: 1 var(--stroke);
+  width: 100%;
+  text-align: center;
+}
+
+/* ── Logo face: the wordmark, whole, on the key colour ── */
+
+.logo-bg {
+  background: var(--bg);
+  direction: column;
+  align: center;
+  justify: center;
+  /* No padding: a percentage size on the child resolves against the parent
+     box, not its content box, so padding would push the logo off-centre. */
+  padding: 0;
+}
+
+.logo {
+  width: 62;
+  height: 62;
+}
+
+/* ── No artwork cached: name on a dark face ── */
+
+.text-bg {
+  background: var(--bg);
+  direction: column;
+  align: center;
+  justify: center;
+  padding: 4;
+  gap: 2;
+}
+
+.small-icon {
+  width: 28;
+  height: 28;
+}
+
+/* ── Nothing picked yet ── */
+
+.idle-bg {
+  background: var(--bg);
+  direction: column;
+  align: center;
+  justify: center;
+  gap: 2;
+}
+
+.idle-icon {
+  width: 44;
+  height: 44;
+}
+
+.idle-label {
+  color: var(--fg-dim);
+  font-size: 11;
+  text-align: center;
+}

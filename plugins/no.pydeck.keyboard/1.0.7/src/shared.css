@@ -1,0 +1,20 @@
+/* Shared PDK styles for no.pydeck.keyboard (classic default #560490 via button color). */
+:root {
+  --fg: #ffffff;
+}
+
+.face {
+  background: {_button_color};
+  padding: 6;
+  direction: column;
+  align: center;
+  justify: center;
+  gap: 4;
+}
+
+.label {
+  color: var(--fg);
+  font-size: 0.72em;
+  font-weight: bold;
+  text-align: center;
+}

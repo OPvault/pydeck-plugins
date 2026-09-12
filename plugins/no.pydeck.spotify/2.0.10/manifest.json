@@ -1,0 +1,255 @@
+{
+  "name": "Spotify",
+  "version": "2.0.10",
+  "description": "Control Spotify playback via the Web API (PDK)",
+  "author": "PyDeck Team",
+  "min_pydeck_version": "1.1.0",
+  "max_pydeck_version": null,
+  "compatibility": {
+    "os": [
+      "linux",
+      "windows",
+      "macos"
+    ]
+  },
+  "changelog": "CHANGELOG.md",
+  "documentation": "DOCS.md",
+  "show_markdown_after_install": true,
+  "oauth": {
+    "authorize_url": "https://accounts.spotify.com/authorize",
+    "token_url": "https://accounts.spotify.com/api/token",
+    "scopes": "user-read-playback-state user-modify-playback-state user-read-currently-playing",
+    "auth_method": "basic"
+  },
+  "credentials": [
+    {
+      "id": "client_id",
+      "label": "Client ID",
+      "type": "text"
+    },
+    {
+      "id": "client_secret",
+      "label": "Client Secret",
+      "type": "password"
+    }
+  ],
+  "permissions": {
+    "urllib.request": [
+      "urlopen",
+      "Request"
+    ],
+    "urllib.parse": [
+      "urlencode"
+    ],
+    "urllib.error": [
+      "HTTPError"
+    ],
+    "base64": [
+      "b64encode"
+    ],
+    "json": [
+      "dumps",
+      "loads"
+    ],
+    "threading": [
+      "Lock"
+    ],
+    "pathlib": [
+      "Path"
+    ]
+  },
+  "functions": {
+    "play_pause": {
+      "label": "Play / Pause",
+      "description": "Toggle Spotify play/pause with album art display",
+      "sidebar_icon": "assets/icons/PlayPause.png",
+      "disableGallery": true,
+      "default_display": {
+        "color": "#222222"
+      },
+      "poll": {
+        "function": "on_poll",
+        "interval_ms": 1000
+      },
+      "ui": [
+        {
+          "type": "radio",
+          "id": "display_mode",
+          "label": "Track Label",
+          "default": "song",
+          "options": [
+            {
+              "value": "none",
+              "label": "None"
+            },
+            {
+              "value": "song",
+              "label": "Song"
+            },
+            {
+              "value": "song_artist",
+              "label": "Song - Artist"
+            },
+            {
+              "value": "artist",
+              "label": "Artist"
+            }
+          ]
+        },
+        {
+          "type": "radio",
+          "id": "label_position",
+          "label": "Track Label Position",
+          "default": "bottom",
+          "options": [
+            {
+              "value": "bottom",
+              "label": "Bottom (time left on top)"
+            },
+            {
+              "value": "top",
+              "label": "Top (time left at bottom)"
+            }
+          ]
+        },
+        {
+          "type": "checkbox",
+          "id": "show_time_left",
+          "label": "Show Time Left",
+          "default": false
+        }
+      ]
+    },
+    "next_track": {
+      "label": "Next Track",
+      "description": "Skip to the next Spotify track",
+      "sidebar_icon": "assets/icons/Next.png",
+      "disableGallery": true,
+      "default_display": {
+        "color": "#222222"
+      }
+    },
+    "prev_track": {
+      "label": "Previous Track",
+      "description": "Go back to the previous Spotify track",
+      "sidebar_icon": "assets/icons/Previous.png",
+      "disableGallery": true,
+      "default_display": {
+        "color": "#222222"
+      }
+    },
+    "volume_up": {
+      "label": "Volume Up",
+      "description": "Increase Spotify volume",
+      "sidebar_icon": "assets/icons/VolumeUp.png",
+      "disableGallery": true,
+      "default_display": {
+        "color": "#222222"
+      },
+      "poll": {
+        "function": "on_poll",
+        "interval_ms": 3000
+      },
+      "ui": [
+        {
+          "type": "number",
+          "id": "volume_step",
+          "label": "Volume Step (%)",
+          "min": 1,
+          "max": 100,
+          "default": 10
+        },
+        {
+          "type": "checkbox",
+          "id": "show_volume_label",
+          "label": "Show Volume %",
+          "default": false
+        }
+      ]
+    },
+    "volume_down": {
+      "label": "Volume Down",
+      "description": "Decrease Spotify volume",
+      "sidebar_icon": "assets/icons/VolumeDown.png",
+      "disableGallery": true,
+      "default_display": {
+        "color": "#222222"
+      },
+      "poll": {
+        "function": "on_poll",
+        "interval_ms": 3000
+      },
+      "ui": [
+        {
+          "type": "number",
+          "id": "volume_step",
+          "label": "Volume Step (%)",
+          "min": 1,
+          "max": 100,
+          "default": 10
+        },
+        {
+          "type": "checkbox",
+          "id": "show_volume_label",
+          "label": "Show Volume %",
+          "default": false
+        }
+      ]
+    },
+    "set_volume": {
+      "label": "Set Volume",
+      "description": "Set Spotify playback volume to a specific level (0–100%)",
+      "sidebar_icon": "assets/icons/Volume.png",
+      "disableGallery": true,
+      "default_display": {
+        "color": "#222222"
+      },
+      "poll": {
+        "function": "on_poll",
+        "interval_ms": 3000
+      },
+      "ui": [
+        {
+          "type": "number",
+          "id": "volume_percent",
+          "label": "Volume (%)",
+          "min": 0,
+          "max": 100,
+          "default": 50
+        },
+        {
+          "type": "checkbox",
+          "id": "show_volume_label",
+          "label": "Show Volume %",
+          "default": false
+        }
+      ]
+    },
+    "toggle_shuffle": {
+      "label": "Shuffle",
+      "description": "Toggle Spotify shuffle mode on/off",
+      "sidebar_icon": "assets/icons/Shuffle.png",
+      "disableGallery": true,
+      "default_display": {
+        "color": "#222222"
+      },
+      "poll": {
+        "function": "on_poll",
+        "interval_ms": 5000
+      }
+    },
+    "cycle_repeat": {
+      "label": "Repeat",
+      "description": "Cycle repeat mode: off → context → track → off",
+      "sidebar_icon": "assets/icons/Repeat.png",
+      "disableGallery": true,
+      "default_display": {
+        "color": "#222222"
+      },
+      "poll": {
+        "function": "on_poll",
+        "interval_ms": 5000
+      }
+    }
+  }
+}

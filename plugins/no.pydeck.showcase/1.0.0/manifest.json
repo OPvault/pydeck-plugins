@@ -22,5 +22,6 @@
       },
       "ui": []
     }
-  }
+  },
+  "compatibility": {"os": ["linux", "windows", "macos"]}
 }

@@ -1,0 +1,12 @@
+<template name="toggle_mute" title="Toggle Mute" description="Toggle Discord microphone mute">
+  <box class="face {face_class}">
+    <img src="{icon_src}" class="glyph" fit="contain" />
+  </box>
+</template>
+
+<template name="toggle_mute-hint" title="Toggle Mute" description="Toggle Discord microphone mute">
+  <box class="face {face_class}">
+    <img src="{icon_src}" class="glyph-hint" fit="contain" />
+    <text class="hint">{hint}</text>
+  </box>
+</template>

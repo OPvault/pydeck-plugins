@@ -52,17 +52,45 @@ For each plugins/<slug>/ directory:
      derived from the version folder and never written as true: an absent key
      means PDK, and the marketplace tags Classic on `pdk === false`.
 
+  6. "compatibility" is lifted from the latest version's manifest so the
+     marketplace can classify and filter without downloading every plugin.
+     catalog.json may override it outright for curation.  A plugin that
+     declares nothing gets no "compatibility" key — the marketplace shows it
+     as unverified rather than assuming it runs everywhere.
+
 Plugins are written in alphabetical order by name.
 """
 
 from __future__ import annotations
 
+import os
+import sys
+
+# Compiled bytecode goes to the one cache root (~/.cache/pydeck/pycache), not
+# into __pycache__ folders next to the sources — the same rule as the PyDeck
+# checkout. Set before the first project import. An explicit
+# PYTHONPYCACHEPREFIX (e.g. from the parent process) wins.
+_pycache_prefix = (os.environ.get("PYTHONPYCACHEPREFIX") or "").strip()
+if not _pycache_prefix:
+    _xdg_cache = (os.environ.get("XDG_CACHE_HOME") or "").strip() or os.path.join(
+        os.path.expanduser("~"), ".cache"
+    )
+    _pycache_prefix = os.path.join(_xdg_cache, "pydeck", "pycache")
+    os.environ["PYTHONPYCACHEPREFIX"] = _pycache_prefix
+sys.pycache_prefix = _pycache_prefix
+
+# These scripts print ✓, → and en dashes. A Windows console hands Python a
+# cp1252 stdout, which cannot encode any of them, so a run that did all its work
+# correctly still died with UnicodeEncodeError on the first success line. Force
+# UTF-8 on the streams rather than dropping the glyphs.
+for _stream in (sys.stdout, sys.stderr):
+    if hasattr(_stream, "reconfigure"):
+        _stream.reconfigure(encoding="utf-8", errors="replace")
+
 import argparse
 import json
 import re
-import os
 import shutil
-import sys
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
@@ -108,18 +136,49 @@ def _git_output(*args: str) -> str:
     return r.stdout.strip() if r.returncode == 0 else ""
 
 
-def default_root_url() -> str:
-    """Raw base for the checked-out branch, or "" when it cannot be determined.
+def _current_branch() -> str:
+    """The branch being worked on, even when HEAD is detached mid-rebase.
 
-    Only a default: any script that writes a manifest for a branch other than
-    the one it is standing on must pass --root-url explicitly.
+    ``rev-parse --abbrev-ref HEAD`` answers "HEAD" while a rebase is in
+    progress, which is exactly when the manifest tends to be regenerated to
+    resolve a conflict -- and that used to blank root_url in the commit. Git
+    records the branch being rebased in rebase-merge/head-name (or
+    rebase-apply/head-name), so read it from there.
+    """
+    branch = _git_output("rev-parse", "--abbrev-ref", "HEAD")
+    if branch and branch != "HEAD":
+        return branch
+    git_dir = _git_output("rev-parse", "--git-dir")
+    for state in ("rebase-merge", "rebase-apply"):
+        head_name = Path(git_dir) / state / "head-name"
+        if git_dir and head_name.exists():
+            ref = head_name.read_text().strip()
+            return ref[len("refs/heads/"):] if ref.startswith("refs/heads/") else ref
+    return ""
+
+
+def _existing_root_url() -> str:
+    """root_url from the manifest already on disk, or ""."""
+    try:
+        return str(json.loads(ROOT_MANIFEST.read_text()).get("root_url", "") or "")
+    except (OSError, json.JSONDecodeError, AttributeError):
+        return ""
+
+
+def default_root_url() -> str:
+    """Raw base for the checked-out branch.
+
+    Falls back to whatever root_url the existing manifest carries when git
+    cannot say which branch this is, so a regeneration never silently erases
+    it. Only a default: any script that writes a manifest for a branch other
+    than the one it is standing on must pass --root-url explicitly.
     """
 
     remote = _git_output("remote", "get-url", "origin")
-    branch = _git_output("rev-parse", "--abbrev-ref", "HEAD")
+    branch = _current_branch()
     m = re.search(r"[:/]([^/:]+)/([^/]+?)(?:\.git)?/?$", remote)
-    if not m or not branch or branch == "HEAD":
-        return ""
+    if not m or not branch:
+        return _existing_root_url()
     return ROOT_URL_TEMPLATE.format(owner=m.group(1), repo=m.group(2), branch=branch)
 
 
@@ -294,11 +353,16 @@ def _build_plugin_entry(
         icon = ""
 
     licenses = catalog.get("licenses") or prev_entry.get("licenses") or []
+    # The authoritative platform declaration lives in the version manifest;
+    # catalog.json may replace it for curation. Sits next to category since
+    # both describe what the plugin is, before the version bookkeeping.
+    compatibility = catalog.get("compatibility") or latest_meta.get("compatibility")
 
     entry: Dict[str, Any] = {
         "name":                     name,
         "slug":                     slug,
         "category":                 category,
+        **({"compatibility": compatibility} if isinstance(compatibility, dict) and compatibility else {}),
         "summary":                  summary,
         "author":                   author,
         "latest":                   latest_version,

@@ -2,7 +2,7 @@
   "schema_version": 1,
   "label": "Testing",
   "root_url": "https://raw.githubusercontent.com/OPvault/pydeck-plugins/testing/",
-  "generated_at": "2026-08-30T01:27:21Z",
+  "generated_at": "2026-09-12T19:02:57Z",
   "plugins": [
     {
       "name": "Casino",
@@ -11,6 +11,13 @@
         "gaming",
         "widgets"
       ],
+      "compatibility": {
+        "os": [
+          "linux",
+          "windows",
+          "macos"
+        ]
+      },
       "summary": "Three games of chance on a button — roll a die, spin a roulette wheel, flip a coin",
       "author": "PyDeck Team",
       "latest": "1.0.0",
@@ -38,6 +45,11 @@
         "widgets",
         "live-data"
       ],
+      "compatibility": {
+        "os": [
+          "linux"
+        ]
+      },
       "summary": "Live audio spectrum on a key, driven by cava",
       "author": "PyDeck Team",
       "latest": "0.1.1",
@@ -72,6 +84,13 @@
         "widgets",
         "time"
       ],
+      "compatibility": {
+        "os": [
+          "linux",
+          "windows",
+          "macos"
+        ]
+      },
       "summary": "Displays the current time with a stylish gradient background",
       "author": "PyDeck Team",
       "latest": "3.0.1",
@@ -111,9 +130,16 @@
         "controls",
         "gaming"
       ],
+      "compatibility": {
+        "os": [
+          "linux",
+          "windows",
+          "macos"
+        ]
+      },
       "summary": "Control Discord voice state (mute/deafen) via RPC",
       "author": "PyDeck Team",
-      "latest": "2.0.2",
+      "latest": "2.0.3",
       "icon_path": "plugins/no.pydeck.discord/icon.svg",
       "compatible_pydeck_versions": [
         "1.0"
@@ -139,9 +165,16 @@
           "min_pydeck_version": "1.1.0",
           "max_pydeck_version": null,
           "changelog_path": "plugins/no.pydeck.discord/2.0.2/CHANGELOG.md"
+        },
+        {
+          "version": "2.0.3",
+          "path": "plugins/no.pydeck.discord/2.0.3",
+          "min_pydeck_version": "1.1.0",
+          "max_pydeck_version": null,
+          "changelog_path": "plugins/no.pydeck.discord/2.0.3/CHANGELOG.md"
         }
       ],
-      "doc_path": "plugins/no.pydeck.discord/2.0.2/DOCS.md",
+      "doc_path": "plugins/no.pydeck.discord/2.0.3/DOCS.md",
       "show_markdown_after_install": true
     },
     {
@@ -152,9 +185,16 @@
         "widgets",
         "live-data"
       ],
+      "compatibility": {
+        "os": [
+          "linux",
+          "windows",
+          "macos"
+        ]
+      },
       "summary": "Formula 1 race countdown, driver standings, and constructor standings",
       "author": "PyDeck Team",
-      "latest": "2.1.1",
+      "latest": "2.1.2",
       "icon_path": "plugins/no.pydeck.f1/icon.svg",
       "compatible_pydeck_versions": [
         "1.0"
@@ -180,6 +220,13 @@
           "min_pydeck_version": "1.1.0",
           "max_pydeck_version": null,
           "changelog_path": "plugins/no.pydeck.f1/2.1.1/CHANGELOG.md"
+        },
+        {
+          "version": "2.1.2",
+          "path": "plugins/no.pydeck.f1/2.1.2",
+          "min_pydeck_version": "1.1.0",
+          "max_pydeck_version": null,
+          "changelog_path": "plugins/no.pydeck.f1/2.1.2/CHANGELOG.md"
         }
       ],
       "licenses": [
@@ -203,6 +250,13 @@
         "widgets",
         "live-data"
       ],
+      "compatibility": {
+        "os": [
+          "linux",
+          "windows",
+          "macos"
+        ]
+      },
       "summary": "Display live market prices from Finnhub (stocks, crypto, oil)",
       "author": "PyDeck Team",
       "latest": "2.0.0",
@@ -236,6 +290,13 @@
         "utilities",
         "navigation"
       ],
+      "compatibility": {
+        "os": [
+          "linux",
+          "windows",
+          "macos"
+        ]
+      },
       "summary": "Navigate virtual folder pages on the Stream Deck",
       "author": "PyDeck Team",
       "latest": "1.0.4",
@@ -269,9 +330,16 @@
         "widgets",
         "live-data"
       ],
+      "compatibility": {
+        "os": [
+          "linux",
+          "windows",
+          "macos"
+        ]
+      },
       "summary": "Control and monitor Home Assistant entities",
       "author": "PyDeck Team",
-      "latest": "2.0.5",
+      "latest": "2.0.6",
       "icon_path": "plugins/no.pydeck.home-assistant/icon.png",
       "compatible_pydeck_versions": [
         "1.0"
@@ -318,9 +386,16 @@
           "min_pydeck_version": "1.1.0",
           "max_pydeck_version": null,
           "changelog_path": "plugins/no.pydeck.home-assistant/2.0.5/CHANGELOG.md"
+        },
+        {
+          "version": "2.0.6",
+          "path": "plugins/no.pydeck.home-assistant/2.0.6",
+          "min_pydeck_version": "1.1.0",
+          "max_pydeck_version": null,
+          "changelog_path": "plugins/no.pydeck.home-assistant/2.0.6/CHANGELOG.md"
         }
       ],
-      "doc_path": "plugins/no.pydeck.home-assistant/2.0.5/DOCS.md",
+      "doc_path": "plugins/no.pydeck.home-assistant/2.0.6/DOCS.md",
       "show_markdown_after_install": true,
       "licenses": [
         {
@@ -339,9 +414,21 @@
         "input",
         "automation"
       ],
+      "compatibility": {
+        "os": [
+          "linux"
+        ],
+        "requires": [],
+        "optional": [
+          "x11",
+          "xdotool",
+          "wayland",
+          "evdev"
+        ]
+      },
       "summary": "Simulate keyboard presses and text input via xdotool on X11 when available, with evdev/uinput fallback for Wayland. Works on both X11 and Wayland. Requires the user to be in the 'input' group: sudo usermod -aG input $USER",
       "author": "PyDeck Team",
-      "latest": "1.0.6",
+      "latest": "1.0.8",
       "icon_path": "plugins/no.pydeck.keyboard/icon.svg",
       "compatible_pydeck_versions": [
         "1.0"
@@ -360,6 +447,20 @@
           "min_pydeck_version": "1.1.0",
           "max_pydeck_version": null,
           "changelog_path": "plugins/no.pydeck.keyboard/1.0.6/CHANGELOG.md"
+        },
+        {
+          "version": "1.0.7",
+          "path": "plugins/no.pydeck.keyboard/1.0.7",
+          "min_pydeck_version": "1.1.0",
+          "max_pydeck_version": null,
+          "changelog_path": "plugins/no.pydeck.keyboard/1.0.7/CHANGELOG.md"
+        },
+        {
+          "version": "1.0.8",
+          "path": "plugins/no.pydeck.keyboard/1.0.8",
+          "min_pydeck_version": "1.1.0",
+          "max_pydeck_version": null,
+          "changelog_path": "plugins/no.pydeck.keyboard/1.0.8/CHANGELOG.md"
         }
       ]
     },
@@ -370,6 +471,15 @@
         "media",
         "controls"
       ],
+      "compatibility": {
+        "os": [
+          "linux"
+        ],
+        "requires": [
+          "dbus",
+          "mpris"
+        ]
+      },
       "summary": "Control media playback on Linux (play/pause, next, previous, volume)",
       "author": "PyDeck Team",
       "latest": "2.0.1",
@@ -403,6 +513,13 @@
         "widgets",
         "utilities"
       ],
+      "compatibility": {
+        "os": [
+          "linux",
+          "windows",
+          "macos"
+        ]
+      },
       "summary": "Decorative button that shows a picture or GIF with up to three lines of text, and does nothing when pressed",
       "author": "PyDeck Team",
       "latest": "1.0.0",
@@ -429,9 +546,16 @@
         "widgets",
         "live-data"
       ],
+      "compatibility": {
+        "os": [
+          "linux",
+          "windows",
+          "macos"
+        ]
+      },
       "summary": "Control Spotify playback via the Web API (PDK)",
       "author": "PyDeck Team",
-      "latest": "2.0.9",
+      "latest": "2.0.10",
       "icon_path": "plugins/no.pydeck.spotify/icon.svg",
       "compatible_pydeck_versions": [
         "1.0"
@@ -499,9 +623,16 @@
           "min_pydeck_version": "1.1.0",
           "max_pydeck_version": null,
           "changelog_path": "plugins/no.pydeck.spotify/2.0.9/CHANGELOG.md"
+        },
+        {
+          "version": "2.0.10",
+          "path": "plugins/no.pydeck.spotify/2.0.10",
+          "min_pydeck_version": "1.1.0",
+          "max_pydeck_version": null,
+          "changelog_path": "plugins/no.pydeck.spotify/2.0.10/CHANGELOG.md"
         }
       ],
-      "doc_path": "plugins/no.pydeck.spotify/2.0.9/DOCS.md",
+      "doc_path": "plugins/no.pydeck.spotify/2.0.10/DOCS.md",
       "show_markdown_after_install": true
     },
     {
@@ -512,9 +643,15 @@
         "utilities",
         "controls"
       ],
+      "compatibility": {
+        "os": [
+          "linux",
+          "windows"
+        ]
+      },
       "summary": "Launch installed Steam games from the deck, with the game's icon, logo or library poster as the key face",
       "author": "PyDeck Team",
-      "latest": "0.1.0",
+      "latest": "1.0.1",
       "icon_path": "plugins/no.pydeck.steam/icon.svg",
       "compatible_pydeck_versions": [
         "1.1"
@@ -526,10 +663,31 @@
           "min_pydeck_version": "1.1.0",
           "max_pydeck_version": null,
           "changelog_path": "plugins/no.pydeck.steam/0.1.0/CHANGELOG.md"
+        },
+        {
+          "version": "1.0.0",
+          "path": "plugins/no.pydeck.steam/1.0.0",
+          "min_pydeck_version": "1.1.0",
+          "max_pydeck_version": null,
+          "changelog_path": "plugins/no.pydeck.steam/1.0.0/CHANGELOG.md"
+        },
+        {
+          "version": "1.0.1",
+          "path": "plugins/no.pydeck.steam/1.0.1",
+          "min_pydeck_version": "1.1.0",
+          "max_pydeck_version": null,
+          "changelog_path": "plugins/no.pydeck.steam/1.0.1/CHANGELOG.md"
         }
       ],
-      "doc_path": "plugins/no.pydeck.steam/0.1.0/DOCS.md",
-      "show_markdown_after_install": true
+      "doc_path": "plugins/no.pydeck.steam/1.0.1/DOCS.md",
+      "show_markdown_after_install": true,
+      "licenses": [
+        {
+          "name": "Steam trademark notice",
+          "file": "meta/licenses/LICENSE-steam-trademark",
+          "description": "The Steam logo is Valve's official artwork, used unmodified to identify the Steam client this plugin launches games through. Steam and the Steam logo are trademarks of Valve Corporation; this plugin is not affiliated with or endorsed by Valve."
+        }
+      ]
     },
     {
       "name": "System Monitor",
@@ -539,6 +697,11 @@
         "widgets",
         "system"
       ],
+      "compatibility": {
+        "os": [
+          "linux"
+        ]
+      },
       "summary": "Monitor CPU, RAM, GPU, disk, network and battery in 18 themes and 5 layouts — no extra Python packages required",
       "author": "PyDeck Team",
       "latest": "2.1.1",
@@ -580,6 +743,11 @@
         "utilities",
         "widgets"
       ],
+      "compatibility": {
+        "os": [
+          "linux"
+        ]
+      },
       "summary": "Pending package updates from every installed package manager on one key — press to re-check or upgrade",
       "author": "PyDeck Team",
       "latest": "0.1.0",
@@ -605,6 +773,11 @@
         "automation",
         "web"
       ],
+      "compatibility": {
+        "os": [
+          "linux"
+        ]
+      },
       "summary": "Open URLs, send HTTP requests, and run scripts",
       "author": "PyDeck Team",
       "latest": "1.0.3",
@@ -637,9 +810,16 @@
         "widgets",
         "live-data"
       ],
+      "compatibility": {
+        "os": [
+          "linux",
+          "windows",
+          "macos"
+        ]
+      },
       "summary": "Current weather and multi-hour forecasts powered by met.no",
       "author": "PyDeck Team",
-      "latest": "2.0.2",
+      "latest": "2.0.3",
       "icon_path": "plugins/no.pydeck.weather/icon.png",
       "compatible_pydeck_versions": [
         "1.0"
@@ -658,6 +838,13 @@
           "min_pydeck_version": "1.1.0",
           "max_pydeck_version": null,
           "changelog_path": "plugins/no.pydeck.weather/2.0.2/CHANGELOG.md"
+        },
+        {
+          "version": "2.0.3",
+          "path": "plugins/no.pydeck.weather/2.0.3",
+          "min_pydeck_version": "1.1.0",
+          "max_pydeck_version": null,
+          "changelog_path": "plugins/no.pydeck.weather/2.0.3/CHANGELOG.md"
         }
       ],
       "licenses": [

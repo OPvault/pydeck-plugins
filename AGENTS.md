@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this repo is
 
-A **static plugin catalog** for [PyDeck](https://github.com/opvault/pydeck) — not an application. The PyDeck app reads the root `manifest.json` over raw GitHub, then downloads a plugin's files from the matching version folder straight into `plugins/plugin/<rdnn-id>/` on the user's machine. There is no build, no test suite, no linter config, and no CI. The Python files at the root are maintenance tooling for the catalog; the plugin code under `plugins/` never executes here.
+A **static plugin catalog** for [PyDeck](https://github.com/opvault/pydeck) — not an application. The PyDeck app reads the root `manifest.json` over raw GitHub, then downloads a plugin's files from the matching version folder straight into `plugins/plugin/<rdnn-id>/` on the user's machine. There is no build, no test suite, no linter config, and no CI. Nothing writes a cache into the checkout: the root scripts and `tools/__init__.py` set `PYTHONPYCACHEPREFIX` so compiled bytecode lands in `~/.cache/pydeck/pycache` (`$XDG_CACHE_HOME/pydeck/pycache` when set), exactly as the PyDeck checkout does; keep that block at the top of any new entry point. The one exception is `tools/__pycache__/__init__.pyc`, compiled before `tools/__init__.py` runs — gitignored and harmless, like `tests/__pycache__` in PyDeck. The Python files at the root are maintenance tooling for the catalog; the plugin code under `plugins/` never executes here.
 
 ## Branches are release channels
 

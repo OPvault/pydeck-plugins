@@ -1,0 +1,9 @@
+{
+  "description": "Launch installed Steam games with their library poster on the key",
+  "features": [
+    "Searchable dropdown of every installed Steam game",
+    "Library poster as the key face",
+    "Starts Steam first when it isn't running"
+  ],
+  "tags": ["pdk", "steam", "games", "launcher"]
+}

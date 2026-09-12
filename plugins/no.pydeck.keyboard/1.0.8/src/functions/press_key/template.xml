@@ -1,0 +1,5 @@
+<template name="press_key" title="Press Key" description="Press a key or key combination (e.g. ctrl+c, super+l, F5, volumeup)">
+  <box class="face">
+    <buttonlabel class="label">Key</buttonlabel>
+  </box>
+</template>
