@@ -1,0 +1,13 @@
+{
+  "description": "Control Discord voice state via RPC (mute/deafen)",
+  "features": [
+    "Toggle microphone mute",
+    "Toggle deafen (mic + audio)",
+    "Button face follows Discord's own voice state",
+    "Discord RPC integration via OAuth2"
+  ],
+  "tags": ["pdk", "discord", "voice", "mute", "deafen", "rpc"],
+  "metadata": {
+    "category": "communication"
+  }
+}

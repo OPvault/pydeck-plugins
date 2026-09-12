@@ -2,7 +2,7 @@
   "schema_version": 1,
   "label": "Testing",
   "root_url": "https://raw.githubusercontent.com/OPvault/pydeck-plugins/testing/",
-  "generated_at": "2026-09-12T19:02:57Z",
+  "generated_at": "2026-09-12T19:04:21Z",
   "plugins": [
     {
       "name": "Casino",
@@ -139,7 +139,7 @@
       },
       "summary": "Control Discord voice state (mute/deafen) via RPC",
       "author": "PyDeck Team",
-      "latest": "2.0.3",
+      "latest": "2.0.4",
       "icon_path": "plugins/no.pydeck.discord/icon.svg",
       "compatible_pydeck_versions": [
         "1.0"
@@ -172,9 +172,16 @@
           "min_pydeck_version": "1.1.0",
           "max_pydeck_version": null,
           "changelog_path": "plugins/no.pydeck.discord/2.0.3/CHANGELOG.md"
+        },
+        {
+          "version": "2.0.4",
+          "path": "plugins/no.pydeck.discord/2.0.4",
+          "min_pydeck_version": "1.1.0",
+          "max_pydeck_version": null,
+          "changelog_path": "plugins/no.pydeck.discord/2.0.4/CHANGELOG.md"
         }
       ],
-      "doc_path": "plugins/no.pydeck.discord/2.0.3/DOCS.md",
+      "doc_path": "plugins/no.pydeck.discord/2.0.4/DOCS.md",
       "show_markdown_after_install": true
     },
     {
@@ -555,7 +562,7 @@
       },
       "summary": "Control Spotify playback via the Web API (PDK)",
       "author": "PyDeck Team",
-      "latest": "2.0.10",
+      "latest": "2.0.11",
       "icon_path": "plugins/no.pydeck.spotify/icon.svg",
       "compatible_pydeck_versions": [
         "1.0"
@@ -630,9 +637,16 @@
           "min_pydeck_version": "1.1.0",
           "max_pydeck_version": null,
           "changelog_path": "plugins/no.pydeck.spotify/2.0.10/CHANGELOG.md"
+        },
+        {
+          "version": "2.0.11",
+          "path": "plugins/no.pydeck.spotify/2.0.11",
+          "min_pydeck_version": "1.1.0",
+          "max_pydeck_version": null,
+          "changelog_path": "plugins/no.pydeck.spotify/2.0.11/CHANGELOG.md"
         }
       ],
-      "doc_path": "plugins/no.pydeck.spotify/2.0.10/DOCS.md",
+      "doc_path": "plugins/no.pydeck.spotify/2.0.11/DOCS.md",
       "show_markdown_after_install": true
     },
     {

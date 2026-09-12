@@ -1,0 +1,41 @@
+:root {
+  /* Discord's own voice-state colours, matching the legacy button images. */
+  --idle: #5865f2;
+  --active: #ed4245;
+  --offline: #2b2d31;
+  --hint: rgba(255, 255, 255, 0.85);
+}
+
+.face {
+  background: var(--idle);
+  direction: column;
+  align: center;
+  justify: center;
+}
+
+.face-active {
+  background: var(--active);
+}
+
+/* Discord unreachable or not authorized yet. */
+.face-offline {
+  background: var(--offline);
+}
+
+.glyph {
+  width: 82%;
+  height: 82%;
+}
+
+/* The hint templates also draw a line of text, so the glyph yields room. */
+.glyph-hint {
+  width: 56%;
+  height: 56%;
+}
+
+.hint {
+  color: var(--hint);
+  font-size: 0.58em;
+  font-weight: bold;
+  text-align: center;
+}
