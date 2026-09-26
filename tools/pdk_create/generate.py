@@ -124,6 +124,50 @@ def _func_style_css() -> str:
 """
 
 
+def _plugin_settings_json() -> str:
+    """A small plugin-settings.json the scaffolded handlers read.
+
+    Plugin settings are plugin-wide: the user sets them once under Settings ->
+    Plugin settings and every handler reads them as ``ctx.settings``. Two
+    fields are enough to show the shape; the full field reference is the
+    "Plugin settings" page of the docs.
+    """
+    data = {
+        "save_button": False,
+        "fields": [
+            {
+                "type": "input",
+                "id": "label_text",
+                "label": "Button label",
+                "default": "",
+                "placeholder": "Leave empty to use the function name",
+                "description": "Shown on every button of this plugin.",
+            },
+            {
+                "type": "checkbox",
+                "id": "uppercase",
+                "label": "Show the label in capitals",
+                "default": False,
+            },
+        ],
+    }
+    return json.dumps(data, indent=2) + "\n"
+
+
+def _label_helper(title: str) -> str:
+    return f'''
+
+def _label(ctx: Any) -> str:
+    """The face's label, from the plugin-wide settings (plugin-settings.json).
+
+    ``getattr``: a PyDeck from before plugin settings has no ``ctx.settings``.
+    """
+    settings = getattr(ctx, "settings", None) or {{}}
+    text = str(settings.get("label_text") or "").strip() or "{title}"
+    return text.upper() if settings.get("uppercase") else text
+'''
+
+
 def _handler_py(spec: PluginSpec, func: str) -> str:
     title = func.replace("_", " ").title()
     if spec.preset == "counter":
@@ -132,11 +176,11 @@ def _handler_py(spec: PluginSpec, func: str) -> str:
 from __future__ import annotations
 
 from typing import Any
-
+{_label_helper(title)}
 
 def on_load(ctx: Any) -> None:
     ctx.state._template = "{func}"
-    ctx.state.label = "{title}"
+    ctx.state.label = _label(ctx)
     ctx.state.count = 0
 
 
@@ -145,24 +189,28 @@ def on_press(ctx: Any) -> None:
 
 
 def on_poll(ctx: Any, interval: int = 1000) -> None:
-    """Refresh display periodically (counter preset)."""
-    # State is already updated on press; poll keeps the face in sync.
-    pass
+    """Keep the face in sync; PyDeck also polls right after a settings change."""
+    ctx.state.label = _label(ctx)
 '''
     return f'''"""PDK handler for `{func}`."""
 
 from __future__ import annotations
 
 from typing import Any
-
+{_label_helper(title)}
 
 def on_load(ctx: Any) -> None:
     ctx.state._template = "{func}"
-    ctx.state.label = "{title}"
+    ctx.state.label = _label(ctx)
 
 
 def on_press(ctx: Any) -> None:
     pass
+
+
+def on_poll(ctx: Any, interval: int = 1000) -> None:
+    """PyDeck polls right after a settings change, so the label follows it."""
+    ctx.state.label = _label(ctx)
 '''
 
 
@@ -246,6 +294,7 @@ def write_plugin(
 
     _write_text(plugin_root / "manifest.json", json.dumps(_manifest_json(spec), indent=2) + "\n")
     _write_text(plugin_root / "CHANGELOG.md", _changelog_md(spec))
+    _write_text(plugin_root / "plugin-settings.json", _plugin_settings_json())
     _write_text(plugin_root / "src" / "shared.py", _shared_py(spec))
     _write_text(plugin_root / "src" / "shared.css", _shared_css())
 

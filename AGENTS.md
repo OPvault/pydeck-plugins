@@ -71,6 +71,8 @@ manifest.json                      name/version/description/author, min_pydeck_v
                                    max_pydeck_version: null, "changelog": "CHANGELOG.md",
                                    one entry per function (label, default_display, ui: [])
 CHANGELOG.md                       "## <version> — <today>" + "- Initial release."
+plugin-settings.json               a two-field demo of plugin-wide settings (label text, capitals);
+                                   the handlers read it as ctx.settings in on_load / on_poll
 src/shared.py, src/shared.css      helpers + base stylesheet shared by every function
 src/functions/<fn>/handler.py      on_load / on_press (+ on_poll for counter)
 src/functions/<fn>/template.xml    <template name="<fn>"> face markup
