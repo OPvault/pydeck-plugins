@@ -2,7 +2,7 @@
   "schema_version": 1,
   "label": "Testing",
   "root_url": "https://raw.githubusercontent.com/OPvault/pydeck-plugins/testing/",
-  "generated_at": "2026-09-26T15:02:57Z",
+  "generated_at": "2026-10-03T08:05:46Z",
   "plugins": [
     {
       "name": "Casino",
@@ -208,7 +208,7 @@
       },
       "summary": "Formula 1 race countdown, driver standings, and constructor standings",
       "author": "PyDeck Team",
-      "latest": "2.1.2",
+      "latest": "2.1.3",
       "icon_path": "plugins/no.pydeck.f1/icon.svg",
       "compatible_pydeck_versions": [
         "1.0"
@@ -241,6 +241,13 @@
           "min_pydeck_version": "1.1.0",
           "max_pydeck_version": null,
           "changelog_path": "plugins/no.pydeck.f1/2.1.2/CHANGELOG.md"
+        },
+        {
+          "version": "2.1.3",
+          "path": "plugins/no.pydeck.f1/2.1.3",
+          "min_pydeck_version": "1.1.0",
+          "max_pydeck_version": null,
+          "changelog_path": "plugins/no.pydeck.f1/2.1.3/CHANGELOG.md"
         }
       ],
       "licenses": [
