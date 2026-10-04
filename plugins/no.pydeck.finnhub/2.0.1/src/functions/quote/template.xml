@@ -1,0 +1,24 @@
+<template name="quote" title="Market Price" description="Display one market symbol quote using Finnhub">
+  <box class="face">
+    <text class="sym {symbol_size}">{symbol}</text>
+    <text class="price {price_size}">{price}</text>
+  </box>
+</template>
+
+<template name="quote-change" title="Market Price with change" description="Quote plus the change over the selected period">
+  <box class="face">
+    <text class="sym {symbol_size}">{symbol}</text>
+    <text class="price {price_size}">{price}</text>
+    <box class="chg-row">
+      <text class="period">{period}</text>
+      <text class="chg {change_class} {change_size}">{change}</text>
+    </box>
+  </box>
+</template>
+
+<template name="quote-error" title="Market Price error" description="Shown when a quote cannot be fetched">
+  <box class="face">
+    <text class="sym {symbol_size}">{symbol}</text>
+    <text class="err {error_size}">{error}</text>
+  </box>
+</template>

@@ -1,0 +1,10 @@
+Finnhub Stock API
+https://finnhub.io
+
+Market data is fetched at runtime from the Finnhub REST API and is subject to
+Finnhub's API Terms of Service:
+https://finnhub.io/terms-of-service
+
+No Finnhub data is redistributed with this plugin. Each user supplies their own
+API key under Settings -> Credentials, and quotes are requested directly from
+finnhub.io by their own PyDeck install.
