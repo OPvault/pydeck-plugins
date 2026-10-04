@@ -129,7 +129,7 @@ class PdkCreateApp(App[InteractiveOutcome | None]):
                     allow_blank=False,
                 )
                 yield Label("min_pydeck_version")
-                yield Input("1.1.0", id="min_pydeck")
+                yield Input("2.0.0", id="min_pydeck")
                 yield Checkbox(
                     "Include post-install script (scripts/setup.sh + manifest post_install_script)",
                     id="post_install",
@@ -171,7 +171,7 @@ class PdkCreateApp(App[InteractiveOutcome | None]):
         raw_preset = preset_w.value
         preset_val: Preset = "counter" if raw_preset == "counter" else "static"
 
-        min_pv = self.query_one("#min_pydeck", Input).value.strip() or "1.1.0"
+        min_pv = self.query_one("#min_pydeck", Input).value.strip() or "2.0.0"
         post_install = self.query_one("#post_install", Checkbox).value
 
         spec = PluginSpec(

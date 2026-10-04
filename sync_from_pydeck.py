@@ -11,7 +11,7 @@ Options
     --plugin SLUG          Sync/list only the given plugin slug (repeatable)
     --list-plugins         List source plugins and show NEW/CHANGED/UNCHANGED
     --dry-run              Show what would happen; make no changes
-    --no-diff              Suppress the coloured per-file diff (shown by default)
+    --no-diff              Suppress the colored per-file diff (shown by default)
     --no-generate          Skip running generate_manifest.py at the end
     --yes                  Skip confirmation prompts (non-interactive)
     --changelog TEXT       Changelog bullet for the version being published
@@ -97,7 +97,7 @@ from datetime import date
 from pathlib import Path
 from typing import Optional
 
-# ── ANSI colours ───────────────────────────────────────────────────────────────
+# ── ANSI colors ───────────────────────────────────────────────────────────────
 
 _RESET  = "\033[0m"
 _RED    = "\033[31m"
@@ -460,7 +460,7 @@ def _is_binary(path: Path) -> bool:
 
 
 def _print_file_diff(rel: str, src: Path | None, repo: Path | None) -> None:
-    """Print a coloured unified diff for one file."""
+    """Print a colored unified diff for one file."""
     label_a = f"a/{rel}"
     label_b = f"b/{rel}"
 
@@ -502,7 +502,7 @@ def _print_plugin_diff(
     source_files: dict[str, Path],
     repo_version_dir: Path,
 ) -> None:
-    """Print a coloured diff between source and the latest repo version."""
+    """Print a colored diff between source and the latest repo version."""
     print(f"\n{_BOLD}diff  {slug}  ({repo_version_dir.name} → new){_RESET}")
 
     printed_any = False
@@ -849,7 +849,7 @@ def main() -> None:
     parser.add_argument(
         "--no-diff",
         action="store_true",
-        help="Suppress the coloured per-file diff (shown by default)",
+        help="Suppress the colored per-file diff (shown by default)",
     )
     parser.add_argument(
         "--changelog",

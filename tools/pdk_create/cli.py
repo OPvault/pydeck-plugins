@@ -48,7 +48,7 @@ def interactive_defaults() -> dict:
     if preset_in not in ("counter", "static"):
         _err("Unknown preset; using static.")
         preset_in = "static"
-    min_pv = input("min_pydeck_version [1.1.0]: ").strip() or "1.1.0"
+    min_pv = input("min_pydeck_version [2.0.0]: ").strip() or "2.0.0"
     post_in = input(
         "Include post-install script (scripts/setup.sh + manifest)? [y/N]: ",
     ).strip().lower()
@@ -165,7 +165,7 @@ def build_parser() -> argparse.ArgumentParser:
     )
     p.add_argument(
         "--min-pydeck-version",
-        default="1.1.0",
+        default="2.0.0",
         dest="min_pydeck_version",
         help="Written to manifest.json",
     )

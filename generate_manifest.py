@@ -58,6 +58,12 @@ For each plugins/<slug>/ directory:
      declares nothing gets no "compatibility" key — the marketplace shows it
      as unverified rather than assuming it runs everywhere.
 
+  7. A plugin whose latest version needs PyDeck 2.0.0 (ships
+     plugin-settings.json, reads ctx.preferences / ctx.preference, or has a
+     "color" field) but declares a min_pydeck_version below it is warned
+     about: an older PyDeck has no settings page and no color field, so its
+     user could never change those values.
+
 Plugins are written in alphabetical order by name.
 """
 
@@ -104,6 +110,8 @@ ROOT_MANIFEST = REPO_ROOT / "manifest.json"
 SCHEMA_VERSION = 1
 DEFAULT_LABEL  = "Testing"
 DEFAULT_PYDECK = "1.0.0"
+# The first PyDeck with plugin settings and the shared settings above them.
+SETTINGS_MIN_PYDECK = "2.0.0"
 ICON_PRIORITY  = ("icon.svg", "icon.png")
 # Conventional changelog filename, used when a version manifest does not name
 # one itself. Shipping this file is all a plugin has to do to get a changelog.
@@ -285,6 +293,42 @@ def _changelog_rel(version_dir: Path, vmeta: Dict[str, Any]) -> Optional[str]:
     return None
 
 
+_COLOR_FIELD_RE = re.compile(r'"type"\s*:\s*"color"')
+
+
+def _uses_settings(version_dir: Path) -> bool:
+    """Whether the version relies on Settings -> Plugin settings or the color field."""
+    if (version_dir / "plugin-settings.json").is_file():
+        return True
+    try:
+        if _COLOR_FIELD_RE.search((version_dir / "manifest.json").read_text(encoding="utf-8")):
+            return True
+    except OSError:
+        pass
+    for py in (version_dir / "src").rglob("*.py"):
+        try:
+            text = py.read_text(encoding="utf-8")
+        except (OSError, UnicodeDecodeError):
+            continue
+        if "ctx.preferences" in text or "ctx.preference(" in text:
+            return True
+    return False
+
+
+def _warn_settings_min(slug: str, version_dir: Path, vmeta: Dict[str, Any]) -> None:
+    declared = str(vmeta.get("min_pydeck_version") or DEFAULT_PYDECK)
+    try:
+        too_low = _semver_tuple(declared) < _semver_tuple(SETTINGS_MIN_PYDECK)
+    except ValueError:
+        return
+    if too_low and _uses_settings(version_dir):
+        print(
+            f"  WARNING: {slug} {version_dir.name} uses plugin settings or a color field but declares "
+            f"min_pydeck_version {declared}; it needs {SETTINGS_MIN_PYDECK}",
+            file=sys.stderr,
+        )
+
+
 def _build_plugin_entry(
     slug: str,
     slug_dir: Path,
@@ -329,6 +373,9 @@ def _build_plugin_entry(
         return None
 
     latest_version = versions[-1]["version"]
+    # Only the latest: a published version is never edited, so warning about
+    # an old one would repeat forever.
+    _warn_settings_min(slug, slug_dir / latest_version, latest_meta)
 
     # ── Resolve catalog-only fields ───────────────────────────────────────────
     # Priority: catalog.json > existing root manifest > sensible defaults

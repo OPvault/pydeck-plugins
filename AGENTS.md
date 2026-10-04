@@ -6,6 +6,26 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 A **static plugin catalog** for [PyDeck](https://github.com/opvault/pydeck) — not an application. The PyDeck app reads the root `manifest.json` over raw GitHub, then downloads a plugin's files from the matching version folder straight into `plugins/plugin/<rdnn-id>/` on the user's machine. There is no build, no test suite, no linter config, and no CI. Nothing writes a cache into the checkout: the root scripts and `tools/__init__.py` set `PYTHONPYCACHEPREFIX` so compiled bytecode lands in `~/.cache/pydeck/pycache` (`$XDG_CACHE_HOME/pydeck/pycache` when set), exactly as the PyDeck checkout does; keep that block at the top of any new entry point. The one exception is `tools/__pycache__/__init__.pyc`, compiled before `tools/__init__.py` runs — gitignored and harmless, like `tests/__pycache__` in PyDeck. The Python files at the root are maintenance tooling for the catalog; the plugin code under `plugins/` never executes here.
 
+## Pull every PyDeck repo before you start
+
+The work spans sibling checkouts in one parent folder (`pydeck`, `pydeck-plugins`, `pydeck-docs`, and
+`pydeck-themes` when it is checked out), and other people push to all of them. Before reading or changing
+anything — at the start of every task — bring every checkout up to date, not just the one you were asked about:
+
+```bash
+git -C ../pydeck pull --ff-only dev dev               # its remote is named `dev`, and so is the branch
+git -C ../pydeck-plugins pull --ff-only origin testing
+git -C ../pydeck-docs pull --ff-only origin main
+git -C ../pydeck-themes pull --ff-only                # only when it is checked out
+```
+
+(Paths are relative to whichever of these repos you are in; drop the `../` for the current one.)
+
+When a pull cannot fast-forward — local commits, or uncommitted changes in the way — stash or commit first, merge
+upstream, resolve, and say what you merged. Never reset or discard someone's work to make a pull go through. A
+generated file is resolved by regenerating it: for `pydeck-plugins/manifest.json`, take upstream's copy and run
+`generate_manifest.py --label "Testing"` again rather than merging it by hand.
+
 ## Branches are release channels
 
 `testing`, `canary`, and `stable` are parallel channels of the same catalog, each distinguished by the `label` field in its `manifest.json` (`Testing` / `Canary` / `Stable`). Users pick a channel in the marketplace UI.
@@ -62,7 +82,7 @@ python -m tools.pdk_create --non-interactive \
 # --pydeck-source PATH aims it at another plugins directory (e.g. for a throwaway test)
 ```
 
-**The author of every plugin in this catalog is `PyDeck Team`** — pass `--author "PyDeck Team"` (the scaffold defaults to `"You"`), and keep it that way in the version `manifest.json` and the `Copyright (c)` line of `meta/licenses/LICENSE-main`; the generator copies `author` straight into the root manifest. `--non-interactive` requires `--plugin-id` and `--name`; everything else defaults (`"PDK demo plugin"`, `"You"`, `0.1.0`, `main`, `static`, `1.1.0`). The id must be reverse-DNS with at least three labels (`no.pydeck.foo`); function ids are snake_case. Bad input exits 2 before anything is written. Presets: `static` is a label-only face, `counter` adds a `count` field that `on_press` increments.
+**The author of every plugin in this catalog is `PyDeck Team`** — pass `--author "PyDeck Team"` (the scaffold defaults to `"You"`), and keep it that way in the version `manifest.json` and the `Copyright (c)` line of `meta/licenses/LICENSE-main`; the generator copies `author` straight into the root manifest. `--non-interactive` requires `--plugin-id` and `--name`; everything else defaults (`"PDK demo plugin"`, `"You"`, `0.1.0`, `main`, `static`, `2.0.0`). The id must be reverse-DNS with at least three labels (`no.pydeck.foo`); function ids are snake_case. Bad input exits 2 before anything is written. Presets: `static` is a label-only face, `counter` adds a `count` field that `on_press` increments.
 
 What gets written into `<plugins-dir>/<rdnn-id>/`:
 
@@ -169,7 +189,7 @@ New plugins get an RDNN id; the folder name under `plugins/` and the `slug` in t
 
 ### Fixed
 
-- The track label sat off-centre. A percentage width resolves against the parent
+- The track label sat off-center. A percentage width resolves against the parent
   box rather than its content box, so the horizontal padding on the row pushed
   every full-width child to the right; the inset is now vertical only.
 - Dropped an invalid `text-anchor` declaration from the shared stylesheet.

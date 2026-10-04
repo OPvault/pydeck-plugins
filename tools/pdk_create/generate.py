@@ -25,7 +25,7 @@ class PluginSpec:
     version: str
     functions: List[str]
     preset: Preset
-    min_pydeck_version: str = "1.1.0"
+    min_pydeck_version: str = "2.0.0"
     include_post_install_script: bool = False
 
 
