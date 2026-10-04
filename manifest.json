@@ -2,7 +2,7 @@
   "schema_version": 1,
   "label": "Testing",
   "root_url": "https://raw.githubusercontent.com/OPvault/pydeck-plugins/testing/",
-  "generated_at": "2026-10-03T08:05:46Z",
+  "generated_at": "2026-10-04T12:37:51Z",
   "plugins": [
     {
       "name": "Casino",
@@ -52,7 +52,7 @@
       },
       "summary": "Live audio spectrum on a key, driven by cava",
       "author": "PyDeck Team",
-      "latest": "0.2.0",
+      "latest": "0.2.1",
       "icon_path": "plugins/no.pydeck.cava/icon.svg",
       "compatible_pydeck_versions": [
         "1.1"
@@ -78,9 +78,16 @@
           "min_pydeck_version": "1.1.0",
           "max_pydeck_version": null,
           "changelog_path": "plugins/no.pydeck.cava/0.2.0/CHANGELOG.md"
+        },
+        {
+          "version": "0.2.1",
+          "path": "plugins/no.pydeck.cava/0.2.1",
+          "min_pydeck_version": "2.0.0",
+          "max_pydeck_version": null,
+          "changelog_path": "plugins/no.pydeck.cava/0.2.1/CHANGELOG.md"
         }
       ],
-      "doc_path": "plugins/no.pydeck.cava/0.2.0/DOCS.md",
+      "doc_path": "plugins/no.pydeck.cava/0.2.1/DOCS.md",
       "show_markdown_after_install": false
     },
     {
@@ -100,7 +107,7 @@
       },
       "summary": "Displays the current time with a stylish gradient background",
       "author": "PyDeck Team",
-      "latest": "3.0.1",
+      "latest": "3.0.2",
       "icon_path": "plugins/no.pydeck.clock/icon.png",
       "compatible_pydeck_versions": [
         "1.0"
@@ -126,6 +133,13 @@
           "min_pydeck_version": "1.1.0",
           "max_pydeck_version": null,
           "changelog_path": "plugins/no.pydeck.clock/3.0.1/CHANGELOG.md"
+        },
+        {
+          "version": "3.0.2",
+          "path": "plugins/no.pydeck.clock/3.0.2",
+          "min_pydeck_version": "2.0.0",
+          "max_pydeck_version": null,
+          "changelog_path": "plugins/no.pydeck.clock/3.0.2/CHANGELOG.md"
         }
       ]
     },
@@ -280,7 +294,7 @@
       },
       "summary": "Display live market prices from Finnhub (stocks, crypto, oil)",
       "author": "PyDeck Team",
-      "latest": "2.0.0",
+      "latest": "2.0.1",
       "icon_path": "plugins/no.pydeck.finnhub/icon.png",
       "compatible_pydeck_versions": [
         "1.0"
@@ -292,9 +306,16 @@
           "min_pydeck_version": "1.1.0",
           "max_pydeck_version": null,
           "changelog_path": "plugins/no.pydeck.finnhub/2.0.0/CHANGELOG.md"
+        },
+        {
+          "version": "2.0.1",
+          "path": "plugins/no.pydeck.finnhub/2.0.1",
+          "min_pydeck_version": "2.0.0",
+          "max_pydeck_version": null,
+          "changelog_path": "plugins/no.pydeck.finnhub/2.0.1/CHANGELOG.md"
         }
       ],
-      "doc_path": "plugins/no.pydeck.finnhub/2.0.0/DOCS.md",
+      "doc_path": "plugins/no.pydeck.finnhub/2.0.1/DOCS.md",
       "show_markdown_after_install": true,
       "licenses": [
         {
@@ -360,7 +381,7 @@
       },
       "summary": "Control and monitor Home Assistant entities",
       "author": "PyDeck Team",
-      "latest": "2.0.7",
+      "latest": "2.0.8",
       "icon_path": "plugins/no.pydeck.home-assistant/icon.png",
       "compatible_pydeck_versions": [
         "1.0"
@@ -421,9 +442,16 @@
           "min_pydeck_version": "1.1.0",
           "max_pydeck_version": null,
           "changelog_path": "plugins/no.pydeck.home-assistant/2.0.7/CHANGELOG.md"
+        },
+        {
+          "version": "2.0.8",
+          "path": "plugins/no.pydeck.home-assistant/2.0.8",
+          "min_pydeck_version": "2.0.0",
+          "max_pydeck_version": null,
+          "changelog_path": "plugins/no.pydeck.home-assistant/2.0.8/CHANGELOG.md"
         }
       ],
-      "doc_path": "plugins/no.pydeck.home-assistant/2.0.7/DOCS.md",
+      "doc_path": "plugins/no.pydeck.home-assistant/2.0.8/DOCS.md",
       "show_markdown_after_install": true,
       "licenses": [
         {
@@ -583,7 +611,7 @@
       },
       "summary": "Control Spotify playback via the Web API (PDK)",
       "author": "PyDeck Team",
-      "latest": "2.0.12",
+      "latest": "2.0.13",
       "icon_path": "plugins/no.pydeck.spotify/icon.svg",
       "compatible_pydeck_versions": [
         "1.0"
@@ -672,9 +700,16 @@
           "min_pydeck_version": "1.1.0",
           "max_pydeck_version": null,
           "changelog_path": "plugins/no.pydeck.spotify/2.0.12/CHANGELOG.md"
+        },
+        {
+          "version": "2.0.13",
+          "path": "plugins/no.pydeck.spotify/2.0.13",
+          "min_pydeck_version": "2.0.0",
+          "max_pydeck_version": null,
+          "changelog_path": "plugins/no.pydeck.spotify/2.0.13/CHANGELOG.md"
         }
       ],
-      "doc_path": "plugins/no.pydeck.spotify/2.0.12/DOCS.md",
+      "doc_path": "plugins/no.pydeck.spotify/2.0.13/DOCS.md",
       "show_markdown_after_install": true
     },
     {
@@ -746,7 +781,7 @@
       },
       "summary": "Monitor CPU, RAM, GPU, disk, network and battery in 18 themes and 5 layouts — no extra Python packages required",
       "author": "PyDeck Team",
-      "latest": "2.1.1",
+      "latest": "2.1.2",
       "icon_path": "plugins/no.pydeck.system-monitor/icon.svg",
       "compatible_pydeck_versions": [
         "1.0"
@@ -772,9 +807,16 @@
           "min_pydeck_version": "1.1.0",
           "max_pydeck_version": null,
           "changelog_path": "plugins/no.pydeck.system-monitor/2.1.1/CHANGELOG.md"
+        },
+        {
+          "version": "2.1.2",
+          "path": "plugins/no.pydeck.system-monitor/2.1.2",
+          "min_pydeck_version": "2.0.0",
+          "max_pydeck_version": null,
+          "changelog_path": "plugins/no.pydeck.system-monitor/2.1.2/CHANGELOG.md"
         }
       ],
-      "doc_path": "plugins/no.pydeck.system-monitor/2.1.1/DOCS.md",
+      "doc_path": "plugins/no.pydeck.system-monitor/2.1.2/DOCS.md",
       "show_markdown_after_install": false
     },
     {
@@ -792,7 +834,7 @@
       },
       "summary": "Pending package updates from every installed package manager on one key — press to re-check or upgrade",
       "author": "PyDeck Team",
-      "latest": "0.1.0",
+      "latest": "0.1.1",
       "icon_path": "plugins/no.pydeck.updates/icon.svg",
       "compatible_pydeck_versions": [
         "1.1"
@@ -804,6 +846,13 @@
           "min_pydeck_version": "1.1.0",
           "max_pydeck_version": null,
           "changelog_path": "plugins/no.pydeck.updates/0.1.0/CHANGELOG.md"
+        },
+        {
+          "version": "0.1.1",
+          "path": "plugins/no.pydeck.updates/0.1.1",
+          "min_pydeck_version": "2.0.0",
+          "max_pydeck_version": null,
+          "changelog_path": "plugins/no.pydeck.updates/0.1.1/CHANGELOG.md"
         }
       ]
     },
@@ -861,7 +910,7 @@
       },
       "summary": "Current weather and multi-hour forecasts powered by met.no",
       "author": "PyDeck Team",
-      "latest": "2.0.3",
+      "latest": "2.0.4",
       "icon_path": "plugins/no.pydeck.weather/icon.png",
       "compatible_pydeck_versions": [
         "1.0"
@@ -887,6 +936,13 @@
           "min_pydeck_version": "1.1.0",
           "max_pydeck_version": null,
           "changelog_path": "plugins/no.pydeck.weather/2.0.3/CHANGELOG.md"
+        },
+        {
+          "version": "2.0.4",
+          "path": "plugins/no.pydeck.weather/2.0.4",
+          "min_pydeck_version": "2.0.0",
+          "max_pydeck_version": null,
+          "changelog_path": "plugins/no.pydeck.weather/2.0.4/CHANGELOG.md"
         }
       ],
       "licenses": [
