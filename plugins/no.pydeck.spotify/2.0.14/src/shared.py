@@ -359,11 +359,15 @@ def get_client(ctx: Any = None) -> SpotifyClient:
         )
         _client_cache[key] = client
     else:
+        # The store is the newer side whenever it differs: Authorize wrote new
+        # tokens there, or the other process refreshed and saved. Keeping the
+        # cached ones would go on sending a token the server no longer knows.
         at = str(creds.get("access_token") or "").strip()
         rt = str(creds.get("refresh_token") or "").strip()
-        if at and not client.access_token:
+        if at and at != client.access_token:
             client.access_token = at
-        if rt and not client.refresh_token:
+            client.token_expiry = float(creds.get("token_expiry") or 0.0)
+        if rt and rt != client.refresh_token:
             client.refresh_token = rt
     return client
 
