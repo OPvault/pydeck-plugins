@@ -122,6 +122,9 @@ def _set_rate_limit_from_error(err: Any) -> None:
     for an older client that carried the seconds in its text.
     """
     global _rate_limited_until
+    if _server:
+        # A Spotify server keeps the wait itself; asking it costs Spotify nothing.
+        return
     wait_s = getattr(err, "retry_after", None)
     if wait_s is None:
         msg = str(err or "")
@@ -148,17 +151,17 @@ def _note_shared_rate_limit(until: float) -> None:
         until = float(until)
     except (TypeError, ValueError):
         return
-    if until > _rate_limited_until:
+    if until > _rate_limited_until and not _server:
         _rate_limited_until = min(until, time.time() + _MAX_BACKOFF)
 
 
 def _is_rate_limited() -> bool:
-    return time.time() < _rate_limited_until
+    return not _server and time.time() < _rate_limited_until
 
 
 def rate_limited_for() -> float:
     """Seconds left on the back-off window, 0 when there is none."""
-    return max(0.0, _rate_limited_until - time.time())
+    return 0.0 if _server else max(0.0, _rate_limited_until - time.time())
 
 
 # "Check Spotify every" from Settings -> Plugin settings. It replaces the
@@ -342,7 +345,7 @@ def get_client(ctx: Any = None) -> SpotifyClient:
         )
     key = (cid, csec, _server)
     client = _client_cache.get(key)
-    if client is not None:
+    if client is not None and client.direct:
         # A wait the other process was told about holds for this one too.
         client.rate_limited_until = max(client.rate_limited_until, _rate_limited_until)
     if client is None:

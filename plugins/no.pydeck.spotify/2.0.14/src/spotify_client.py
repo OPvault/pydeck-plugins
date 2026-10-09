@@ -79,6 +79,9 @@ class SpotifyClient:
         self.token_url = f"{server}/api/token" if server else TOKEN_URL
         self.auth_base = f"{server}/authorize" if server else AUTH_URL
         self.api_base = f"{server}/v1/me/player" if server else API_BASE
+        # Through a Spotify server, that server keeps Spotify's waits and
+        # answers at once, so nothing is held back on this side.
+        self.direct = not server
         self._lock = threading.Lock()
         # Wall clock, so the window means the same thing in the server and in
         # the listener subprocess that owns the deck.
@@ -173,7 +176,7 @@ class SpotifyClient:
         # Signing in and refreshing are requests too: none goes out while
         # Spotify (or the Spotify server) asked to wait.
         now = time.time()
-        if self.rate_limited_until > now:
+        if self.direct and self.rate_limited_until > now:
             raise SpotifyError(
                 f"Spotify asked to wait {int(self.rate_limited_until - now)}s more",
                 retry_after=self.rate_limited_until - now,
@@ -196,7 +199,8 @@ class SpotifyClient:
         except urllib.error.HTTPError as e:
             if e.code == 429:
                 retry_after = self._retry_after_from(e)
-                self.rate_limited_until = max(self.rate_limited_until, time.time() + retry_after)
+                if self.direct:
+                    self.rate_limited_until = max(self.rate_limited_until, time.time() + retry_after)
                 raise SpotifyError(f"HTTP 429 (Retry-After: {int(retry_after)}s)", retry_after=retry_after) from None
             raise
 
@@ -255,7 +259,7 @@ class SpotifyClient:
             "User-Agent": "PyDeck/1.0",
         }
         now = time.time()
-        if self.rate_limited_until > now:
+        if self.direct and self.rate_limited_until > now:
             raise SpotifyError(
                 "Spotify is rate-limiting this app — "
                 f"retrying in {int(self.rate_limited_until - now)}s",
@@ -284,9 +288,10 @@ class SpotifyClient:
                 # fails. Every caller in this process sees it through
                 # rate_limited_until above.
                 retry_after = self._retry_after_from(e)
-                self.rate_limited_until = max(
-                    self.rate_limited_until, time.time() + retry_after
-                )
+                if self.direct:
+                    self.rate_limited_until = max(
+                        self.rate_limited_until, time.time() + retry_after
+                    )
                 raise SpotifyError(
                     f"HTTP 429 (Retry-After: {int(retry_after)}s)",
                     retry_after=retry_after,
