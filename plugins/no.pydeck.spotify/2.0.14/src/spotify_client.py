@@ -170,6 +170,14 @@ class SpotifyClient:
             pass
 
     def _token_request(self, body: bytes) -> dict:
+        # Signing in and refreshing are requests too: none goes out while
+        # Spotify (or the Spotify server) asked to wait.
+        now = time.time()
+        if self.rate_limited_until > now:
+            raise SpotifyError(
+                f"Spotify asked to wait {int(self.rate_limited_until - now)}s more",
+                retry_after=self.rate_limited_until - now,
+            )
         cred_str = base64.b64encode(
             f"{self.client_id}:{self.client_secret}".encode()
         ).decode()
@@ -182,8 +190,15 @@ class SpotifyClient:
             },
             method="POST",
         )
-        with urllib.request.urlopen(req, timeout=10) as resp:
-            return json.loads(resp.read())
+        try:
+            with urllib.request.urlopen(req, timeout=10) as resp:
+                return json.loads(resp.read())
+        except urllib.error.HTTPError as e:
+            if e.code == 429:
+                retry_after = self._retry_after_from(e)
+                self.rate_limited_until = max(self.rate_limited_until, time.time() + retry_after)
+                raise SpotifyError(f"HTTP 429 (Retry-After: {int(retry_after)}s)", retry_after=retry_after) from None
+            raise
 
     # ── Player controls ───────────────────────────────────────────────────────
 

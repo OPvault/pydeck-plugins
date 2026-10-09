@@ -73,9 +73,9 @@ _TTL_STOPPED = 30.0
 # A forced refresh (straight after a press) still rides a snapshot this fresh,
 # so the press and the poll that follows it do not both pay for a call.
 _TTL_FORCED = 1.0
-# Spotify's Retry-After can be the better part of an hour; honour it, but never
-# lock the plugin out for longer than that on one refusal.
-_MAX_BACKOFF = 3600.0
+# Spotify's Retry-After has run to fourteen hours. All of it is honoured: asking
+# again early only earns another refusal. The cap guards against a nonsense header.
+_MAX_BACKOFF = 7 * 86400.0
 
 _last_art_url: Optional[str] = None
 # Wall clock of the last playback change this process made; a published
@@ -342,6 +342,9 @@ def get_client(ctx: Any = None) -> SpotifyClient:
         )
     key = (cid, csec, _server)
     client = _client_cache.get(key)
+    if client is not None:
+        # A wait the other process was told about holds for this one too.
+        client.rate_limited_until = max(client.rate_limited_until, _rate_limited_until)
     if client is None:
         client = SpotifyClient(
             cid, csec,
