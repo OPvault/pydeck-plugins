@@ -1,0 +1,37 @@
+{
+  "save_button": false,
+  "fields": [
+    {
+      "type": "number",
+      "id": "update_interval",
+      "label": "Check Spotify every (seconds)",
+      "default": 10,
+      "min": 3,
+      "max": 120,
+      "description": "How often PyDeck asks Spotify what is playing, to pick up changes made elsewhere, like a skip on your phone or a pause in the app. Lower reacts faster but uses more of your Spotify app's request quota. With nothing playing it checks every 30 seconds at most."
+    },
+    {
+      "type": "api_select",
+      "id": "playback_device",
+      "label": "Start playback on",
+      "api": "devices",
+      "default": "",
+      "description": "Where Play / Pause starts the music when Spotify no longer has an active device, which happens a few minutes after playback stops. Spotify has to be open on that device. Automatic uses the device that played last. Music already playing or paused on a device stays there."
+    },
+    {
+      "type": "checkbox",
+      "id": "keep_art_when_paused",
+      "label": "Keep album art while paused",
+      "default": false,
+      "description": "Play / Pause keeps showing the song's art when you pause, until playback resumes or a different song starts."
+    },
+    {
+      "type": "input",
+      "id": "server",
+      "label": "Spotify server",
+      "default": "",
+      "placeholder": "http://127.0.0.1:8790",
+      "description": "Leave empty to talk to Spotify itself. Set it to the address of a SpotiProxy to share one Spotify app, and its request quota, with your other apps: give PyDeck the Client ID and secret the proxy issued, then press Authorize again. Needs a PyDeck that supports it (dev after 2026-10-09)."
+    }
+  ]
+}
