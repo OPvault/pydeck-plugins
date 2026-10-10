@@ -54,9 +54,20 @@ class SpotifyError(Exception):
     for as long as it keeps asking.
     """
 
-    def __init__(self, message: str, retry_after: float | None = None):
+    def __init__(self, message: str, retry_after: float | None = None,
+                 status: int | None = None, reason: str = ""):
         super().__init__(message)
         self.retry_after = retry_after
+        # The HTTP status and Spotify's machine-readable reason, when it gave
+        # one -- "NO_ACTIVE_DEVICE" is what a play with nowhere to play says.
+        self.status = status
+        self.reason = reason
+
+    @property
+    def no_active_device(self) -> bool:
+        return self.reason == "NO_ACTIVE_DEVICE" or (
+            self.status == 404 and not self.reason
+        )
 
 
 class SpotifyClient:
@@ -189,8 +200,24 @@ class SpotifyClient:
         """
         return self._req("GET", "")
 
-    def play(self) -> None:
-        self._req("PUT", "/play")
+    def play(self, device_id: str = "") -> None:
+        """Resume on the active device, or on *device_id* when given."""
+        self._req("PUT", "/play", query={"device_id": device_id} if device_id else None)
+
+    def devices(self) -> list[dict]:
+        """Every Spotify Connect device this account can reach right now.
+
+        A running, logged-in Spotify app stays in this list after a long pause,
+        with ``is_active`` false: that is the device a play has to name once
+        Spotify has stopped treating anything as the active one.
+        """
+        data = self._req("GET", "/devices") or {}
+        found = data.get("devices") if isinstance(data, dict) else None
+        return [d for d in found or [] if isinstance(d, dict) and d.get("id")]
+
+    def transfer(self, device_id: str, play: bool = True) -> None:
+        """Move playback to *device_id*, resuming it there when *play* is set."""
+        self._req("PUT", "", body={"device_ids": [device_id], "play": bool(play)})
 
     def pause(self) -> None:
         self._req("PUT", "/pause")
@@ -269,12 +296,14 @@ class SpotifyClient:
                     retry_after=retry_after,
                 )
             # Read Spotify's error body for a useful message
+            reason = ""
             try:
                 err = json.loads(e.read().decode("utf-8", errors="replace"))
                 msg = err.get("error", {}).get("message") or f"HTTP {e.code}"
+                reason = str(err.get("error", {}).get("reason") or "")
             except Exception:
                 msg = f"HTTP {e.code}"
-            raise SpotifyError(msg)
+            raise SpotifyError(msg, status=e.code, reason=reason)
         except urllib.error.URLError as e:
             raise SpotifyError(f"Network error: {e.reason}")
 

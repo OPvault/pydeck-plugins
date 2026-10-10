@@ -1,6 +1,6 @@
 {
   "name": "Spotify",
-  "version": "2.0.14",
+  "version": "2.0.15",
   "description": "Control Spotify playback via the Web API (PDK)",
   "author": "PyDeck Team",
   "min_pydeck_version": "2.0.0",

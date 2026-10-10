@@ -303,12 +303,138 @@ def refresh_playback_state(
         _pb_cache = pb
         _pb_cache_ts = time.monotonic()
         _write_state_payload(storage_dir, pb)
+        _remember_device(storage_dir, pb)
         return pb
     except Exception as exc:
         _set_rate_limit_from_error(exc)
         fallback = _pb_cache if _pb_cache is not None else shared_pb
         _write_state_payload(storage_dir, fallback, str(exc))
         return fallback
+
+
+# ---------------------------------------------------------------------------
+# Starting playback with no active device
+# ---------------------------------------------------------------------------
+#
+# A few minutes after playback stops, Spotify stops treating any device as the
+# active one, and a bare "play" then has nowhere to go (404 NO_ACTIVE_DEVICE).
+# The Spotify app is still running and still listed by /me/player/devices, so
+# the press names a device instead: the one picked under Plugin settings, else
+# the one that played last, else the first one Spotify will let us control.
+
+_last_device: Dict[str, str] = {}
+
+
+class NoPlaybackDevice(SpotifyError):
+    """Nothing to play on: the user has to open Spotify somewhere first."""
+
+
+def _last_device_file(storage_dir: Path) -> Path:
+    return storage_dir / "last_device.json"
+
+
+def _remember_device(storage_dir: Path, pb: Optional[dict]) -> None:
+    """Record the device playback is on, while Spotify still reports one."""
+    device = (pb or {}).get("device") if isinstance(pb, dict) else None
+    if not isinstance(device, dict) or not device.get("id"):
+        return
+    seen = {"id": str(device["id"]), "name": str(device.get("name") or "")}
+    if seen == _last_device:
+        return
+    _last_device.clear()
+    _last_device.update(seen)
+    try:
+        storage_dir.mkdir(parents=True, exist_ok=True)
+        _last_device_file(storage_dir).write_text(json.dumps(seen) + "\n", encoding="utf-8")
+    except Exception:
+        pass
+
+
+def _recall_device(storage_dir: Path) -> Dict[str, str]:
+    if _last_device:
+        return dict(_last_device)
+    try:
+        data = json.loads(_last_device_file(storage_dir).read_text(encoding="utf-8"))
+        return data if isinstance(data, dict) else {}
+    except Exception:
+        return {}
+
+
+def preferred_device(ctx: Any) -> str:
+    """The device name picked under Plugin settings, ``""`` for automatic."""
+    settings = getattr(ctx, "settings", None) or {}
+    return str(settings.get("playback_device") or "").strip()
+
+
+def pick_device(devices: List[dict], preferred: str = "",
+                last: Optional[Dict[str, str]] = None) -> Optional[dict]:
+    """The device a play should name, or ``None`` when there is none to use.
+
+    A picked device is matched by name, which survives the app being
+    reinstalled where its id does not. When it is not running the answer is
+    ``None`` rather than some other device: music starting on a speaker the
+    user did not choose is worse than a press that says why it did nothing.
+    """
+    usable = [d for d in devices if not d.get("is_restricted")]
+    if preferred:
+        return next((d for d in usable if d.get("name") == preferred), None)
+    last = last or {}
+    for key in ("id", "name"):
+        if last.get(key):
+            match = next((d for d in usable if str(d.get(key)) == last[key]), None)
+            if match:
+                return match
+    computers = [d for d in usable if str(d.get("type") or "").lower() == "computer"]
+    return (computers or usable or [None])[0]
+
+
+def start_playback(client: SpotifyClient, ctx: Any) -> None:
+    """Resume playback, waking a device when Spotify has no active one.
+
+    A plain play is tried first, so a session already running somewhere keeps
+    playing there; only Spotify answering that nothing is active brings the
+    device list in.
+    """
+    try:
+        client.play()
+        return
+    except SpotifyError as exc:
+        if not getattr(exc, "no_active_device", False):
+            raise
+    preferred = preferred_device(ctx)
+    device = pick_device(client.devices(), preferred, _recall_device(ctx.storage_path))
+    if device is None:
+        if preferred:
+            raise NoPlaybackDevice(f"{preferred} is not available — is Spotify running on it?")
+        raise NoPlaybackDevice("No Spotify app is running — open Spotify on a device first")
+    client.transfer(str(device["id"]), play=True)
+
+
+def api_devices(config: Dict[str, Any]) -> List[Dict[str, str]]:
+    """Options for *Start playback on* in Plugin settings.
+
+    Reached at ``GET /api/plugins/no.pydeck.spotify/api/devices``. The saved
+    choice is kept in the list while its device is off, so opening the pane
+    shows what was picked rather than quietly falling back to Automatic.
+    """
+    options = [{"label": "Automatic — the device that played last", "value": ""}]
+    try:
+        devices = get_client().devices()
+    except Exception:
+        devices = []
+    names: List[str] = []
+    for d in devices:
+        name = str(d.get("name") or "")
+        if not name or name in names:
+            continue
+        names.append(name)
+        kind = str(d.get("type") or "")
+        note = " — can't be controlled" if d.get("is_restricted") else ""
+        options.append({"label": f"{name} ({kind}){note}" if kind else name + note, "value": name})
+    saved = str((config.get("_settings") or {}).get("playback_device") or "")
+    if saved and saved not in names:
+        options.append({"label": f"{saved} (not running)", "value": saved})
+    return options
 
 
 def invalidate_pb_cache() -> None:

@@ -110,6 +110,7 @@ On the **Play / Pause** button you can enable:
 | `Not authorized — press the Spotify Authorize button first` | No token saved | Complete Step 4 (Authorize) |
 | `HTTP 403` / playback controls do nothing | Free Spotify account | Playback control requires **Spotify Premium** |
 | `HTTP 404` / no active device | Spotify is not open on any device | Open Spotify on a phone, desktop, or web player |
+| Play does nothing after a long pause | Spotify stops treating any device as active a few minutes after playback stops | Play / Pause now wakes a running Spotify app by itself. Pick which one under **Settings → Plugin settings → Spotify → Start playback on**; Automatic uses the device that played last |
 | Album art not updating | Spotify's API poll cycle | Art refreshes within ~3 s of a track change |
 
 ---

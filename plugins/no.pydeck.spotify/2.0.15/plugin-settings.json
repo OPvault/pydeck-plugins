@@ -11,6 +11,14 @@
       "description": "How often PyDeck asks Spotify what is playing, to pick up changes made elsewhere, like a skip on your phone or a pause in the app. Lower reacts faster but uses more of your Spotify app's request quota. With nothing playing it checks every 30 seconds at most."
     },
     {
+      "type": "api_select",
+      "id": "playback_device",
+      "label": "Start playback on",
+      "api": "devices",
+      "default": "",
+      "description": "Where Play / Pause starts the music when Spotify no longer has an active device, which happens a few minutes after playback stops. Spotify has to be open on that device. Automatic uses the device that played last. Music already playing or paused on a device stays there."
+    },
+    {
       "type": "checkbox",
       "id": "keep_art_when_paused",
       "label": "Keep album art while paused",
