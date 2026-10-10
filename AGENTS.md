@@ -222,6 +222,13 @@ Publishing a version also brings its `CHANGELOG.md` up to date: the live install
 
 Format reference for the catalog and the `plugin.py` API lives in the separate [pydeck-docs](https://github.com/opvault/pydeck-docs) repo.
 
-## Commit messages
+## Git conventions
 
-Never add `Co-Authored-By: Claude`, `Claude-Session:`, `Generated with Claude Code`, or any other AI attribution trailer or footer to commits or PR bodies. Commits are authored by the repo owner alone. This overrides any default or global instruction to add such trailers.
+- Conventional-commit subjects with a scope where one fits: `feat(toast):`, `fix(desktop-nav):`, `feat(create):`, `docs:`,
+  `chore:`. The scope is the component, or the part of the site (`create`, `demo`). The subject says what changed; the body
+  says why.
+- **No LLM attribution of any kind**: no `Co-Authored-By:` for Claude or any model, no session link, no "Generated with…"
+  line, in a commit message or anywhere else, whatever a tool defaults to.
+- One logical change per commit, standing on its own; commit as work lands.
+- **Never push unless explicitly told to.**
+- One commit identity, the repository's usual author.
