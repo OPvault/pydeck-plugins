@@ -2,7 +2,7 @@
   "schema_version": 1,
   "label": "Testing",
   "root_url": "https://raw.githubusercontent.com/OPvault/pydeck-plugins/testing/",
-  "generated_at": "2026-10-09T19:27:21Z",
+  "generated_at": "2026-10-10T19:00:51Z",
   "plugins": [
     {
       "name": "Casino",
@@ -618,7 +618,7 @@
       },
       "summary": "Control Spotify playback via the Web API (PDK)",
       "author": "PyDeck Team",
-      "latest": "2.0.14",
+      "latest": "2.0.15",
       "icon_path": "plugins/no.pydeck.spotify/icon.svg",
       "compatible_pydeck_versions": [
         "1.0"
@@ -721,9 +721,16 @@
           "min_pydeck_version": "2.0.0",
           "max_pydeck_version": null,
           "changelog_path": "plugins/no.pydeck.spotify/2.0.14/CHANGELOG.md"
+        },
+        {
+          "version": "2.0.15",
+          "path": "plugins/no.pydeck.spotify/2.0.15",
+          "min_pydeck_version": "2.0.0",
+          "max_pydeck_version": null,
+          "changelog_path": "plugins/no.pydeck.spotify/2.0.15/CHANGELOG.md"
         }
       ],
-      "doc_path": "plugins/no.pydeck.spotify/2.0.14/DOCS.md",
+      "doc_path": "plugins/no.pydeck.spotify/2.0.15/DOCS.md",
       "show_markdown_after_install": true
     },
     {
