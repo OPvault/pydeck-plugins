@@ -2,7 +2,7 @@
   "schema_version": 1,
   "label": "Testing",
   "root_url": "https://raw.githubusercontent.com/OPvault/pydeck-plugins/testing/",
-  "generated_at": "2026-10-18T17:49:24Z",
+  "generated_at": "2026-10-18T22:15:56Z",
   "plugins": [
     {
       "name": "Casino",
@@ -114,7 +114,7 @@
       },
       "summary": "Displays the current time with a stylish gradient background",
       "author": "PyDeck Team",
-      "latest": "3.0.2",
+      "latest": "3.0.3",
       "icon_path": "plugins/no.pydeck.clock/icon.png",
       "compatible_pydeck_versions": [
         "1.0"
@@ -147,6 +147,13 @@
           "min_pydeck_version": "2.0.0",
           "max_pydeck_version": null,
           "changelog_path": "plugins/no.pydeck.clock/3.0.2/CHANGELOG.md"
+        },
+        {
+          "version": "3.0.3",
+          "path": "plugins/no.pydeck.clock/3.0.3",
+          "min_pydeck_version": "2.0.0",
+          "max_pydeck_version": null,
+          "changelog_path": "plugins/no.pydeck.clock/3.0.3/CHANGELOG.md"
         }
       ]
     },

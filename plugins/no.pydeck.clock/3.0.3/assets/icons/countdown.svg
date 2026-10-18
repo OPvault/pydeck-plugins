@@ -1,0 +1,8 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+	<style>
+		.s0 { fill: none;stroke: #ffffff;stroke-width: 2.5;stroke-linecap: round;stroke-linejoin: round }
+		.s1 { fill: #ffffff }
+	</style>
+	<path class="s0" d="m22 12h20m-20 40h20m-17-40v8c0 6 7 9 7 12s-7 6-7 12v8h14v-8c0-6-7-9-7-12s7-6 7-12v-8"/>
+	<path class="s1" d="m27 48h10l-5-6z"/>
+</svg>
