@@ -1,0 +1,6 @@
+<template name="volume_down" title="Volume Down" description="Decrease volume">
+  <box class="face">
+    <img src="{icon_src}" class="{icon_class}" fit="contain" />
+    <text class="label">{volume_label}</text>
+  </box>
+</template>

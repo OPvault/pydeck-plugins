@@ -1,0 +1,10 @@
+<template name="showcase" title="Showcase" description="A picture or GIF with up to three lines of text" icon="assets/icons/showcase.svg">
+  <box class="face">
+    <img class="media" src="{_button_image}" fit="cover" />
+    <box class="rows">
+      <buttonlabel class="line top" speed="{_button_scroll_speed_1}"></buttonlabel>
+      <buttonlabel class="line middle" speed="{_button_scroll_speed_2}"></buttonlabel>
+      <buttonlabel class="line bottom" speed="{_button_scroll_speed_3}"></buttonlabel>
+    </box>
+  </box>
+</template>

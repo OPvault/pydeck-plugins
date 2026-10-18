@@ -1,0 +1,5 @@
+<template name="previous_track" title="Previous Track" description="Go to the previous track">
+  <box class="face">
+    <img src="{icon_src}" class="icon" fit="contain" />
+  </box>
+</template>

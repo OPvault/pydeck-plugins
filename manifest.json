@@ -2,7 +2,7 @@
   "schema_version": 1,
   "label": "Testing",
   "root_url": "https://raw.githubusercontent.com/OPvault/pydeck-plugins/testing/",
-  "generated_at": "2026-10-18T15:21:18Z",
+  "generated_at": "2026-10-18T16:21:47Z",
   "plugins": [
     {
       "name": "Casino",
@@ -20,7 +20,7 @@
       },
       "summary": "Three games of chance on a button — roll a die, spin a roulette wheel, flip a coin",
       "author": "PyDeck Team",
-      "latest": "1.0.0",
+      "latest": "1.0.1",
       "icon_path": "plugins/no.pydeck.casino/icon.svg",
       "compatible_pydeck_versions": [
         "1.1"
@@ -32,9 +32,16 @@
           "min_pydeck_version": "1.1.0",
           "max_pydeck_version": null,
           "changelog_path": "plugins/no.pydeck.casino/1.0.0/CHANGELOG.md"
+        },
+        {
+          "version": "1.0.1",
+          "path": "plugins/no.pydeck.casino/1.0.1",
+          "min_pydeck_version": "1.1.0",
+          "max_pydeck_version": null,
+          "changelog_path": "plugins/no.pydeck.casino/1.0.1/CHANGELOG.md"
         }
       ],
-      "doc_path": "plugins/no.pydeck.casino/1.0.0/DOCS.md",
+      "doc_path": "plugins/no.pydeck.casino/1.0.1/DOCS.md",
       "show_markdown_after_install": false
     },
     {
@@ -160,7 +167,7 @@
       },
       "summary": "Control Discord voice state (mute/deafen) via RPC",
       "author": "PyDeck Team",
-      "latest": "2.0.4",
+      "latest": "2.0.5",
       "icon_path": "plugins/no.pydeck.discord/icon.svg",
       "compatible_pydeck_versions": [
         "1.0"
@@ -200,9 +207,16 @@
           "min_pydeck_version": "1.1.0",
           "max_pydeck_version": null,
           "changelog_path": "plugins/no.pydeck.discord/2.0.4/CHANGELOG.md"
+        },
+        {
+          "version": "2.0.5",
+          "path": "plugins/no.pydeck.discord/2.0.5",
+          "min_pydeck_version": "1.1.0",
+          "max_pydeck_version": null,
+          "changelog_path": "plugins/no.pydeck.discord/2.0.5/CHANGELOG.md"
         }
       ],
-      "doc_path": "plugins/no.pydeck.discord/2.0.4/DOCS.md",
+      "doc_path": "plugins/no.pydeck.discord/2.0.5/DOCS.md",
       "show_markdown_after_install": true
     },
     {
@@ -545,7 +559,7 @@
       },
       "summary": "Control media playback on Linux (play/pause, next, previous, volume)",
       "author": "PyDeck Team",
-      "latest": "2.0.1",
+      "latest": "2.0.2",
       "icon_path": "plugins/no.pydeck.media-control/icon.svg",
       "compatible_pydeck_versions": [
         "1.0"
@@ -564,9 +578,16 @@
           "min_pydeck_version": "1.1.0",
           "max_pydeck_version": null,
           "changelog_path": "plugins/no.pydeck.media-control/2.0.1/CHANGELOG.md"
+        },
+        {
+          "version": "2.0.2",
+          "path": "plugins/no.pydeck.media-control/2.0.2",
+          "min_pydeck_version": "1.1.0",
+          "max_pydeck_version": null,
+          "changelog_path": "plugins/no.pydeck.media-control/2.0.2/CHANGELOG.md"
         }
       ],
-      "doc_path": "plugins/no.pydeck.media-control/2.0.1/DOCS.md",
+      "doc_path": "plugins/no.pydeck.media-control/2.0.2/DOCS.md",
       "show_markdown_after_install": false
     },
     {
@@ -585,7 +606,7 @@
       },
       "summary": "Decorative button that shows a picture or GIF with up to three lines of text, and does nothing when pressed",
       "author": "PyDeck Team",
-      "latest": "1.0.0",
+      "latest": "1.0.1",
       "icon_path": "plugins/no.pydeck.showcase/icon.svg",
       "compatible_pydeck_versions": [
         "1.1"
@@ -597,6 +618,13 @@
           "min_pydeck_version": "1.1.0",
           "max_pydeck_version": null,
           "changelog_path": "plugins/no.pydeck.showcase/1.0.0/CHANGELOG.md"
+        },
+        {
+          "version": "1.0.1",
+          "path": "plugins/no.pydeck.showcase/1.0.1",
+          "min_pydeck_version": "1.1.0",
+          "max_pydeck_version": null,
+          "changelog_path": "plugins/no.pydeck.showcase/1.0.1/CHANGELOG.md"
         }
       ]
     },
@@ -763,7 +791,7 @@
       },
       "summary": "Launch installed Steam games from the deck, with the game's icon, logo or library poster as the key face",
       "author": "PyDeck Team",
-      "latest": "1.0.1",
+      "latest": "1.0.2",
       "icon_path": "plugins/no.pydeck.steam/icon.svg",
       "compatible_pydeck_versions": [
         "1.1"
@@ -789,9 +817,16 @@
           "min_pydeck_version": "1.1.0",
           "max_pydeck_version": null,
           "changelog_path": "plugins/no.pydeck.steam/1.0.1/CHANGELOG.md"
+        },
+        {
+          "version": "1.0.2",
+          "path": "plugins/no.pydeck.steam/1.0.2",
+          "min_pydeck_version": "1.1.0",
+          "max_pydeck_version": null,
+          "changelog_path": "plugins/no.pydeck.steam/1.0.2/CHANGELOG.md"
         }
       ],
-      "doc_path": "plugins/no.pydeck.steam/1.0.1/DOCS.md",
+      "doc_path": "plugins/no.pydeck.steam/1.0.2/DOCS.md",
       "show_markdown_after_install": true,
       "licenses": [
         {

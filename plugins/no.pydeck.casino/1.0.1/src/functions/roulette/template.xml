@@ -1,0 +1,26 @@
+<template name="roulette" title="Roulette" description="Spin the wheel and land on a number" icon="assets/icons/roulette.svg">
+  <box class="face">
+    <box class="rim" />
+    <box class="wheel">
+      <box class="pocket green k0" />
+      <box class="pocket red k1" />
+      <box class="pocket black k2" />
+      <box class="pocket red k3" />
+      <box class="pocket black k4" />
+      <box class="pocket red k5" />
+      <box class="pocket black k6" />
+      <box class="pocket red k7" />
+      <box class="pocket black k8" />
+      <box class="pocket red k9" />
+      <box class="pocket black k10" />
+      <box class="pocket red k11" />
+    </box>
+    <box class="hub" />
+    <box class="ballstage">
+      <box class="ball" />
+    </box>
+    <box class="disc">
+      <text class="num">{number}</text>
+    </box>
+  </box>
+</template>

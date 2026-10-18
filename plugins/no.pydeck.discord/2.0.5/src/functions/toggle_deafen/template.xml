@@ -1,0 +1,12 @@
+<template name="toggle_deafen" title="Toggle Deafen" description="Toggle Discord deafen (mic + audio)">
+  <box class="face {face_class}">
+    <img src="{icon_src}" class="glyph" fit="contain" />
+  </box>
+</template>
+
+<template name="toggle_deafen-hint" title="Toggle Deafen" description="Toggle Discord deafen (mic + audio)">
+  <box class="face {face_class}">
+    <img src="{icon_src}" class="glyph-hint" fit="contain" />
+    <text class="hint">{hint}</text>
+  </box>
+</template>

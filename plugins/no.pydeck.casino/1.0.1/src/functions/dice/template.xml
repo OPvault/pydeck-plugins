@@ -1,0 +1,15 @@
+<template name="dice" title="Dice" description="Roll a single six-sided die" icon="assets/icons/dice.svg">
+  <box class="face">
+    <box class="tumble">
+      <box class="die">
+        <box class="pip tl" />
+        <box class="pip tr" />
+        <box class="pip ml" />
+        <box class="pip mr" />
+        <box class="pip bl" />
+        <box class="pip br" />
+        <box class="pip c" />
+      </box>
+    </box>
+  </box>
+</template>
