@@ -2,7 +2,7 @@
   "schema_version": 1,
   "label": "Testing",
   "root_url": "https://raw.githubusercontent.com/OPvault/pydeck-plugins/testing/",
-  "generated_at": "2026-10-18T16:21:47Z",
+  "generated_at": "2026-10-18T17:49:24Z",
   "plugins": [
     {
       "name": "Casino",
@@ -167,7 +167,7 @@
       },
       "summary": "Control Discord voice state (mute/deafen) via RPC",
       "author": "PyDeck Team",
-      "latest": "2.0.5",
+      "latest": "2.0.6",
       "icon_path": "plugins/no.pydeck.discord/icon.svg",
       "compatible_pydeck_versions": [
         "1.0"
@@ -214,9 +214,16 @@
           "min_pydeck_version": "1.1.0",
           "max_pydeck_version": null,
           "changelog_path": "plugins/no.pydeck.discord/2.0.5/CHANGELOG.md"
+        },
+        {
+          "version": "2.0.6",
+          "path": "plugins/no.pydeck.discord/2.0.6",
+          "min_pydeck_version": "1.1.0",
+          "max_pydeck_version": null,
+          "changelog_path": "plugins/no.pydeck.discord/2.0.6/CHANGELOG.md"
         }
       ],
-      "doc_path": "plugins/no.pydeck.discord/2.0.5/DOCS.md",
+      "doc_path": "plugins/no.pydeck.discord/2.0.6/DOCS.md",
       "show_markdown_after_install": true
     },
     {
@@ -395,7 +402,7 @@
       },
       "summary": "Control and monitor Home Assistant entities",
       "author": "PyDeck Team",
-      "latest": "2.0.8",
+      "latest": "2.0.9",
       "icon_path": "plugins/no.pydeck.home-assistant/icon.png",
       "compatible_pydeck_versions": [
         "1.0"
@@ -463,9 +470,16 @@
           "min_pydeck_version": "2.0.0",
           "max_pydeck_version": null,
           "changelog_path": "plugins/no.pydeck.home-assistant/2.0.8/CHANGELOG.md"
+        },
+        {
+          "version": "2.0.9",
+          "path": "plugins/no.pydeck.home-assistant/2.0.9",
+          "min_pydeck_version": "2.0.0",
+          "max_pydeck_version": null,
+          "changelog_path": "plugins/no.pydeck.home-assistant/2.0.9/CHANGELOG.md"
         }
       ],
-      "doc_path": "plugins/no.pydeck.home-assistant/2.0.8/DOCS.md",
+      "doc_path": "plugins/no.pydeck.home-assistant/2.0.9/DOCS.md",
       "show_markdown_after_install": true,
       "licenses": [
         {
@@ -498,7 +512,7 @@
       },
       "summary": "Simulate keyboard presses and text input via xdotool on X11 when available, with evdev/uinput fallback for Wayland. Works on both X11 and Wayland. Requires the user to be in the 'input' group: sudo usermod -aG input $USER",
       "author": "PyDeck Team",
-      "latest": "1.0.9",
+      "latest": "1.0.10",
       "icon_path": "plugins/no.pydeck.keyboard/icon.svg",
       "compatible_pydeck_versions": [
         "1.0"
@@ -538,6 +552,13 @@
           "min_pydeck_version": "1.1.0",
           "max_pydeck_version": null,
           "changelog_path": "plugins/no.pydeck.keyboard/1.0.9/CHANGELOG.md"
+        },
+        {
+          "version": "1.0.10",
+          "path": "plugins/no.pydeck.keyboard/1.0.10",
+          "min_pydeck_version": "1.1.0",
+          "max_pydeck_version": null,
+          "changelog_path": "plugins/no.pydeck.keyboard/1.0.10/CHANGELOG.md"
         }
       ]
     },
@@ -559,7 +580,7 @@
       },
       "summary": "Control media playback on Linux (play/pause, next, previous, volume)",
       "author": "PyDeck Team",
-      "latest": "2.0.2",
+      "latest": "2.0.3",
       "icon_path": "plugins/no.pydeck.media-control/icon.svg",
       "compatible_pydeck_versions": [
         "1.0"
@@ -585,9 +606,16 @@
           "min_pydeck_version": "1.1.0",
           "max_pydeck_version": null,
           "changelog_path": "plugins/no.pydeck.media-control/2.0.2/CHANGELOG.md"
+        },
+        {
+          "version": "2.0.3",
+          "path": "plugins/no.pydeck.media-control/2.0.3",
+          "min_pydeck_version": "1.1.0",
+          "max_pydeck_version": null,
+          "changelog_path": "plugins/no.pydeck.media-control/2.0.3/CHANGELOG.md"
         }
       ],
-      "doc_path": "plugins/no.pydeck.media-control/2.0.2/DOCS.md",
+      "doc_path": "plugins/no.pydeck.media-control/2.0.3/DOCS.md",
       "show_markdown_after_install": false
     },
     {
@@ -646,7 +674,7 @@
       },
       "summary": "Control Spotify playback via the Web API (PDK)",
       "author": "PyDeck Team",
-      "latest": "2.0.17",
+      "latest": "2.0.18",
       "icon_path": "plugins/no.pydeck.spotify/icon.svg",
       "compatible_pydeck_versions": [
         "1.0"
@@ -770,9 +798,16 @@
           "min_pydeck_version": "2.0.0",
           "max_pydeck_version": null,
           "changelog_path": "plugins/no.pydeck.spotify/2.0.17/CHANGELOG.md"
+        },
+        {
+          "version": "2.0.18",
+          "path": "plugins/no.pydeck.spotify/2.0.18",
+          "min_pydeck_version": "2.0.0",
+          "max_pydeck_version": null,
+          "changelog_path": "plugins/no.pydeck.spotify/2.0.18/CHANGELOG.md"
         }
       ],
-      "doc_path": "plugins/no.pydeck.spotify/2.0.17/DOCS.md",
+      "doc_path": "plugins/no.pydeck.spotify/2.0.18/DOCS.md",
       "show_markdown_after_install": true
     },
     {
@@ -791,7 +826,7 @@
       },
       "summary": "Launch installed Steam games from the deck, with the game's icon, logo or library poster as the key face",
       "author": "PyDeck Team",
-      "latest": "1.0.2",
+      "latest": "1.0.3",
       "icon_path": "plugins/no.pydeck.steam/icon.svg",
       "compatible_pydeck_versions": [
         "1.1"
@@ -824,9 +859,16 @@
           "min_pydeck_version": "1.1.0",
           "max_pydeck_version": null,
           "changelog_path": "plugins/no.pydeck.steam/1.0.2/CHANGELOG.md"
+        },
+        {
+          "version": "1.0.3",
+          "path": "plugins/no.pydeck.steam/1.0.3",
+          "min_pydeck_version": "1.1.0",
+          "max_pydeck_version": null,
+          "changelog_path": "plugins/no.pydeck.steam/1.0.3/CHANGELOG.md"
         }
       ],
-      "doc_path": "plugins/no.pydeck.steam/1.0.2/DOCS.md",
+      "doc_path": "plugins/no.pydeck.steam/1.0.3/DOCS.md",
       "show_markdown_after_install": true,
       "licenses": [
         {
@@ -941,7 +983,7 @@
       },
       "summary": "Open URLs, send HTTP requests, and run scripts",
       "author": "PyDeck Team",
-      "latest": "1.0.3",
+      "latest": "1.0.4",
       "icon_path": "plugins/no.pydeck.utilities/icon.svg",
       "compatible_pydeck_versions": [
         "1.0"
@@ -960,6 +1002,13 @@
           "min_pydeck_version": "1.1.0",
           "max_pydeck_version": null,
           "changelog_path": "plugins/no.pydeck.utilities/1.0.3/CHANGELOG.md"
+        },
+        {
+          "version": "1.0.4",
+          "path": "plugins/no.pydeck.utilities/1.0.4",
+          "min_pydeck_version": "1.1.0",
+          "max_pydeck_version": null,
+          "changelog_path": "plugins/no.pydeck.utilities/1.0.4/CHANGELOG.md"
         }
       ]
     },

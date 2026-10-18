@@ -1,0 +1,16 @@
+{
+  "description": "Control and monitor Home Assistant entities",
+  "features": [
+    "Toggle any Home Assistant entity on or off",
+    "Live entity state mirrored on the button face",
+    "Read-only sensor display with units",
+    "Domain-filtered entity picker",
+    "Material Design Icons resolved per entity"
+  ],
+  "tags": [
+    "pdk",
+    "home-automation",
+    "home-assistant",
+    "iot"
+  ]
+}

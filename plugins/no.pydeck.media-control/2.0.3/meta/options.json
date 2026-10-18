@@ -1,0 +1,14 @@
+{
+  "description": "Linux media transport and volume control using playerctl/pactl/amixer",
+  "features": [
+    "Play, pause, next and previous over MPRIS",
+    "Play/Pause glyph follows the player's real status",
+    "Optional now-playing label on the Play/Pause key",
+    "Volume up/down with an optional live volume %",
+    "Mute toggle that follows the default sink's mute state"
+  ],
+  "tags": ["pdk", "media", "music", "playback", "volume"],
+  "metadata": {
+    "category": "media"
+  }
+}

@@ -1,0 +1,5 @@
+<template name="open_url" title="Open URL" description="Launch a custom URL in your default browser">
+  <box class="util-bg">
+    <img src="{icon_src}" class="util-icon" fit="contain" />
+  </box>
+</template>

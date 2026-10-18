@@ -1,0 +1,5 @@
+<template name="play" title="Play" description="Start playback">
+  <box class="face">
+    <img src="{icon_src}" class="icon" fit="contain" />
+  </box>
+</template>

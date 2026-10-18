@@ -1,0 +1,8 @@
+Material Design Icons
+https://github.com/Templarian/MaterialDesign
+
+Icons are licensed under the Apache License 2.0.
+https://github.com/Templarian/MaterialDesign/blob/master/LICENSE
+
+Fetched at runtime from https://cdn.jsdelivr.net/npm/@mdi/svg and cached under
+~/.local/share/pydeck/storage/no.pydeck.home-assistant/icons/.

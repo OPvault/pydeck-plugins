@@ -1,0 +1,5 @@
+<template name="pause" title="Pause" description="Pause playback">
+  <box class="face">
+    <img src="{icon_src}" class="icon" fit="contain" />
+  </box>
+</template>

@@ -1,0 +1,5 @@
+<template name="run_script" title="Run Script" description="Execute a Bash or Python script file">
+  <box class="util-bg">
+    <img src="{icon_src}" class="util-icon" fit="contain" />
+  </box>
+</template>

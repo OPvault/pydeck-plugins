@@ -1,0 +1,5 @@
+<template name="mute_toggle" title="Toggle Mute" description="Toggle mute on the default audio sink">
+  <box class="face {face_class}">
+    <img src="{icon_src}" class="glyph" fit="contain" />
+  </box>
+</template>

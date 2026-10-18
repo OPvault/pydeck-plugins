@@ -1,0 +1,5 @@
+<template name="send_request" title="HTTP Request" description="Send a request with a selected HTTP method and optional data">
+  <box class="util-bg">
+    <img src="{icon_src}" class="util-icon" fit="contain" />
+  </box>
+</template>
